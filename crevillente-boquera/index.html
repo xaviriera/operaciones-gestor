@@ -15,20 +15,23 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
 .brand { text-align: center; margin-bottom: 36px; padding-bottom: 22px; border-bottom: 1px solid rgba(22,61,96,0.18); }
 .brand .name { font-family: 'Raleway', sans-serif; font-size: 42px; letter-spacing: 1.5px; font-weight: 300; color: #0E0E0E; line-height: 1.05; }
 .brand .name .b { font-weight: 800; }
-.brand .role { font-size: 9.5px; letter-spacing: 5px; color: #E29F34; font-weight: 700; text-transform: uppercase; margin-top: 14px; }
-.brand .credential { font-size: 9.5px; letter-spacing: 3px; color: #163D60; opacity: 0.6; font-weight: 600; text-transform: uppercase; margin-top: 6px; }
+.brand .role { font-size: 10px; letter-spacing: 5px; color: #E29F34; font-weight: 700; text-transform: uppercase; margin-top: 14px; }
 .brand .sep { width: 36px; height: 1px; background: #E29F34; margin: 14px auto; }
-.brand .badge-in { display: inline-flex; align-items: center; gap: 10px; margin-top: 14px; padding: 5px 16px 5px 6px; border: 1px solid rgba(226,159,52,0.55); border-radius: 999px; background: rgba(226,159,52,0.06); }
+.brand .badge-in { display: inline-flex; align-items: center; gap: 10px; margin-top: 0; padding: 5px 16px 5px 6px; border: 1px solid rgba(226,159,52,0.55); border-radius: 999px; background: rgba(226,159,52,0.06); }
 .brand .badge-in .logo { width: 26px; height: 26px; object-fit: contain; display: block; }
 .brand .badge-in .dot { width: 7px; height: 7px; background: #E29F34; border-radius: 50%; box-shadow: 0 0 0 3px rgba(226,159,52,0.18); }
 .brand .badge-in .txt { font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 800; letter-spacing: 2.4px; color: #163D60; text-transform: uppercase; }
+.brand .chapas { display: flex; justify-content: center; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+.brand .chapas .chapa { font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: 1.8px; color: #163D60; text-transform: uppercase; padding: 5px 12px; border: 1px solid rgba(22,61,96,0.35); border-radius: 4px; background: #fff; }
+.brand .chapas .chapa b { font-weight: 900; color: #E29F34; letter-spacing: 1px; }
 
 /* === HERO === */
 .hero { padding: 8px 0 28px; text-align: center; }
 .hero .pre { font-size: 10px; color: #E29F34; letter-spacing: 4px; text-transform: uppercase; font-weight: 800; margin-bottom: 14px; }
 .title { font-size: 36px; font-weight: 900; color: #163D60; letter-spacing: -0.8px; line-height: 1.08; margin-bottom: 12px; }
 .title span { color: #E29F34; font-weight: 800; }
-.subtitle { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: #163D60; opacity: 0.85; font-weight: 400; font-style: italic; margin-bottom: 22px; }
+.subtitle { font-family: 'Raleway', sans-serif; font-size: 18px; color: #163D60; opacity: 0.85; font-weight: 300; letter-spacing: 0.8px; line-height: 1.5; margin-bottom: 22px; max-width: 640px; margin-left: auto; margin-right: auto; }
+.subtitle b { font-weight: 700; color: #E29F34; }
 .lead { font-size: 14.5px; color: #163D60; line-height: 1.7; margin: 0 auto 24px; max-width: 780px; text-align: left; }
 .lead strong { color: #E29F34; font-weight: 800; }
 
@@ -75,7 +78,8 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
 
 /* === GALERÍA === */
 .galeria-extra { margin-top: 18px; }
-.galeria-extra .head { font-size: 10.5px; letter-spacing: 2px; color: #163D60; opacity: 0.65; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+.galeria-extra .head { font-size: 10.5px; letter-spacing: 2px; color: #163D60; opacity: 0.65; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.galeria-extra .head .hint { font-size: 9px; letter-spacing: 1.5px; color: #E29F34; font-weight: 600; opacity: 1; text-transform: none; }
 .galeria-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
 .galeria-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; cursor: pointer; transition: transform 0.2s, opacity 0.2s; }
 .galeria-grid img:hover { transform: scale(1.04); opacity: 0.9; }
@@ -84,6 +88,13 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
 .video-block { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 12px 32px rgba(22,61,96,0.18); margin-bottom: 14px; }
 .video-block video { width: 100%; display: block; background: #000; }
 .video-block .cap { position: absolute; top: 14px; left: 14px; background: #163D60; color: #fff; padding: 7px 14px; border-radius: 4px; font-size: 10px; letter-spacing: 2.5px; font-weight: 800; text-transform: uppercase; }
+.video-pair-vert { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+.video-pair-vert .video-vert { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 12px 32px rgba(22,61,96,0.18); }
+.video-pair-vert .video-vert video { width: 100%; aspect-ratio: 9/16; object-fit: contain; display: block; background: #163D60; }
+.video-pair-vert .video-vert .cap { position: absolute; top: 12px; left: 12px; background: #163D60; color: #fff; padding: 6px 12px; border-radius: 4px; font-size: 9.5px; letter-spacing: 2px; font-weight: 800; text-transform: uppercase; z-index: 2; }
+@media (max-width: 600px) {
+  .video-pair-vert { grid-template-columns: 1fr; }
+}
 .video-placeholder { background: linear-gradient(135deg, #163D60, #1f4a73); color: #FDFBF7; padding: 60px 30px; border-radius: 12px; text-align: center; margin-bottom: 14px; border: 2px dashed rgba(226,159,52,0.4); }
 .video-placeholder .ic { font-size: 48px; margin-bottom: 12px; }
 .video-placeholder .lab { font-size: 11px; color: #E29F34; letter-spacing: 3px; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; }
@@ -171,16 +182,19 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
   <div class="brand">
     <div class="name"><span class="b">XAVI</span> RIERA</div>
     <div class="sep"></div>
-    <div class="role">Gestor de operaciones inmobiliarias</div>
-    <div class="credential">8ª edición Programa IN · 2ª edición Grado IN</div>
-    <div class="badge-in"><img class="logo" src="assets/logo-in.png" alt="Comunidad IN" onerror="this.style.display='none'"><span class="txt">Miembro · Comunidad IN</span></div>
+    <div class="role">Gestor · Comunidad IN</div>
+    <div class="badge-in" style="margin-top:14px;"><img class="logo" src="assets/logo-in.png" alt="Comunidad IN" onerror="this.style.display='none'"><span class="txt">Miembro · Comunidad IN</span></div>
+    <div class="chapas">
+      <span class="chapa"><b>8ª</b> Programa IN</span>
+      <span class="chapa"><b>2ª</b> Grado IN</span>
+    </div>
   </div>
 
   <!-- HERO -->
   <div class="hero">
     <div class="pre">Operación cerrada · 06 mayo 2026</div>
     <div class="title">Tríplex Boquera Calvari 67B</div>
-    <div class="subtitle">de vivienda en bruto desde 2007 a hogar listo para vivir</div>
+    <div class="subtitle">de <b>vivienda en bruto desde 2007</b> a <b>hogar listo para vivir en 2026</b></div>
     <div class="lead">
       Compra a Aliseda de un tríplex en Crevillente parado en obra desde 2007 con licencia de obra mayor vigente. Reactivación del proyecto sin reabrir tramitación, reforma integral con escalera, barandilla, cocina y electrodomésticos, comercialización en paralelo a obra y cierre de venta con cláusula notarial. Modalidad <strong>INBRUTO con prestación de servicios</strong> · 10 meses 18 días de exposición de capital.
     </div>
@@ -234,7 +248,7 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
     </div>
     <div class="rol">
       <div class="lab">Reformista</div>
-      <div class="name">Diseño del Prado · Ángel</div>
+      <div class="name">Externo · fuera del programa</div>
       <div class="meta">Obra integral bajo régimen ISP</div>
     </div>
   </div>
@@ -245,20 +259,21 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
     Dos vídeos separados para apreciar la transformación: el estado bruto desde 2007 frente al hogar terminado y listo para vivir. Recorrido por las tres plantas y el exterior.
   </div>
 
-  <div class="video-block">
-    <span class="cap">Antes · estado bruto 2007–2025</span>
-    <video controls preload="metadata" poster="assets/antes/pb-02.jpg">
-      <source src="https://github.com/xaviriera/operaciones-gestor/releases/download/v1.0/antes.mp4" type="video/mp4">
-      Tu navegador no soporta vídeo HTML5. Descarga el archivo: <a href="https://github.com/xaviriera/operaciones-gestor/releases/download/v1.0/antes.mp4">antes.mp4</a>
-    </video>
-  </div>
-
-  <div class="video-block">
-    <span class="cap">Después · vivienda terminada 2026 · 4:50</span>
-    <video controls preload="metadata" poster="assets/exterior/fachada-frontal.jpg">
-      <source src="https://github.com/xaviriera/operaciones-gestor/releases/download/v1.0/despues.mp4" type="video/mp4">
-      Tu navegador no soporta vídeo HTML5. Descarga el archivo: <a href="https://github.com/xaviriera/operaciones-gestor/releases/download/v1.0/despues.mp4">despues.mp4</a>
-    </video>
+  <div class="video-pair-vert">
+    <div class="video-vert">
+      <span class="cap">Antes · 2007</span>
+      <video controls preload="metadata" poster="assets/antes/pb-02.jpg">
+        <source src="https://github.com/xaviriera/operaciones-gestor/releases/download/v1.0/antes.mp4" type="video/mp4">
+        Tu navegador no soporta vídeo HTML5. <a href="https://github.com/xaviriera/operaciones-gestor/releases/download/v1.0/antes.mp4">Descargar antes.mp4</a>
+      </video>
+    </div>
+    <div class="video-vert">
+      <span class="cap">Después · 2026</span>
+      <video controls preload="metadata" poster="assets/exterior/fachada-frontal.jpg">
+        <source src="https://github.com/xaviriera/operaciones-gestor/releases/download/v1.0/despues.mp4" type="video/mp4">
+        Tu navegador no soporta vídeo HTML5. <a href="https://github.com/xaviriera/operaciones-gestor/releases/download/v1.0/despues.mp4">Descargar despues.mp4</a>
+      </video>
+    </div>
   </div>
 
   <!-- TRANSFORMACIÓN -->
@@ -294,7 +309,7 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
   </div>
 
   <div class="galeria-extra">
-    <div class="head">Galería · Planta Baja</div>
+    <div class="head"><span>Galería · Planta Baja</span><span class="hint">🔍 Haz clic en cualquier foto para ampliarla</span></div>
     <div class="galeria-grid">
       <img src="assets/despues/pb-1341.jpg" data-lightbox alt="Entrada">
       <img src="assets/despues/pb-1345.jpg" data-lightbox alt="Cocina">
@@ -337,7 +352,7 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
   </div>
 
   <div class="galeria-extra">
-    <div class="head">Galería · Primera Planta</div>
+    <div class="head"><span>Galería · Primera Planta</span><span class="hint">🔍 Clic para ampliar</span></div>
     <div class="galeria-grid">
       <img src="assets/despues/p1-1367.jpg" data-lightbox alt="Dormitorio principal">
       <img src="assets/despues/p1-1369.jpg" data-lightbox alt="Dormitorio principal">
@@ -371,7 +386,7 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
   </div>
 
   <div class="galeria-extra">
-    <div class="head">Galería · Segunda Planta</div>
+    <div class="head"><span>Galería · Segunda Planta</span><span class="hint">🔍 Clic para ampliar</span></div>
     <div class="galeria-grid">
       <img src="assets/despues/p2-1381.jpg" data-lightbox alt="Escalera">
       <img src="assets/despues/p2-1385.jpg" data-lightbox alt="Estudio">
@@ -413,7 +428,7 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
   <div>
     <div class="tl-row">
       <div class="date">19/06/2025</div>
-      <div class="desc"><span class="tag notreg">Notaría</span><strong>Compra a Aliseda</strong> · Notaría Dolores · 40.000 € + IVA 21% deducible + AJD 1,5%</div>
+      <div class="desc"><span class="tag notreg">Notaría</span><strong>Compra a Aliseda</strong> · 40.000 € + IVA 21% deducible + AJD 1,5%</div>
     </div>
     <div class="tl-row">
       <div class="date">17/09/2025</div>
@@ -425,7 +440,7 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
     </div>
     <div class="tl-row">
       <div class="date">03/10/2025</div>
-      <div class="desc"><span class="tag ayto">Ayto</span><strong>Inicio de obra.</strong> Reformista Diseño del Prado bajo régimen ISP.</div>
+      <div class="desc"><span class="tag ayto">Ayto</span><strong>Inicio de obra.</strong> Reformista externo (fuera del programa) bajo régimen ISP.</div>
     </div>
     <div class="tl-row">
       <div class="date">25/11/2025</div>
@@ -473,10 +488,10 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
   </div>
 
   <div class="bloqueo">
-    <h3><span class="num">2</span>El reformista que subió +66%</h3>
-    <div class="b-line"><span class="ic">🧱</span><div>Presupuesto cerrado en 58.420 €. A punto de arrancar obra en agosto, llega actualización: 97.000 €. Si aceptamos, la operación se rompe.</div></div>
-    <div class="s-line"><span class="ic">💡</span><div><strong>Solución:</strong> ruptura inmediata, entrevistas con alternativos en pleno agosto, comparativa final entre Universal y Diseño del Prado. Cierre con Diseño del Prado a 67.638 €, escalera incluida — clave en un tríplex.</div></div>
-    <div class="a-line"><span class="ic">📌</span><div><strong>Aprendizaje:</strong> un presupuesto cerrado solo es cerrado hasta que el reformista decide reabrirlo. Tener siempre alternativas activas y mirar el desglose, no el total.</div></div>
+    <h3><span class="num">2</span>El reformista del programa que subió +66%</h3>
+    <div class="b-line"><span class="ic">🧱</span><div>Nuestra primera elección fue un <strong>reformista de dentro del programa</strong> (apostamos por mantener todo el equipo dentro: inversor IN + arquitecto IN + reformista IN). Presupuesto cerrado en 58.420 € durante el verano. A punto de arrancar obra en agosto, llega revisión: <strong>97.000 €</strong> (+66 %). Si aceptamos, la operación se rompe.</div></div>
+    <div class="s-line"><span class="ic">💡</span><div><strong>Solución:</strong> ruptura inmediata. Entrevistas con alternativos en pleno agosto (todo el mundo de vacaciones, fue la parte más estresante de la operación). Comparativa final entre dos candidatos. <strong>Cerramos con un reformista externo, fuera del programa, a 67.638 €</strong> escalera incluida — clave en un tríplex.</div></div>
+    <div class="a-line"><span class="ic">📌</span><div><strong>Aprendizaje:</strong> que un proveedor sea <strong>de dentro del programa no es garantía automática de fiabilidad</strong>. La intención de mantener todo el equipo IN es buena pero nunca debe ir por delante del criterio comercial. Tener siempre alternativas activas, mirar el desglose (no el total) y estar dispuesto a romper. <em>(Sin dar nombres aquí; si alguien quiere preguntarme en privado quién fue, encantado de contarlo.)</em></div></div>
   </div>
 
   <div class="bloqueo">
@@ -537,7 +552,7 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
     <div class="lab">🔵 Coste total de la operación</div>
     <div class="grid-num" style="grid-template-columns: 1fr; gap: 6px;">
       <div class="nu" style="display:flex; justify-content:space-between; padding:10px 14px;"><div class="l" style="text-align:left;">🏠 Precio de compra (con notaría, registro, AJD, IBI)</div><div class="v" style="font-size:18px;">41.736 €</div></div>
-      <div class="nu" style="display:flex; justify-content:space-between; padding:10px 14px;"><div class="l" style="text-align:left;">🔨 Reforma integral ISP (Diseño del Prado)</div><div class="v" style="font-size:18px;">75.324 €</div></div>
+      <div class="nu" style="display:flex; justify-content:space-between; padding:10px 14px;"><div class="l" style="text-align:left;">🔨 Reforma integral bajo régimen ISP</div><div class="v" style="font-size:18px;">75.324 €</div></div>
       <div class="nu" style="display:flex; justify-content:space-between; padding:10px 14px;"><div class="l" style="text-align:left;">📐 Arquitecto + renders pre-obra</div><div class="v" style="font-size:18px;">5.200 €</div></div>
       <div class="nu" style="display:flex; justify-content:space-between; padding:10px 14px;"><div class="l" style="text-align:left;">🏛️ Licencias · DREO · DROC · OVP · ICIO</div><div class="v" style="font-size:18px;">326 €</div></div>
       <div class="nu" style="display:flex; justify-content:space-between; padding:10px 14px;"><div class="l" style="text-align:left;">🤝 Honorarios gestión (captación + dirección + comercialización)</div><div class="v" style="font-size:18px;">19.000 €</div></div>
@@ -593,7 +608,7 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
     <div class="name"><span class="b">XAVI</span> RIERA</div>
     <div class="role">Gestor de operaciones inmobiliarias</div>
     <div class="meta">
-      8ª edición Programa IN · 2ª edición Grado IN · Miembro Comunidad IN<br>
+      Gestor · Comunidad IN · 8ª edición Programa IN · 2ª edición Grado IN<br>
       Compra 19/06/2025 · Inscripción Registro 29/04/2026 · Compraventa 06/05/2026<br>
       Modalidad: INBRUTO con prestación de servicios
     </div>
