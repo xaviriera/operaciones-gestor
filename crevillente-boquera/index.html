@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tríplex Boquera Calvari · Crevillente · Cierre operación · Xavi Riera</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Raleway:wght@200;300;400;500;600;700;800;900&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color: #163D60; line-height: 1.55; padding: 28px 16px; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1080px; margin: 0 auto; }
+
+/* === BRAND === */
+.brand { text-align: center; margin-bottom: 36px; padding-bottom: 22px; border-bottom: 1px solid rgba(22,61,96,0.18); }
+.brand .name { font-family: 'Raleway', sans-serif; font-size: 42px; letter-spacing: 1.5px; font-weight: 300; color: #0E0E0E; line-height: 1.05; }
+.brand .name .b { font-weight: 800; }
+.brand .role { font-size: 9.5px; letter-spacing: 5px; color: #E29F34; font-weight: 700; text-transform: uppercase; margin-top: 14px; }
+.brand .credential { font-size: 9.5px; letter-spacing: 3px; color: #163D60; opacity: 0.6; font-weight: 600; text-transform: uppercase; margin-top: 6px; }
+.brand .sep { width: 36px; height: 1px; background: #E29F34; margin: 14px auto; }
+.brand .badge-in { display: inline-flex; align-items: center; gap: 10px; margin-top: 14px; padding: 5px 16px 5px 6px; border: 1px solid rgba(226,159,52,0.55); border-radius: 999px; background: rgba(226,159,52,0.06); }
+.brand .badge-in .logo { width: 26px; height: 26px; object-fit: contain; display: block; }
+.brand .badge-in .dot { width: 7px; height: 7px; background: #E29F34; border-radius: 50%; box-shadow: 0 0 0 3px rgba(226,159,52,0.18); }
+.brand .badge-in .txt { font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 800; letter-spacing: 2.4px; color: #163D60; text-transform: uppercase; }
+
+/* === HERO === */
+.hero { padding: 8px 0 28px; text-align: center; }
+.hero .pre { font-size: 10px; color: #E29F34; letter-spacing: 4px; text-transform: uppercase; font-weight: 800; margin-bottom: 14px; }
+.title { font-size: 36px; font-weight: 900; color: #163D60; letter-spacing: -0.8px; line-height: 1.08; margin-bottom: 12px; }
+.title span { color: #E29F34; font-weight: 800; }
+.subtitle { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: #163D60; opacity: 0.85; font-weight: 400; font-style: italic; margin-bottom: 22px; }
+.lead { font-size: 14.5px; color: #163D60; line-height: 1.7; margin: 0 auto 24px; max-width: 780px; text-align: left; }
+.lead strong { color: #E29F34; font-weight: 800; }
+
+/* === KPI === */
+.kpi { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 24px 0 20px; }
+.kpi .card { background: #fff; border-radius: 10px; padding: 16px 12px; text-align: center; border: 1.5px solid #E29F34; box-shadow: 0 2px 10px rgba(22,61,96,0.04); }
+.kpi .card .lab { font-size: 9.5px; color: #E29F34; letter-spacing: 1.8px; font-weight: 800; text-transform: uppercase; margin-bottom: 6px; }
+.kpi .card .val { font-size: 24px; color: #163D60; font-weight: 900; line-height: 1; letter-spacing: -0.5px; }
+.kpi .card .hint { font-size: 10.5px; color: #163D60; opacity: 0.7; margin-top: 5px; font-weight: 500; }
+
+/* === EQUIPO === */
+.equipo { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 32px 0 24px; }
+.equipo .rol { background: #fff; border-radius: 10px; padding: 18px 20px; border-left: 3px solid #E29F34; }
+.equipo .rol .lab { font-size: 9.5px; color: #E29F34; letter-spacing: 2.5px; font-weight: 800; text-transform: uppercase; margin-bottom: 6px; }
+.equipo .rol .name { font-size: 17px; font-weight: 800; color: #163D60; letter-spacing: -0.3px; }
+.equipo .rol .meta { font-size: 11.5px; color: #163D60; opacity: 0.7; margin-top: 4px; font-weight: 500; }
+.equipo .rol.full { grid-column: 1 / -1; background: linear-gradient(135deg, #163D60 0%, #1f4a73 100%); border-left: 4px solid #E29F34; padding: 22px 24px; }
+.equipo .rol.full .lab { color: #E29F34; }
+.equipo .rol.full .name { color: #FDFBF7; font-size: 19px; }
+.equipo .rol.full .meta { color: rgba(253,251,247,0.78); opacity: 1; }
+
+/* === SECTIONS === */
+.section-label { font-size: 10.5px; font-weight: 800; color: #E29F34; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; margin-top: 56px; padding-bottom: 8px; border-bottom: 1px solid rgba(226,159,52,0.3); display: flex; align-items: center; gap: 12px; }
+.section-label .n { background: #163D60; color: #fff; display: inline-block; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; font-size: 10px; font-weight: 800; }
+.section-intro { font-size: 14px; color: #163D60; line-height: 1.7; margin-bottom: 22px; opacity: 0.92; max-width: 780px; }
+.section-intro strong { color: #E29F34; font-weight: 700; }
+
+/* === PLANTA TITLE === */
+.planta-titulo { display: flex; align-items: baseline; gap: 14px; margin: 30px 0 16px; }
+.planta-titulo .num { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: #E29F34; line-height: 1; letter-spacing: -2px; }
+.planta-titulo .text .lab { font-size: 10px; letter-spacing: 3px; color: #E29F34; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; }
+.planta-titulo .text .nm { font-size: 22px; font-weight: 800; color: #163D60; line-height: 1; letter-spacing: -0.4px; }
+.planta-titulo .text .desc { font-size: 12px; color: #163D60; opacity: 0.75; margin-top: 4px; }
+
+/* === PAR ANTES/DESPUÉS === */
+.par { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.par .col { position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 8px; background: #f0ebe2; }
+.par .col img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+.par .col:hover img { transform: scale(1.03); }
+.par .col .tag { position: absolute; top: 12px; left: 12px; padding: 5px 11px; font-size: 9.5px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; border-radius: 3px; backdrop-filter: blur(6px); }
+.par .col.antes .tag { background: rgba(22,61,96,0.92); color: #fff; }
+.par .col.despues .tag { background: rgba(226,159,52,0.95); color: #fff; }
+.par .espacio { grid-column: span 2; font-size: 10px; letter-spacing: 2px; color: #163D60; opacity: 0.55; font-weight: 700; text-transform: uppercase; margin-top: -8px; padding-bottom: 6px; }
+
+/* === GALERÍA === */
+.galeria-extra { margin-top: 18px; }
+.galeria-extra .head { font-size: 10.5px; letter-spacing: 2px; color: #163D60; opacity: 0.65; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+.galeria-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.galeria-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; cursor: pointer; transition: transform 0.2s, opacity 0.2s; }
+.galeria-grid img:hover { transform: scale(1.04); opacity: 0.9; }
+
+/* === VIDEO BLOCK === */
+.video-block { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 12px 32px rgba(22,61,96,0.18); margin-bottom: 14px; }
+.video-block video { width: 100%; display: block; background: #000; }
+.video-block .cap { position: absolute; top: 14px; left: 14px; background: #163D60; color: #fff; padding: 7px 14px; border-radius: 4px; font-size: 10px; letter-spacing: 2.5px; font-weight: 800; text-transform: uppercase; }
+.video-placeholder { background: linear-gradient(135deg, #163D60, #1f4a73); color: #FDFBF7; padding: 60px 30px; border-radius: 12px; text-align: center; margin-bottom: 14px; border: 2px dashed rgba(226,159,52,0.4); }
+.video-placeholder .ic { font-size: 48px; margin-bottom: 12px; }
+.video-placeholder .lab { font-size: 11px; color: #E29F34; letter-spacing: 3px; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; }
+.video-placeholder .msg { font-size: 14px; opacity: 0.85; }
+
+/* === TIMELINE 3 VÍAS === */
+.timeline-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 16px 0 22px; }
+.timeline-tabs .tab { background: #fff; border: 1.5px solid #E29F34; border-radius: 10px; padding: 14px 10px; text-align: center; }
+.timeline-tabs .tab .ic { font-size: 24px; margin-bottom: 6px; }
+.timeline-tabs .tab .lab { font-size: 10.5px; font-weight: 800; color: #E29F34; letter-spacing: 1.5px; text-transform: uppercase; }
+.tl-row { display: grid; grid-template-columns: 130px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px dashed rgba(22,61,96,0.15); align-items: start; }
+.tl-row:last-child { border-bottom: none; }
+.tl-row .date { font-size: 11px; font-weight: 800; color: #E29F34; letter-spacing: 1.2px; padding-top: 2px; }
+.tl-row .desc { font-size: 13.5px; color: #163D60; line-height: 1.55; }
+.tl-row .desc strong { color: #163D60; font-weight: 800; }
+.tl-row .tag { display: inline-block; font-size: 9px; font-weight: 800; padding: 3px 8px; border-radius: 3px; letter-spacing: 1.2px; text-transform: uppercase; margin-right: 8px; vertical-align: 2px; }
+.tl-row .tag.ayto { background: #fff3d6; color: #8a6a1f; }
+.tl-row .tag.notreg { background: #e6eef4; color: #163D60; }
+.tl-row .tag.com { background: #fdecea; color: #9b3333; }
+
+/* === BLOQUEOS === */
+.bloqueo { background: #fff; border-radius: 12px; padding: 22px 24px 18px; margin-bottom: 14px; box-shadow: 0 4px 16px rgba(22,61,96,0.06); border-left: 4px solid #E29F34; }
+.bloqueo h3 { font-size: 17px; font-weight: 800; color: #163D60; margin-bottom: 12px; }
+.bloqueo h3 .num { display: inline-block; background: #E29F34; color: #fff; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; font-size: 11px; margin-right: 10px; font-weight: 800; }
+.bloqueo .b-line, .bloqueo .s-line, .bloqueo .a-line { font-size: 13.5px; line-height: 1.65; padding: 7px 0; display: grid; grid-template-columns: 30px 1fr; gap: 10px; }
+.bloqueo .b-line .ic, .bloqueo .s-line .ic, .bloqueo .a-line .ic { font-size: 16px; }
+.bloqueo .a-line { background: #fff8ea; border-radius: 6px; padding: 11px 14px; margin-top: 10px; font-style: italic; }
+.bloqueo .a-line strong { color: #E29F34; font-style: normal; font-weight: 800; }
+
+/* === ESTRATEGIAS === */
+.estrategia { display: grid; grid-template-columns: 90px 1fr; gap: 18px; background: #163D60; color: #FDFBF7; padding: 22px 24px; border-radius: 12px; margin-bottom: 12px; align-items: center; }
+.estrategia .ic { font-size: 44px; line-height: 1; text-align: center; }
+.estrategia h4 { font-size: 15px; font-weight: 800; color: #E29F34; letter-spacing: 0.5px; margin-bottom: 8px; }
+.estrategia p { font-size: 13px; line-height: 1.6; opacity: 0.92; }
+
+/* === CIERRE NUMERICO === */
+.cierre { background: linear-gradient(135deg, #163D60 0%, #1f4a73 100%); color: #FDFBF7; padding: 32px 28px; border-radius: 14px; margin-top: 26px; }
+.cierre .lab { font-size: 10px; font-weight: 800; color: #E29F34; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 18px; text-align: center; }
+.cierre .grid-num { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 22px; }
+.cierre .nu { background: rgba(253,251,247,0.07); border: 1px solid rgba(226,159,52,0.4); border-radius: 10px; padding: 16px 14px; }
+.cierre .nu .l { font-size: 9.5px; color: #E29F34; letter-spacing: 1.5px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
+.cierre .nu .v { font-size: 20px; font-weight: 900; line-height: 1.05; }
+.cierre .nu .h { font-size: 10.5px; opacity: 0.75; margin-top: 4px; }
+.cierre .recap { font-size: 13px; line-height: 1.65; padding-top: 18px; border-top: 1px solid rgba(226,159,52,0.3); }
+.cierre .recap strong { color: #E29F34; font-weight: 800; }
+
+/* === FOOTER === */
+.footer { text-align: center; margin-top: 56px; padding-top: 28px; border-top: 1px solid rgba(22,61,96,0.15); }
+.footer .name { font-family: 'Raleway', sans-serif; font-size: 30px; letter-spacing: 1.5px; color: #0E0E0E; font-weight: 300; margin-bottom: 6px; line-height: 1.05; }
+.footer .name .b { font-weight: 800; }
+.footer .role { font-size: 9.5px; letter-spacing: 4px; color: #E29F34; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+.footer .meta { font-size: 11px; opacity: 0.55; line-height: 1.7; color: #163D60; max-width: 520px; margin: 14px auto 0; }
+
+/* === RESPONSIVE === */
+@media (max-width: 760px) {
+  body { padding: 18px 12px; }
+  .brand .name { font-size: 32px; letter-spacing: 1px; }
+  .title { font-size: 26px; }
+  .subtitle { font-size: 17px; }
+  .kpi { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .equipo { grid-template-columns: 1fr; }
+  .timeline-tabs { grid-template-columns: 1fr; }
+  .par { grid-template-columns: 1fr; gap: 8px; }
+  .par .col { aspect-ratio: 4/3; }
+  .galeria-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .estrategia { grid-template-columns: 60px 1fr; gap: 12px; padding: 16px 18px; }
+  .estrategia .ic { font-size: 32px; }
+  .cierre .grid-num { grid-template-columns: 1fr 1fr; }
+  .tl-row { grid-template-columns: 100px 1fr; gap: 12px; }
+  .planta-titulo .num { font-size: 42px; }
+  .planta-titulo .text .nm { font-size: 18px; }
+}
+
+/* === LIGHTBOX === */
+.lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; cursor: zoom-out; padding: 30px; }
+.lightbox.show { display: flex; align-items: center; justify-content: center; }
+.lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.lightbox .close { position: absolute; top: 22px; right: 32px; color: #fff; font-size: 32px; font-weight: 300; cursor: pointer; line-height: 1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- MARCA PERSONAL -->
+  <div class="brand">
+    <div class="name"><span class="b">XAVI</span> RIERA</div>
+    <div class="sep"></div>
+    <div class="role">Gestor de operaciones inmobiliarias</div>
+    <div class="credential">8ª edición Programa IN · 2ª edición Grado IN</div>
+    <div class="badge-in"><img class="logo" src="assets/logo-in.png" alt="Comunidad IN" onerror="this.style.display='none'"><span class="txt">Miembro · Comunidad IN</span></div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="pre">Operación cerrada · 06 mayo 2026</div>
+    <div class="title">Tríplex Boquera Calvari 67B</div>
+    <div class="subtitle">de vivienda en bruto desde 2007 a vivienda lista para vivir</div>
+    <div class="lead">
+      Compra a Aliseda de un tríplex en Crevillente parado en obra desde 2007 con licencia de obra mayor vigente. Reactivación del proyecto sin reabrir tramitación, reforma integral con escalera, barandilla, cocina y electrodomésticos, comercialización en paralelo a obra y cierre de venta con cláusula notarial. Modalidad <strong>INBRUTO con prestación de servicios</strong> · 10 meses 18 días de exposición de capital.
+    </div>
+
+    <div class="kpi">
+      <div class="card">
+        <div class="lab">ROI Operación</div>
+        <div class="val">20,52%</div>
+        <div class="hint">24,26% anualizado</div>
+      </div>
+      <div class="card">
+        <div class="lab">ROE Capital propio</div>
+        <div class="val">35,77%</div>
+        <div class="hint">42,29% anualizado</div>
+      </div>
+      <div class="card">
+        <div class="lab">Beneficio neto</div>
+        <div class="val">30.578 €</div>
+        <div class="hint">tras IS</div>
+      </div>
+      <div class="card">
+        <div class="lab">Plazo total</div>
+        <div class="val">~10,5 m</div>
+        <div class="hint">obra: 6,64 meses</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EQUIPO -->
+  <div class="section-label"><span class="n">1</span>Equipo de la operación</div>
+  <div class="equipo">
+    <div class="rol">
+      <div class="lab">Gestor</div>
+      <div class="name">Xavi Riera</div>
+      <div class="meta">Dirección estratégica · comercialización · cierre · contratos</div>
+    </div>
+    <div class="rol">
+      <div class="lab">Gestora</div>
+      <div class="name">Esther Davó</div>
+      <div class="meta">Captación · acompañamiento comprador · trámites presenciales</div>
+    </div>
+    <div class="rol full">
+      <div class="lab">Inversor</div>
+      <div class="name">Iker Mendinueta</div>
+      <div class="meta">Capital y vehículo SL promotora</div>
+    </div>
+    <div class="rol">
+      <div class="lab">Arquitecto</div>
+      <div class="name">Pablo Segovia</div>
+      <div class="meta">Alicante IN · proyecto técnico · DREO · DROC</div>
+    </div>
+    <div class="rol">
+      <div class="lab">Reformista</div>
+      <div class="name">Diseño del Prado · Ángel</div>
+      <div class="meta">Obra integral bajo régimen ISP</div>
+    </div>
+  </div>
+
+  <!-- VIDEO PRINCIPAL · ANTES + DESPUÉS separados -->
+  <div class="section-label"><span class="n">2</span>El recorrido · Antes y Después</div>
+  <div class="section-intro">
+    Dos vídeos separados para apreciar la transformación: el estado bruto desde 2007 frente a la vivienda terminada lista para vivir. Recorrido por las tres plantas y el exterior.
+  </div>
+
+  <div class="video-block">
+    <span class="cap">Antes · estado bruto 2007–2025</span>
+    <video controls preload="metadata" poster="assets/antes/pb-02.jpg">
+      <source src="assets/videos/antes.mp4" type="video/mp4">
+      Tu navegador no soporta vídeo HTML5. Descarga el archivo: <a href="assets/videos/antes.mp4">antes.mp4</a>
+    </video>
+  </div>
+
+  <div class="video-block">
+    <span class="cap">Después · vivienda terminada 2026</span>
+    <video controls preload="metadata" poster="assets/exterior/fachada.jpg">
+      <source src="assets/videos/despues.mp4" type="video/mp4">
+      Tu navegador no soporta vídeo HTML5. Descarga el archivo: <a href="assets/videos/despues.mp4">despues.mp4</a>
+    </video>
+  </div>
+
+  <!-- TRANSFORMACIÓN -->
+  <div class="section-label"><span class="n">3</span>La transformación · plano a plano</div>
+  <div class="section-intro">
+    Pares antes/después por estancia + galería completa del estado final.
+  </div>
+
+  <!-- PLANTA BAJA -->
+  <div class="planta-titulo">
+    <div class="num">01</div>
+    <div class="text">
+      <div class="lab">Planta Baja</div>
+      <div class="nm">Salón · Cocina · Aseo · Patio</div>
+      <div class="desc">Salón comedor con cocina abierta · aseo de cortesía · salida a patio interior · arranque de escalera</div>
+    </div>
+  </div>
+
+  <div class="par">
+    <div class="col antes"><span class="tag">Antes</span><img src="assets/antes/pb-02.jpg" alt=""></div>
+    <div class="col despues"><span class="tag">Después</span><img src="assets/despues/pb-1340.jpg" alt=""></div>
+    <div class="espacio">Salón</div>
+  </div>
+  <div class="par">
+    <div class="col antes"><span class="tag">Antes</span><img src="assets/antes/pb-01.jpg" alt=""></div>
+    <div class="col despues"><span class="tag">Después</span><img src="assets/despues/pb-1344.jpg" alt=""></div>
+    <div class="espacio">Salón–cocina</div>
+  </div>
+  <div class="par">
+    <div class="col antes"><span class="tag">Antes</span><img src="assets/antes/pb-03.jpg" alt=""></div>
+    <div class="col despues"><span class="tag">Después</span><img src="assets/despues/pb-1339.jpg" alt=""></div>
+    <div class="espacio">Plano amplio · cocina, escalera y aseo</div>
+  </div>
+
+  <div class="galeria-extra">
+    <div class="head">Galería · Planta Baja</div>
+    <div class="galeria-grid">
+      <img src="assets/despues/pb-1341.jpg" data-lightbox alt="Entrada">
+      <img src="assets/despues/pb-1345.jpg" data-lightbox alt="Cocina">
+      <img src="assets/despues/pb-1353.jpg" data-lightbox alt="Cocina">
+      <img src="assets/despues/pb-1355.jpg" data-lightbox alt="Patio">
+      <img src="assets/despues/pb-1359.jpg" data-lightbox alt="Aseo">
+      <img src="assets/despues/pb-1360.jpg" data-lightbox alt="Aseo">
+    </div>
+  </div>
+
+  <!-- PLANTA 1 -->
+  <div class="planta-titulo">
+    <div class="num">02</div>
+    <div class="text">
+      <div class="lab">Primera Planta</div>
+      <div class="nm">Tres dormitorios · Baño completo</div>
+      <div class="desc">Dormitorio principal con armario empotrado · dos dormitorios secundarios · baño con plato de ducha · iluminación LED</div>
+    </div>
+  </div>
+
+  <div class="par">
+    <div class="col antes"><span class="tag">Antes</span><img src="assets/antes/p1-01.jpg" alt=""></div>
+    <div class="col despues"><span class="tag">Después</span><img src="assets/despues/p1-1368.jpg" alt=""></div>
+    <div class="espacio">Dormitorio principal</div>
+  </div>
+  <div class="par">
+    <div class="col antes"><span class="tag">Antes</span><img src="assets/antes/p1-04.jpg" alt=""></div>
+    <div class="col despues"><span class="tag">Después</span><img src="assets/despues/p1-1376.jpg" alt=""></div>
+    <div class="espacio">Dormitorio 1</div>
+  </div>
+  <div class="par">
+    <div class="col antes"><span class="tag">Antes</span><img src="assets/antes/p1-05.jpg" alt=""></div>
+    <div class="col despues"><span class="tag">Después</span><img src="assets/despues/p1-1374.jpg" alt=""></div>
+    <div class="espacio">Dormitorio 2</div>
+  </div>
+  <div class="par">
+    <div class="col antes"><span class="tag">Antes</span><img src="assets/antes/p1-03.jpg" alt=""></div>
+    <div class="col despues"><span class="tag">Después</span><img src="assets/despues/p1-1372.jpg" alt=""></div>
+    <div class="espacio">Baño</div>
+  </div>
+
+  <div class="galeria-extra">
+    <div class="head">Galería · Primera Planta</div>
+    <div class="galeria-grid">
+      <img src="assets/despues/p1-1367.jpg" data-lightbox alt="Dormitorio principal">
+      <img src="assets/despues/p1-1369.jpg" data-lightbox alt="Dormitorio principal">
+      <img src="assets/despues/p1-1370.jpg" data-lightbox alt="Dormitorio principal">
+      <img src="assets/despues/p1-1373.jpg" data-lightbox alt="Baño">
+      <img src="assets/despues/p1-1375.jpg" data-lightbox alt="Dormitorio 2">
+      <img src="assets/despues/p1-1379.jpg" data-lightbox alt="Escalera">
+      <img src="assets/despues/p1-1380.jpg" data-lightbox alt="Escalera">
+    </div>
+  </div>
+
+  <!-- PLANTA 2 -->
+  <div class="planta-titulo">
+    <div class="num">03</div>
+    <div class="text">
+      <div class="lab">Segunda Planta</div>
+      <div class="nm">Estudio polivalente · Baño · Terraza</div>
+      <div class="desc">Estudio diáfano con salida a terraza exterior · baño completo · pieza diferencial de la vivienda con luz natural y vistas</div>
+    </div>
+  </div>
+
+  <div class="par">
+    <div class="col antes"><span class="tag">Antes</span><img src="assets/antes/p2-02.jpg" alt=""></div>
+    <div class="col despues"><span class="tag">Después</span><img src="assets/despues/p2-1384.jpg" alt=""></div>
+    <div class="espacio">Estudio</div>
+  </div>
+  <div class="par">
+    <div class="col antes"><span class="tag">Antes</span><img src="assets/antes/p2-01.jpg" alt=""></div>
+    <div class="col despues"><span class="tag">Después</span><img src="assets/despues/p2-1388.jpg" alt=""></div>
+    <div class="espacio">Baño</div>
+  </div>
+
+  <div class="galeria-extra">
+    <div class="head">Galería · Segunda Planta</div>
+    <div class="galeria-grid">
+      <img src="assets/despues/p2-1381.jpg" data-lightbox alt="Escalera">
+      <img src="assets/despues/p2-1385.jpg" data-lightbox alt="Estudio">
+      <img src="assets/despues/p2-1386.jpg" data-lightbox alt="Estudio">
+      <img src="assets/despues/p2-1389.jpg" data-lightbox alt="Baño">
+      <img src="assets/despues/p2-1392.jpg" data-lightbox alt="Baño">
+      <img src="assets/despues/p2-1393.jpg" data-lightbox alt="Baño">
+      <img src="assets/despues/p2-1398.jpg" data-lightbox alt="Terraza">
+      <img src="assets/despues/p2-1400.jpg" data-lightbox alt="Terraza">
+    </div>
+  </div>
+
+  <!-- EXTERIOR -->
+  <div class="planta-titulo">
+    <div class="num">04</div>
+    <div class="text">
+      <div class="lab">Exterior</div>
+      <div class="nm">Fachada del bloque</div>
+      <div class="desc">El exterior estaba acabado desde 2007 — el bloque venía con la obra parada por dentro pero con fachada terminada</div>
+    </div>
+  </div>
+  <div class="par" style="grid-template-columns: 1fr;">
+    <div class="col despues" style="aspect-ratio: 16/9;"><span class="tag">Fachada</span><img src="assets/exterior/fachada.jpg" alt=""></div>
+  </div>
+
+  <!-- CRONOLOGÍA 3 VÍAS -->
+  <div class="section-label"><span class="n">4</span>Cronología 3-vías · Quién hace qué y cuándo</div>
+  <div class="section-intro">
+    Una operación INBRUTO se cocina en <strong>tres ramas paralelas</strong>: trámites con Ayuntamiento, escrituración + Registro, y comercialización + venta. La diferencia entre cerrar en 10 meses o en 18 está en sincronizarlas.
+  </div>
+
+  <div class="timeline-tabs">
+    <div class="tab"><div class="ic">🏛️</div><div class="lab">Ayuntamiento</div></div>
+    <div class="tab"><div class="ic">📜</div><div class="lab">Notaría + Registro</div></div>
+    <div class="tab"><div class="ic">💼</div><div class="lab">Comercialización</div></div>
+  </div>
+
+  <div>
+    <div class="tl-row">
+      <div class="date">19/06/2025</div>
+      <div class="desc"><span class="tag notreg">Notaría</span><strong>Compra a Aliseda</strong> · Notaría Dolores · 40.000 € + IVA 21% deducible + AJD 1,5%</div>
+    </div>
+    <div class="tl-row">
+      <div class="date">17/09/2025</div>
+      <div class="desc"><span class="tag ayto">Ayto</span><strong>DREO presentada</strong> (Declaración Responsable de Ejecución de Obras). Reactivación del proyecto existente sin licencia nueva. Suministros provisionales en paralelo.</div>
+    </div>
+    <div class="tl-row">
+      <div class="date">17/09 → 09/10/25</div>
+      <div class="desc"><span class="tag com">Venta</span><strong>Renders pre-obra entregados.</strong> Comercialización activa antes incluso de empezar reforma.</div>
+    </div>
+    <div class="tl-row">
+      <div class="date">03/10/2025</div>
+      <div class="desc"><span class="tag ayto">Ayto</span><strong>Inicio de obra.</strong> Reformista Diseño del Prado bajo régimen ISP.</div>
+    </div>
+    <div class="tl-row">
+      <div class="date">29/11/2025</div>
+      <div class="desc"><span class="tag com">Venta</span><strong>Reserva firmada</strong> por compradores (3.300 € con IVA). Primer compromiso real durante obra al 50%.</div>
+    </div>
+    <div class="tl-row">
+      <div class="date">25/01/2026</div>
+      <div class="desc"><span class="tag com">Venta</span><strong>Arras del 10%</strong> firmadas. Capital al inversor para cubrir certificaciones finales sin más capital propio.</div>
+    </div>
+    <div class="tl-row">
+      <div class="date">20/02/2026</div>
+      <div class="desc"><span class="tag notreg">Registro</span><strong>Certificado Técnico de Antigüedad visado</strong> (R02). Coordenadas GML resueltas vía contacto Catastro, sin levantamiento topográfico.</div>
+    </div>
+    <div class="tl-row">
+      <div class="date">11/03 → 30/04/26</div>
+      <div class="desc"><span class="tag ayto">Ayto</span><strong>DROC v1 → v2 → v3.</strong> Trámite final con varias iteraciones hasta dejarlo limpio. Lección clara: validar la vía con técnico municipal en persona antes de presentar.</div>
+    </div>
+    <div class="tl-row">
+      <div class="date">30/03/2026</div>
+      <div class="desc"><span class="tag notreg">Notaría</span><strong>Escritura de Obra Nueva por Antigüedad.</strong> Vía registral que permitió inscribir la obra terminada sin esperar a la LPO.</div>
+    </div>
+    <div class="tl-row">
+      <div class="date">29/04/2026</div>
+      <div class="desc"><span class="tag notreg">Registro</span><strong>Inscripción obra nueva terminada</strong> en Registro Elche 3 · protocolo 352/2026 · finca 36911.</div>
+    </div>
+    <div class="tl-row">
+      <div class="date">06/05/2026</div>
+      <div class="desc"><span class="tag com">Venta</span><strong>Compraventa firmada</strong> con cláusula notarial protegiendo al comprador hasta culminación de LPO. Suministros definitivos operativos.</div>
+    </div>
+  </div>
+
+  <!-- BLOQUEOS Y SOLUCIONES -->
+  <div class="section-label"><span class="n">5</span>Bloqueos · Soluciones · Aprendizajes</div>
+  <div class="section-intro">
+    Lo que parecía atractivo sobre el papel se cocinó con fuego lento. Cinco bloqueos clave y cómo se desbloqueó cada uno.
+  </div>
+
+  <div class="bloqueo">
+    <h3><span class="num">1</span>Los sótanos y los vecinos</h3>
+    <div class="b-line"><span class="ic">🧱</span><div>El bloque venía con dos sótanos asociados a 24 plazas de garaje y trasteros. Tomar el paquete completo implicaba reabrir la división horizontal con la Comunidad. Los vecinos no cerraron acuerdo.</div></div>
+    <div class="s-line"><span class="ic">💡</span><div><strong>Solución:</strong> renunciamos a garajes y trasteros, los dejamos en Aliseda y entramos solo al tríplex. Sin riesgo legal de copropiedad, sin esperar juntas, sin DH nueva.</div></div>
+    <div class="a-line"><span class="ic">📌</span><div><strong>Aprendizaje:</strong> lo que blinda una operación a veces es saber qué dejas fuera, no qué metes dentro.</div></div>
+  </div>
+
+  <div class="bloqueo">
+    <h3><span class="num">2</span>El reformista que subió +66%</h3>
+    <div class="b-line"><span class="ic">🧱</span><div>Presupuesto cerrado en 58.420 €. A punto de arrancar obra en agosto, llega actualización: 97.000 €. Si aceptamos, la operación se rompe.</div></div>
+    <div class="s-line"><span class="ic">💡</span><div><strong>Solución:</strong> ruptura inmediata, entrevistas con alternativos en pleno agosto, comparativa final entre Universal y Diseño del Prado. Cierre con Diseño del Prado a 67.638 €, escalera incluida — clave en un tríplex.</div></div>
+    <div class="a-line"><span class="ic">📌</span><div><strong>Aprendizaje:</strong> un presupuesto cerrado solo es cerrado hasta que el reformista decide reabrirlo. Tener siempre alternativas activas y mirar el desglose, no el total.</div></div>
+  </div>
+
+  <div class="bloqueo">
+    <h3><span class="num">3</span>La luz definitiva durante obra · imposible</h3>
+    <div class="b-line"><span class="ic">🧱</span><div>El boletín provisional cubría la ejecución, pero el alta de luz definitiva la distribuidora la condicionaba a tener LPO formal en mano. Meses moviendo Ayuntamiento e Iberdrola sin éxito.</div></div>
+    <div class="s-line"><span class="ic">💡</span><div><strong>Solución:</strong> trabajar con suministros provisionales hasta el cierre administrativo. Alta definitiva planificada justo cuando el distribuidor tuvo lo formal. Suministros operativos antes de la compraventa, garantía real al comprador.</div></div>
+    <div class="a-line"><span class="ic">📌</span><div><strong>Aprendizaje:</strong> la cadena luz-LPO-suministros no se rompe por cabezonería. Anticipar y secuenciar.</div></div>
+  </div>
+
+  <div class="bloqueo">
+    <h3><span class="num">4</span>El papeleo final · 3 versiones de DROC</h3>
+    <div class="b-line"><span class="ic">🧱</span><div>La DROC se preparó inicialmente como "segunda ocupación". El técnico municipal en sede aclaró que en este caso (vivienda nunca ocupada antes, licencia de 2007 sin título habilitante) la vía correcta era primera ocupación vía "edificación existente sin autorización de ocupación anterior". Después llegó un requerimiento adicional sobre una ficha técnica mal rellena.</div></div>
+    <div class="s-line"><span class="ic">💡</span><div><strong>Solución:</strong> tres versiones de la DROC en mes y medio (11/03 → 01/04 → 30/04) hasta dejar el expediente limpio.</div></div>
+    <div class="a-line"><span class="ic">📌</span><div><strong>Aprendizaje:</strong> validar la vía exacta con el técnico municipal en persona antes de presentar, no después. Una visita previa ahorra 6-8 semanas de subsanaciones.</div></div>
+  </div>
+
+  <div class="bloqueo">
+    <h3><span class="num">5</span>Cierre con LPO en trámite</h3>
+    <div class="b-line"><span class="ic">🧱</span><div>Compraventa lista en abril. LPO definitiva del Ayuntamiento aún se hacía esperar. ¿Esperar al Ayuntamiento o cerrar con la garantía de lo que ya teníamos?</div></div>
+    <div class="s-line"><span class="ic">💡</span><div><strong>Solución:</strong> compraventa firmada (06/05) con cláusula notarial específica. Garantía real al comprador: obra nueva inscrita en Registro (29/04) + suministros definitivos + cláusula. La banca del comprador validó el dossier sin LPO en mano.</div></div>
+    <div class="a-line"><span class="ic">📌</span><div><strong>Aprendizaje:</strong> se puede cerrar con LPO en trámite si la finca está inscrita como vivienda terminada y los suministros operativos.</div></div>
+  </div>
+
+  <!-- ESTRATEGIAS -->
+  <div class="section-label"><span class="n">6</span>Estrategias que funcionaron</div>
+
+  <div class="estrategia">
+    <div class="ic">🎨</div>
+    <div>
+      <h4>Renders pre-obra → comercialización en paralelo</h4>
+      <p>Renders del producto terminado encargados antes de empezar obra. Comercializamos en paralelo a la reforma, no después. Reserva firmada con obra al 50%, arras con obra al 80%. Ese capital al inversor le sirvió para ir cubriendo certificaciones sin recurrir a más capital propio.</p>
+    </div>
+  </div>
+
+  <div class="estrategia">
+    <div class="ic">🧮</div>
+    <div>
+      <h4>ISP en la reforma · fiscalidad limpia</h4>
+      <p>La reforma se contrató con Inversión del Sujeto Pasivo (art. 84.Uno.2º.f LIVA). Evita adelantar IVA durante obra. Combinado con compra a promotora con IVA deducible y venta como primera transmisión con IVA 10%, la estructura fiscal cuadra de extremo a extremo.</p>
+    </div>
+  </div>
+
+  <div class="estrategia">
+    <div class="ic">📋</div>
+    <div>
+      <h4>Vía registral por antigüedad · desbloqueo del cierre</h4>
+      <p>Para inscribir la finca como obra terminada (estaba como "obra en construcción" desde 2007) usamos la vía de Escritura de Obra Nueva por Antigüedad con Certificado Técnico de Antigüedad visado. Permitió inscribir en paralelo al trámite de LPO sin esperar a que el Ayuntamiento la emitiera. Eso desbloqueó la compraventa.</p>
+    </div>
+  </div>
+
+  <!-- CIERRE NUMERICO -->
+  <div class="cierre">
+    <div class="lab">Cierre numérico</div>
+    <div class="grid-num">
+      <div class="nu"><div class="l">Compra</div><div class="v">40.000 €</div><div class="h">+ IVA 21% deducible</div></div>
+      <div class="nu"><div class="l">Reforma</div><div class="v">67.638 €</div><div class="h">incluye escalera + barandilla + cocina</div></div>
+      <div class="nu"><div class="l">Inversión total</div><div class="v">159.281 €</div><div class="h">sin IVA deducible</div></div>
+      <div class="nu"><div class="l">Venta</div><div class="v">185.000 €</div><div class="h">+ IVA 10% primera transmisión</div></div>
+    </div>
+    <div class="recap">
+      Plan inicial: <strong>162.000 €</strong> de venta. Cierre real: <strong>185.000 €</strong> (+14%). Esa subida absorbió un sobrecoste de inversión de <strong>+18.630 €</strong> (reforma final superior, gastos no presupuestados, micro-subsanaciones de papeleo) sin que el inversor perdiera el rendimiento objetivo. Beneficio neto operación tras IS: <strong>30.578 €</strong>. ROI 20,52% (24,26% anualizado) · ROE sobre capital propio 35,77% (42,29% anualizado).
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="name"><span class="b">XAVI</span> RIERA</div>
+    <div class="role">Gestor de operaciones inmobiliarias</div>
+    <div class="meta">
+      8ª edición Programa IN · 2ª edición Grado IN · Miembro Comunidad IN<br>
+      Compra 19/06/2025 · Inscripción Registro 29/04/2026 · Compraventa 06/05/2026<br>
+      Modalidad: INBRUTO con prestación de servicios
+    </div>
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <span class="close">&times;</span>
+  <img src="" alt="">
+</div>
+
+<script>
+const lb = document.getElementById('lightbox');
+const lbImg = lb.querySelector('img');
+document.querySelectorAll('[data-lightbox], .par .col img').forEach(img => {
+  img.style.cursor = 'pointer';
+  img.addEventListener('click', (e) => {
+    lbImg.src = img.src;
+    lb.classList.add('show');
+  });
+});
+lb.addEventListener('click', () => lb.classList.remove('show'));
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') lb.classList.remove('show');
+});
+</script>
+
+</body>
+</html>

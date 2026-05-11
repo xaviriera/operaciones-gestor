@@ -1,0 +1,14 @@
+# Archivos grandes — usar GitHub Releases en su lugar
+**/assets/videos/*.mp4
+**/assets/videos/*.mov
+**/assets/videos/*.webm
+
+# Temporales
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+
+# IDE
+.vscode/
+.idea/
