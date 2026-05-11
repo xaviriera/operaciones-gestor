@@ -187,23 +187,23 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
 
     <div class="kpi">
       <div class="card">
-        <div class="lab">ROI Operación</div>
-        <div class="val">20,52%</div>
-        <div class="hint">24,26% anualizado</div>
+        <div class="lab">Rentabilidad operación</div>
+        <div class="val">24,14%</div>
+        <div class="hint">27,4% anualizada</div>
       </div>
       <div class="card">
-        <div class="lab">ROE Capital propio</div>
-        <div class="val">35,77%</div>
-        <div class="hint">42,29% anualizado</div>
+        <div class="lab">Rent. capital propio</div>
+        <div class="val">45,5%</div>
+        <div class="hint">51,6% anualizada</div>
       </div>
       <div class="card">
-        <div class="lab">Beneficio neto</div>
-        <div class="val">30.578 €</div>
-        <div class="hint">tras IS</div>
+        <div class="lab">Beneficio obtenido</div>
+        <div class="val">35.974 €</div>
+        <div class="hint">bruto operación</div>
       </div>
       <div class="card">
         <div class="lab">Plazo total</div>
-        <div class="val">~10,5 m</div>
+        <div class="val">322 días</div>
         <div class="hint">obra: 6,64 meses</div>
       </div>
     </div>
@@ -526,17 +526,45 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
     </div>
   </div>
 
-  <!-- CIERRE NUMERICO -->
+  <!-- DESGLOSE DE GASTOS · método IN (sin IS) -->
+  <div class="section-label"><span class="n">7</span>Números cerrados de la operación</div>
+  <div class="section-intro">
+    Desglose de gastos línea a línea siguiendo el método del <strong>Grado IN</strong>: rentabilidades sobre el bruto de la operación (sin imputar Impuesto de Sociedades). El IS del 15% (nueva creación) lo asume el inversor en su vehículo y se muestra aparte como referencia.
+  </div>
+
   <div class="cierre">
-    <div class="lab">Cierre numérico</div>
-    <div class="grid-num">
-      <div class="nu"><div class="l">Compra</div><div class="v">40.000 €</div><div class="h">+ IVA 21% deducible</div></div>
-      <div class="nu"><div class="l">Reforma</div><div class="v">67.638 €</div><div class="h">incluye escalera + barandilla + cocina</div></div>
-      <div class="nu"><div class="l">Inversión total</div><div class="v">159.281 €</div><div class="h">sin IVA deducible</div></div>
-      <div class="nu"><div class="l">Venta</div><div class="v">185.000 €</div><div class="h">+ IVA 10% primera transmisión</div></div>
+    <div class="lab">🔵 Coste total de la operación</div>
+    <div class="grid-num" style="grid-template-columns: 1fr; gap: 6px;">
+      <div class="nu" style="display:flex; justify-content:space-between; padding:10px 14px;"><div class="l" style="text-align:left;">🏠 Precio de compra (con notaría, registro, AJD, IBI)</div><div class="v" style="font-size:18px;">41.736 €</div></div>
+      <div class="nu" style="display:flex; justify-content:space-between; padding:10px 14px;"><div class="l" style="text-align:left;">🔨 Reforma integral ISP (Diseño del Prado)</div><div class="v" style="font-size:18px;">75.324 €</div></div>
+      <div class="nu" style="display:flex; justify-content:space-between; padding:10px 14px;"><div class="l" style="text-align:left;">📐 Arquitecto + renders pre-obra</div><div class="v" style="font-size:18px;">5.200 €</div></div>
+      <div class="nu" style="display:flex; justify-content:space-between; padding:10px 14px;"><div class="l" style="text-align:left;">🏛️ Licencias · DREO · DROC · OVP · ICIO</div><div class="v" style="font-size:18px;">326 €</div></div>
+      <div class="nu" style="display:flex; justify-content:space-between; padding:10px 14px;"><div class="l" style="text-align:left;">🤝 Honorarios gestión (captación + dirección + comercialización)</div><div class="v" style="font-size:18px;">19.000 €</div></div>
+      <div class="nu" style="display:flex; justify-content:space-between; padding:10px 14px;"><div class="l" style="text-align:left;">👥 API venta</div><div class="v" style="font-size:18px;">6.000 €</div></div>
+      <div class="nu" style="display:flex; justify-content:space-between; padding:10px 14px;"><div class="l" style="text-align:left;">🔌 Suministros · CEE · altas</div><div class="v" style="font-size:18px;">500 €</div></div>
+      <div class="nu" style="display:flex; justify-content:space-between; padding:10px 14px;"><div class="l" style="text-align:left;">🧹 Limpieza pre-entrega + Acta Fin Obra + plusvalía IIVTNU</div><div class="v" style="font-size:18px;">941 €</div></div>
+      <div class="nu" style="display:flex; justify-content:space-between; padding:14px 14px; background:#163D60; color:#FDFBF7;"><div class="l" style="text-align:left; color:#E29F34; font-weight:800;">💰 COSTE TOTAL OPERACIÓN</div><div class="v" style="font-size:22px; color:#FDFBF7;">149.026 €</div></div>
     </div>
+
+    <div class="grid-num" style="grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 18px;">
+      <div class="nu"><div class="l">Capital propio</div><div class="v">79.026 €</div></div>
+      <div class="nu"><div class="l">Préstamo bancario</div><div class="v">70.000 €</div></div>
+    </div>
+
+    <div class="grid-num" style="grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 14px;">
+      <div class="nu"><div class="l">🏷️ Precio salida mercado</div><div class="v">162.000 €</div></div>
+      <div class="nu"><div class="l">💸 Precio de venta</div><div class="v">185.000 €</div><div class="h">+14% sobre plan</div></div>
+      <div class="nu" style="background:#163D60; color:#FDFBF7;"><div class="l" style="color:#E29F34;">📈 Beneficio obtenido</div><div class="v" style="color:#FDFBF7;">35.974 €</div></div>
+    </div>
+
+    <div class="grid-num" style="grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px;">
+      <div class="nu" style="border-color:#E29F34;"><div class="l">✅ Rentabilidad operación</div><div class="v">24,14 %</div><div class="h">🚀 27,4% anualizada</div></div>
+      <div class="nu" style="border-color:#E29F34;"><div class="l">🔥 Rent. capital propio</div><div class="v">45,5 %</div><div class="h">💹 51,6% anualizada</div></div>
+    </div>
+
     <div class="recap">
-      Plan inicial: <strong>162.000 €</strong> de venta. Cierre real: <strong>185.000 €</strong> (+14%). Esa subida absorbió un sobrecoste de inversión de <strong>+18.630 €</strong> (reforma final superior, gastos no presupuestados, micro-subsanaciones de papeleo) sin que el inversor perdiera el rendimiento objetivo. Beneficio neto operación tras IS: <strong>30.578 €</strong>. ROI 20,52% (24,26% anualizado) · ROE sobre capital propio 35,77% (42,29% anualizado).
+      Plan inicial: <strong>162.000 €</strong> de venta. Cierre real: <strong>185.000 €</strong> (+14%). La subida absorbió un sobrecoste de inversión de <strong>+18.630 €</strong> (reforma final superior, gastos no presupuestados, micro-subsanaciones de papeleo) sin perder el rendimiento objetivo. <br><br>
+      <em style="opacity:0.75; font-size:12px;">Nota fiscal complementaria: el Impuesto de Sociedades al 15% (nueva creación, primeros 2 años con beneficios) sobre el beneficio bruto deja al inversor un <strong>beneficio neto tras IS de 30.578 €</strong>. La rentabilidad publicada en la plataforma IN sigue el método Grado IN (bruto operacional, sin imputar IS).</em>
     </div>
   </div>
 
