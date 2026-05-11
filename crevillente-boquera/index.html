@@ -61,7 +61,7 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
 
 /* === PLANTA TITLE === */
 .planta-titulo { display: flex; align-items: baseline; gap: 14px; margin: 30px 0 16px; }
-.planta-titulo .num { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: #E29F34; line-height: 1; letter-spacing: -2px; }
+.planta-titulo .num { font-family: 'Montserrat', sans-serif; font-size: 46px; font-weight: 800; color: #E29F34; line-height: 1; letter-spacing: -2px; }
 .planta-titulo .text .lab { font-size: 10px; letter-spacing: 3px; color: #E29F34; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; }
 .planta-titulo .text .nm { font-size: 22px; font-weight: 800; color: #163D60; line-height: 1; letter-spacing: -0.4px; }
 .planta-titulo .text .desc { font-size: 12px; color: #163D60; opacity: 0.75; margin-top: 4px; }
@@ -89,8 +89,8 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
 .video-block video { width: 100%; display: block; background: #000; }
 .video-block .cap { position: absolute; top: 14px; left: 14px; background: #163D60; color: #fff; padding: 7px 14px; border-radius: 4px; font-size: 10px; letter-spacing: 2.5px; font-weight: 800; text-transform: uppercase; }
 .video-pair-vert { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
-.video-pair-vert .video-vert { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 12px 32px rgba(22,61,96,0.18); }
-.video-pair-vert .video-vert video { width: 100%; aspect-ratio: 9/16; object-fit: contain; display: block; background: #163D60; }
+.video-pair-vert .video-vert { position: relative; padding-bottom: 177.78%; height: 0; border-radius: 12px; overflow: hidden; box-shadow: 0 12px 32px rgba(22,61,96,0.18); background: #163D60; }
+.video-pair-vert .video-vert video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; display: block; background: #163D60; }
 .video-pair-vert .video-vert .cap { position: absolute; top: 12px; left: 12px; background: #163D60; color: #fff; padding: 6px 12px; border-radius: 4px; font-size: 9.5px; letter-spacing: 2px; font-weight: 800; text-transform: uppercase; z-index: 2; }
 @media (max-width: 600px) {
   .video-pair-vert { grid-template-columns: 1fr; }
@@ -230,17 +230,17 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
     <div class="rol full">
       <div class="lab">Gestor principal · captación + coordinación</div>
       <div class="name">Xavi Riera</div>
-      <div class="meta">Captación de la oportunidad y presentación al inversor · dirección estratégica · estrategia fiscal · diseño de contratos (reserva, arras, compraventa) · coordinación general del equipo durante toda la operación (urbanismo, arquitecto, reformista, registro, notaría, comercialización) · cierre comercial</div>
+      <div class="meta">Captación de la oportunidad y presentación al canal de oportunidades del Programa IN · dirección estratégica · estrategia fiscal · diseño de contratos (reserva y arras) · coordinación general del equipo durante toda la operación (urbanismo, arquitecto, reformista, registro, notaría, comercialización) · cierre comercial</div>
     </div>
     <div class="rol">
-      <div class="lab">Gestora · personal shopper</div>
+      <div class="lab">Gestora presencial · personal shopper</div>
       <div class="name">Esther Davó</div>
-      <div class="meta">Brazo presencial de la operación · trámites Ayuntamiento (urbanismo) en sede · búsqueda y negociación con proveedores · visitas y acompañamiento cercano de los compradores hasta la firma — figura de "personal shopper" de la operación</div>
+      <div class="meta">Gestora presencial de la operación · búsqueda y negociación con proveedores en zona · visitas y acompañamiento cercano de los compradores hasta la firma — figura de "personal shopper" de la operación</div>
     </div>
     <div class="rol">
-      <div class="lab">Inversor · titular SL</div>
+      <div class="lab">Inversor · titular SL · firma oficial</div>
       <div class="name">Iker Mendinueta</div>
-      <div class="meta">Aportación de capital · vehículo SL promotora (VALUEBUILD) · firma oficial de todos los actos: notaría compra, notaría arras, escrituras de obra nueva, inscripciones en Registro, compraventa</div>
+      <div class="meta">Aportación de capital · vehículo SL promotora (VALUEBUILD) · firma oficial de todos los actos: notaría compra, notaría arras, escrituras de obra nueva, inscripciones en Registro, compraventa · trámites en sede del Ayuntamiento (DREO, DROC) con certificado digital</div>
     </div>
     <div class="rol">
       <div class="lab">Arquitecto</div>
@@ -285,7 +285,7 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
 
   <!-- PLANTA BAJA -->
   <div class="planta-titulo">
-    <div class="num">01</div>
+    <div class="num">00</div>
     <div class="text">
       <div class="lab">Planta Baja</div>
       <div class="nm">Salón · Cocina · Aseo · Patio</div>
@@ -323,7 +323,7 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
 
   <!-- PLANTA 1 -->
   <div class="planta-titulo">
-    <div class="num">02</div>
+    <div class="num">01</div>
     <div class="text">
       <div class="lab">Primera Planta</div>
       <div class="nm">Tres dormitorios · Baño completo</div>
@@ -367,7 +367,7 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
 
   <!-- PLANTA 2 -->
   <div class="planta-titulo">
-    <div class="num">03</div>
+    <div class="num">02</div>
     <div class="text">
       <div class="lab">Segunda Planta</div>
       <div class="nm">Estudio polivalente · Baño · Terraza</div>
@@ -402,7 +402,7 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
 
   <!-- EXTERIOR -->
   <div class="planta-titulo">
-    <div class="num">04</div>
+    <div class="num">03</div>
     <div class="text">
       <div class="lab">Exterior</div>
       <div class="nm">Fachada del bloque</div>
@@ -612,8 +612,9 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
 
   <div class="servicios" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0 28px;">
     <div style="background: #fff; border-radius: 12px; padding: 22px 24px; border: 1.5px solid #163D60; box-shadow: 0 4px 14px rgba(22,61,96,0.08); display: flex; flex-direction: column;">
-      <div style="font-size: 10px; letter-spacing: 3px; color: #E29F34; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Servicio CdU</div>
-      <div style="font-family: 'Raleway', sans-serif; font-size: 22px; font-weight: 800; color: #163D60; line-height: 1.1; margin-bottom: 6px;">CdU de 0 a ÉXITO</div>
+      <div style="height: 70px; display: flex; align-items: center; justify-content: flex-start; margin-bottom: 14px;">
+        <img src="assets/logos/cdu-exito.png" alt="CdU de 0 a ÉXITO" style="max-height: 70px; max-width: 100%; object-fit: contain;">
+      </div>
       <div style="font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; color: #163D60; opacity: 0.75; margin-bottom: 14px; line-height: 1.3;">tu operación de Cambio de Uso, de principio a fin</div>
       <div style="font-size: 13px; color: #163D60; line-height: 1.55; margin-bottom: 18px; flex: 1;">
         Acompañamiento profesional para inversores que quieren ejecutar una operación de Cambio de Uso con rentabilidad y sin sustos. Tres fases: <strong>GO</strong> (validación) → <strong>MAP</strong> (proyecto + licencias + obra) → <strong>ÉXITO</strong> (venta).
@@ -625,8 +626,9 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
     </div>
 
     <div style="background: #fff; border-radius: 12px; padding: 22px 24px; border: 1.5px solid #163D60; box-shadow: 0 4px 14px rgba(22,61,96,0.08); display: flex; flex-direction: column;">
-      <div style="font-size: 10px; letter-spacing: 3px; color: #E29F34; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Servicio IM·PULSO</div>
-      <div style="font-family: 'Raleway', sans-serif; font-size: 22px; font-weight: 800; color: #163D60; line-height: 1.1; margin-bottom: 6px;">IM·PULSO</div>
+      <div style="height: 70px; display: flex; align-items: center; justify-content: flex-start; margin-bottom: 14px;">
+        <img src="assets/logos/impulso.png" alt="IM·PULSO" style="max-height: 70px; max-width: 100%; object-fit: contain;">
+      </div>
       <div style="font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; color: #163D60; opacity: 0.75; margin-bottom: 14px; line-height: 1.3;">el prefiltro rápido e inteligente con IA · antes del MTVV</div>
       <div style="font-size: 13px; color: #163D60; line-height: 1.55; margin-bottom: 18px; flex: 1;">
         Pre-validador con IA que en segundos descarta oportunidades inviables y prioriza las que merecen un <strong>MTVV completo</strong>. No pierdas horas analizando lo que no tiene recorrido — centra tu tiempo en lo que sí.
@@ -644,7 +646,6 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
     <div class="role">Gestor de operaciones inmobiliarias</div>
     <div class="meta">
       Gestor · Comunidad IN · 8ª edición Programa IN · 2ª edición Grado IN<br>
-      Compra 19/06/2025 · Inscripción Registro 29/04/2026 · Compraventa 06/05/2026<br>
       Modalidad: INBRUTO con prestación de servicios
     </div>
   </div>
