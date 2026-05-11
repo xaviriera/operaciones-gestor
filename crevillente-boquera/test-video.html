@@ -1,14 +1,27 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>Test vídeos verticales</title></head>
-<body style="margin:0;padding:20px;background:#FDFBF7;font-family:sans-serif">
-  <h1>Test vídeos verticales (raw, sin CSS adicional)</h1>
-  <p>Si los ves verticales (más altos que anchos) aquí pero horizontales en el briefing, el problema es CSS. Si en ambos se ven horizontales, problema del navegador o del archivo.</p>
-  <h2>Después (debería ser 1080x1920 vertical)</h2>
-  <video controls width="540" height="960" poster="assets/exterior/fachada-1.jpg">
-    <source src="https://github.com/xaviriera/operaciones-gestor/releases/download/v1.1/despues.mp4" type="video/mp4">
-  </video>
-  <h2>Antes (debería ser 1080x1920 vertical)</h2>
-  <video controls width="540" height="960" poster="assets/antes/pb-02.jpg">
-    <source src="https://github.com/xaviriera/operaciones-gestor/releases/download/v1.1/antes.mp4" type="video/mp4">
-  </video>
+<html><head><meta charset="UTF-8"><title>Test vídeos verticales</title>
+<style>
+  body { margin:0; padding:20px; background:#FDFBF7; font-family:sans-serif; }
+  .row { display: flex; gap: 20px; flex-wrap: wrap; }
+  .row > div { flex: 1; min-width: 200px; max-width: 400px; }
+  .row video { width: 100%; height: auto; aspect-ratio: 9/16; background: #163D60; display: block; border-radius: 8px; }
+  h2 { font-size: 14px; }
+</style></head>
+<body>
+  <h1>Test vídeos · 1080×1920 verticales (sin poster)</h1>
+  <p>Si ves <strong>ambos verticales</strong> aquí, el archivo está perfecto y el problema del briefing original era el poster horizontal. Si ves alguno horizontal aquí, problema del navegador o cache profundo (prueba ventana incógnito).</p>
+  <div class="row">
+    <div>
+      <h2>Antes</h2>
+      <video controls preload="metadata" playsinline width="1080" height="1920">
+        <source src="https://github.com/xaviriera/operaciones-gestor/releases/download/v1.1/antes.mp4?test=1" type="video/mp4">
+      </video>
+    </div>
+    <div>
+      <h2>Después</h2>
+      <video controls preload="metadata" playsinline width="1080" height="1920">
+        <source src="https://github.com/xaviriera/operaciones-gestor/releases/download/v1.1/despues.mp4?test=1" type="video/mp4">
+      </video>
+    </div>
+  </div>
 </body></html>
