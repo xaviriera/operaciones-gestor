@@ -88,9 +88,9 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
 .video-block { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 12px 32px rgba(22,61,96,0.18); margin-bottom: 14px; }
 .video-block video { width: 100%; display: block; background: #000; }
 .video-block .cap { position: absolute; top: 14px; left: 14px; background: #163D60; color: #fff; padding: 7px 14px; border-radius: 4px; font-size: 10px; letter-spacing: 2.5px; font-weight: 800; text-transform: uppercase; }
-.video-pair-vert { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
-.video-pair-vert .video-vert { position: relative; padding-bottom: 177.78%; height: 0; border-radius: 12px; overflow: hidden; box-shadow: 0 12px 32px rgba(22,61,96,0.18); background: #163D60; }
-.video-pair-vert .video-vert video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; display: block; background: #163D60; }
+.video-pair-vert { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; align-items: start; }
+.video-pair-vert .video-vert { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 12px 32px rgba(22,61,96,0.18); background: #163D60; }
+.video-pair-vert .video-vert video { width: 100%; height: auto; display: block; background: #163D60; }
 .video-pair-vert .video-vert .cap { position: absolute; top: 12px; left: 12px; background: #163D60; color: #fff; padding: 6px 12px; border-radius: 4px; font-size: 9.5px; letter-spacing: 2px; font-weight: 800; text-transform: uppercase; z-index: 2; }
 @media (max-width: 600px) {
   .video-pair-vert { grid-template-columns: 1fr; }
@@ -263,14 +263,14 @@ body { font-family: 'Montserrat', Arial, sans-serif; background: #FDFBF7; color:
   <div class="video-pair-vert">
     <div class="video-vert">
       <span class="cap">Antes</span>
-      <video controls preload="metadata" playsinline poster="assets/antes/pb-02.jpg">
+      <video controls preload="metadata" playsinline width="1080" height="1920" poster="assets/antes/pb-02.jpg">
         <source src="https://github.com/xaviriera/operaciones-gestor/releases/download/v1.1/antes.mp4" type="video/mp4">
         Tu navegador no soporta vídeo HTML5. <a href="https://github.com/xaviriera/operaciones-gestor/releases/download/v1.1/antes.mp4">Descargar antes.mp4</a>
       </video>
     </div>
     <div class="video-vert">
       <span class="cap">Después</span>
-      <video controls preload="metadata" playsinline poster="assets/exterior/fachada-1.jpg">
+      <video controls preload="metadata" playsinline width="1080" height="1920" poster="assets/exterior/fachada-1.jpg">
         <source src="https://github.com/xaviriera/operaciones-gestor/releases/download/v1.1/despues.mp4" type="video/mp4">
         Tu navegador no soporta vídeo HTML5. <a href="https://github.com/xaviriera/operaciones-gestor/releases/download/v1.1/despues.mp4">Descargar despues.mp4</a>
       </video>
