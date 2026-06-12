@@ -17,7 +17,28 @@ html, body {
     font-family: 'Montserrat', -apple-system, sans-serif;
     background: #FDFBF7; color: #1a1a1a; line-height: 1.55; font-weight: 400;
 }
-.page { max-width: 880px; margin: 0 auto; padding: 28px 56px 70px; background: #FDFBF7; }
+.page { max-width: 1060px; margin: 0 auto; padding: 0 56px 70px; background: #FDFBF7; }
+
+/* ───── HERO PORTADA (presentación) ───── */
+.hero {
+    margin: 0 -56px 40px; padding: 84px 56px 56px;
+    background: linear-gradient(165deg, rgba(14,42,68,.93) 0%, rgba(22,61,96,.86) 55%, rgba(14,42,68,.94) 100%),
+                url('assets/fotos/render-venta-1.jpg') center/cover no-repeat;
+    color: #FDFBF7;
+}
+.hero .h-logo { height: 84px; width: auto; margin-bottom: 30px; display: block; }
+.hero .brand-tag { color: #E29F34; }
+.hero .h-title { font-size: clamp(34px, 4.6vw, 54px); font-weight: 800; line-height: 1.06; letter-spacing: -1px; color: #fff; margin-bottom: 14px; }
+.hero .h-title .highlight { color: #E29F34; }
+.hero .h-sub { font-size: 15.5px; color: rgba(253,251,247,.88); max-width: 720px; margin-bottom: 22px; }
+.hero .doc-meta { color: rgba(253,251,247,.8); }
+.hero .doc-meta span strong { color: #fff; }
+.hero .h-claim { margin-top: 24px; font-size: 14.5px; font-weight: 700; color: #E29F34; }
+.hero .h-claim span { color: rgba(253,251,247,.85); font-weight: 600; }
+.cover-strip { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; margin: 30px 0 0; }
+.cover-strip img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 8px; box-shadow: 0 6px 22px rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.18); }
+.cover-strip .arrow { font-size: 28px; color: #E29F34; font-weight: 800; }
+.cover-strip figcaption { font-size: 10px; color: rgba(253,251,247,.75); text-align: center; margin-top: 7px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
 
 /* ───── NAV SUPERIOR (pantalla; oculta al imprimir) ───── */
 .topnav {
@@ -51,15 +72,15 @@ html, body {
 .cover .arrow { font-size: 26px; color: #E29F34; font-weight: 800; }
 .cover figcaption { font-size: 10.5px; color: #777; text-align: center; margin-top: 6px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; }
 
-/* ───── SECCIONES ───── */
-section { margin-bottom: 36px; page-break-inside: avoid; }
+/* ───── SECCIONES (formato presentación con branding documento) ───── */
+section { margin-bottom: 54px; page-break-inside: avoid; }
 h2 {
-    font-size: 15px; font-weight: 700; color: #163D60; text-transform: uppercase;
-    letter-spacing: 1px; margin-bottom: 14px; padding-bottom: 6px;
-    border-bottom: 1.5px solid rgba(22, 61, 96, 0.18);
-    display: flex; align-items: baseline; gap: 10px;
+    font-size: 19px; font-weight: 700; color: #163D60; text-transform: uppercase;
+    letter-spacing: 1.2px; margin-bottom: 18px; padding-bottom: 9px;
+    border-bottom: 2px solid rgba(22, 61, 96, 0.18);
+    display: flex; align-items: baseline; gap: 12px;
 }
-h2 .num { color: #E29F34; font-size: 14px; font-weight: 800; letter-spacing: .5px; min-width: 24px; }
+h2 .num { color: #E29F34; font-size: 17px; font-weight: 800; letter-spacing: .5px; min-width: 30px; }
 h3 { font-size: 13px; font-weight: 600; color: #163D60; margin: 18px 0 8px; }
 p { font-size: 13px; color: #2a2a2a; margin-bottom: 10px; }
 ul { margin: 8px 0 8px 22px; }
@@ -88,7 +109,7 @@ td.amount { text-align: right; font-weight: 600; color: #163D60; white-space: no
 /* KPI compactos (estilo documento, no hero) */
 .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 12px 0; }
 .kpi { background: #fff; border: 1px solid #e6dfd0; border-radius: 6px; padding: 12px 14px; }
-.kpi .v { font-size: 19px; font-weight: 700; color: #163D60; line-height: 1.1; }
+.kpi .v { font-size: 24px; font-weight: 800; color: #163D60; line-height: 1.1; letter-spacing: -.3px; }
 .kpi .l { font-size: 10px; color: #777; text-transform: uppercase; font-weight: 700; letter-spacing: .4px; margin-top: 4px; line-height: 1.4; }
 
 /* EQUIPO (triángulo + perfiles compactos) */
@@ -215,21 +236,22 @@ td.amount { text-align: right; font-weight: 600; color: #163D60; white-space: no
   <a href="#visor">Visor</a><a href="#docs">Documentación</a>
 </nav>
 
-<!-- HEADER -->
-<header class="header">
-  <img class="brand-logo-img" src="assets/logo-cdu.png" alt="CdU de 0 a ÉXITO · tucambiodeuso.com">
+<!-- PORTADA -->
+<header class="hero">
+  <img class="h-logo" src="assets/logo-cdu-blanco.png" alt="CdU de 0 a ÉXITO · tucambiodeuso.com">
   <div class="brand-tag">Propuesta de inversión · Joint Venture · Comunidad IN</div>
-  <div class="doc-title">Las Torres de Cotillas — <span class="highlight">de local comercial a 3 viviendas</span></div>
+  <div class="h-title">Las Torres de Cotillas<br><span class="highlight">de local comercial a 3 viviendas</span></div>
+  <p class="h-sub">Viabilidad <b>cerrada y certificada</b> · demanda <b>medida dos veces</b> sobre el terreno · ejecución con <b>equipo de obra propia</b> · el gestor invierte <b>su capital junto al tuyo</b>.</p>
   <div class="doc-meta">
     <span><strong>Ubicación:</strong> C/ D'Estoup 17 · Las Torres de Cotillas (Murcia)</span>
-    <span><strong>Modalidad:</strong> C/A/V · Cuentas en Participación</span>
+    <span><strong>Modalidad:</strong> C/A/V · Cuentas en Participación (servicer)</span>
     <span><strong>Estado:</strong> <span class="flag green">Viabilidad cerrada</span><span class="flag orange">Licencia en trámite</span></span>
-    <span><strong>Documento:</strong> v1 · junio 2026</span>
   </div>
-  <figure class="cover">
+  <div class="h-claim">Tres fases. Un objetivo: pasar de la viabilidad al beneficio real. <span>Sin improvisar. Sin sorpresas.</span></div>
+  <figure class="cover-strip">
     <div><img src="assets/fotos/original-2.jpg" alt="Estado actual"><figcaption>Estado actual · local en esquina 105 m²</figcaption></div>
     <div class="arrow">→</div>
-    <div><img src="assets/fotos/render-venta-1.jpg" alt="Producto final"><figcaption>Producto final · piso piloto (visualización)</figcaption></div>
+    <div><img src="assets/fotos/render-venta-2.jpg" alt="Producto final"><figcaption>Producto final · piso piloto (visualización)</figcaption></div>
   </figure>
 </header>
 
@@ -286,9 +308,10 @@ td.amount { text-align: right; font-weight: 600; color: #163D60; white-space: no
   <div class="impulso">
     <div class="head"><span class="tag">Inteligencia de mercado</span><img src="assets/logo-impulso.png" alt="IM·PULSO"></div>
     <p><b>Triple validación del precio:</b> Método Total (MTVV) con 4 inmobiliarias + 2 campañas reales con ofertas recibidas + cruce con datos masivos y notariado. En su último contraste, el motor IM·PULSO replicó el método manual con un <b>1,3% de desviación</b> (74.000 € manual vs 75.000 € motor).</p>
-    <p style="border:1px dashed #FF4D2E;border-radius:6px;padding:8px 12px;color:#ffd9cf;font-size:11px">⏳ Hueco reservado: informe IM·PULSO×MTVV de la operación (fusión v2 — en elaboración).</p>
+    <p><b>Y en esta operación:</b> el motor IM·PULSO valoró las unidades de TDC en <b>68.000–69.000 €</b> — en línea con los suelos del paso 4 (67.000–72.000 €). Tres vías independientes, un mismo rango.</p>
+    <p style="border:1px dashed #FF4D2E;border-radius:6px;padding:8px 12px;color:#ffd9cf;font-size:11px">⏳ Informe IM·PULSO×MTVV completo de la operación: en elaboración (fusión v2).</p>
   </div>
-  <p class="intro"><strong>En 5 líneas:</strong> local en esquina de 105 m² en la mejor zona del municipio → 3 viviendas (1 dormitorio + 2 estudios). Compra 40.000 €. Inversión total ~162.000 € <span class="flag orange">provisional</span>. Venta validada por triple método: ~214.000 € realista <span class="flag orange">provisional</span>. ROI ~21% realista / ~30% optimista en ~12 meses. Viabilidad acreditada con certificado en mano.</p>
+  <p class="intro"><strong>En 5 líneas:</strong> local en esquina de 105 m² en la mejor zona del municipio → 3 viviendas (1 dormitorio + 2 estudios). Inversión total <strong>162.212 €</strong>. Venta realista validada por triple método: <strong>205.000 €</strong> (67 + 67 + 71). Beneficio de la JV: <strong>33.788 €</strong> tras retribución transparente del gestor. <strong>Todo el capital rinde igual: 20,92%</strong> — el del gestor (35.000 € dentro) y el de los inversores. Horizonte ~12 meses. Viabilidad acreditada con certificado en mano.</p>
 </section>
 
 <!-- 04 OPORTUNIDAD -->
@@ -363,7 +386,7 @@ td.amount { text-align: right; font-weight: 600; color: #163D60; white-space: no
 
 <!-- 07 NÚMEROS -->
 <section id="numeros">
-  <h2><span class="num">07</span> Análisis económico <span class="flag orange">provisional — en cierre</span></h2>
+  <h2><span class="num">07</span> Análisis económico</h2>
   <table>
     <tr><th>Partida</th><th style="text-align:right">Importe</th></tr>
     <tr><td>Compra del local</td><td class="amount">40.000 €</td></tr>
@@ -372,23 +395,24 @@ td.amount { text-align: right; font-weight: 600; color: #163D60; white-space: no
     <tr><td>Proyecto, licencias, tasas, AJD, altas de suministros</td><td class="amount">~12.600 €</td></tr>
     <tr><td>Reforma (3 presupuestos contrastados 625–778 €/m² · cálculo prudente 710 €/m² + IVA)</td><td class="amount">~90.200 €</td></tr>
     <tr><td>CGP + contadores + gastos hasta venta + imprevistos</td><td class="amount">~4.500 €</td></tr>
-    <tr><td><strong>INVERSIÓN TOTAL</strong></td><td class="amount"><strong>~162.000 €</strong></td></tr>
+    <tr><td><strong>INVERSIÓN TOTAL DE LA OPERACIÓN</strong></td><td class="amount"><strong>162.212 €</strong></td></tr>
   </table>
   <a class="doc-link" href="#docs">Excel análisis económico</a><a class="doc-link" href="#docs">PPTO 1 · Creahogar</a><a class="doc-link" href="#docs">PPTO 2 · Totaltécnicos</a><a class="doc-link" href="#docs">PPTO 3 · SPM</a>
-  <div class="callout"><strong>La palanca:</strong> comercializamos EN PARALELO a la obra (probado en Crevillente). Con pagos a cuenta de compradores, la exposición real de capital baja — y el <strong>ROE sube a ~35%</strong> <span class="flag orange">provisional</span>.</div>
+  <div class="callout"><strong>La palanca:</strong> comercializamos EN PARALELO a la obra (probado en Crevillente): renders pre-obra, reserva temprana — el comprador entra antes de acabar la obra y la exposición de capital se acorta.</div>
 </section>
 
 <!-- 08 ESCENARIOS -->
 <section id="escenarios">
-  <h2><span class="num">08</span> Escenarios — y un plan B <span class="flag orange">provisional</span></h2>
+  <h2><span class="num">08</span> Escenarios — y un plan B</h2>
+  <p class="intro">El escenario que contamos es el <strong>realista</strong>, construido sobre suelos validados tres veces: paso 4 de Antonio (67K), paso 4 de Paco (72K) e IM·PULSO (68-69K).</p>
   <table>
-    <tr><th></th><th>Pesimista</th><th>Realista</th><th>Optimista</th></tr>
+    <tr><th></th><th>Conservador</th><th>Realista (el que contamos)</th><th>Por encima del realista</th></tr>
     <tr><td><strong>Quién compra</strong></td><td>Solo demanda local, a precio suelo</td><td>Patrimonialista + 1ª residencia (perfiles detectados)</td><td>Alta demanda, compra al contado</td></tr>
-    <tr><td><strong>Venta 3 unidades</strong></td><td class="amount">192.000 €</td><td class="amount">214.000 €</td><td class="amount">229.000 €</td></tr>
+    <tr><td><strong>Venta 3 unidades</strong></td><td class="amount">192.000 €</td><td class="amount"><strong>205.000 €</strong> (67+67+71)</td><td>activa el <strong>bonus 70/30</strong></td></tr>
     <tr><td><strong>Plazo de venta</strong></td><td>+meses</td><td>30-60 días/ud</td><td>semanas</td></tr>
-    <tr><td><strong>Beneficio</strong></td><td class="amount">~30.600 €</td><td class="amount">~33.900 €</td><td class="amount">~48.900 €</td></tr>
-    <tr><td><strong>Rentabilidad neta</strong></td><td>20,1%</td><td>20,9%</td><td>30,2%</td></tr>
-    <tr><td><strong>Anualizada</strong></td><td><span class="flag orange">pdte.</span></td><td><span class="flag orange">pdte.</span></td><td><span class="flag orange">pdte.</span></td></tr>
+    <tr><td><strong>Beneficio operación</strong></td><td class="amount">~29.800 €</td><td class="amount">42.788 €</td><td rowspan="3" style="vertical-align:middle">Todo lo que se venda por encima del realista genera bonus, repartido <strong>70/30 gestor-inversor</strong> — incentivo alineado: empujar el precio beneficia a ambos</td></tr>
+    <tr><td><strong>Beneficio JV</strong> (tras servicer 9.000 €)</td><td class="amount">~20.800 €</td><td class="amount"><strong>33.788 €</strong></td></tr>
+    <tr><td><strong>Rentabilidad del capital</strong></td><td>~12,8%</td><td><strong>20,92%</strong></td></tr>
   </table>
   <div class="callout"><strong>Plan B — la red de seguridad:</strong> si la venta se alargara, el activo se sostiene en alquiler tradicional: <strong>350-450 €/mes por unidad</strong> validados con 111 contactos → <strong>~8-9% de rentabilidad neta anual</strong>. La operación tiene dos salidas: la venta es la principal; el alquiler, la red.</div>
 </section>
@@ -449,10 +473,11 @@ td.amount { text-align: right; font-weight: 600; color: #163D60; white-space: no
 <section id="venta">
   <h2><span class="num">11</span> Estrategia de venta — vendemos mientras construimos</h2>
   <div class="kpis">
-    <div class="kpi"><div class="v">69.800 €</div><div class="l">Salida recomendada (campaña real 15 días)</div></div>
-    <div class="kpi"><div class="v">66,7–69,8K</div><div class="l">Rango de cierre validado con demanda real</div></div>
+    <div class="kpi"><div class="v">67 / 67 / 71</div><div class="l">Precios realistas (miles €) — suelos validados 3 veces</div></div>
+    <div class="kpi"><div class="v">69.800 €</div><div class="l">Salida recomendada por el estudio (campaña real 15 días)</div></div>
     <div class="kpi"><div class="v">30-60 días</div><div class="l">Horizonte de venta por unidad</div></div>
   </div>
+  <p><strong>Triple suelo del precio:</strong> paso 4 de Antonio (67.000 €) · paso 4 de Paco (72.000 €) · motor IM·PULSO (68.000–69.000 €). El realista que presentamos está construido sobre el suelo, no sobre el deseo.</p>
   <p><strong>Posicionamiento:</strong> loft/estudio reformado, equipado y listo para entrar — precio accesible, escasez total, doble público (residencial + inversor patrimonialista con alquiler estimado 350-420 €/mes).</p>
   <p><strong>El método (probado en Crevillente):</strong> renders pre-obra + anuncio desde el arranque → reserva temprana → el comprador entra antes de acabar la obra. Inmobiliarias locales con compradores directos ya detectados.</p>
   <a class="doc-link" href="#docs">Conclusiones estudio de mercado</a><a class="doc-link" href="#docs">Fichas MTVV 3 viviendas</a>
@@ -460,15 +485,15 @@ td.amount { text-align: right; font-weight: 600; color: #163D60; white-space: no
 
 <!-- 12 INVERSIÓN / CCP -->
 <section id="inversion">
-  <h2><span class="num">12</span> Estructura de inversión — cómo entras y cómo cobras <span class="flag orange">provisional</span></h2>
+  <h2><span class="num">12</span> Estructura de inversión — cómo entras y cómo cobras</h2>
   <div class="kpis">
-    <div class="kpi"><div class="v">CCP</div><div class="l">Cuentas en Participación (arts. 239-243 CCom)</div></div>
-    <div class="kpi"><div class="v">4 × 24%</div><div class="l">Partícipes (~39.300 € c/u) + gestor con capital dentro</div></div>
-    <div class="kpi"><div class="v">3 tramos</div><div class="l">Desembolso por hitos — no todo de golpe</div></div>
+    <div class="kpi"><div class="v">162.212 €</div><div class="l">Capital total de la operación</div></div>
+    <div class="kpi"><div class="v">35.000 €</div><div class="l">Lo pone el GESTOR (21,57%) — nuestro dinero, junto al tuyo</div></div>
+    <div class="kpi"><div class="v">127.212 €</div><div class="l">Capital de inversores (78,43%)</div></div>
   </div>
+  <p><strong>Modelo servicer sobre Cuentas en Participación</strong> (arts. 239-243 CCom): <strong>todo el capital rinde igual</strong> — el del gestor y el de los inversores, al mismo porcentaje (20,92% en el escenario realista). Sin clases de capital, sin letra pequeña.</p>
   <p><strong>El partícipe:</strong> invierte, no gestiona, no aparece frente a terceros, y su riesgo queda limitado estrictamente a su aportación. <strong>El gestor:</strong> responde frente a terceros, cuenta exclusiva del proyecto, contabilidad separada, información periódica, derecho de auditoría externa, seguro RC.</p>
-  <p><strong>Waterfall de liquidación:</strong> primero se devuelve tu aportación → después se reparte el beneficio según porcentaje. Liquidaciones parciales posibles al vender unidades. Cap de aportaciones adicionales: +15% máximo.</p>
-  <div class="callout"><strong>Retribución del gestor:</strong> línea transparente del análisis + bonus de éxito sobre umbral de rentabilidad anualizada — formato estándar de la comunidad. <span class="flag orange">En cierre con números finales</span></div>
+  <div class="callout"><strong>Retribución del gestor — transparente y en la mesa:</strong> (1) su capital rinde como el de cualquier partícipe; (2) <strong>9.000 € de servicer</strong> por la gestión integral (detección, dirección de obra, administración y comercialización hasta notaría), descontados del resultado y reflejados en el Excel; (3) <strong>bonus solo si se vende por encima del realista</strong>, repartido 70/30 — el gestor gana más únicamente si tú también ganas más.</div>
   <p style="font-size:11.5px;color:#777">Fiscalidad del partícipe: rendimiento del capital mobiliario (19-23%), retención 19% practicada por el gestor. Modelo de contrato CCP a disposición.</p>
 </section>
 
@@ -529,15 +554,16 @@ td.amount { text-align: right; font-weight: 600; color: #163D60; white-space: no
 
 <script id="op-data" type="application/json">
 {
-  "_comment": "DATOS DE LA OPERACIÓN — plantilla reutilizable (cambiar aquí + celdas con flag provisional).",
-  "operacion": "Las Torres de Cotillas", "provincia": "Murcia", "modalidad": "C/A/V · CCP",
-  "compra": 40000, "inversion_total_prov": 162000,
-  "venta": {"pesimista": 192000, "realista": 214000, "optimista": 229000},
-  "beneficio": {"pesimista": 30600, "realista": 33900, "optimista": 48900},
-  "roi": {"pesimista": "20,1%", "realista": "20,9%", "optimista": "30,2%"},
+  "_comment": "DATOS DE LA OPERACIÓN — capa PÚBLICA (cerrada con Dani/Paco 12/06). La capa confidencial NO va aquí.",
+  "operacion": "Las Torres de Cotillas", "provincia": "Murcia", "modalidad": "C/A/V · CCP servicer",
+  "compra": 40000, "inversion_total": 162212,
+  "capital": {"gestor": 35000, "gestor_pct": "21,57%", "inversores": 127212, "inversores_pct": "78,43%"},
+  "venta_realista": {"total": 205000, "unidades": [67000, 67000, 71000]},
+  "beneficio": {"operacion": 42788, "servicer": 9000, "jv": 33788},
+  "rentabilidad_capital": "20,92%", "bonus": "de existir, 70/30 gestor-inversor",
+  "suelos_precio": {"paso4_antonio": 67000, "paso4_paco": 72000, "impulso": "68000-69000"},
   "reforma_eur_m2": 710, "obra_semanas": 16, "plazo_meses": 12,
-  "precio_salida": 69800, "rango_cierre": "66.700-69.800",
-  "estado": "PROVISIONAL"
+  "estado": "PUBLICO-CERRADO"
 }
 </script>
 </body>
