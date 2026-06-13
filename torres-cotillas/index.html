@@ -548,12 +548,14 @@ body.final .prov::after{display:none}
 
 <script id="op-data" type="application/json">
 {
-  "_comment": "DATOS DE LA OPERACIÓN — plantilla reutilizable. Al cerrar números: actualizar aquí y en las celdas .prov; para ocultar chips PROVISIONAL añadir class='final' al <body>.",
-  "operacion": "Las Torres de Cotillas", "provincia": "Murcia", "modalidad": "C/A/V · CCP",
-  "compra": 40000, "inversion_total_prov": 162000,
-  "venta": {"pesimista": 192000, "realista": 214000, "optimista": 229000},
-  "beneficio": {"pesimista": 30600, "realista": 33900, "optimista": 48900},
-  "roi": {"pesimista": "20,1%", "realista": "20,9%", "optimista": "30,2%"},
+  "_comment": "DATOS DE LA OPERACIÓN — plantilla reutilizable. MODELO SERVICER (cierre Dani 12/06, ORGANIZACION §2bis). Al cerrar números finales con Paco: actualizar aquí y en las celdas .prov; para ocultar chips PROVISIONAL añadir class='final' al <body>.",
+  "operacion": "Las Torres de Cotillas", "provincia": "Murcia", "modalidad": "C/A/V · CCP servicer",
+  "compra": 40000, "inversion_total": 162212,
+  "estructura": {"gestor": 35000, "gestor_pct": "21,57%", "inversores": 127212, "inversores_pct": "78,43%", "servicer": 9000, "bonus": "70/30 sobre el exceso del realista"},
+  "venta": {"conservador": 192000, "realista": 205000, "realista_desglose": "67+67+71", "por_encima": "activa bonus 70/30"},
+  "beneficio_operacion": {"conservador": 29788, "realista": 42788},
+  "beneficio_jv": {"conservador": 20788, "realista": 33788},
+  "rentabilidad_capital": {"conservador": "12,8%", "realista": "20,92%"},
   "reforma_eur_m2": 710, "obra_semanas": 16, "plazo_meses": 12,
   "unidades": [{"tipo": "1 dormitorio"}, {"tipo": "estudio loft"}, {"tipo": "estudio loft"}],
   "precio_salida": 69800, "rango_cierre": "66.700-69.800",
