@@ -203,10 +203,9 @@ body.final .prov::after{display:none}
 .team-h .th p{font-size:13px;margin:0;color:#41526a;line-height:1.55}
 @media(max-width:760px){.team-h{grid-template-columns:1fr}}
 /* triángulo del equipo — recreado en SVG, sin fondo, integrado */
-.pyr{position:relative;width:100%;max-width:660px;margin:24px 0 18px;aspect-ratio:1.5/1}
-.pyr>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.pyr>svg polygon{fill:none;stroke:var(--navy);stroke-width:2;opacity:.75;stroke-linejoin:round}
-.pyr .res{position:absolute;left:50%;top:60%;transform:translate(-50%,-50%);color:var(--ochre);font-weight:900;font-size:clamp(17px,2.6vw,25px);letter-spacing:1.5px}
+.pyr{position:relative;width:100%;max-width:600px;margin:26px auto 20px;aspect-ratio:46/43}
+.pyr-bg{position:absolute;inset:0;width:100%;height:100%}
+.pyr .res{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);color:var(--ochre);font-weight:900;font-size:clamp(16px,2.6vw,23px);letter-spacing:1.5px;text-shadow:0 1px 0 #fff}
 .pyr .lab{position:absolute;transform:translate(-50%,-50%);font-weight:800;font-size:11.5px;letter-spacing:2px;color:#90a0b2;text-transform:uppercase}
 .pyr .node{position:absolute;display:flex;align-items:center;gap:9px;transform:translate(-50%,-50%)}
 .pyr .node.l{flex-direction:row-reverse}
@@ -310,21 +309,20 @@ body.final .prov::after{display:none}
   <h2>Tres perfiles diferentes. Mismos estándares.<br>Un objetivo: <span style="color:var(--ochre)">el Resultado</span>.</h2>
   <p class="lead">Esto no va solo de un método — va de un equipo humano completo, <b>encajado como un puzzle</b>: tres energías que se complementan.</p>
   <div class="pyr">
-    <svg viewBox="0 0 660 440" preserveAspectRatio="xMidYMid meet"><polygon points="330,78 566,392 94,392"/></svg>
+    <img class="pyr-bg" src="assets/pyramid-puzzle.svg" alt="">
     <span class="res">RESULTADO</span>
-    <span class="lab" style="left:50%;top:38%">ESPÍRITU</span>
-    <span class="lab" style="left:38%;top:80%">MENTE</span>
-    <span class="lab" style="left:62%;top:80%">CORAZÓN</span>
-    <div class="node" style="left:47%;top:14%"><img src="assets/xavi.png" alt="Xavi"><span class="nm">Xavi<b>Visión</b></span></div>
-    <div class="node l" style="left:14%;top:88%"><img src="assets/paco.png" alt="Paco"><span class="nm">Paco<b>Control</b></span></div>
-    <div class="node" style="left:86%;top:88%"><img src="assets/dani.png" alt="Dani"><span class="nm">Dani<b>Ejecución</b></span></div>
+    <span class="lab" style="left:50%;top:31%">ESPÍRITU</span>
+    <span class="lab" style="left:31%;top:79%">MENTE</span>
+    <span class="lab" style="left:69%;top:79%">CORAZÓN</span>
+    <div class="node" style="left:50%;top:4%"><img src="assets/xavi.png" alt="Xavi"><span class="nm">Xavi<b>Visión</b></span></div>
+    <div class="node l" style="left:7%;top:91%"><img src="assets/paco.png" alt="Paco"><span class="nm">Paco<b>Control</b></span></div>
+    <div class="node" style="left:93%;top:91%"><img src="assets/dani.png" alt="Dani"><span class="nm">Dani<b>Ejecución</b></span></div>
   </div>
   <div class="team-h">
-    <div class="th"><span class="n">Xavi</span><span class="r">Espíritu · Visión</span><p>Visión, estrategia y salida a mercado. IA y automatización. Partner de IM·PULSO. Aquí: mercado, estructura de inversión y comunicación con partícipes.</p></div>
-    <div class="th"><span class="n">Paco</span><span class="r">Mente · Control</span><p>Números, validación, fiscalidad y costes. "Veredicto antes de enamorarte": el control que protege el margen. En curso: 2 locales → 13 viviendas.</p></div>
-    <div class="th"><span class="n">Dani</span><span class="r">Corazón · Ejecución</span><p>Dirección, jurídico-técnico y coordinación de obra con equipo propio. De la obra desde crío: "la obra no perdona" — la ejecuta quien la conoce por dentro.</p></div>
+    <div class="th"><span class="n">Xavi</span><span class="r">Espíritu · Visión</span><p>Visión, estrategia y salida a mercado. IA y automatización. Aquí: mercado, estructura de inversión y comunicación con partícipes.</p></div>
+    <div class="th"><span class="n">Paco</span><span class="r">Mente · Control</span><p>Números, validación, fiscalidad y costes. "Veredicto antes de enamorarte": el control que protege el margen.</p></div>
+    <div class="th"><span class="n">Dani</span><span class="r">Corazón · Ejecución</span><p>Dirección, jurídico-técnico y coordinación de obra. De la obra desde crío: "la obra no perdona" — la ejecuta quien la conoce por dentro.</p></div>
   </div>
-  <p style="margin-top:10px"><span class="chip">El origen</span> Esta oportunidad llegó por el canal <b>inbruto de la Comunidad IN</b>: la captó y trabajó un compañero del programa, nosotros compramos el inbruto y la ejecutamos. El circuito funciona.</p>
 </section>
 
 <!-- ═════════ S0 · TRACK RECORD ═════════ -->
