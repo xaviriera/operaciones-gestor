@@ -129,8 +129,9 @@ body.final .prov::after{display:none}
 @media(max-width:600px){.in-stamp{right:9px;bottom:9px;font-size:8.5px;padding:4px 9px}}
 @media print{.in-stamp{display:none}}
 /* logos cabecera portada (CdU izq · Programa IN der) */
-.toplogos{display:flex;justify-content:space-between;align-items:flex-end;width:100%;margin-bottom:26px;gap:16px;flex-wrap:wrap}
-.in-lockup{display:inline-flex;align-items:center;gap:7px;font-weight:900;letter-spacing:1px;color:#fff;font-size:21px;line-height:1;text-shadow:0 1px 9px rgba(0,0,0,.6);margin-bottom:6px}
+.hero-head{display:flex;flex-direction:column;width:max-content;max-width:100%;align-self:flex-start}
+.toplogos{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:16px;gap:24px}
+.in-lockup{display:inline-flex;align-items:center;gap:7px;font-weight:900;letter-spacing:1px;color:#fff;font-size:21px;line-height:1;text-shadow:0 1px 9px rgba(0,0,0,.6);margin-bottom:8px}
 .in-lockup .in{background:var(--in-coral);color:#fff;border-radius:7px;padding:2px 10px;letter-spacing:2px}
 /* logo PROGRAMA IN (recreado) — navy por defecto, blanco sobre fondo oscuro */
 .prog-in{display:inline-flex;align-items:center;gap:6px;font-weight:900;letter-spacing:.5px;line-height:1;white-space:nowrap}
@@ -250,11 +251,13 @@ body.final .prov::after{display:none}
 
 <!-- ═════════ S0 · PORTADA ═════════ -->
 <section class="sec hero">
-  <div class="toplogos">
-    <img src="assets/logo-cdu-blanco.png" alt="CdU de 0 a ÉXITO" style="height:120px;width:auto">
-    <div class="in-lockup">OPORTUNIDADES <span class="in">IN</span></div>
+  <div class="hero-head">
+    <div class="toplogos">
+      <img src="assets/logo-cdu-blanco.png" alt="CdU de 0 a ÉXITO" style="height:120px;width:auto">
+      <div class="in-lockup">OPORTUNIDADES <span class="in">IN</span></div>
+    </div>
+    <span class="badge">Propuesta de inversión · Joint Venture · Comprar-Aportar Valor-Vender</span>
   </div>
-  <span class="badge">Propuesta de inversión · Joint Venture · Comprar-Aportar Valor-Vender</span>
   <h1>Las Torres de Cotillas</h1>
   <div class="sub">Local comercial → 3 viviendas · Murcia · 2026</div>
   <p class="lead" style="color:rgba(253,251,247,.9);margin-top:22px;max-width:900px;font-size:21px">
