@@ -153,6 +153,28 @@ body.final .prov::after{display:none}
 .serv .s-estado{margin-top:10px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
 @media(max-width:840px){.nav{display:none}main{margin-left:0}.sec{padding:48px 5vw}.hero{min-height:auto;padding:80px 6vw}.hero h1{font-size:36px}h1{font-size:30px}h2{font-size:23px}.dafo{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}table{font-size:12px;display:block;overflow-x:auto}.fases{flex-direction:column}.fase{border-radius:10px!important;margin-bottom:6px}}
 @media(max-width:520px){.cards{grid-template-columns:1fr}}
+/* ── MÓVIL fino: portada y bloques densos (mucho tráfico será móvil) ── */
+@media(max-width:600px){
+  .sec{padding:40px 6vw}
+  .hero{padding:56px 7vw}
+  .hero>img:first-of-type{height:74px!important;margin-bottom:20px!important}
+  .hero h1{font-size:30px}
+  .hero .sub{font-size:16px}
+  .hero .badge{font-size:9.5px;letter-spacing:1px;padding:6px 12px}
+  .hero p[style]{font-size:15.5px!important;line-height:1.5!important}
+  .hero .partners{font-size:12px!important}
+  .lead{font-size:16.5px}
+  h2{font-size:21px}
+  .kicker{font-size:9.5px;letter-spacing:1.8px}
+  /* tablas: ya scrollean (display:block en 840) — afinamos legibilidad */
+  th,td{padding:8px 10px;font-size:12px}
+  /* Gantt: etiqueta más estrecha para ganar ancho de barras al scrollear */
+  .g-head,.g-row,.g-mes{grid-template-columns:96px repeat(16,16px)}
+  .impulso,.dash{padding:20px 18px}
+  .dafo{grid-template-columns:1fr}
+  .quote{font-size:14.5px;padding:13px 16px}
+  .serv{grid-template-columns:1fr}
+}
 /* IMPRESIÓN: sin perder detalle ni color */
 @media print{
   .nav{display:none}main{margin-left:0}
@@ -267,7 +289,7 @@ body.final .prov::after{display:none}
     <p style="margin-top:8px"><b>Y en esta operación:</b> el motor IM·PULSO valoró las unidades de TDC en <b>68.000–69.000 €</b> — en línea con los suelos del paso 4 (67.000–72.000 €). Tres vías independientes, un mismo rango.</p>
     <div class="todo" style="background:rgba(255,255,255,.07);border-color:var(--impulso-orange);color:#ffd9cf">Hueco reservado: informe IM·PULSO×MTVV de la operación (lo genera Xavi — fusión v2: testigos + €/m² + notariado → veredicto).</div>
   </div>
-  <p class="lead"><b>La operación en 5 líneas:</b> local en esquina de 105 m² en la mejor zona de Las Torres de Cotillas → 3 viviendas (1 dormitorio + 2 estudios). Inversión total <b>162.212 €</b>. Venta realista validada por triple método: <b>205.000 €</b> (67+67+71). Beneficio JV: <b>33.788 €</b> tras retribución transparente del gestor. <b>Todo el capital rinde igual: 20,92%</b> — el del gestor (35.000 € dentro) y el de los inversores. Horizonte ~12 meses, todo certificado.</p>
+  <p class="lead"><b>La operación en 5 líneas:</b> local en esquina de 105 m² en la mejor zona de Las Torres de Cotillas → 3 viviendas (1 dormitorio + 2 estudios). Inversión total <b>162.212 €</b>. Venta realista validada por triple método: <b>214.000 €</b> (70+70+74). Beneficio: <b>33.938 €</b> tras retribución transparente del gestor. <b>Todo el capital rinde igual: 20,92%</b> — el del gestor (35.000 € dentro) y el de los inversores. Horizonte ~12 meses, todo certificado.</p>
 </section>
 
 <!-- ═════════ S1bis · UBICACIÓN ═════════ -->
@@ -396,23 +418,23 @@ body.final .prov::after{display:none}
     <tr><td><b>INVERSIÓN TOTAL DE LA OPERACIÓN</b></td><td><b>162.212 €</b></td></tr>
   </table>
   <a class="doc" href="#docs">Excel análisis económico</a><a class="doc" href="#docs">Presupuesto 1 · Creahogar</a><a class="doc" href="#docs">Presupuesto 2 · Totaltécnicos</a><a class="doc" href="#docs">Presupuesto 3 · SPM</a>
-  <div class="quote">Comercializamos EN PARALELO a la obra (método probado en Crevillente). Con pagos a cuenta de compradores, la exposición real de capital baja — y el <b>ROE sube a ~35%</b> <span class="prov"></span>.</div>
+  <div class="quote">Comercializamos EN PARALELO a la obra (método probado en Crevillente): el comprador entra antes de terminar, lo que acorta el horizonte de venta y reduce la exposición real del capital.</div>
 </section>
 
 <!-- ═════════ S4b · ESCENARIOS ═════════ -->
 <section class="sec" id="escenarios">
   <div class="kicker">Análisis de la inversión · Escenarios</div>
   <h2>Tres escenarios — y un plan B</h2>
-  <p class="lead">El escenario que contamos es el <b>realista</b>, sobre suelos validados tres veces: paso 4 de Antonio (67K), paso 4 de Paco (72K) e IM·PULSO (68-69K).</p>
+  <p class="lead">El escenario que contamos es el <b>realista</b>, fijado sobre suelos validados tres veces (paso 4 de Antonio 67K · paso 4 de Paco 72K · IM·PULSO 68-69K) — situado en la franja alta de ese rango ya validado.</p>
   <table>
-    <tr><th></th><th>Conservador</th><th>Realista (el que contamos)</th><th>Por encima del realista</th></tr>
-    <tr><td><b>Quién compra</b></td><td>Solo demanda local, a precio suelo</td><td>Patrimonialista + 1ª residencia (perfiles ya detectados)</td><td>Alta demanda, compra al contado</td></tr>
-    <tr><td><b>Venta 3 unidades</b></td><td>192.000 €</td><td><b>205.000 €</b> (67+67+71)</td><td>activa el <b>bonus 70/30</b></td></tr>
-    <tr><td><b>Plazo de venta</b></td><td>+meses</td><td>30-60 días/unidad</td><td>semanas</td></tr>
-    <tr><td><b>Beneficio operación</b></td><td>~29.800 €</td><td>42.788 €</td><td rowspan="3" style="vertical-align:middle">Lo vendido por encima del realista genera bonus, repartido <b>70/30 gestor-inversor</b>: empujar el precio beneficia a ambos</td></tr>
-    <tr><td><b>Beneficio JV</b> (tras servicer 9.000 €)</td><td>~20.800 €</td><td><b>33.788 €</b></td></tr>
-    <tr><td><b>Rentabilidad del capital</b></td><td>~12,8%</td><td><b>20,92%</b></td></tr>
+    <tr><th></th><th>Realista (el que contamos)</th><th>Optimista</th></tr>
+    <tr><td><b>Quién compra</b></td><td>Patrimonialista + 1ª residencia (perfiles ya detectados)</td><td>Alta demanda, compra al contado en semanas</td></tr>
+    <tr><td><b>Venta 3 unidades</b></td><td><b>214.000 €</b> (70+70+74)</td><td><b>229.000 €</b> (75+75+79)</td></tr>
+    <tr><td><b>Plazo de venta</b></td><td>30-60 días/unidad</td><td>semanas</td></tr>
+    <tr><td><b>Beneficio</b> (tras servicer 9.000 €)</td><td><b>33.938 €</b></td><td><b>48.938 €</b></td></tr>
+    <tr><td><b>Rentabilidad del capital</b></td><td><b>20,92%</b></td><td><b>30,17%</b></td></tr>
   </table>
+  <p style="font-size:13px;color:var(--grey)">Mismo porcentaje para todo el capital — gestor e inversores por igual, en cualquier escenario.</p>
   <p><b>Plan B — la red de seguridad:</b> si la venta se alargara, el activo se sostiene en alquiler tradicional: <b>350-450 €/mes por unidad</b> validados con 111 contactos → <b>~8-9% de rentabilidad neta anual</b>. La operación tiene dos salidas: la venta es la principal; el alquiler, la red.</p>
 </section>
 
@@ -477,7 +499,7 @@ body.final .prov::after{display:none}
   <div class="kicker">Estrategia de venta</div>
   <h2>Vendemos mientras construimos</h2>
   <div class="cards">
-    <div class="card"><div class="big">67 / 67 / 71</div><div class="lbl">Precios realistas (miles €) — suelos validados 3 veces</div></div>
+    <div class="card"><div class="big">70 / 70 / 74</div><div class="lbl">Precios realistas (miles €) — sobre suelos validados 3 veces</div></div>
     <div class="card"><div class="big">69.800 €</div><div class="lbl">Salida recomendada por el estudio (campaña real de 15 días)</div></div>
     <div class="card"><div class="big">30-60 días</div><div class="lbl">Horizonte de venta por unidad</div></div>
   </div>
@@ -498,7 +520,7 @@ body.final .prov::after{display:none}
   </div>
   <p><b>Modelo servicer sobre Cuentas en Participación</b> (arts. 239-243 CCom): <b>todo el capital rinde igual</b> — el del gestor y el de los inversores, al mismo porcentaje (20,92% en el realista). Sin clases de capital, sin letra pequeña.</p>
   <p><b>El partícipe:</b> invierte, no gestiona, no aparece frente a terceros, y su riesgo queda limitado estrictamente a su aportación. <b>El gestor:</b> responde frente a terceros, fondos en cuenta exclusiva del proyecto, contabilidad separada, información periódica, derecho de auditoría externa, seguro RC.</p>
-  <div class="quote"><b>Retribución del gestor — transparente y en la mesa:</b> (1) su capital rinde como el de cualquier partícipe; (2) <b>9.000 € de servicer</b> por la gestión integral, descontados del resultado y reflejados en el Excel; (3) <b>bonus solo si se vende por encima del realista</b>, repartido 70/30 — el gestor gana más únicamente si tú también ganas más.</div>
+  <div class="quote"><b>Retribución del gestor — transparente y en la mesa:</b> (1) su capital (35.000 €) rinde <b>exactamente como el de cualquier partícipe</b> — 20,92% en el realista; (2) <b>9.000 € de servicer</b> por la gestión integral, descontados del resultado y reflejados en el Excel. Si la operación cierra en el optimista, <b>todo el capital sube por igual al 30,17%</b>, gestor incluido. Mismo barco, mismo porcentaje.</div>
   <p style="font-size:13px;color:var(--grey)">Fiscalidad del partícipe: rendimiento del capital mobiliario (19-23%), retención 19% practicada por el gestor. Modelo de contrato CCP a disposición.</p>
 </section>
 
@@ -548,14 +570,13 @@ body.final .prov::after{display:none}
 
 <script id="op-data" type="application/json">
 {
-  "_comment": "DATOS DE LA OPERACIÓN — plantilla reutilizable. MODELO SERVICER (cierre Dani 12/06, ORGANIZACION §2bis). Al cerrar números finales con Paco: actualizar aquí y en las celdas .prov; para ocultar chips PROVISIONAL añadir class='final' al <body>.",
-  "operacion": "Las Torres de Cotillas", "provincia": "Murcia", "modalidad": "C/A/V · CCP servicer",
+  "_comment": "DATOS DE LA OPERACIÓN — plantilla reutilizable. NÚMEROS = hoja 'Resumen' del Excel oficial (la que se enseña). El 'Escenario Alternativo' NO se enseña (sorpresa). Gestor aporta 35.000 € (decisión Xavi). Al cerrar con Paco: actualizar aquí y en las celdas .prov; para ocultar chips PROVISIONAL añadir class='final' al <body>.",
+  "operacion": "Las Torres de Cotillas", "provincia": "Murcia", "modalidad": "C/A/V · CCP",
   "compra": 40000, "inversion_total": 162212,
-  "estructura": {"gestor": 35000, "gestor_pct": "21,57%", "inversores": 127212, "inversores_pct": "78,43%", "servicer": 9000, "bonus": "70/30 sobre el exceso del realista"},
-  "venta": {"conservador": 192000, "realista": 205000, "realista_desglose": "67+67+71", "por_encima": "activa bonus 70/30"},
-  "beneficio_operacion": {"conservador": 29788, "realista": 42788},
-  "beneficio_jv": {"conservador": 20788, "realista": 33788},
-  "rentabilidad_capital": {"conservador": "12,8%", "realista": "20,92%"},
+  "estructura": {"gestor": 35000, "gestor_pct": "21,57%", "inversores": 127212, "inversores_pct": "78,43%", "servicer": 9000},
+  "venta": {"realista": 214000, "realista_desglose": "70+70+74", "optimista": 229000, "optimista_desglose": "75+75+79"},
+  "beneficio_tras_servicer": {"realista": 33938, "optimista": 48938},
+  "rentabilidad_capital": {"realista": "20,92%", "optimista": "30,17%"},
   "reforma_eur_m2": 710, "obra_semanas": 16, "plazo_meses": 12,
   "unidades": [{"tipo": "1 dormitorio"}, {"tipo": "estudio loft"}, {"tipo": "estudio loft"}],
   "precio_salida": 69800, "rango_cierre": "66.700-69.800",
