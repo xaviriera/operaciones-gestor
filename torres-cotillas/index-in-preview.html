@@ -194,6 +194,14 @@ body.final .prov::after{display:none}
 .tri .base{display:flex;gap:14px;margin-top:14px}
 .tri .base span{background:var(--ochre);color:var(--navy);border-radius:10px;padding:9px 18px;font-weight:800;font-size:13px}
 .tri .lbl{font-size:11px;color:var(--grey);margin-top:8px;font-weight:600;letter-spacing:.5px}
+/* equipo rediseñado: pirámide grande + perfiles horizontales */
+.piramide{display:block;width:100%;max-width:1000px;margin:24px auto 8px;border-radius:14px;box-shadow:0 12px 38px rgba(15,44,71,.3)}
+.team-h{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0 6px}
+.team-h .th{background:#fff;border:1px solid var(--line);border-top:4px solid var(--ochre);border-radius:12px;padding:16px 18px;box-shadow:0 1px 6px rgba(22,61,96,.07)}
+.team-h .th .n{font-weight:800;color:var(--navy);font-size:18px}
+.team-h .th .r{display:block;font-size:11px;color:var(--ochre);font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin:2px 0 8px}
+.team-h .th p{font-size:13px;margin:0;color:#41526a;line-height:1.55}
+@media(max-width:760px){.team-h{grid-template-columns:1fr}}
 /* servicio por dentro */
 .serv{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:18px 0}
 .serv .s-card{background:#fff;border:1px solid var(--line);border-top:5px solid var(--ochre);border-radius:12px;padding:18px 20px}
@@ -287,23 +295,9 @@ body.final .prov::after{display:none}
 <!-- ═════════ S0 · EQUIPO ═════════ -->
 <section class="sec" id="equipo">
   <div class="kicker">Equipo gestor</div>
-  <h2>Tres perfiles diferentes. Mismos estándares.</h2>
-  <p class="lead">Un objetivo: <b style="color:var(--ochre)">el Resultado</b>. Esto no va solo de un método — va de un equipo humano completo, montado como un puzle: tres energías que se complementan.</p>
-  <div class="tri-row">
-    <img src="assets/equipo-triangulo.png" alt="Tres perfiles diferentes. Mismos estándares. Un objetivo: El Resultado">
-    <div class="profiles">
-      <div class="profile"><div class="av" style="background-image:url('assets/xavi.png')"></div>
-        <div><span class="n">Xavi</span><span class="r">Espíritu · Visión</span>
-        <p>Visión, estrategia y salida a mercado. IA y automatización. Partner de IM·PULSO. Aquí: mercado, estructura de inversión y comunicación con partícipes.</p></div></div>
-      <div class="profile"><div class="av" style="background-image:url('assets/paco.png')"></div>
-        <div><span class="n">Paco</span><span class="r">Mente · Control</span>
-        <p>Números, validación, fiscalidad y costes. "Veredicto antes de enamorarte": el control que protege el margen. En curso: 2 locales → 13 viviendas.</p></div></div>
-      <div class="profile"><div class="av" style="background-image:url('assets/dani.png')"></div>
-        <div><span class="n">Dani</span><span class="r">Corazón · Ejecución</span>
-        <p>Dirección, jurídico-técnico y coordinación de obra con equipo propio. De la obra desde crío: "la obra no perdona" — la ejecuta quien la conoce por dentro.</p></div></div>
-    </div>
-  </div>
-  <p style="text-align:center;font-weight:700;color:var(--navy);font-size:15px;margin-top:4px">Tres talentos distintos, un único objetivo: que el CdU llegue a <span style="color:var(--ochre)">resultado</span> con seguridad.</p>
+  <h2>Tres perfiles diferentes. Mismos estándares.<br>Un objetivo: <span style="color:var(--ochre)">el Resultado</span>.</h2>
+  <p class="lead">Esto no va solo de un método — va de un equipo humano completo, <b>encajado como un puzzle</b>: tres energías que se complementan.</p>
+  <img src="assets/equipo-piramide.png" alt="El equipo como pirámide — Xavi · Visión (mercado y estructura), Paco · Control (números y fiscalidad), Dani · Ejecución (dirección y obra); al centro, el Resultado" class="piramide">
   <p style="margin-top:10px"><span class="chip">El origen</span> Esta oportunidad llegó por el canal <b>inbruto de la Comunidad IN</b>: la captó y trabajó un compañero del programa, nosotros compramos el inbruto y la ejecutamos. El circuito funciona.</p>
 </section>
 
