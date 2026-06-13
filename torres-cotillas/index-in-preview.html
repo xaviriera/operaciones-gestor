@@ -128,6 +128,11 @@ body.final .prov::after{display:none}
 .in-stamp .in{background:var(--in-coral);color:#fff;border-radius:4px;padding:1px 5px;font-weight:900;letter-spacing:1px}
 @media(max-width:600px){.in-stamp{right:9px;bottom:9px;font-size:8.5px;padding:4px 9px}}
 @media print{.in-stamp{display:none}}
+/* logos cabecera portada (CdU izq · Programa IN der) */
+.toplogos{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:30px;gap:16px;flex-wrap:wrap}
+.in-lockup{display:inline-flex;align-items:center;gap:7px;font-weight:900;letter-spacing:1px;color:#fff;font-size:20px;line-height:1}
+.in-lockup .in{background:var(--in-coral);color:#fff;border-radius:7px;padding:2px 10px;letter-spacing:2px}
+@media(max-width:600px){.toplogos{margin-bottom:20px}.toplogos img{height:60px!important}.in-lockup{font-size:13px;gap:5px}.in-lockup .in{padding:1px 6px;border-radius:5px}}
 /* cronograma CCP */
 .crono{display:flex;gap:0;margin:18px 0;flex-wrap:wrap}
 .crono .step{flex:1;min-width:155px;background:#fff;border:1px solid var(--line);border-top:4px solid var(--in-coral);padding:14px 16px;position:relative}
@@ -240,7 +245,10 @@ body.final .prov::after{display:none}
 
 <!-- ═════════ S0 · PORTADA ═════════ -->
 <section class="sec hero">
-  <img src="assets/logo-cdu-blanco.png" alt="CdU de 0 a ÉXITO" style="height:120px;width:auto;margin-bottom:30px;align-self:flex-start">
+  <div class="toplogos">
+    <img src="assets/logo-cdu-blanco.png" alt="CdU de 0 a ÉXITO" style="height:120px;width:auto">
+    <div class="in-lockup">OPORTUNIDADES <span class="in">IN</span></div>
+  </div>
   <span class="badge">Propuesta de inversión · Joint Venture · Comprar-Aportar Valor-Vender</span>
   <h1>Las Torres de Cotillas</h1>
   <div class="sub">Local comercial → 3 viviendas · Murcia · 2026</div>
@@ -250,8 +258,9 @@ body.final .prov::after{display:none}
     <span style="background:rgba(226,159,52,.16);border:1px solid var(--ochre);color:var(--ochre);padding:2px 9px;border-radius:7px;font-size:.86em;font-weight:800;letter-spacing:.5px">GO</span><span style="color:var(--ochre)">→</span>
     <span style="background:rgba(226,159,52,.16);border:1px solid var(--ochre);color:var(--ochre);padding:2px 9px;border-radius:7px;font-size:.86em;font-weight:800;letter-spacing:.5px">MAP</span><span style="color:var(--ochre)">→</span>
     <span style="background:rgba(226,159,52,.16);border:1px solid var(--ochre);color:var(--ochre);padding:2px 9px;border-radius:7px;font-size:.86em;font-weight:800;letter-spacing:.5px">ÉXITO</span></span> — y un objetivo claro: pasar de la viabilidad al beneficio real.<br><span style="color:rgba(253,251,247,.88)">Sin improvisar. Sin sorpresas.</span></p>
-  <div class="partners" style="font-size:14.5px">Gestiona el equipo <b>CdU de 0 a ÉXITO</b>, asociado con <img src="assets/logo-impulso-chapa.png" alt="IM·PULSO" style="height:34px;width:auto;vertical-align:middle;margin:0 5px"> para la inteligencia de mercado · tucambiodeuso.com<br>
-  <span style="display:inline-flex;align-items:center;gap:7px;margin-top:12px;font-size:12.5px;color:rgba(253,251,247,.8)"><span class="in-badge">OPORTUNIDADES<span class="in">IN</span></span> Oportunidad publicada en el canal oficial del <b>Programa IN</b></span></div>
+  <div class="partners" style="font-size:14.5px">
+    <div style="display:inline-flex;align-items:center;gap:10px;font-size:14.5px;font-weight:600;color:#fff;margin-bottom:16px;background:rgba(233,85,79,.13);border:1px solid rgba(233,85,79,.45);padding:9px 16px;border-radius:11px"><span class="in-badge" style="font-size:12px">OPORTUNIDADES<span class="in">IN</span></span> Oportunidad publicada por el canal oficial del <b>Programa IN</b></div><br>
+    Gestiona el equipo <b>CdU de 0 a ÉXITO</b>, asociado con <img src="assets/logo-impulso-chapa.png" alt="IM·PULSO" style="height:34px;width:auto;vertical-align:middle;margin:0 5px"> para la inteligencia de mercado · tucambiodeuso.com</div>
 </section>
 
 <!-- ═════════ S0 · EQUIPO ═════════ -->
