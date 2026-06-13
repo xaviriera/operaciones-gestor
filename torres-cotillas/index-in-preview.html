@@ -202,6 +202,18 @@ body.final .prov::after{display:none}
 .team-h .th .r{display:block;font-size:11px;color:var(--ochre);font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin:2px 0 8px}
 .team-h .th p{font-size:13px;margin:0;color:#41526a;line-height:1.55}
 @media(max-width:760px){.team-h{grid-template-columns:1fr}}
+/* triángulo del equipo — recreado en SVG, sin fondo, integrado */
+.pyr{position:relative;width:100%;max-width:660px;margin:24px 0 18px;aspect-ratio:1.5/1}
+.pyr>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.pyr>svg polygon{fill:none;stroke:var(--navy);stroke-width:2;opacity:.75;stroke-linejoin:round}
+.pyr .res{position:absolute;left:50%;top:60%;transform:translate(-50%,-50%);color:var(--ochre);font-weight:900;font-size:clamp(17px,2.6vw,25px);letter-spacing:1.5px}
+.pyr .lab{position:absolute;transform:translate(-50%,-50%);font-weight:800;font-size:11.5px;letter-spacing:2px;color:#90a0b2;text-transform:uppercase}
+.pyr .node{position:absolute;display:flex;align-items:center;gap:9px;transform:translate(-50%,-50%)}
+.pyr .node.l{flex-direction:row-reverse}
+.pyr .node img{width:70px;height:70px;border-radius:50%;border:3px solid var(--ochre);object-fit:cover;object-position:center 22%;background:#e8edf2;flex-shrink:0;box-shadow:0 4px 14px rgba(15,44,71,.2)}
+.pyr .node .nm{font-size:15px;color:var(--navy);font-weight:800;line-height:1.15;white-space:nowrap}
+.pyr .node .nm b{display:block;color:var(--ochre);font-size:11px;text-transform:uppercase;letter-spacing:1.2px;font-weight:800;margin-top:2px}
+@media(max-width:680px){.pyr{aspect-ratio:1.15/1}.pyr .node img{width:50px;height:50px;border-width:2px}.pyr .node .nm{font-size:11.5px}.pyr .node .nm b{font-size:9px}.pyr .lab{font-size:8.5px;letter-spacing:1px}}
 /* servicio por dentro */
 .serv{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:18px 0}
 .serv .s-card{background:#fff;border:1px solid var(--line);border-top:5px solid var(--ochre);border-radius:12px;padding:18px 20px}
@@ -297,7 +309,16 @@ body.final .prov::after{display:none}
   <div class="kicker">Equipo gestor</div>
   <h2>Tres perfiles diferentes. Mismos estándares.<br>Un objetivo: <span style="color:var(--ochre)">el Resultado</span>.</h2>
   <p class="lead">Esto no va solo de un método — va de un equipo humano completo, <b>encajado como un puzzle</b>: tres energías que se complementan.</p>
-  <img src="assets/equipo-piramide.png" alt="El equipo como pirámide — Xavi · Visión (mercado y estructura), Paco · Control (números y fiscalidad), Dani · Ejecución (dirección y obra); al centro, el Resultado" class="piramide">
+  <div class="pyr">
+    <svg viewBox="0 0 660 440" preserveAspectRatio="xMidYMid meet"><polygon points="330,78 566,392 94,392"/></svg>
+    <span class="res">RESULTADO</span>
+    <span class="lab" style="left:50%;top:38%">ESPÍRITU</span>
+    <span class="lab" style="left:38%;top:80%">MENTE</span>
+    <span class="lab" style="left:62%;top:80%">CORAZÓN</span>
+    <div class="node" style="left:47%;top:14%"><img src="assets/xavi.png" alt="Xavi"><span class="nm">Xavi<b>Visión</b></span></div>
+    <div class="node l" style="left:14%;top:88%"><img src="assets/paco.png" alt="Paco"><span class="nm">Paco<b>Control</b></span></div>
+    <div class="node" style="left:86%;top:88%"><img src="assets/dani.png" alt="Dani"><span class="nm">Dani<b>Ejecución</b></span></div>
+  </div>
   <div class="team-h">
     <div class="th"><span class="n">Xavi</span><span class="r">Espíritu · Visión</span><p>Visión, estrategia y salida a mercado. IA y automatización. Partner de IM·PULSO. Aquí: mercado, estructura de inversión y comunicación con partícipes.</p></div>
     <div class="th"><span class="n">Paco</span><span class="r">Mente · Control</span><p>Números, validación, fiscalidad y costes. "Veredicto antes de enamorarte": el control que protege el margen. En curso: 2 locales → 13 viviendas.</p></div>
