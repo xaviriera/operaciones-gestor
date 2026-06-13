@@ -117,6 +117,29 @@ body.final .prov::after{display:none}
 .foot b{color:var(--ochre)}
 .todo{background:#fffbf2;border:1.5px dashed var(--ochre);border-radius:10px;padding:13px 17px;margin:12px 0;color:#8a5a14;font-weight:600;font-size:13px}
 .todo::before{content:"⏳ ";font-weight:800}
+/* ── GUIÑO IN (Programa IN · Oportunidades IN) ── */
+.in-eyebrow{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(233,85,79,.4);border-left:3px solid var(--in-coral);border-radius:9px;padding:7px 14px;margin-bottom:20px;font-size:12px;color:rgba(253,251,247,.9);letter-spacing:.2px}
+.in-eyebrow b{color:#fff}
+.in-badge{display:inline-flex;align-items:center;gap:5px;font-weight:800;letter-spacing:.6px;font-size:11.5px;color:#fff}
+.in-badge .in{background:var(--in-coral);color:#fff;border-radius:5px;padding:1px 6px;font-weight:900;letter-spacing:1px;font-size:.95em}
+.jv-word{font-weight:900}.jv-word .v{color:var(--in-coral)}
+/* cronograma CCP */
+.crono{display:flex;gap:0;margin:18px 0;flex-wrap:wrap}
+.crono .step{flex:1;min-width:155px;background:#fff;border:1px solid var(--line);border-top:4px solid var(--in-coral);padding:14px 16px;position:relative}
+.crono .step:not(:last-child)::after{content:"→";position:absolute;right:-9px;top:50%;transform:translateY(-50%);color:var(--in-coral);font-weight:900;z-index:2}
+.crono .st-tag{font-size:10px;font-weight:800;letter-spacing:1px;color:var(--in-coral);text-transform:uppercase}
+.crono .st-t{font-weight:800;color:var(--navy);font-size:13.5px;margin:4px 0 5px}
+.crono .step p{font-size:11.5px;margin:0;color:var(--grey)}
+/* la propuesta (ask) */
+.ask{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.ask .col{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.ask .col.give{border-top:4px solid var(--ochre)}.ask .col.get{border-top:4px solid var(--in-coral)}
+.ask .col h3{margin-top:0}
+/* compromisos del gestor */
+.commit{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:16px 0}
+.commit .c{background:#fff;border:1px solid var(--line);border-left:3px solid var(--ok);border-radius:10px;padding:13px 15px;font-size:13px;color:#41526a}
+.commit .c b{color:var(--navy);display:block;margin-bottom:3px}
+@media(max-width:700px){.ask{grid-template-columns:1fr}}
 /* GANTT visual */
 .gantt{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;overflow-x:auto}
 .g-head{display:grid;grid-template-columns:150px repeat(16,1fr);gap:2px;font-size:9px;font-weight:700;color:var(--grey);margin-bottom:6px}
@@ -203,7 +226,7 @@ body.final .prov::after{display:none}
   <div class="grp">Ejecución</div>
   <a href="#gantt">Planning · Gantt</a><a href="#venta">Estrategia de venta</a>
   <div class="grp">Inversión</div>
-  <a href="#ccp">Estructura (CCP)</a><a href="#visor">Tu cuadro de mandos</a>
+  <a href="#plan">El plan</a><a href="#propuesta">La propuesta</a><a href="#ccp">Estructura · operación en conjunto</a><a href="#crono">Cronograma CCP</a><a href="#compromisos">Compromisos del gestor</a><a href="#visor">Tu cuadro de mandos</a>
   <div class="grp">Cierre</div>
   <a href="#docs">Documentación · Drive</a>
 </nav>
@@ -212,8 +235,9 @@ body.final .prov::after{display:none}
 
 <!-- ═════════ S0 · PORTADA ═════════ -->
 <section class="sec hero">
-  <img src="assets/logo-cdu-blanco.png" alt="CdU de 0 a ÉXITO" style="height:120px;width:auto;margin-bottom:30px;align-self:flex-start">
-  <span class="badge">Propuesta de inversión · Joint Venture Servicer · Cambio de Uso</span>
+  <div class="in-eyebrow"><span class="in-badge">OPORTUNIDADES<span class="in">IN</span></span> Oportunidad publicada en el canal oficial · <b>Programa IN</b></div>
+  <img src="assets/logo-cdu-blanco.png" alt="CdU de 0 a ÉXITO" style="height:120px;width:auto;margin-bottom:26px;align-self:flex-start">
+  <span class="badge">Propuesta de inversión · Joint Venture · Comprar-Aportar Valor-Vender</span>
   <h1>Las Torres de Cotillas</h1>
   <div class="sub">Local comercial → 3 viviendas · Murcia · 2026</div>
   <p class="lead" style="color:rgba(253,251,247,.9);margin-top:22px;max-width:900px;font-size:21px">
@@ -510,19 +534,84 @@ body.final .prov::after{display:none}
   <a class="doc" href="#docs">Conclusiones estudio de mercado (paso 4 ampliado)</a><a class="doc" href="#docs">Fichas MTVV 3 viviendas</a>
 </section>
 
+<!-- ═════════ EL PLAN ═════════ -->
+<section class="sec" id="plan">
+  <div class="kicker">Estructura de inversión · El plan</div>
+  <h2>El plan: por qué, quién compra y cómo</h2>
+  <div class="cards">
+    <div class="card"><div class="big">¿Por qué?</div><div class="lbl">Producto inexistente en el municipio (primer mover) · demanda probada 2 veces · zona más cara · viabilidad certificada</div></div>
+    <div class="card"><div class="big">¿Quién compra?</div><div class="lbl">Patrimonialista + 1ª residencia (parejas jóvenes, industria, UCAM) · ~60% nacional · capacidad probada con ofertas al contado</div></div>
+    <div class="card"><div class="big">¿Cómo?</div><div class="lbl">Venta individualizada de cada vivienda a través de la sociedad gestora · vehículo Cuentas en Participación</div></div>
+  </div>
+  <p><b>Figura jurídica:</b> Cuentas en Participación (arts. 239-243 CCom) con <b>CdU de 0 a ÉXITO SL</b> como gestor único frente a terceros. El partícipe invierte, no gestiona y no aparece frente a terceros; su riesgo queda limitado estrictamente a su aportación.</p>
+</section>
+
+<!-- ═════════ LA PROPUESTA (ask del gestor) ═════════ -->
+<section class="sec" id="propuesta">
+  <div class="kicker">Estructura de inversión · La propuesta</div>
+  <h2>La propuesta: qué pedimos y qué ponemos</h2>
+  <p class="lead">En el formato del programa, el gestor solicita un porcentaje del resultado. Nuestra propuesta es más transparente: <b>un servicer fijo y nuestro propio capital al mismo riesgo que el tuyo</b>.</p>
+  <div class="ask">
+    <div class="col give"><h3>Lo que pedimos</h3>
+      <p><b>Servicer de 9.000 €</b> por la gestión integral: propuesta, dirección de la aportación de valor y comercialización hasta notaría. Descontado del resultado y reflejado en el Excel.</p>
+      <p style="font-size:13px;color:var(--grey)">A diferencia de un % abierto del resultado, es una cifra <b>cerrada y conocida de antemano</b>.</p></div>
+    <div class="col get"><h3>Lo que ponemos</h3>
+      <p><b>35.000 € de capital propio</b> dentro de la operación, al <b>mismo riesgo y misma rentabilidad</b> que tú — 20,92% en el realista. Sin clases de capital, sin bonus asimétrico.</p>
+      <p style="font-size:13px;color:var(--grey)">Gestión llave en mano + tu cuadro de mandos en vivo desde el día uno.</p></div>
+  </div>
+  <div class="quote">No cobramos un porcentaje mayor si va bien para lavarnos las manos si va mal: <b>ponemos nuestro dinero junto al tuyo y rendimos exactamente igual</b>.</div>
+</section>
+
 <!-- ═════════ S8 · CCP ═════════ -->
 <section class="sec" id="ccp">
-  <div class="kicker">Estructura de inversión</div>
+  <div class="kicker">Estructura de inversión · La operación en conjunto</div>
   <h2>Cómo entras — y cómo cobras</h2>
   <div class="cards">
     <div class="card"><div class="big">162.212 €</div><div class="lbl">Capital total de la operación</div></div>
     <div class="card"><div class="big">35.000 €</div><div class="lbl">Lo pone el GESTOR (21,57%) — nuestro dinero, junto al tuyo</div></div>
     <div class="card"><div class="big">127.212 €</div><div class="lbl">Capital de inversores (78,43%)</div></div>
   </div>
+  <h3>La operación en conjunto</h3>
+  <table>
+    <tr><th>Aportación</th><th>Capital</th><th>% del capital</th><th>Rentabilidad (realista)</th></tr>
+    <tr><td><b>Inversores</b> (partícipes)</td><td>127.212 €</td><td>78,43%</td><td>20,92%</td></tr>
+    <tr><td><b>Gestor</b> (CdU de 0 a ÉXITO)</td><td>35.000 €</td><td>21,57%</td><td>20,92%</td></tr>
+    <tr><td><b>Operación</b></td><td><b>162.212 €</b></td><td>100%</td><td><b>20,92%</b></td></tr>
+  </table>
   <p><b>Modelo servicer sobre Cuentas en Participación</b> (arts. 239-243 CCom): <b>todo el capital rinde igual</b> — el del gestor y el de los inversores, al mismo porcentaje (20,92% en el realista). Sin clases de capital, sin letra pequeña.</p>
   <p><b>El partícipe:</b> invierte, no gestiona, no aparece frente a terceros, y su riesgo queda limitado estrictamente a su aportación. <b>El gestor:</b> responde frente a terceros, fondos en cuenta exclusiva del proyecto, contabilidad separada, información periódica, derecho de auditoría externa, seguro RC.</p>
   <div class="quote"><b>Retribución del gestor — transparente y en la mesa:</b> (1) su capital (35.000 €) rinde <b>exactamente como el de cualquier partícipe</b> — 20,92% en el realista; (2) <b>9.000 € de servicer</b> por la gestión integral, descontados del resultado y reflejados en el Excel. Si la operación cierra en el optimista, <b>todo el capital sube por igual al 30,17%</b>, gestor incluido. Mismo barco, mismo porcentaje.</div>
   <p style="font-size:13px;color:var(--grey)">Fiscalidad del partícipe: rendimiento del capital mobiliario (19-23%), retención 19% practicada por el gestor. Modelo de contrato CCP a disposición.</p>
+</section>
+
+<!-- ═════════ CRONOGRAMA CCP ═════════ -->
+<section class="sec" id="crono">
+  <div class="kicker">Estructura de inversión · Cronograma</div>
+  <h2>Cronograma de la inversión (CCP)</h2>
+  <p class="lead">Del primer euro al reparto. El capital se desembolsa <b>en 3 tramos ligados a hitos</b> — no todo de golpe — y la liquidación se hace conforme se venden las unidades.</p>
+  <div class="crono">
+    <div class="step"><div class="st-tag">Inicio</div><div class="st-t">Firma CCP + Tramo 1</div><p>Constitución de las cuentas en participación y primera aportación a la cuenta exclusiva del proyecto.</p></div>
+    <div class="step"><div class="st-tag">~Mes 2</div><div class="st-t">Licencia + arranque · Tramo 2</div><p>Concesión de licencia y arranque de obra. Segunda aportación ligada al hito.</p></div>
+    <div class="step"><div class="st-tag">Meses 2-6</div><div class="st-t">Obra + Tramo 3</div><p>Obra de 16 semanas. Tercera aportación. Comercialización en paralelo (renders, reserva temprana).</p></div>
+    <div class="step"><div class="st-tag">Meses 6-9</div><div class="st-t">Ventas</div><p>Cierre de ventas (30-60 días/unidad). Liquidaciones parciales posibles conforme se vende.</p></div>
+    <div class="step"><div class="st-tag">Cierre</div><div class="st-t">Liquidación CCP + reparto</div><p>1º devolución de tu aportación · 2º reparto del beneficio. Todo el capital al 20,92%.</p></div>
+  </div>
+  <p class="prov" style="font-size:12.5px;color:var(--grey)">Calendario estimado: firma + tramo 1 a la captación · licencia jul-ago 2026 · obra sep-dic 2026 · ventas y liquidación T1 2027. Importes por tramo en cierre con Paco.</p>
+</section>
+
+<!-- ═════════ COMPROMISOS DEL GESTOR ═════════ -->
+<section class="sec" id="compromisos">
+  <div class="kicker">Solvencia y transparencia · Compromisos del gestor</div>
+  <h2>Nuestros compromisos contigo</h2>
+  <div class="commit">
+    <div class="c"><b>Comunicación fluida</b>Grupo directo con el equipo gestor y respuesta ágil a cualquier duda.</div>
+    <div class="c"><b>Reuniones de seguimiento</b>Reporting periódico por videollamada en cada hito de la operación.</div>
+    <div class="c"><b>Cuenta exclusiva del proyecto</b>Fondos separados, contabilidad propia y trazabilidad de cada euro.</div>
+    <div class="c"><b>Sin deudas sin tu permiso</b>Prohibición de hipotecas o deudas sobre el activo sin consentimiento escrito.</div>
+    <div class="c"><b>Derecho de auditoría</b>Auditoría externa a disposición del partícipe + seguro de RC del gestor.</div>
+    <div class="c"><b>Información hasta la liquidación</b>Te acompañamos con datos hasta el reparto final, no solo durante la obra.</div>
+  </div>
+  <p class="lead" style="margin-top:6px">Y por encima de todo, un compromiso que nadie más en la plataforma te da: <b>verlo tú mismo, casi en tiempo real</b>. 👇</p>
 </section>
 
 <!-- ═════════ S9 · CUADRO DE MANDOS ═════════ -->
@@ -564,7 +653,7 @@ body.final .prov::after{display:none}
   <p class="lead">Si quieres estudiarla: el Drive queda abierto. Si quieres entrar: hablamos 1 a 1 esta semana — los contratos de cuentas en participación se firman por orden de compromiso.</p>
 </section>
 
-<div class="foot"><b>CdU de 0 a ÉXITO</b> · tucambiodeuso.com × <b>IM·PULSO</b> · Las Torres de Cotillas · Murcia · 2026<br>
+<div class="foot"><b>CdU de 0 a ÉXITO</b> · tucambiodeuso.com × <b>IM·PULSO</b> · Oportunidad del <b>Programa IN</b> · Oportunidades IN · Las Torres de Cotillas · Murcia · 2026<br>
 <span style="font-size:11px">Primero claridad. Luego control. Y al final, resultado.</span></div>
 
 </main>
