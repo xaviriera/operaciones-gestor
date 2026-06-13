@@ -131,13 +131,24 @@ body.final .prov::after{display:none}
 /* logos cabecera portada (CdU izq · Programa IN der) */
 .hero-head{display:flex;flex-direction:column;width:max-content;max-width:100%;align-self:flex-start}
 .toplogos{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:16px;gap:24px}
-.in-lockup{display:inline-flex;align-items:center;gap:7px;font-weight:900;letter-spacing:1px;color:#fff;font-size:21px;line-height:1;text-shadow:0 1px 9px rgba(0,0,0,.6);margin-bottom:8px}
+.in-lockup{display:inline-flex;align-items:center;gap:7px;font-weight:900;letter-spacing:1px;color:#fff;font-size:21px;line-height:1;text-shadow:0 1px 9px rgba(0,0,0,.6);margin-bottom:8px;text-decoration:none;cursor:pointer}
+.in-lockup:hover .in{filter:brightness(1.08)}
 .in-lockup .in{background:var(--in-coral);color:#fff;border-radius:7px;padding:2px 10px;letter-spacing:2px}
 /* logo PROGRAMA IN (recreado) — navy por defecto, blanco sobre fondo oscuro */
 .prog-in{display:inline-flex;align-items:center;gap:6px;font-weight:900;letter-spacing:.5px;line-height:1;white-space:nowrap}
 .prog-in .pg{color:var(--navy)}
 .prog-in.light .pg{color:#fff}
 .prog-in .in{background:var(--in-coral);color:#fff;border-radius:30px;padding:3px 11px;letter-spacing:1.5px}
+/* acceso a la oportunidad en la plataforma IN (pastilla portada, marcada) */
+.in-access{display:inline-flex;align-items:center;flex-wrap:wrap;gap:10px 14px;font-size:14px;font-weight:600;color:#fff;margin-bottom:16px;background:rgba(233,85,79,.15);border:1px solid rgba(233,85,79,.55);padding:10px 10px 10px 18px;border-radius:13px;text-decoration:none;transition:.15s}
+.in-access:hover{background:rgba(233,85,79,.27);border-color:var(--in-coral)}
+.in-access .go{font-weight:800;color:#fff;background:var(--in-coral);padding:7px 14px;border-radius:30px;font-size:12.5px;white-space:nowrap;box-shadow:0 2px 10px rgba(233,85,79,.4)}
+/* accesos sutiles en el pie */
+.partners a.ft-link{color:rgba(253,251,247,.92);text-decoration:none;font-weight:600;border-bottom:1px dotted rgba(253,251,247,.45);transition:.15s}
+.partners a.ft-link:hover{color:#fff;border-bottom-color:#fff}
+.partners a.ft-imp{display:inline-flex;align-items:center;gap:3px;text-decoration:none;vertical-align:middle}
+.partners a.ft-imp .arr{font-size:11px;color:rgba(253,251,247,.75)}
+.partners a.ft-imp:hover .arr{color:#fff}
 @media(max-width:600px){.toplogos{margin-bottom:20px}.toplogos img{height:60px!important}.in-lockup{font-size:13px;gap:5px}.in-lockup .in{padding:1px 6px;border-radius:5px}}
 /* cronograma CCP */
 .crono{display:flex;gap:0;margin:18px 0;flex-wrap:wrap}
@@ -253,8 +264,8 @@ body.final .prov::after{display:none}
 <section class="sec hero">
   <div class="hero-head">
     <div class="toplogos">
-      <img src="assets/logo-cdu-blanco.png" alt="CdU de 0 a ÉXITO" style="height:120px;width:auto">
-      <div class="in-lockup">OPORTUNIDADES <span class="in">IN</span></div>
+      <a href="https://tucambiodeuso.com" target="_blank" rel="noopener" style="display:inline-flex" aria-label="CdU de 0 a ÉXITO — tucambiodeuso.com"><img src="assets/logo-cdu-blanco.png" alt="CdU de 0 a ÉXITO" style="height:120px;width:auto"></a>
+      <a href="https://oportunidades.in" target="_blank" rel="noopener" class="in-lockup" aria-label="Oportunidades IN — plataforma del Programa IN">OPORTUNIDADES <span class="in">IN</span></a>
     </div>
     <span class="badge">Propuesta de inversión · Joint Venture · Comprar-Aportar Valor-Vender</span>
   </div>
@@ -267,8 +278,8 @@ body.final .prov::after{display:none}
     <span style="background:rgba(226,159,52,.16);border:1px solid var(--ochre);color:var(--ochre);padding:2px 9px;border-radius:7px;font-size:.86em;font-weight:800;letter-spacing:.5px">MAP</span><span style="color:var(--ochre)">→</span>
     <span style="background:rgba(226,159,52,.16);border:1px solid var(--ochre);color:var(--ochre);padding:2px 9px;border-radius:7px;font-size:.86em;font-weight:800;letter-spacing:.5px">ÉXITO</span></span> — y un objetivo claro: pasar de la viabilidad al beneficio real.<br><span style="color:rgba(253,251,247,.88)">Sin improvisar. Sin sorpresas.</span></p>
   <div class="partners" style="font-size:14.5px">
-    <div style="display:inline-flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;color:#fff;margin-bottom:16px;background:rgba(233,85,79,.13);border:1px solid rgba(233,85,79,.45);padding:9px 16px;border-radius:11px">Oportunidad publicada por el canal oficial del <span class="prog-in light" style="font-size:15px"><span class="pg">PROGRAMA</span><span class="in">IN</span></span></div><br>
-    Gestiona el equipo <b>CdU de 0 a ÉXITO</b>, asociado con <img src="assets/logo-impulso-chapa.png" alt="IM·PULSO" style="height:34px;width:auto;vertical-align:middle;margin:0 5px"> para la inteligencia de mercado · tucambiodeuso.com</div>
+    <a href="https://oportunidades.in" target="_blank" rel="noopener" class="in-access"><span>Oportunidad publicada por el canal oficial del <span class="prog-in light" style="font-size:15px"><span class="pg">PROGRAMA</span><span class="in">IN</span></span></span><span class="go">Ver en la plataforma →</span></a><br>
+    Gestiona el equipo <b>CdU de 0 a ÉXITO</b>, asociado con <a href="https://im-pulso.es" target="_blank" rel="noopener" class="ft-imp" title="Acceder a IM·PULSO"><img src="assets/logo-impulso-chapa.png" alt="IM·PULSO" style="height:34px;width:auto;vertical-align:middle;margin:0 5px"><span class="arr">↗</span></a> para la inteligencia de mercado · <a href="https://tucambiodeuso.com" target="_blank" rel="noopener" class="ft-link">Ver servicio completo ↗</a></div>
 </section>
 
 <!-- ═════════ S0 · EQUIPO ═════════ -->
