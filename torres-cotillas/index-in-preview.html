@@ -125,13 +125,18 @@ body.final .prov::after{display:none}
 .jv-word{font-weight:900}.jv-word .v{color:var(--in-coral)}
 /* sello IN fijo — guiño presente en todas las secciones */
 .in-stamp{position:fixed;right:14px;bottom:14px;z-index:60;display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.93);border:1px solid var(--line);box-shadow:0 3px 12px rgba(22,61,96,.18);border-radius:30px;padding:5px 12px;font-size:10px;font-weight:800;letter-spacing:.5px;color:var(--navy);pointer-events:none;backdrop-filter:blur(3px)}
-.in-stamp .in{background:var(--in-coral);color:#fff;border-radius:4px;padding:1px 5px;font-weight:900;letter-spacing:1px}
+.in-stamp .in{background:var(--in-coral);color:#fff;border-radius:30px;padding:1px 7px;font-weight:900;letter-spacing:1px}
 @media(max-width:600px){.in-stamp{right:9px;bottom:9px;font-size:8.5px;padding:4px 9px}}
 @media print{.in-stamp{display:none}}
 /* logos cabecera portada (CdU izq · Programa IN der) */
-.toplogos{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:30px;gap:16px;flex-wrap:wrap}
-.in-lockup{display:inline-flex;align-items:center;gap:7px;font-weight:900;letter-spacing:1px;color:#fff;font-size:20px;line-height:1}
+.toplogos{display:flex;justify-content:space-between;align-items:flex-end;width:100%;margin-bottom:26px;gap:16px;flex-wrap:wrap}
+.in-lockup{display:inline-flex;align-items:center;gap:7px;font-weight:900;letter-spacing:1px;color:#fff;font-size:21px;line-height:1;text-shadow:0 1px 9px rgba(0,0,0,.6);margin-bottom:6px}
 .in-lockup .in{background:var(--in-coral);color:#fff;border-radius:7px;padding:2px 10px;letter-spacing:2px}
+/* logo PROGRAMA IN (recreado) — navy por defecto, blanco sobre fondo oscuro */
+.prog-in{display:inline-flex;align-items:center;gap:6px;font-weight:900;letter-spacing:.5px;line-height:1;white-space:nowrap}
+.prog-in .pg{color:var(--navy)}
+.prog-in.light .pg{color:#fff}
+.prog-in .in{background:var(--in-coral);color:#fff;border-radius:30px;padding:3px 11px;letter-spacing:1.5px}
 @media(max-width:600px){.toplogos{margin-bottom:20px}.toplogos img{height:60px!important}.in-lockup{font-size:13px;gap:5px}.in-lockup .in{padding:1px 6px;border-radius:5px}}
 /* cronograma CCP */
 .crono{display:flex;gap:0;margin:18px 0;flex-wrap:wrap}
@@ -259,7 +264,7 @@ body.final .prov::after{display:none}
     <span style="background:rgba(226,159,52,.16);border:1px solid var(--ochre);color:var(--ochre);padding:2px 9px;border-radius:7px;font-size:.86em;font-weight:800;letter-spacing:.5px">MAP</span><span style="color:var(--ochre)">→</span>
     <span style="background:rgba(226,159,52,.16);border:1px solid var(--ochre);color:var(--ochre);padding:2px 9px;border-radius:7px;font-size:.86em;font-weight:800;letter-spacing:.5px">ÉXITO</span></span> — y un objetivo claro: pasar de la viabilidad al beneficio real.<br><span style="color:rgba(253,251,247,.88)">Sin improvisar. Sin sorpresas.</span></p>
   <div class="partners" style="font-size:14.5px">
-    <div style="display:inline-flex;align-items:center;gap:10px;font-size:14.5px;font-weight:600;color:#fff;margin-bottom:16px;background:rgba(233,85,79,.13);border:1px solid rgba(233,85,79,.45);padding:9px 16px;border-radius:11px"><span class="in-badge" style="font-size:12px">OPORTUNIDADES<span class="in">IN</span></span> Oportunidad publicada por el canal oficial del <b>Programa IN</b></div><br>
+    <div style="display:inline-flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;color:#fff;margin-bottom:16px;background:rgba(233,85,79,.13);border:1px solid rgba(233,85,79,.45);padding:9px 16px;border-radius:11px">Oportunidad publicada por el canal oficial del <span class="prog-in light" style="font-size:15px"><span class="pg">PROGRAMA</span><span class="in">IN</span></span></div><br>
     Gestiona el equipo <b>CdU de 0 a ÉXITO</b>, asociado con <img src="assets/logo-impulso-chapa.png" alt="IM·PULSO" style="height:34px;width:auto;vertical-align:middle;margin:0 5px"> para la inteligencia de mercado · tucambiodeuso.com</div>
 </section>
 
@@ -672,7 +677,7 @@ body.final .prov::after{display:none}
 
 </main>
 
-<div class="in-stamp">OPORTUNIDADES <span class="in">IN</span></div>
+<div class="in-stamp">PROGRAMA <span class="in">IN</span></div>
 
 <script id="op-data" type="application/json">
 {
