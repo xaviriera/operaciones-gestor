@@ -117,6 +117,27 @@ body.final .prov::after{display:none}
 .foot b{color:var(--ochre)}
 .todo{background:#fffbf2;border:1.5px dashed var(--ochre);border-radius:10px;padding:13px 17px;margin:12px 0;color:#8a5a14;font-weight:600;font-size:13px}
 .todo::before{content:"⏳ ";font-weight:800}
+body.final .todo{display:none}
+/* Botones documento */
+.docbtns{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0 2px}
+.btn-doc{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:inherit;font-weight:700;font-size:13.5px;color:var(--navy);background:#fff;border:1.6px solid var(--navy);border-radius:999px;padding:9px 16px;transition:all .15s;text-decoration:none}
+.btn-doc:hover{background:var(--navy);color:#fff;transform:translateY(-1px)}
+.btn-doc.gold{border-color:var(--ochre);color:#8a5a14}
+.btn-doc.gold:hover{background:var(--ochre);color:#fff}
+.btn-doc .ic{font-size:15px;line-height:1}
+/* Visor modal embebido */
+.viewer{position:fixed;inset:0;z-index:99999;background:rgba(10,20,32,.9);backdrop-filter:blur(5px);display:none;flex-direction:column}
+.viewer.open{display:flex}
+.viewer-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 18px;background:var(--navy);color:#fff;box-shadow:0 2px 14px rgba(0,0,0,.3)}
+.viewer-bar .vt{font-weight:700;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.viewer-bar .va{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.viewer-bar a.vlink{color:#fff;text-decoration:none;font-size:12.5px;font-weight:600;border:1px solid rgba(255,255,255,.35);border-radius:8px;padding:6px 12px}
+.viewer-bar a.vlink:hover{background:rgba(255,255,255,.15)}
+.viewer-bar .vclose{cursor:pointer;background:var(--ochre);color:#fff;border:0;border-radius:8px;width:34px;height:34px;font-size:18px;font-weight:800;line-height:1}
+.viewer-stage{flex:1;display:flex;align-items:center;justify-content:center;overflow:auto;background:#33404d}
+.viewer-stage iframe{width:100%;height:100%;border:0;background:#fff}
+.viewer-stage img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.gal img{cursor:zoom-in}
 /* ── GUIÑO IN (Programa IN · Oportunidades IN) ── */
 .in-eyebrow{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(233,85,79,.4);border-left:3px solid var(--in-coral);border-radius:9px;padding:7px 14px;margin-bottom:20px;font-size:12px;color:rgba(253,251,247,.9);letter-spacing:.2px}
 .in-eyebrow b{color:#fff}
@@ -430,11 +451,13 @@ body.final .prov::after{display:none}
       <div class="s-tag">FASE 1 · GO — Veredicto</div><div class="s-t">Decidir · "Veredicto claro. Sin ruleta."</div>
       <ul><li>Tres patas — si una falla, todo falla: <b>Normativa · Comunidad · Números</b></li><li>Veredicto: GO / GO con ajustes / NO GO — y el porqué</li><li>Viabilidad REAL antes de comprometer capital</li><li>Sales con: veredicto + riesgos + próximo paso</li></ul>
       <div class="s-estado" style="color:var(--ok)">✅ En TDC: COMPLETADA — los certificados que habéis visto son su resultado</div>
+      <div class="docbtns"><button class="btn-doc gold" onclick="vOpen('docs/fase1-go.pdf','Informe Fase 1 · CdU GO · Torres de Cotillas','pdf')"><span class="ic">📄</span> Ver Informe Fase 1 · GO</button></div>
     </div>
     <div class="s-card">
       <div class="s-tag">FASE 2 · MAP — Plan</div><div class="s-t">Planificar · "Viable no significa ejecutable"</div>
       <ul><li>MAP convierte el "sí" en un plan: <b>Ruta · Costes · Riesgos · Decisiones</b></li><li>Ruta administrativa: pasos y orden real</li><li>Presupuesto por partidas + contingencia + escenarios</li><li>Un mapa que un técnico puede seguir sin inventarse nada</li></ul>
       <div class="s-estado" style="color:#9a6712">🟡 En TDC: EN CURSO — proyecto presentado, licencia en trámite</div>
+      <div class="docbtns"><button class="btn-doc" onclick="vOpen('docs/ppto-obra.pdf','Presupuesto de obra · Torres de Cotillas','pdf')"><span class="ic">📄</span> Presupuesto</button><button class="btn-doc" onclick="vOpen('docs/gantt.pdf','Cronograma de obra · Torres de Cotillas','pdf')"><span class="ic">📅</span> Cronograma</button></div>
     </div>
     <div class="s-card">
       <div class="s-tag">FASE 3 · ÉXITO — Ejecución</div><div class="s-t">Ejecutar · "La realidad se juega en la obra"</div>
@@ -634,7 +657,16 @@ body.final .prov::after{display:none}
   <p><b>Modelo servicer sobre Cuentas en Participación</b> (arts. 239-243 CCom): <b>todo el capital rinde igual</b> — el del gestor y el de los inversores, al mismo porcentaje (20,92% en el realista). Sin clases de capital, sin letra pequeña.</p>
   <p><b>El partícipe:</b> invierte, no gestiona, no aparece frente a terceros, y su riesgo queda limitado estrictamente a su aportación. <b>El gestor:</b> responde frente a terceros, fondos en cuenta exclusiva del proyecto, contabilidad separada, información periódica, derecho de auditoría externa, seguro RC.</p>
   <div class="quote"><b>Retribución del gestor — transparente y en la mesa:</b> (1) su capital (35.000 €) rinde <b>exactamente como el de cualquier partícipe</b> — 20,92% en el realista; (2) <b>9.000 € de servicer</b> por la gestión integral, descontados del resultado y reflejados en el Excel. Si la operación cierra en el optimista, <b>todo el capital sube por igual al 30,17%</b>, gestor incluido. Mismo barco, mismo porcentaje.</div>
-  <p style="font-size:13px;color:var(--grey)">Fiscalidad del partícipe: rendimiento del capital mobiliario (19-23%), retención 19% practicada por el gestor. Modelo de contrato CCP a disposición.</p>
+  <p style="font-size:13px;color:var(--grey)">Fiscalidad del partícipe: rendimiento del capital mobiliario (19-23%), retención 19% practicada por el gestor.</p>
+  <h3>Cómo te blinda el contrato</h3>
+  <p class="lead">El CCP no es un papel de confianza: es un blindaje recíproco que sigue el código de buenas prácticas del Programa IN — protege al partícipe y a la gestora por igual.</p>
+  <div class="cards">
+    <div class="card"><div class="big">Riesgo acotado</div><div class="lbl">Tu riesgo se limita <b>estrictamente a tu aportación</b> (arts. 239-243 CCom). Ni un euro más, pase lo que pase.</div></div>
+    <div class="card"><div class="big">Tu dinero, separado</div><div class="lbl">Fondos en <b>cuenta exclusiva</b> del proyecto y <b>contabilidad separada</b>. Nada se mezcla con la gestora.</div></div>
+    <div class="card"><div class="big">Luz y control</div><div class="lbl"><b>Información periódica</b>, <b>derecho de auditoría externa</b> y <b>seguro de RC</b> del gestor. Todo trazable.</div></div>
+    <div class="card"><div class="big">Mismo barco</div><div class="lbl">El capital del gestor rinde <b>al mismo % que el tuyo</b>. Sin clases de capital ni letra pequeña.</div></div>
+  </div>
+  <div class="docbtns"><button class="btn-doc gold" onclick="vOpen('docs/ccp-modelo.pdf','Modelo de contrato CCP · CdU de 0 a ÉXITO','pdf')"><span class="ic">📑</span> Ver modelo de contrato CCP</button></div>
 </section>
 
 <!-- ═════════ CRONOGRAMA CCP ═════════ -->
@@ -690,20 +722,42 @@ body.final .prov::after{display:none}
 <!-- ═════════ S10 · DOCUMENTACIÓN ═════════ -->
 <section class="sec" id="docs">
   <div class="kicker">Documentación · Transparencia</div>
-  <h2>Todo lo que habéis visto, a un clic</h2>
-  <p>El Drive de la operación está organizado igual que el código de buenas prácticas de la comunidad — y queda abierto (lectura) para quien quiera estudiar la oportunidad a fondo:</p>
-  <table>
-    <tr><th>Carpeta</th><th>Contenido</th></tr>
-    <tr><td>01 · Jurídico</td><td>Nota simple · estatutos · autorización comunidad · certificado VPO · catastro · escritura</td></tr>
-    <tr><td>02 · Técnica</td><td>Diagnóstico Fase 1 · proyecto firmado · planos · audio arquitecto municipal · MTVV</td></tr>
-    <tr><td>03 · Suministros</td><td>Aguas (presupuesto) · Iberdrola (expediente CGP)</td></tr>
-    <tr><td>04 · Económica</td><td>Excel análisis · estudio de mercado · matriz de riesgos · Gantt · 3 presupuestos</td></tr>
-    <tr><td>05 · Empresa</td><td>CIF · escritura SL · poderes · certificados AEAT/SS al corriente <span class="prov">(renovando)</span></td></tr>
-    <tr><td>06 · Inversión</td><td>Modelo CCP · estructura · escenarios de retorno · estrategia de salida</td></tr>
-  </table>
-  <div class="todo">Enlazar aquí las URLs reales del Drive compartido al configurar los permisos de lectura para inversores.</div>
+  <h2>Toda la operación, ordenada por fase</h2>
+  <p>Seguimos el estándar del Programa IN y, encima, lo organizamos como trabajamos nosotros: <b>cada documento se abre en la fase a la que pertenece</b>. Así ves de un vistazo qué hemos comprobado, qué tenemos preparado y qué viene ahora. Pulsa cualquiera — se abre aquí mismo, sin salir de la presentación.</p>
+  <div class="serv">
+    <div class="s-card">
+      <div class="s-tag">FASE 1 · CdU GO — Viabilidad</div>
+      <div class="s-t">Certeza antes de mover capital</div>
+      <p style="font-size:13.5px;color:var(--grey);margin:6px 0 0">Lo que hemos comprobado: urbanismo, comunidad, números y encaje. Todo, de una tacada.</p>
+      <div class="docbtns">
+        <button class="btn-doc gold" onclick="vOpen('docs/fase1-go.pdf','Informe Fase 1 · CdU GO · Torres de Cotillas','pdf')"><span class="ic">📄</span> Informe Fase 1 · GO</button>
+        <button class="btn-doc" onclick="vOpen('docs/urbanismo-cert.pdf','Certificado de compatibilidad urbanística','pdf')"><span class="ic">🏛️</span> Compatibilidad urbanística</button>
+        <button class="btn-doc" onclick="vOpen('docs/estado-actual.pdf','Estado actual del inmueble','pdf')"><span class="ic">🏚️</span> Estado actual</button>
+        <button class="btn-doc" onclick="vOpen('docs/encaje-tecnico.pdf','Encaje técnico','pdf')"><span class="ic">📐</span> Encaje técnico</button>
+      </div>
+    </div>
+    <div class="s-card">
+      <div class="s-tag">FASE 2 · CdU MAP — Preparación</div>
+      <div class="s-t">La viabilidad abre la puerta; la ejecución decide el resultado</div>
+      <p style="font-size:13.5px;color:var(--grey);margin:6px 0 0">El plan ejecutable: presupuesto por partidas, cronograma y valoración de las viviendas.</p>
+      <div class="docbtns">
+        <button class="btn-doc" onclick="vOpen('docs/ppto-obra.pdf','Presupuesto de obra · Torres de Cotillas','pdf')"><span class="ic">📄</span> Presupuesto de obra</button>
+        <button class="btn-doc" onclick="vOpen('docs/gantt.pdf','Cronograma de obra · Torres de Cotillas','pdf')"><span class="ic">📅</span> Cronograma</button>
+      </div>
+      <div class="todo">Por incorporar: matriz de riesgos resuelta + MTVV de las 3 viviendas (en cierre).</div>
+    </div>
+    <div class="s-card">
+      <div class="s-tag">FASE 3 · CdU ÉXITO — Ejecución</div>
+      <div class="s-t">Del plan al resultado real</div>
+      <p style="font-size:13.5px;color:var(--grey);margin:6px 0 0">Lo que viene ahora: obra por hitos, comercialización y cierre. Y el contrato con el que entras.</p>
+      <div class="docbtns">
+        <button class="btn-doc gold" onclick="vOpen('docs/ccp-modelo.pdf','Modelo de contrato CCP · CdU de 0 a ÉXITO','pdf')"><span class="ic">📑</span> Modelo de contrato CCP</button>
+      </div>
+      <div class="todo">Por incorporar: renders de comercialización (paso 4) + dossier de cierre auditable.</div>
+    </div>
+  </div>
   <h3>Siguiente paso</h3>
-  <p class="lead">Si quieres estudiarla: el Drive queda abierto. Si quieres entrar: hablamos 1 a 1 esta semana — los contratos de cuentas en participación se firman por orden de compromiso.</p>
+  <p class="lead">Si quieres estudiarla a fondo, toda la documentación está aquí a un clic. Si quieres entrar: hablamos 1 a 1 esta semana — los contratos de cuentas en participación se firman por orden de compromiso.</p>
 </section>
 
 <div class="foot"><b>CdU de 0 a ÉXITO</b> · tucambiodeuso.com × <b>IM·PULSO</b> · Oportunidad del <b>Programa IN</b> · Oportunidades IN · Las Torres de Cotillas · Murcia · 2026<br>
@@ -726,6 +780,38 @@ body.final .prov::after{display:none}
   "precio_salida": 69800, "rango_cierre": "66.700-69.800",
   "estado": "PROVISIONAL"
 }
+</script>
+
+<!-- ═════════ VISOR MODAL EMBEBIDO (docs + lightbox fotos) ═════════ -->
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Visor de documento">
+  <div class="viewer-bar">
+    <span class="vt" id="viewerTitle">Documento</span>
+    <span class="va">
+      <a class="vlink" id="viewerOpen" href="#" target="_blank" rel="noopener">Abrir / descargar ↗</a>
+      <button class="vclose" onclick="vClose()" aria-label="Cerrar">✕</button>
+    </span>
+  </div>
+  <div class="viewer-stage" id="viewerStage"></div>
+</div>
+<script>
+(function(){
+  var v=document.getElementById('viewer'),stage=document.getElementById('viewerStage'),
+      vt=document.getElementById('viewerTitle'),vo=document.getElementById('viewerOpen');
+  window.vOpen=function(src,title,type){
+    vt.textContent=title||'Documento';vo.href=src;
+    stage.innerHTML=(type==='img')
+      ? '<img src="'+src+'" alt="'+(title||'')+'">'
+      : '<iframe src="'+src+'#view=FitH" title="'+(title||'')+'"></iframe>';
+    v.classList.add('open');document.body.style.overflow='hidden';
+  };
+  window.vClose=function(){v.classList.remove('open');stage.innerHTML='';document.body.style.overflow='';};
+  v.addEventListener('click',function(e){if(e.target===v)vClose();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')vClose();});
+  document.querySelectorAll('.gal img').forEach(function(img){
+    img.style.cursor='zoom-in';
+    img.addEventListener('click',function(){vOpen(img.src,img.alt||'Imagen','img');});
+  });
+})();
 </script>
 </body>
 </html>
