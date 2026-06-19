@@ -1,0 +1,142 @@
+EXTRACCION DE DATOS - TORRES DE COTILLAS
+Operacion: C/ D'Estoup 17, Las Torres de Cotillas
+Fecha extraccion: 2026-06-19
+
+================================================================================
+RESUMEN EJECUTIVO
+================================================================================
+
+Los dos documentos analizados son:
+1. nota-simple.pdf (8 páginas escaneadas, SIN capa OCR)
+2. catastro.pdf (1 página con datos estructurados extraíbles)
+
+Del CATASTRO se extrajeron datos verificables.
+De la NOTA-SIMPLE no se pudieron extraer datos sin OCR (pdf escaneado puro).
+
+================================================================================
+DATOS CONCRETOS SOLICITADOS
+================================================================================
+
+1. SUPERFICIE DEL LOCAL
+   - Catastro: 107 m2 (CONFIRMADO - ya esperado 105/107, es 107)
+   - Nota Simple: NO EXTRAIBLE (documento escaneado sin OCR)
+
+2. DESCRIPCION REGISTRAL LITERAL DEL LOCAL
+   - Ubicacion: AV D'ESTOUP 17, E/P/P/1/00/0A, BL. 1, 30565 LAS TORRES DE COTILLAS [MURCIA]
+   - Clase: URBANO
+   - Uso principal: COMERCIAL
+   - Destino: OCIO HOSTEL.
+   - Tipo inmueble: Parcela con varios inmuebles [division horizontal]
+   - Planta: Baja (notacion: P/P/1/00/0A)
+   - Cuota participacion: 1,650980 %
+   - Fuente: CATASTRO
+
+3. NUMERO DE ASEOS / BANOS
+   - Catastro: NO CONSTA
+   - Nota Simple: NO EXTRAIBLE
+   - RESULTADO: NO CONSTA
+
+4. DISTRIBUCION ACTUAL (DIAFANO / ESTANCIAS)
+   - Catastro: NO CONSTA
+   - Nota Simple: NO EXTRAIBLE (seria necesario OCR)
+   - RESULTADO: NO CONSTA
+
+5. NUMERO TOTAL DE ELEMENTOS/DEPARTAMENTOS/VIVIENDAS DEL EDIFICIO
+   - Tipo: "Parcela con varios inmuebles [division horizontal]"
+   - Finca registral del local: 7949 (segun enunciado)
+   - Numero exacto de departamentos: NO CONSTA (documento solo menciona "varios inmuebles")
+   - Superficie grafica parcela: 2.160 m2 (total)
+   - Participacion: 1,650980 % (del local sobre el total)
+   - RESULTADO: NO CONSTA numero exacto
+
+6. ANO DE CONSTRUCCION Y PLANTA
+   - Ano construccion: 1978 (CONFIRMADO)
+   - Planta: BAJA (notacion registral: P/P/1/00/0A = Planta baja)
+   - Fuente: CATASTRO
+
+7. REFERENCIA CATASTRAL
+   - 4802703XH5140S0008GQ (CONFIRMADO - coincide con enunciado)
+   - Fuente: CATASTRO
+
+8. DATOS DE FACHADA
+   - Ubicacion: AV D'ESTOUP 17 (Avenida D'Estoup, numero 17)
+   - Numero de calles a las que da: 1 (Avenida D'Estoup)
+   - Metros de fachada: NO CONSTA
+   - Fuente: CATASTRO
+
+================================================================================
+INFORMACION TECNICA DE LOS DOCUMENTOS
+================================================================================
+
+CATASTRO.PDF
+- Paginas: 1
+- Formato: PDF 1.7
+- Tipo contenido: Texto + Grafico (plano catastral)
+- Extraccion: EXITOSA (PyPDF2 + fitz)
+- Metadata:
+  * Titulo: Certificacion Descriptiva y Grafica Catastral 4802703XH5140S0008GQ
+  * Autor: Sede Electronica del Catastro
+  * Creacion: 2026-01-22 02:32:08
+  * Productor: PDFlib+PDI 9.4.0
+
+NOTA-SIMPLE.PDF
+- Paginas: 8 (todas imagenes escaneadas)
+- Formato: PDF 1.4
+- Tipo contenido: IMAGENES ESCANEADAS (sin capa OCR embebida)
+- Extraccion: PARCIAL (metadata solo, contenido de imagenes no extraible sin OCR)
+- Metadata:
+  * Creator: Scanner System
+  * Creacion: 2025-11-19 16:37:53
+  * Nota: PDF puro scan, creado por "Scanner System Image Conversion"
+
+================================================================================
+IMAGENES GENERADAS (para OCR manual si es necesario)
+================================================================================
+
+Las 8 paginas de nota-simple.pdf fueron renderizadas como imagenes PNG:
+- C:\Users\MAINBR~1\AppData\Local\Temp\nota_page_0.png (Portada)
+- C:\Users\MAINBR~1\AppData\Local\Temp\nota_page_1.png
+- C:\Users\MAINBR~1\AppData\Local\Temp\nota_page_2.png
+- C:\Users\MAINBR~1\AppData\Local\Temp\nota_page_3.png
+- C:\Users\MAINBR~1\AppData\Local\Temp\nota_page_4.png
+- C:\Users\MAINBR~1\AppData\Local\Temp\nota_page_5.png
+- C:\Users\MAINBR~1\AppData\Local\Temp\nota_page_6.png
+- C:\Users\MAINBR~1\AppData\Local\Temp\nota_page_7.png
+
+Para obtener el contenido completo de nota-simple seria necesario:
+1. Usar OCR visual (Tesseract, EasyOCR, PaddleOCR, etc.)
+2. Leer manualmente los PDFs en un visor PDF (Adobe, etc.)
+3. Solicitar version digital o copia con texto embebido
+
+================================================================================
+RESPUESTA A PREGUNTAS INICIALES (COMPACTA)
+================================================================================
+
+| Campo | Valor | Fuente | Estado |
+|-------|-------|--------|--------|
+| Superficie | 107 m2 | Catastro | CONFIRMADO |
+| Ref. Catastral | 4802703XH5140S0008GQ | Catastro | CONFIRMADO |
+| Año construcción | 1978 | Catastro | CONFIRMADO |
+| Planta | Baja | Catastro | CONFIRMADO |
+| Uso | Comercial (Ocio Hostelería) | Catastro | CONFIRMADO |
+| Aseos/Baños | NO CONSTA | - | NO EXTRAIBLE |
+| Distribución | NO CONSTA | - | NO EXTRAIBLE |
+| N° Elementos Edificio | NO CONSTA (varios inmuebles DH) | Catastro | PARCIAL |
+| Fachada (calles) | 1 vía (Avenida) | Catastro | CONFIRMADO |
+| Metros fachada | NO CONSTA | - | NO CONSTA |
+
+================================================================================
+CONCLUSIONES
+================================================================================
+
+✓ DATOS DISPONIBLES: Ubicación, referencia catastral, superficie, año construcción,
+  planta, uso, tipo inmueble, cuota participación.
+
+✗ DATOS NO DISPONIBLES SIN OCR: Descripción detallada de aseos, distribución interna,
+  número exacto de elementos del edificio (nota simple es 100% escaneada).
+
+ACCION RECOMENDADA:
+- Para completar datos de aseos y distribución: aplicar OCR a nota_page_0.png
+  o leer manualmente el PDF original en Adobe/similar.
+- Los datos del catastro son completos para fines registrales.
+

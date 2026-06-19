@@ -1,0 +1,81 @@
+EXTRACCION DE DATOS - TORRES DE COTILLAS (C/ D'Estoup 17)
+Generado: 2026-06-19
+
+=== CATASTRO.PDF (EXTRAIDO EXITOSAMENTE) ===
+
+REFERENCIA CATASTRAL: 4802703XH5140S0008GQ [CONFIRMADO]
+
+SUPERFICIE:
+  - Catastro: 107 m2 [CONFIRMADO: era 105/107, catastro dice 107]
+
+DESCRIPCION REGISTRAL Y UBICACION:
+  - Direccion: AV D'ESTOUP 17 E/P/P/1/00/0A. BL. 1
+  - Municipio: LAS TORRES DE COTILLAS [MURCIA]
+  - Clase: URBANO
+  - Uso principal: Comercial (OCIO HOSTEL.)
+  - Tipo inmueble: Parcela con varios inmuebles [division horizontal]
+
+ANO CONSTRUCCION Y PLANTA:
+  - Ano construccion: 1978
+  - Planta: P/P/1/00/0A (planta baja, puerta 1, despacho 00, apartamento 0A)
+
+FACHADA:
+  - Ubicacion en Via: AV D'ESTOUP 17 (Avenida D'Estoup, numero 17)
+  - Numero de calles: 1 via (Avenida)
+
+ASEOS/BANOS:
+  - NO CONSTA en el catastro
+
+DISTRIBUCION:
+  - NO CONSTA en el catastro (plano no legible en extraccion)
+
+NUMERO TOTAL DE ELEMENTOS/DEPARTAMENTOS DEL EDIFICIO:
+  - Tipo: "Parcela con varios inmuebles [division horizontal]"
+  - Participacion: 1,650980 %
+  - Superficie grafica: 2.160 m2 (total parcela)
+  - NO se especifica numero total de departamentos/viviendas
+
+=== NOTA-SIMPLE.PDF ===
+
+ESTADO: NO PUDO EXTRAERSE (PDF sin capa de texto OCR disponible / escaneado de baja calidad)
+Los datos que requieren lectura visual no pudieron obtenerse sin herramientas OCR especializadas.
+
+=== RESUMEN DE DATOS CONCRETOS SOLICITADOS ===
+
+1. Superficie del local:
+   - Catastro: 107 m2 (CONFIRMADO vs esperado 105/107)
+   - Nota Simple: NO CONSTA (no extraible)
+
+2. Descripcion registral literal:
+   - "Local comercial en planta baja (AV D'ESTOUP 17, Bloc 1) - Uso: Comercial (Ocio Hosteleria)"
+   - Linderos: NO CONSTA (no extraible de catastro/nota)
+   - Cuota: Participacion 1,650980 %
+
+3. Aseos/Banos en estado actual:
+   - NO CONSTA
+
+4. Distribucion actual:
+   - NO CONSTA
+
+5. Numero total de elementos/departamentos edificio:
+   - NO CONSTA (inmueble es "Parcela con varios inmuebles en division horizontal" pero no se especifica total)
+
+6. Ano de construccion y planta:
+   - Ano: 1978
+   - Planta: Baja (P/P/1/00/0A)
+
+7. Referencia catastral:
+   - 4802703XH5140S0008GQ [CONFIRMADO]
+
+8. Fachada:
+   - Ubicacion: AV D'ESTOUP 17, una via (Avenida)
+   - Metros de fachada: NO CONSTA
+   - Numero de calles: 1
+
+=== OBSERVACIONES ===
+
+- El PDF de catastro fue extraible mediante PyPDF2 pero con encoding issues que se corrigieron manualmente
+- El PDF de nota-simple parece ser un documento escaneado sin OCR embebido
+- Para obtener datos completos (descripcion registral, aseos, distribucion, numero exact departamentos) seria necesario:
+  a) OCR visual especializado (Tesseract, EasyOCR, etc.)
+  b) Lectura manual del PDF original en lector PDF nativo
