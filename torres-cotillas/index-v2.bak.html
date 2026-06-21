@@ -133,11 +133,13 @@ body.final .prov::after{display:none}
 body.final .todo{display:none}
 /* Botones documento */
 .docbtns{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0 2px}
-.btn-doc{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:inherit;font-weight:700;font-size:13.5px;color:var(--navy);background:#fff;border:1.6px solid var(--navy);border-radius:999px;padding:9px 16px;transition:all .15s;text-decoration:none}
+.btn-doc{display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-family:inherit;font-weight:700;font-size:13.5px;color:var(--navy);background:#fff;border:1.6px solid var(--navy);border-radius:999px;padding:9px 16px;transition:all .15s;text-decoration:none}
 .btn-doc:hover{background:var(--navy);color:#fff;transform:translateY(-1px)}
 .btn-doc.gold{border-color:var(--ochre);color:#8a5a14}
 .btn-doc.gold:hover{background:var(--ochre);color:#fff}
 .btn-doc .ic{font-size:15px;line-height:1}
+.doc-hero{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:800;padding:11px 22px;margin:6px 0 6px;background:#fff;color:var(--navy);border:1.6px solid var(--navy);box-shadow:0 2px 10px rgba(0,0,0,.10)}
+.doc-hero:hover,.doc-hero:active{background:#fff;border-color:var(--ochre);color:var(--ochre);box-shadow:0 4px 14px rgba(226,159,52,.30);transform:translateY(-1px)}
 /* Visor modal embebido */
 .viewer{position:fixed;inset:0;z-index:99999;background:rgba(10,20,32,.9);backdrop-filter:blur(5px);display:none;flex-direction:column}
 .viewer.open{display:flex}
@@ -313,7 +315,7 @@ body.final .todo{display:none}
 .fase-split .fs h3{margin-top:0}
 @media(max-width:760px){.fase-split{grid-template-columns:1fr}}
 /* patas de la Fase 1 (jurídica/urbanística/técnica/económica) */
-.patas{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:16px 0}
+.patas{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0}
 .pata{background:#fff;border:1px solid var(--line);border-left:4px solid var(--ok);border-radius:10px;padding:15px 18px}
 .pata .p-tag{font-size:10.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--ok);margin-bottom:6px}
 .pata b{color:var(--navy)}
@@ -393,46 +395,35 @@ body.final .todo{display:none}
 <section class="sec" id="track">
   <div class="kicker">Equipo gestor · Operaciones</div>
   <h2>Lo que ya hemos hecho — la prueba antes de la promesa</h2>
-  <p class="lead">No hablamos en futuro: tenemos operaciones cerradas que demuestran que el método llega hasta el resultado real. Estos son los números.</p>
-  <h3>Finalizadas</h3>
+  <p class="lead">No hablamos en futuro: tenemos operaciones cerradas y en marcha que demuestran que el método llega hasta el resultado real. Estos son los números.</p>
+  
+  <h3>Cambio de uso (local → viviendas)</h3>
   <table>
-    <tr><th>Operación</th><th>Modalidad</th><th>Inversión</th><th>Rentabilidad</th><th>Anualizada</th><th>Referencia</th></tr>
-    <tr><td>Tríplex Crevillente (Alicante) 2025-26</td><td>C/A/V</td><td>149K €</td><td>ROI 24,1% · ROE 45,5%</td><td>27,4% / 51,6%</td><td><a href="https://xaviriera.github.io/operaciones-gestor/crevillente-boquera/" target="_blank">briefing</a></td></tr>
-    <tr><td>Elche Torre-Quevedo · CdU 5 locales → viviendas</td><td>C/A/V</td><td class="prov">[dato]</td><td>VENDIDO</td><td class="prov">[dato]</td><td>—</td></tr>
-    <tr><td>Servicio CdU finalizadas: Castellón · Elda · Petrel</td><td>Servicio</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><th>Operación</th><th>Inversión</th><th>Venta</th><th>Rentabilidad</th><th>Anualizada</th><th>Estado</th></tr>
+<tr><td><strong>CdU</strong> · 2 viviendas · C/ Diego Fuentes Serrano (Elche)</td><td>140.000 €</td><td>220.000 €</td><td>ROI 57%</td><td>68% anual</td><td>Finalizada · <a href="https://discord.com/channels/818097367508713473/1302444976730406942" target="_blank">Hilo en Discord</a></td></tr>
+<tr><td><strong>CdU</strong> · 4 viviendas · C/ Capitán Alfonso Vives (Elche)</td><td>330.000 €</td><td>473.000 €</td><td>ROI 52%</td><td>48% anual</td><td>Finalizada (pendiente de cierre)</td></tr>
+<tr><td><strong>CdU</strong> · 13 viviendas (San Vicente del Raspeig)</td><td>930.000 €</td><td>1.640.000 €</td><td>ROI 76%</td><td>38% anual</td><td>En obra (fase final)</td></tr>
+<tr><td><strong>CdU</strong> · 1 vivienda (Elche, Raval)</td><td>160.000 €</td><td>220.000 €</td><td>ROI 37,5%</td><td>45% anual</td><td>En marcha</td></tr>
   </table>
-  <h3>En marcha</h3>
-  <table>
-    <tr><th>Operación</th><th>Modalidad</th><th>Estado</th></tr>
-    <tr><td><b>Las Torres de Cotillas (esta propuesta)</b></td><td>C/A/V · CCP</td><td>Viabilidad cerrada · licencia en trámite</td></tr>
-    <tr><td>Elche Juan Espuche 1 · CdU local → 3 viviendas</td><td>C/A/V</td><td>Análisis avanzado</td></tr>
-    <tr><td>2 locales → 13 viviendas (Paco)</td><td>CdU</td><td>En ejecución</td></tr>
-  </table>
-  <div class="todo">FORMATO LISTO — así se visualizarán. Pendiente que Dani y Paco reporten sus operaciones reales (operación · modalidad · inversión · rentabilidad · anualizada · referencia: hilo Discord / briefing / ficha de plataforma). Pasarles esta tabla como plantilla.</div>
-</section>
 
-<!-- ═════════ EL MÉTODO (explicado UNA sola vez · marco GO/MAP/ÉXITO) ═════════ -->
+  <h3>Comprar, aportar valor y vender</h3>
+  <table>
+    <tr><th>Operación</th><th>Inversión</th><th>Venta</th><th>Rentabilidad</th><th>Anualizada (plazo)</th><th>Estado</th></tr>
+<tr><td><strong>C/AV/V</strong> · Tríplex · C/ Boquera Calvarí (Crevillente)</td><td>149.026 €</td><td>185.000 €</td><td>ROI 24% · ROE 45,5%</td><td>27,4% anual (10,5 meses)</td><td>Finalizada · <a href="https://discord.com/channels/818097367508713473/1503443427495514333" target="_blank">Hilo en Discord</a></td></tr>
+<tr><td><strong>C/AV/V</strong> · Piso · C/ Juan Ramón Jiménez (Elche)</td><td>45.000 €</td><td>118.000 €</td><td>ROI 44%</td><td>53% anual (10 meses)</td><td>Finalizada · Detalles en el perfil del gestor</td></tr>
+<tr><td><strong>C/AV/V</strong> · Piso · C/ Bahamas (Orihuela Costa)</td><td>38.480 €</td><td>76.500 €</td><td>ROI 60%</td><td>144% anual (5 meses)</td><td>Finalizada · Detalles en el perfil del gestor</td></tr>
+<tr><td><strong>C/AV/V</strong> · Piso · Av. Alcalde Ramón Pastor 12 (Elche)</td><td>216.000 €</td><td>270.000 €</td><td>ROI 25%</td><td>49,9% anual</td><td>Finalizada · <a href="https://discord.com/channels/818097367508713473/1354248845772460173" target="_blank">Hilo en Discord</a></td></tr>
+<tr><td><strong>C/AV/V</strong> · Piso · C/ Churruca, La Veleta (Torrevieja)</td><td>65.836 €</td><td>Objetivo ~145.000 €</td><td>ROI objetivo ~120%</td><td>—</td><td>En venta</td></tr>
+  </table>
+
+  <h3>Comprar, aportar valor y alquilar</h3>
+  <table>
+    <tr><th>Operación</th><th>Inversión</th><th>Renta mensual</th><th>Notas</th><th>Estado</th></tr>
+<tr><td><strong>C/AV/A</strong> · Dúplex · C/ Joan Maragall (Sant Pere de Ribes, Barcelona)</td><td>~167.000 €</td><td>830 €/mes</td><td><strong>Rentabilidad infinita</strong> — operación financiada al 100%, sin capital propio inmovilizado · Valor potencial de venta ~255.000 €</td><td>Alquilada</td></tr>
+  </table>
+</section>
 <section class="sec" id="servicio" style="display:none"><!-- RETIRADA Xavi 15-jun: no vender el servicio aquí; el método se enseña SUTIL dentro de las fases (3x1: IM·PULSO+servicio+oportunidad), eje = la oportunidad. Contenido conservado por si se recupera. -->
-  <div class="kicker">El método · CdU de 0 a ÉXITO</div>
-  <h2>Rentabilidad con método, no con fe</h2>
-  <p class="lead">En Cambio de Uso no gana el que más sabe: <b>gana el que menos se equivoca</b>. Por eso trabajamos en escalera — <b>GO → MAP → ÉXITO</b>: decidir, planificar, ejecutar.</p>
-  <div class="serv">
-    <div class="s-card">
-      <div class="s-tag">FASE 1 · GO</div><div class="s-t">Decidir · "Certeza antes de mover capital"</div>
-      <ul><li>Diagnóstico de viabilidad: ¿se puede, sí o no?</li><li>Cuatro patas — jurídica, urbanística, técnica, económica</li><li>Veredicto claro antes de comprometer un euro</li></ul>
-      <div class="s-estado" style="color:var(--ok)">✅ En Torres de Cotillas: COMPLETADA</div>
-    </div>
-    <div class="s-card">
-      <div class="s-tag">FASE 2 · MAP</div><div class="s-t">Planificar · "La viabilidad abre la puerta; la ejecución decide el resultado"</div>
-      <ul><li>El plan ejecutable: encaje técnico, costes, riesgos, plazos</li><li>Presupuesto por partidas + escenarios + Gantt</li><li>Un mapa que un técnico puede seguir sin inventarse nada</li></ul>
-      <div class="s-estado" style="color:#9a6712">🟡 En esta operación: EN CURSO</div>
-    </div>
-    <div class="s-card">
-      <div class="s-tag">FASE 3 · ÉXITO</div><div class="s-t">Ejecutar · "Del plan al resultado real"</div>
-      <ul><li>Obra dirigida por hitos, con control y calidad</li><li>Comercialización, estrategia de salida y cierre</li><li>Reporting hasta la liquidación</li></ul>
       <div class="s-estado" style="color:var(--grey)">⬜ En esta operación: PREPARADA</div>
-    </div>
-  </div>
   <div class="cards">
     <div class="card"><div class="big">Transparencia absoluta</div><div class="lbl">Cobramos por criterio, no por metro construido — el objetivo es la mejor decisión, aunque sea no hacer nada</div></div>
     <div class="card"><div class="big">Cero conflicto de interés</div><div class="lbl">No somos promotores ni constructores disfrazados: el método protege al inversor desde el minuto cero</div></div>
@@ -446,22 +437,25 @@ body.final .todo{display:none}
 <div class="act-divider">
   <div class="act-n">Fase 1 · GO</div>
   <h2>El diagnóstico de viabilidad</h2>
-  <p>Antes de mover capital, comprobamos que la operación se puede hacer. Aquí está lo que medimos en el mercado, el activo del que partimos y las cuatro patas de la viabilidad — con el Informe de Diagnóstico como prueba.</p>
+  <p>Antes de mover capital, comprobamos que la operación se puede hacer. Aquí está lo que medimos en el mercado, el activo del que partimos y los cuatro ejes que la sostienen — con el Informe de Diagnóstico como prueba.</p>
 </div>
 
 <!-- ═════════ S1 · MERCADO + ACTIVO (qué hace F1 en el servicio + qué medimos en TDC) ═════════ -->
 <section class="sec" id="resumen">
   <span class="phase-badge go"><span class="dot"></span>Fase 1 · GO</span>
-  <div class="kicker">Diagnóstico · Mercado y activo</div>
+  <div class="kicker">Mercado y activo</div>
   <h2>El mercado, medido — no opinado</h2>
-  <p class="lead">El diagnóstico empieza por una pregunta: ¿hay demanda real para el producto que vamos a crear? La medimos con datos, no con intuición.</p>
+  <p class="lead">Todo empieza por una pregunta: ¿hay demanda real para el producto que vamos a crear? La medimos con datos, no con intuición.</p>
   <div class="cards">
     <div class="card"><div class="big">1.307 €/m²</div><div class="lbl">La zona más cara del municipio (vs 840–1.080 colindantes)</div></div>
     <div class="card"><div class="big">277</div><div class="lbl">Compraventas 2024 — máximo de 5 años · Q1-2025 récord</div></div>
     <div class="card"><div class="big">3-5</div><div class="lbl">Pisos en alquiler en TODO el municipio (22.000 hab.)</div></div>
-    <div class="card"><div class="big">2×</div><div class="lbl">Demanda validada con campañas reales: 15 contactos/6 días + 25/15 días, con ofertas</div></div>
   </div>
-  <p style="margin-top:4px">El precio de salida lo afinamos en la Fase 2; aquí basta una <b>estimación orientativa apoyada en el pulso de mercado</b>, que confirma que hay recorrido para el producto que vamos a crear.</p>
+  <p style="margin-top:4px">El precio de salida lo afinamos en la Fase 2; aquí basta una <b>estimación orientativa apoyada en datos reales de mercado</b>, que confirma que hay recorrido para el producto que vamos a crear.</p>
+  <div style="display:flex;align-items:center;gap:10px;margin-top:12px">
+    <img src="assets/logo-impulso-chapa.png" alt="IM·PULSO" style="height:34px;width:auto;flex:none">
+    <span style="font-size:12.5px;color:var(--grey)">Demanda y precios medidos con <b>IM·PULSO</b>. El análisis completo va incluido en el informe de viabilidad de Fase 1.</span>
+  </div>
   <h3>El activo del que partimos</h3>
   <div class="cards">
     <div class="card"><div class="big">105 m²</div><div class="lbl">Local comercial en esquina · ~20 m de fachada · diáfano · PB 1978</div></div>
@@ -495,56 +489,31 @@ body.final .todo{display:none}
 <!-- ═════════ S2 · FASE 1 — VIABILIDAD POR PATAS + doc estrella ═════════ -->
 <section class="sec" id="fase1">
   <span class="phase-badge go"><span class="dot"></span>Fase 1 · GO</span>
-  <div class="kicker">Diagnóstico de viabilidad</div>
-  <h2>Diagnóstico de viabilidad: ¿es viable este cambio de uso?</h2>
+  <div class="kicker">El veredicto</div>
+  <h2>¿Es viable este cambio de uso?</h2>
   <div class="fase-split">
     <div class="fs servicio">
       <div class="fs-tag">Qué hace esta fase en el servicio</div>
       <h3>El veredicto, sin ruleta</h3>
-      <p>La Fase 1 valida cuatro frentes — y si uno falla, falla todo: <b>jurídico/registral, urbanístico, técnico y económico</b>. Se obtiene un veredicto claro (GO / GO con ajustes / NO GO) antes de comprometer un euro.</p>
+      <p>La Fase 1 valida cuatro ejes — y si uno falla, falla todo: <b>jurídico/registral, urbanístico, técnico y económico</b>. Se obtiene un veredicto claro (GO / GO con ajustes / NO GO) antes de comprometer un euro.</p>
     </div>
     <div class="fs tdc">
       <div class="fs-tag">Qué hicimos en Torres de Cotillas</div>
-      <h3>Los cuatro frentes, cerrados</h3>
-      <p>Validamos los cuatro frentes en esta operación. Los tres riesgos serios que traía —VPO, uso en planta baja y comunidad— quedaron <b>cerrados con certificado</b>. Veredicto: <b>GO</b>.</p>
-    </div>
-  </div>
-
-  <div class="patas">
-    <div class="pata">
-      <div class="p-tag">Jurídica</div>
-      <b>VPO y comunidad — cerrados por escrito</b>
-      <p>Certificado de la Dirección General de Vivienda: <b>el precio de venta es LIBRE</b> (art. 27 RD 2960/1976). Estatutos: los locales de PB pueden subdividirse con autorización expresa del presidente.</p>
-    </div>
-    <div class="pata">
-      <div class="p-tag">Urbanística</div>
-      <b>Uso residencial compatible — confirmado</b>
-      <p>La fachada del local <b>no recae sobre el eje comercial</b>, sino sobre espacio libre privativo. Uso residencial compatible, confirmado por el Ayuntamiento (el certificado se muestra en la Fase 2).</p>
-    </div>
-    <div class="pata">
-      <div class="p-tag">Técnica</div>
-      <b>¿Cabe el cambio de uso? Sí</b>
-      <p>Altura libre, ventilación, salida de humos existente y acometidas son viables sin obstáculos estructurales (estructura NO afectada). El encaje detallado de las 3 viviendas pertenece a la Fase 2.</p>
-    </div>
-    <div class="pata">
-      <div class="p-tag">Económica</div>
-      <b>¿Sale a cuenta? El rango dice que sí</b>
-      <p>En el diagnóstico no se afina al euro: se comprueba que la operación <b>sale viable</b>, con una rentabilidad orientativa en el entorno del <b>~20%</b>. El desglose fino por partidas se trabaja en la Fase 2.</p>
+      <h3>Los cuatro ejes, cerrados</h3>
+      <p>Validamos los cuatro ejes en esta operación. Los tres riesgos serios que traía —VPO, uso en planta baja y comunidad— quedaron <b>cerrados con certificado</b>. Veredicto: <b>GO</b>.</p>
     </div>
   </div>
 
   <h3>El informe de viabilidad</h3>
   <p class="lead">Todo el diagnóstico, en un solo documento.</p>
+  <a class="btn-doc doc-hero" href="https://drive.google.com/file/d/1uqp-797Y1Commrw0THlY399I4mCaPSe5/view" target="_blank" rel="noopener"><img src="assets/logo-cdu-casa.png" alt="CdU de 0 a Éxito" style="height:30px;width:auto"> Ver Informe de Diagnóstico · Fase 1</a>
+  <p style="font-size:13px;color:var(--grey);margin-top:14px">Y la documentación con la que verificamos cada eje, como prueba de que está respaldado:</p>
   <div class="docbtns">
-    <button class="btn-doc gold" onclick="vOpen('docs/fase1-go.pdf','Informe Fase 1 · GO · Torres de Cotillas','pdf')"><span class="ic">📄</span> Ver informe de viabilidad completo</button>
-  </div>
-  <p style="font-size:13px;color:var(--grey)">La documentación que usamos para verificar cada frente queda adjunta aquí como prueba de que cada uno está respaldado:</p>
-  <div class="docbtns">
-    <button class="btn-doc" onclick="vOpen('docs/nota-simple.pdf','Nota simple registral','pdf')"><span class="ic">📄</span> Nota simple</button>
-    <button class="btn-doc" onclick="vOpen('docs/normas-comunidad.pdf','Normas de la comunidad','pdf')"><span class="ic">🏠</span> Normas de comunidad</button>
-    <button class="btn-doc" onclick="vOpen('docs/conformidad-comunidad.pdf','Conformidad de la comunidad','pdf')"><span class="ic">✔️</span> Conformidad comunidad</button>
-    <button class="btn-doc" onclick="vOpen('docs/vpo-precio-libre.pdf','Certificado VPO / precio libre','pdf')"><span class="ic">🏛️</span> VPO / precio libre</button>
-    <button class="btn-doc" onclick="vOpen('docs/catastro.pdf','Datos catastrales','pdf')"><span class="ic">🗂️</span> Catastro</button>
+    <a class="btn-doc" href="https://drive.google.com/file/d/14h9JiE2xcc8ZSyZ5pnrAxCiy1ngl7X2E/view" target="_blank" rel="noopener"><span class="ic">📄</span> Nota simple</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1rHR4V22sQaoqxeev2Rc2yTu-6stFq9aX/view" target="_blank" rel="noopener"><span class="ic">🗂️</span> Datos catastrales</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1D46MVMB7bS4QwijF96vNnSnw_EM5Ndsb/view" target="_blank" rel="noopener"><span class="ic">🏷️</span> Valor de referencia catastral</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1S0gSqUjfUu2PtsVXX-bBqtQYRfI6b6gu/view" target="_blank" rel="noopener"><span class="ic">🏠</span> Normas comunitarias</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1Gl6GYpDHy8qKE68CP_Fu-yC8wNoLe0Z1/view" target="_blank" rel="noopener"><span class="ic">🎧</span> Audio técnico municipal</a>
   </div>
 </section>
 
@@ -566,6 +535,28 @@ body.final .todo{display:none}
   <div class="fase-split">
     <div class="fs servicio">
       <div class="fs-tag">Qué hace esta fase en el servicio</div>
+      <div class="patas">
+        <div class="pata">
+          <div class="p-tag">Jurídica</div>
+          <b>VPO y comunidad — cerrados por escrito</b>
+          <p>Certificado de la Dirección General de Vivienda: <b>el precio de venta es LIBRE</b> (art. 27 RD 2960/1976). Estatutos: los locales de PB pueden subdividirse con autorización expresa del presidente.</p>
+        </div>
+        <div class="pata">
+          <div class="p-tag">Urbanística</div>
+          <b>Uso residencial compatible — confirmado</b>
+          <p>La fachada del local <b>no recae sobre el eje comercial</b>, sino sobre espacio libre privativo. Uso residencial compatible, confirmado por el Ayuntamiento (el certificado se muestra en la Fase 2).</p>
+        </div>
+        <div class="pata">
+          <div class="p-tag">Técnica</div>
+          <b>¿Cabe el cambio de uso? Sí</b>
+          <p>Altura libre, ventilación, salida de humos existente y acometidas son viables sin obstáculos estructurales (estructura NO afectada). El encaje detallado de las 3 viviendas pertenece a la Fase 2.</p>
+        </div>
+        <div class="pata">
+          <div class="p-tag">Económica</div>
+          <b>¿Sale a cuenta? El rango dice que sí</b>
+          <p>En el diagnóstico no se afina al euro: se comprueba que la operación <b>sale viable</b>, con una rentabilidad orientativa en el entorno del <b>~20%</b>. El desglose fino por partidas se trabaja en la Fase 2.</p>
+        </div>
+      </div>
       <h3>El encaje, al detalle</h3>
       <p>La Fase 2 toma el "sí cabe" de la Fase 1 y lo convierte en una propuesta funcional concreta: distribución, cotas, instalaciones y cumplimiento normativo — un plan tan detallado que cualquiera puede ejecutarlo sin improvisar.</p>
     </div>
@@ -586,7 +577,10 @@ body.final .todo{display:none}
     <div>
       <b>Compatibilidad urbanística certificada por el Ayuntamiento</b>
       <p>El PGMO prohíbe vivienda en PB en Ejes Comerciales — pero la fachada del local no recae sobre el eje, sino sobre espacio libre privativo. Uso residencial COMPATIBLE, certificado oficialmente.</p>
-      <div class="docbtns"><button class="btn-doc" onclick="vOpen('docs/urbanismo-cert.pdf','Certificado de compatibilidad urbanística','pdf')"><span class="ic">🏛️</span> Certificado de compatibilidad</button></div>
+      <div class="docbtns"><a class="btn-doc" href="https://drive.google.com/file/d/1z0mAX25EwUbPCEUDLh5Nxzasl2thgFWm/view" target="_blank" rel="noopener"><span class="ic">🏛️</span> Certificado de compatibilidad</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1tPHqLhkU4P17Rvjf-RNJGlu8jvzB_Dbl/view" target="_blank" rel="noopener"><span class="ic">📜</span> VPO / precio libre</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1o6uCYdBFxub0qiGc95KlHRZu6vJk7lUi/view" target="_blank" rel="noopener"><span class="ic">🏚️</span> Estado actual</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1CusUSB_BqSOCY8be-Lj-pGjpIK2AMN7Y/view" target="_blank" rel="noopener"><span class="ic">✔️</span> Conformidad comunitaria</a></div>
     </div>
   </div>
   <h3>El producto final (visualización · piso piloto)</h3>
@@ -599,20 +593,9 @@ body.final .todo{display:none}
     <img src="assets/fotos/render-venta-6.jpg" alt="Render 6" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
   </div>
   <div class="docbtns">
-    <button class="btn-doc gold" onclick="vOpen('docs/encaje-tecnico.pdf','Encaje técnico · Torres de Cotillas','pdf')"><span class="ic">📐</span> Ver encaje técnico</button>
+    <a class="btn-doc gold" href="https://drive.google.com/file/d/1dT7wsiSpH-4iWlfVS-0Uibx9yavZFN_l/view" target="_blank" rel="noopener"><span class="ic">📐</span> Ver encaje técnico</a>
   </div>
   <div class="todo">Falta: plano del encaje de las 3 viviendas (de TDC_01/02.pdf del proyecto técnico).</div>
-  <div class="impulso">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-      <div class="tag">IM·PULSO v2 — validación de mercado</div>
-      <img src="assets/logo-impulso-chapa.png" alt="IM·PULSO" style="height:46px;width:auto;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:6px 12px;border-radius:10px">
-    </div>
-    <h3>Triple validación del precio</h3>
-    <p>Método Total (MTVV) con 4 inmobiliarias + verificación de demanda real con ofertas recibidas + cruce con datos masivos y notariado (IM·PULSO).
-    En su último contraste, el motor IM·PULSO replicó el resultado del método manual con un <b>1,3% de desviación</b> (caso Elda: 74.000 € manual vs 75.000 € motor).</p>
-    <p style="margin-top:8px"><b>Y en esta operación:</b> el motor IM·PULSO valoró las unidades en <b>68.000–69.000 €</b> — en línea con los suelos del paso 4 (67.000–72.000 €). Tres vías independientes, un mismo rango.</p>
-    <div class="todo" style="background:rgba(255,255,255,.07);border-color:var(--impulso-orange);color:#ffd9cf">Hueco reservado: informe IM·PULSO×MTVV de la operación (lo genera Xavi — fusión v2: testigos + €/m² + notariado → veredicto).</div>
-  </div>
 </section>
 
 <!-- ═════════ SUMINISTROS (bloque NUEVO · Fase 2) ═════════ -->
@@ -633,7 +616,7 @@ body.final .todo{display:none}
     <img src="assets/fotos/contador-agua.jpg" alt="Contadores de agua" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
   </div>
   <div class="docbtns">
-    <button class="btn-doc" onclick="vOpen('docs/gantt.pdf','Planning de obra y suministros · Torres de Cotillas','pdf')"><span class="ic">📅</span> Ver presupuestos de suministros</button>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1V5AFMsVe_S334PP2dKV-A-_jzPejKa1a/view" target="_blank" rel="noopener"><span class="ic">💧</span> Ver Hidrogea (agua)</a>
   </div>
   <div class="todo">Por incorporar: PDF de presupuestos de suministros (agua + luz) cuando se cierren con Iberdrola y aguas.</div>
 </section>
@@ -655,10 +638,21 @@ body.final .todo{display:none}
     <tr><td><b>INVERSIÓN TOTAL DE LA OPERACIÓN</b></td><td><b>162.212 €</b></td></tr>
   </table>
   <div class="docbtns">
-    <button class="btn-doc gold" onclick="vOpen('docs/ppto-obra.pdf','Presupuesto de obra · Torres de Cotillas','pdf')"><span class="ic">📄</span> Ver presupuesto de obra (SPM)</button>
+    <a class="btn-doc gold" href="https://drive.google.com/file/d/1BkGNxBZYwGcUDouoAaoZ3I8ikWVA9Z30/view" target="_blank" rel="noopener"><span class="ic">📄</span> Ver presupuesto de obra (SPM)</a>
   </div>
   <p style="font-size:13px;color:var(--grey)">Cálculo prudente sobre 3 presupuestos contrastados. Esta es la única vez en toda la presentación que ves el detalle de la inversión total; en la estructura de inversión verás cómo se reparte el capital.</p>
   <!-- TABÚ (FUERA): "Comercializamos EN PARALELO a la obra (método probado en Crevillente)" → se suelta en vivo, no en el HTML. -->
+  <div class="impulso">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <div class="tag">IM·PULSO v2 — validación de mercado</div>
+      <img src="assets/logo-impulso-chapa.png" alt="IM·PULSO" style="height:46px;width:auto;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:6px 12px;border-radius:10px">
+    </div>
+    <h3>Triple validación del precio</h3>
+    <p>Método Total (MTVV) con 4 inmobiliarias + verificación de demanda real con ofertas recibidas + cruce con datos masivos y notariado (IM·PULSO).
+    En su último contraste, el motor IM·PULSO replicó el resultado del método manual con un <b>1,3% de desviación</b> (caso Elda: 74.000 € manual vs 75.000 € motor).</p>
+    <p style="margin-top:8px"><b>Y en esta operación:</b> el motor IM·PULSO valoró las unidades en <b>68.000–69.000 €</b> — en línea con los suelos del paso 4 (67.000–72.000 €). Tres vías independientes, un mismo rango.</p>
+    <a class="btn-doc gold" href="https://xaviriera.github.io/im-pulso-share/torres-cotillas.html" target="_blank" rel="noopener"><span class="ic">📈</span> Ver informe IM·PULSO v2</a>
+  </div>
 </section>
 
 <!-- ═════════ S4b · ESCENARIOS (realista + optimista · el inverso FUERA) ═════════ -->
@@ -679,7 +673,7 @@ body.final .todo{display:none}
   <!-- TABÚ (FUERA): Escenario INVERSO (compradores financian la obra → ROE ~35%) NO se enseña aquí; es la joya, se suelta en vivo. -->
   <p><b>Plan B — la red de seguridad:</b> si la venta se alargara, el activo se sostiene en alquiler tradicional: <b>350-450 €/mes por unidad</b> validados con 111 contactos → <b>~8-9% de rentabilidad neta anual</b>. La operación tiene dos salidas: la venta es la principal; el alquiler, la red.</p>
   <div class="docbtns">
-    <button class="btn-doc" onclick="vOpen('docs/ppto-obra.pdf','Análisis económico y escenarios · Torres de Cotillas','pdf')"><span class="ic">📊</span> Ver análisis económico</button>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1af49tXhgCXgnSlO1jii-cFBCuZskw0U6/view" target="_blank" rel="noopener"><span class="ic">📊</span> Ver análisis económico</a>
   </div>
 </section>
 
@@ -702,16 +696,9 @@ body.final .todo{display:none}
     <tr><td>Humedades por capilaridad en solado</td><td><b style="color:var(--warn)">🔴 ABIERTO</b></td><td>6 · Bajo</td><td>Catas previas; impermeabilización desde forjado; estructura NO afectada (inspección)</td></tr>
   </table>
   <div class="docbtns">
-    <button class="btn-doc" onclick="vOpen('docs/ppto-obra.pdf','Matriz de análisis de riesgos · Torres de Cotillas','pdf')"><span class="ic">📋</span> Ver matriz de riesgos</button>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1AuZn3pBKUYzXE-rJzxEfE7RfuAWghQJn/view" target="_blank" rel="noopener"><span class="ic">📋</span> Ver matriz de riesgos</a>
   </div>
   <div class="todo">Por incorporar: PDF de la matriz de riesgos resuelta (04_4 del Drive, "darle amor / añadir resueltos").</div>
-  <h3>DAFO de la operación</h3>
-  <div class="dafo">
-    <div class="f"><b>Fortalezas</b><ul><li>Zona más cara del municipio</li><li>Esquina, 20 m de fachada</li><li>Viabilidad certificada (3 candados cerrados)</li><li>Equipo con ejecución de obra propia</li></ul></div>
-    <div class="o"><b>Oportunidades</b><ul><li>Producto inexistente: primer mover</li><li>Demanda probada 2 veces</li><li>Arco Norte en licitación</li><li>Escasez estructural de vivienda compacta</li></ul></div>
-    <div class="d"><b>Debilidades</b><ul><li>Superficies reducidas (estudios)</li><li>Sin testigos directos de producto similar</li></ul></div>
-    <div class="a"><b>Amenazas</b><ul><li>Plazos administrativos (licencia en trámite)</li><li>Sobrecostes de ejecución</li><li>Financiación de algunos compradores (mitigado por precio absoluto bajo)</li></ul></div>
-  </div>
 </section>
 
 <!-- ═════════ S6 · GANTT (planificación · Fase 2) ═════════ -->
@@ -787,7 +774,15 @@ body.final .todo{display:none}
     <button class="btn-doc" onclick="vOpen('docs/encaje-tecnico.pdf','Conclusiones de mercado y estrategia de salida · Torres de Cotillas','pdf')"><span class="ic">📈</span> Ver conclusiones de mercado</button>
   </div>
   <!-- TABÚ (FUERA): "comercialización EN PARALELO a la obra (método probado en Crevillente)" → se suelta en vivo, no en el HTML. -->
-</section>
+
+  <h3>DAFO de la operación</h3>
+  <div class="dafo">
+    <div class="f"><b>Fortalezas</b><ul><li>Zona más cara del municipio</li><li>Esquina, 20 m de fachada</li><li>Viabilidad certificada (3 candados cerrados)</li><li>Equipo con ejecución de obra propia</li></ul></div>
+    <div class="o"><b>Oportunidades</b><ul><li>Producto inexistente: primer mover</li><li>Demanda probada 2 veces</li><li>Arco Norte en licitación</li><li>Escasez estructural de vivienda compacta</li></ul></div>
+    <div class="d"><b>Debilidades</b><ul><li>Superficies reducidas (estudios)</li><li>Sin testigos directos de producto similar</li></ul></div>
+    <div class="a"><b>Amenazas</b><ul><li>Plazos administrativos (licencia en trámite)</li><li>Sobrecostes de ejecución</li><li>Financiación de algunos compradores (mitigado por precio absoluto bajo)</li></ul></div>
+  </div>
+  </section>
 
 <!-- ═════════ EL PLAN — quién compra y cómo (bloque inversión) ═════════ -->
 <section class="sec" id="plan">
