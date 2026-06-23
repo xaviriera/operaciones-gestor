@@ -357,14 +357,16 @@ body.final .todo{display:none}
     background-attachment:local, local, scroll, scroll;
   }
 }
-/* cierre del documento (CTA + marca) */
-.close-cta{display:inline-flex;align-items:center;gap:9px;background:var(--ochre);color:var(--navy);font-weight:800;font-size:15px;padding:13px 26px;border-radius:30px;text-decoration:none;box-shadow:0 6px 20px rgba(226,159,52,.4);transition:.18s}
-.close-cta:hover{background:#f2b14e;transform:translateY(-2px);box-shadow:0 9px 26px rgba(226,159,52,.5)}
-.close-cta .ar{transition:transform .18s}.close-cta:hover .ar{transform:translateX(4px)}
-.close-brand{margin-top:24px;font-size:13.5px;letter-spacing:.4px;color:rgba(253,251,247,.7)}
-.close-brand a{color:var(--ochre);text-decoration:none;font-weight:700}
-.close-brand a:hover{color:#fff;text-decoration:underline}
-.close-brand .sep{margin:0 9px;opacity:.45}
+/* logo (imago CdU) en el CTA del visor */
+.visor-cta .vc-logo{height:26px;width:auto;display:block;flex-shrink:0}
+/* pie con logotipos (CdU · IM·PULSO · Programa IN), cada uno con acceso */
+.foot-logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;gap:24px 48px;margin-bottom:22px}
+.foot-logos .fl{display:flex;flex-direction:column;align-items:center;gap:10px;text-decoration:none}
+.foot-logos .fl img{height:44px;width:auto;opacity:.95;transition:.15s}
+.foot-logos .fl:hover img{opacity:1}
+.foot-logos .fl .acc{font-size:10.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--ochre)}
+.foot-logos .fl:hover .acc{color:#fff}
+.foot-tag{font-size:11px;color:rgba(253,251,247,.62);letter-spacing:.5px;line-height:1.7}
 </style>
 </head>
 <body>
@@ -936,7 +938,7 @@ body.final .todo{display:none}
       <div class="pill"><b>🔴 Obra en directo</b> · cámaras de obra en vivo</div>
       <div class="pill"><b>Documentación</b> · todos los papeles a mano</div>
     </div>
-    <a class="visor-cta" href="https://xaviriera.github.io/operaciones-gestor/torres-cotillas/visor/" target="_blank" rel="noopener"><span>📊</span> Abrir el Visor del Inversor <span class="vc-arrow">→</span></a>
+    <a class="visor-cta" href="https://xaviriera.github.io/operaciones-gestor/torres-cotillas/visor/" target="_blank" rel="noopener"><img src="assets/logo-cdu-imago.png" alt="CdU de 0 a ÉXITO" class="vc-logo"> Abrir el Visor del Inversor <span class="vc-arrow">→</span></a>
   </div>
 </section>
 
@@ -1001,14 +1003,17 @@ body.final .todo{display:none}
   <div class="kicker" style="color:var(--ochre)">El siguiente paso es tuyo</div>
   <h2 style="color:#fff;max-width:820px;margin:0 auto 12px">De la viabilidad al beneficio real — contigo dentro</h2>
   <p class="lead" style="color:rgba(253,251,247,.9);max-width:720px;margin:0 auto 22px">Si quieres entrar, hablamos 1 a 1 esta semana — los CCP se firman por orden de compromiso.</p>
-  <a href="https://plataforma.inversor.in/slides/3viv-murcia-las-torres-de-cotillas-c-d-estoup-17-1001" target="_blank" rel="noopener" class="close-cta">Accede a esta oportunidad en la Plataforma IN <span class="ar">→</span></a>
-  <div class="close-brand">
-    <a href="https://tucambiodeuso.com" target="_blank" rel="noopener">CdU de 0 a ÉXITO</a><span class="sep">·</span><a href="https://im-pulso.app" target="_blank" rel="noopener">IM·PULSO</a><span class="sep">·</span><a href="https://oportunidades.in" target="_blank" rel="noopener">Programa IN</a>
-  </div>
+  <a href="https://plataforma.inversor.in/slides/3viv-murcia-las-torres-de-cotillas-c-d-estoup-17-1001" target="_blank" rel="noopener" class="in-access" style="margin:0 auto;justify-content:center"><span>Accede a esta oportunidad en la plataforma del <span class="prog-in light" style="font-size:14px"><span class="pg">PROGRAMA</span><span class="in">IN</span></span></span><span class="go">Abrir en la plataforma →</span></a>
 </section>
 
-<div class="foot"><b>Las Torres de Cotillas</b> · Murcia · 2026<br>
-<span style="font-size:11px">Primero claridad. Luego control. Y al final, resultado.</span></div>
+<div class="foot">
+  <div class="foot-logos">
+    <a href="https://tucambiodeuso.com" target="_blank" rel="noopener" class="fl"><img src="assets/logo-cdu-blanco.png" alt="CdU de 0 a ÉXITO"><span class="acc">Acceder ↗</span></a>
+    <a href="https://im-pulso.app" target="_blank" rel="noopener" class="fl"><img src="assets/logo-impulso-chapa.png" alt="IM·PULSO"><span class="acc">Acceder ↗</span></a>
+    <a href="https://programa.in/" target="_blank" rel="noopener" class="fl"><span class="prog-in light" style="font-size:22px"><span class="pg">PROGRAMA</span><span class="in">IN</span></span><span class="acc">Acceder ↗</span></a>
+  </div>
+  <div class="foot-tag"><b>CdU de 0 a ÉXITO</b> × <b>IM·PULSO</b> · Oportunidad del Programa IN · Las Torres de Cotillas · Murcia · 2026<br>Primero claridad. Luego control. Y al final, resultado.</div>
+</div>
 
 </main>
 
