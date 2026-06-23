@@ -15,3 +15,7 @@ Thumbs.db
 
 # GSD planning (interno, no publicar)
 .planning/
+
+# interno (no publicar en GitHub Pages)
+.claude/
+CLAUDE.md
