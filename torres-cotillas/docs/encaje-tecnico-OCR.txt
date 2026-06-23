@@ -1,0 +1,77 @@
+ENCAJE TÉCNICO - TORRES DE COTILLAS
+Plano de distribución de 3 viviendas resultantes
+
+=== DESCRIPCIÓN GENERAL ===
+Plano arquitectónico que muestra la distribución de 3 unidades de vivienda (marcadas como 1, 2 y 3) en un edificio. Las viviendas están organizadas en una planta única con distribuciones variadas. El plano está acotado en metros cuadrados y muestra todas las dependencias, sanitarios, cocinas y zonas de estar-comedor.
+
+=== VIVIENDA 1 (inferior izquierda) ===
+Área total: ESTAR COMEDOR COCINA DORMITORIO = 26.95 m²
+Composición:
+- ESTAR/COMEDOR/COCINA: zona abierta de 26.95 m² (zona común multifuncional)
+- BAÑO: 2.75 m² (con planta WC + lavabo)
+- Servicios: cocina con placa eléctrica (2 quemadores, según símbolo del plano)
+
+=== VIVIENDA 2 (derecha central-inferior) ===
+Área total: 20.55 m²
+Composición:
+- ESTAR COMEDOR COCINA: zona abierta de 20.55 m² (espacio multifuncional)
+- BAÑO: 3.30 m² (con planta WC + lavabo)
+- Servicios: cocina equipada con placa eléctrica (4 quemadores)
+
+=== VIVIENDA 3 (superior derecha) ===
+Área total: 26.50 m²
+Composición:
+- ESTAR COMEDOR COCINA DORMITORIO: zona abierta/semiabierta de 26.50 m² (multifuncional)
+- DORMITORIO: 10.00 m² (dormitorio independiente, separado del área común)
+- BAÑO: 3.95 m² (con planta WC + lavabo)
+- Servicios: cocina equipada
+
+=== CARACTERÍSTICAS DEL PLANO ===
+Escala: Métrica (acotaciones en metros cuadrados)
+Orientación: Las viviendas están distribuidas de forma que aprovechan la planta completa
+Número de núcleos húmedos (sanitarios/cocinas): 3 (uno por vivienda)
+Distribución de lavanderías: Se observan 2 áreas comunes con lo que parecen ser instalaciones de lavado (con símbolos de lavadora):
+  - Una en la zona superior izquierda (lavadora doble)
+  - Una en la zona inferior central (lavadora doble)
+  - Una en la zona inferior derecha (con 4 quemadores, zona de cocina)
+
+=== DETALLES TÉCNICOS DE DISTRIBUCIÓN ===
+
+Vivienda 1:
+- Entrada desde zona común
+- Baño de 2.75 m² adyacente a entrada
+- Zona abierta multifuncional de 26.95 m²
+- Servicios integrados en la zona de estar-comedor-cocina
+- Disposición compacta
+
+Vivienda 2:
+- Entrada lateral desde zona común
+- Baño de 3.30 m² con acceso desde zona principal
+- Zona abierta multifuncional de 20.55 m² (la más compacta de las tres)
+- Cocina equipada (4 quemadores)
+- Disposición central que articula el espacio
+
+Vivienda 3:
+- Entrada desde zona superior derecha
+- Zona abierta multifuncional de 26.50 m²
+- DORMITORIO SEPARADO de 10.00 m² (único con estancia de dormitorio independiente)
+- Baño de 3.95 m² (el más amplio de los tres)
+- Disposición que aprovecha la altura y profundidad del espacio
+
+=== SUPERFICIES TOTALES ===
+Vivienda 1: ~33.65 m² aprox. (26.95 + 2.75 + servicios)
+Vivienda 2: ~24.40 m² aprox. (20.55 + 3.30 + servicios)
+Vivienda 3: ~40.45 m² aprox. (26.50 + 10.00 + 3.95)
+
+=== INTERPRETACIÓN DE LA DISTRIBUCIÓN ===
+El encaje técnico muestra 3 viviendas resultado de una parcelación eficiente de una planta:
+- Vivienda 1: Categoría estudio/pequeño apartamento con zona multifuncional abierta
+- Vivienda 2: Categoría estudio compacto, la más reducida
+- Vivienda 3: Categoría 1-dormitorio con separación clara de dormitorio
+
+Todas cuentan con baño propio y acceso a servicios (cocina, áreas de lavado comunes).
+La distribución aprovecha las esquinas y profundidades del espacio rectangular de la planta.
+Hay acceso a áreas comunes de servicios (lavanderías con electrodomésticos).
+
+Líneas de separación entre viviendas: muros de carga mostrados en líneas oscuras que delimitan claramente cada unidad.
+Puertas de acceso: marcadas con arcos circulares de apertura en los puntos de entrada a cada vivienda (números 1, 2, 3).
