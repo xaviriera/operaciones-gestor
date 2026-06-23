@@ -334,6 +334,15 @@ body.final .todo{display:none}
 .bx-n{font-size:12.5px;color:#41526a}
 .bx-foot{font-size:13px;color:#41526a;margin-top:6px}
 @media(max-width:700px){.bx-grid{grid-template-columns:1fr}}
+/* visor del partícipe — toque premium + CTA integrado dentro de la caja navy */
+.visor-dash{border:1px solid rgba(226,159,52,.45);box-shadow:0 12px 38px rgba(15,44,71,.36);position:relative;overflow:hidden}
+.visor-dash::before{content:"";position:absolute;top:-40%;right:-10%;width:320px;height:320px;background:radial-gradient(circle,rgba(226,159,52,.16),rgba(226,159,52,0) 70%);pointer-events:none}
+.visor-flag{display:inline-flex;align-items:center;gap:7px;background:rgba(226,159,52,.16);border:1px solid rgba(226,159,52,.5);color:var(--ochre);font-weight:800;font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;padding:5px 13px;border-radius:30px;margin-bottom:14px}
+.visor-cta{display:inline-flex;align-items:center;gap:10px;margin-top:20px;background:var(--ochre);color:var(--navy);font-weight:800;font-size:14.5px;padding:13px 24px;border-radius:30px;text-decoration:none;box-shadow:0 4px 18px rgba(226,159,52,.4);transition:.18s}
+.visor-cta:hover{background:#f2b14e;transform:translateY(-2px);box-shadow:0 8px 24px rgba(226,159,52,.5)}
+.visor-cta .vc-arrow{transition:transform .18s}
+.visor-cta:hover .vc-arrow{transform:translateX(4px)}
+.visor-note{margin-top:14px;font-size:12px;color:rgba(253,251,247,.6);letter-spacing:.3px}
 /* indicador de scroll horizontal en tablas (móvil/tablet) — sombras laterales tipo Lea Verou */
 @media(max-width:840px){
   table{
@@ -906,9 +915,10 @@ body.final .todo{display:none}
   <span class="phase-badge invers"><span class="dot"></span>Bloque inversión</span>
   <div class="kicker">Solvencia y transparencia · Tu cuadro de mandos</div>
   <h2>Tu cuadro de mandos — desde el día uno</h2>
-  <div class="quote">"Todos montados en el mismo vehículo. El equipo CdU de 0 a ÉXITO conduce y tú, como invitado, disfrutas del viaje — viendo en tiempo real cómo trabaja tu dinero: en qué fase está la operación, qué hito viene, las fotos de la obra y qué ha pasado con cada euro."</div>
-  <div class="dash">
-    <h3>📊 El visor del partícipe <span style="font-size:11px;color:var(--ochre);letter-spacing:1px">· HERRAMIENTA CdU DE 0 A ÉXITO</span></h3>
+  <div class="quote">"Vamos todos en el mismo vehículo. El equipo CdU de 0 a ÉXITO es quien conduce la inversión — y tú, como invitado, solo disfrutas del viaje: viendo en tiempo real cómo trabaja tu dinero, en qué fase está la operación, qué hito viene, las fotos de la obra y qué ha pasado con cada euro."</div>
+  <div class="dash visor-dash">
+    <div class="visor-flag">⭐ Exclusivo · lo que nadie más en la plataforma te da</div>
+    <h3>📊 El visor del partícipe <span style="font-size:11px;color:var(--ochre);letter-spacing:1px">· HERRAMIENTA OFICIAL CdU DE 0 A ÉXITO</span></h3>
     <p>Todas nuestras operaciones se siguen así. No es un PDF que envejece: es la operación en vivo.</p>
     <div class="row">
       <div class="pill"><b>Fase actual</b> · GO ✅ → MAP 🟡 → ÉXITO ⬜</div>
@@ -918,9 +928,9 @@ body.final .todo{display:none}
       <div class="pill"><b>Drive</b> · toda la documentación a 1 clic</div>
       <div class="pill"><b>Próximo reporte</b> · fecha comprometida</div>
     </div>
+    <a class="visor-cta" href="https://xaviriera.github.io/operaciones-gestor/torres-cotillas/visor/" target="_blank" rel="noopener"><span>📊</span> Abrir el Cuadro de Mandos oficial <span class="vc-arrow">→</span></a>
+    <div class="visor-note">Acceso privado para partícipes · demo en vivo durante la presentación</div>
   </div>
-  <a class="btn-doc gold" href="https://xaviriera.github.io/operaciones-gestor/torres-cotillas/visor/" target="_blank" rel="noopener" style="margin-top:14px"><span class="ic">📊</span> Abrir el Cuadro de Mandos oficial (demo en vivo)</a>
-  <p style="margin-top:12px;font-size:13px;color:var(--grey)">Acceso privado para partícipes. Demo en vivo durante la presentación.</p>
 </section>
 
 <!-- ═════════ S10 · ÍNDICE DOCUMENTAL LIGERO (cierre) ═════════ -->
