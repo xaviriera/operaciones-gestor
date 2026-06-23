@@ -239,7 +239,7 @@ body.final .todo{display:none}
 .team-h .th p{font-size:13px;margin:0;color:#41526a;line-height:1.55}
 @media(max-width:760px){.team-h{grid-template-columns:1fr}}
 /* triángulo del equipo — recreado en SVG, sin fondo, integrado */
-.pyr{position:relative;width:100%;max-width:720px;margin:24px 0 22px;aspect-ratio:66/38}
+.pyr{position:relative;width:100%;max-width:720px;margin:52px 0 22px;aspect-ratio:66/38}
 .pyr-bg{position:absolute;inset:0;width:100%;height:100%}
 .pyr .res{position:absolute;left:50%;top:62%;transform:translate(-50%,-50%);color:var(--ochre);font-weight:900;font-size:clamp(14px,2.1vw,20px);letter-spacing:1px}
 .pyr .lab{position:absolute;transform:translate(-50%,-50%);font-weight:800;font-size:11.5px;letter-spacing:2px;color:#90a0b2;text-transform:uppercase}
@@ -321,6 +321,33 @@ body.final .todo{display:none}
 .pata b{color:var(--navy)}
 .pata p{font-size:13px;margin:4px 0 8px}
 .pata .docbtns{margin:8px 0 0}
+/* bonus destacado (#propuesta) */
+.bonus-box{background:linear-gradient(140deg,#fff,#fff8ec);border:1.5px solid var(--ochre);border-radius:16px;padding:22px 26px;margin:18px 0}
+.bonus-box .bx-tag{font-weight:900;letter-spacing:1.5px;font-size:12px;color:#8a5a14;text-transform:uppercase}
+.bonus-box h3{margin:6px 0 8px}
+.bonus-box>p{font-size:14.5px}
+.bx-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.bx-c{background:#fff;border:1px solid var(--line);border-top:4px solid var(--ochre);border-radius:12px;padding:14px 16px}
+.bx-c.alt{border-top-color:var(--ok)}
+.bx-h{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--grey)}
+.bx-v{font-size:17px;font-weight:800;color:var(--navy);margin:5px 0}
+.bx-n{font-size:12.5px;color:#41526a}
+.bx-foot{font-size:13px;color:#41526a;margin-top:6px}
+@media(max-width:700px){.bx-grid{grid-template-columns:1fr}}
+/* indicador de scroll horizontal en tablas (móvil/tablet) — sombras laterales tipo Lea Verou */
+@media(max-width:840px){
+  table{
+    background-image:
+      linear-gradient(to right, #fff 30%, rgba(255,255,255,0)),
+      linear-gradient(to left, #fff 30%, rgba(255,255,255,0)),
+      radial-gradient(farthest-side at 0 50%, rgba(22,61,96,.22), rgba(22,61,96,0)),
+      radial-gradient(farthest-side at 100% 50%, rgba(22,61,96,.22), rgba(22,61,96,0));
+    background-position:0 0, 100% 0, 0 0, 100% 0;
+    background-repeat:no-repeat;
+    background-size:36px 100%, 36px 100%, 14px 100%, 14px 100%;
+    background-attachment:local, local, scroll, scroll;
+  }
+}
 </style>
 </head>
 <body>
@@ -363,7 +390,7 @@ body.final .todo{display:none}
     <span style="background:rgba(226,159,52,.16);border:1px solid var(--ochre);color:var(--ochre);padding:2px 9px;border-radius:7px;font-size:.86em;font-weight:800;letter-spacing:.5px">MAP</span><span style="color:var(--ochre)">→</span>
     <span style="background:rgba(226,159,52,.16);border:1px solid var(--ochre);color:var(--ochre);padding:2px 9px;border-radius:7px;font-size:.86em;font-weight:800;letter-spacing:.5px">ÉXITO</span></span> — y un objetivo claro: pasar de la viabilidad al beneficio real.<br><span style="color:rgba(253,251,247,.88)">Sin improvisar. Sin sorpresas.</span></p>
   <div class="partners" style="font-size:14.5px">
-    <a href="https://oportunidades.in" target="_blank" rel="noopener" class="in-access"><span>Oportunidad publicada por el canal oficial del <span class="prog-in light" style="font-size:15px"><span class="pg">PROGRAMA</span><span class="in">IN</span></span></span><span class="go">Ver en la plataforma →</span></a>
+    <a href="https://plataforma.inversor.in/slides/3viv-murcia-las-torres-de-cotillas-c-d-estoup-17-1001" target="_blank" rel="noopener" class="in-access"><span>Oportunidad publicada por el canal oficial del <span class="prog-in light" style="font-size:15px"><span class="pg">PROGRAMA</span><span class="in">IN</span></span></span><span class="go">Ver en la plataforma →</span></a>
     <div style="margin-top:8px;margin-bottom:13px">Gestiona el equipo <b>CdU de 0 a ÉXITO</b> — <a href="https://tucambiodeuso.com" target="_blank" rel="noopener" class="ft-link">ver servicio completo ↗</a></div>
     <div>Asociado con <a href="https://im-pulso.app" target="_blank" rel="noopener" class="ft-imp" title="IM·PULSO"><img src="assets/logo-impulso-chapa.png" alt="IM·PULSO" style="height:40px;width:auto;vertical-align:middle;margin:0 6px"></a> para la inteligencia de mercado — <a href="https://im-pulso.app" target="_blank" rel="noopener" class="ft-link">ver servicio completo ↗</a></div></div>
 
@@ -460,7 +487,7 @@ body.final .todo{display:none}
   <div class="cards">
     <div class="card"><div class="big">105 m²</div><div class="lbl">Local comercial en esquina · ~20 m de fachada · diáfano · PB 1978</div></div>
     <div class="card"><div class="big">→ 3 viviendas</div><div class="lbl">1 apartamento 1 dormitorio + 2 estudios loft</div></div>
-    <div class="card"><div class="big">0</div><div class="lbl">Producto similar en el municipio: primer mover</div></div>
+    <div class="card"><div class="big">0</div><div class="lbl">Productos similares en venta en el municipio — somos los primeros en crearlo</div></div>
   </div>
   <p><b>El problema:</b> un municipio de 22.000 habitantes prácticamente sin oferta de vivienda compacta (3-5 pisos en portales) y un local en desuso que la comunidad no quiere como comercial.</p>
   <p><b>La aportación de valor:</b> cambio de uso y reforma integral para crear el producto que el mercado reclama y no existe: vivienda pequeña, reformada, equipada y lista para entrar — en la mejor zona del pueblo.</p>
@@ -565,7 +592,7 @@ body.final .todo{display:none}
   <h3>El mapa antes de la obra</h3>
   <p>Qué hacer, en qué orden y por qué — cada paso con su documento sobre la mesa. Cuando la obra empieza, no se improvisa: <b>se ejecuta</b>.</p>
   <div class="cards">
-    <div class="card"><div class="big">2,50 m</div><div class="lbl">Altura libre estancias (2,20 baños) — cumple normativa</div></div>
+    <div class="card"><div class="big">&gt; 2,50 m</div><div class="lbl">Altura libre real por encima del mínimo normativo (2,20 en baños)</div></div>
     <div class="card"><div class="big">8 + 3</div><div class="lbl">Ventanas y puertas nuevas · luz y ventilación 1/8 superficie</div></div>
     <div class="card"><div class="big">0</div><div class="lbl">Garajes exigibles en el municipio</div></div>
   </div>
@@ -622,7 +649,7 @@ body.final .todo{display:none}
     <a class="btn-doc gold" href="https://drive.google.com/file/d/1BkGNxBZYwGcUDouoAaoZ3I8ikWVA9Z30/view" target="_blank" rel="noopener"><span class="ic">📄</span> Ver presupuesto de obra (SPM)</a>
     <a class="btn-doc" href="https://drive.google.com/file/d/1af49tXhgCXgnSlO1jii-cFBCuZskw0U6/view" target="_blank" rel="noopener"><span class="ic">📊</span> Excel · análisis económico</a>
   </div>
-  <p style="font-size:13px;color:var(--grey)">Cálculo prudente sobre 3 presupuestos contrastados. Esta es la única vez en toda la presentación que ves el detalle de la inversión total; en la estructura de inversión verás cómo se reparte el capital.</p>
+  <p style="font-size:13px;color:var(--grey)">Cálculo prudente sobre 3 presupuestos contrastados. En la estructura de inversión verás el reparto del capital.</p>
   <!-- TABÚ (FUERA): "Comercializamos EN PARALELO a la obra (método probado en Crevillente)" → se suelta en vivo, no en el HTML. -->
   <div class="impulso">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
@@ -639,19 +666,17 @@ body.final .todo{display:none}
 <section class="sec" id="escenarios">
   <span class="phase-badge map"><span class="dot"></span>Fase 2 · MAP</span>
   <div class="kicker">Plan ejecutable · Escenarios</div>
-  <h2>Dos escenarios — y un plan B</h2>
+  <h2>Dos escenarios</h2>
   <p class="lead">El escenario que contamos es el <b>realista</b>, fijado sobre suelos validados tres veces (67K · 72K · IM·PULSO 68-69K) — situado en la franja alta de ese rango ya validado. El optimista es el techo razonable.</p>
   <table>
     <tr><th></th><th>Realista (el que contamos)</th><th>Optimista</th></tr>
     <tr><td><b>Quién compra</b></td><td>Patrimonialista + 1ª residencia (perfiles ya detectados)</td><td>Alta demanda, compra al contado en semanas</td></tr>
     <tr><td><b>Venta 3 unidades</b></td><td><b>205.000 €</b> (67+67+71)</td><td><b>220.000 €</b> (75+75+79)</td></tr>
-    <tr><td><b>Plazo de venta</b></td><td>30-60 días/unidad</td><td>semanas</td></tr>
     <tr><td><b>Beneficio</b> (tras servicer 9.000 €)</td><td><b>33.938 €</b></td><td><b>48.938 €</b></td></tr>
-    <tr><td><b>Rentabilidad del capital</b></td><td><b>20,92%</b></td><td><b>30,17%</b></td></tr>
+    <tr><td><b>Rentabilidad del capital</b></td><td><b>20,92%</b></td><td><b>20,92% + bonus *</b></td></tr>
   </table>
-  <p style="font-size:13px;color:var(--grey)">Mismo porcentaje para todo el capital — gestor e inversores por igual, en cualquier escenario.</p>
+  <p style="font-size:13px;color:var(--grey)">El capital rinde el mismo porcentaje para gestor e inversores por igual. <b>* Vender por encima de 205.000 € activa el bonus</b> — una capa aparte que se suma a tu rentabilidad (ver «La propuesta»).</p>
   <!-- TABÚ (FUERA): Escenario INVERSO (compradores financian la obra → ROE ~35%) NO se enseña aquí; es la joya, se suelta en vivo. -->
-  <p><b>Plan B — la red de seguridad:</b> si la venta se alargara, el activo se sostiene en alquiler tradicional: <b>350-450 €/mes por unidad</b> validados con 111 contactos → <b>~8-9% de rentabilidad neta anual</b>. La operación tiene dos salidas: la venta es la principal; el alquiler, la red.</p>
 </section>
 
 <!-- ═════════ S5 · RIESGOS + MATRIZ (etiquetas CERRADO/VALIDADO) ═════════ -->
@@ -683,7 +708,7 @@ body.final .todo{display:none}
 <div class="act-divider">
   <div class="act-n">Fase 3 · ÉXITO + Inversión</div>
   <h2>Del plan al resultado — y cómo entras tú</h2>
-  <p>La Fase 3 lleva el plan al resultado real: obra, comercialización y cierre. Y a continuación, la parte que te toca: la estructura de la inversión, cómo entras, cómo cobras y con qué garantías.</p>
+  <p>La Fase 3 lleva el plan al resultado real: obra y cierre de la operación. Y a continuación, la parte que te toca: la estructura de la inversión, cómo entras, cómo cobras y con qué garantías.</p>
 </div>
 
 <!-- ═════════ S7 · EJECUCIÓN Y VENTA (Fase 3) ═════════ -->
@@ -709,7 +734,7 @@ body.final .todo{display:none}
     <div class="card"><div class="big">67–71 mil €</div><div class="lbl">Precio por vivienda según tipo — sobre suelo validado 3 veces</div></div>
     <div class="card"><div class="big">30–60 días</div><div class="lbl">Horizonte de venta por unidad</div></div>
   </div>
-  <p><b>Posicionamiento:</b> loft/estudio reformado, equipado y listo para entrar — precio accesible, escasez total, doble público (residencial + inversor patrimonialista con alquiler estimado 350-420 €/mes).</p>
+  <p><b>Posicionamiento:</b> loft/estudio reformado, equipado y listo para entrar — precio accesible, escasez total, doble público (residencial + inversor patrimonialista con alquiler estimado 380-470 €/mes).</p>
   <p><b>El precio de salida está validado, no estimado</b> — medido dos veces con el Método Total de Valoración de Vivienda (MTVV): en el <b>análisis del inbruto</b> (origen de la operación), suelo <b>67.000 €</b>; y como <b>comprobación propia</b> (paso 4 · CdU de 0 a ÉXITO), <b>72.000 €</b>. En la <b>Fase 2</b> ya se contrastó con el motor <b>IM·PULSO</b> (68.000–69.000 €). Las tres lecturas convergen: el realista (67/67/71) se asienta sobre el suelo más bajo, no sobre el deseo.</p>
   <div class="docbtns">
     <a class="btn-doc" href="https://drive.google.com/file/d/11Pn8bw_g4ZfRUY11QxkCLXuGk51zdhr3/view" target="_blank" rel="noopener"><span class="ic">📈</span> MTVV · inbruto (origen)</a>
@@ -781,11 +806,21 @@ body.final .todo{display:none}
   <p class="lead">En el formato del <b>Programa IN</b> hay dos tipos de Joint Venture: <b>waterfall</b> y <b>servicer</b>. Esta operación es <b>servicer</b>: honorario fijo de gestión + nuestro propio capital al mismo riesgo y misma rentabilidad que el tuyo.</p>
   <div class="ask">
     <div class="col give"><h3>Lo que pedimos</h3>
-      <p><b>Honorario servicer fijo de 9.000 €</b> por la gestión integral: propuesta, dirección de la aportación de valor y comercialización hasta notaría. Una cifra <b>cerrada y conocida de antemano</b>, descontada del resultado y reflejada en el Excel.</p>
-      <p style="font-size:13px;color:var(--grey)">Más un <b>bonus</b> ligado a superar el objetivo: solo cobramos extra si a ti te va mejor de lo previsto.</p></div>
+      <p><b>Honorario servicer fijo de 9.000 €</b> por la gestión integral de la operación: propuesta, dirección de la aportación de valor y conducción del proyecto hasta su cierre. Una cifra <b>cerrada y conocida de antemano</b>, descontada del resultado y reflejada en el Excel.</p>
+      <p style="font-size:13px;color:var(--grey)">Más un <b>bonus</b> ligado a superar el objetivo — lo detallamos justo aquí debajo.</p></div>
     <div class="col get"><h3>Lo que ponemos</h3>
       <p><b>35.000 € de capital propio</b> dentro de la operación, al <b>mismo riesgo y misma rentabilidad</b> que tú — 20,92% en el realista. Capital simétrico: sin clases de capital, sin rentabilidad asimétrica para el gestor.</p>
-      <p style="font-size:13px;color:var(--grey)">Gestión llave en mano + tu cuadro de mandos en vivo desde el día uno.</p></div>
+      <p style="font-size:13px;color:var(--grey)">Gestión llave en mano + el <b>Cuadro de Mandos oficial de CdU de 0 a ÉXITO</b>: sigues tu inversión en vivo desde el día uno (te lo enseñamos más abajo).</p></div>
+  </div>
+  <div class="bonus-box">
+    <div class="bx-tag">🎁 El bonus — alineados al 100%</div>
+    <h3>Solo ganamos más si a ti te va mejor de lo previsto</h3>
+    <p>El precio que contamos es <b>205.000 €</b>. Todo lo que vendamos <b>por encima</b> de esa cifra es un <b>bonus</b> que repartimos contigo:</p>
+    <div class="bx-grid">
+      <div class="bx-c"><div class="bx-h">Dentro de los 12 meses</div><div class="bx-v">70% gestor · <b>30% para ti</b></div><div class="bx-n">Ej.: vender en 220.000 € → +15.000 € → <b>+4.500 € para ti</b></div></div>
+      <div class="bx-c alt"><div class="bx-h">Si se alarga más de 12 meses</div><div class="bx-v"><b>70% para ti</b> · 30% gestor</div><div class="bx-n">El reparto se invierte a tu favor: si tardamos más, ganas tú</div></div>
+    </div>
+    <p class="bx-foot">El bonus se considera ganado en cuanto hay <b>contrato de arras</b> de la venta. Es una <b>capa aparte</b> de tu rentabilidad: nunca resta, solo suma.</p>
   </div>
   <div class="quote">No es un porcentaje abierto del resultado: es un <b>servicer fijo + capital al mismo riesgo que el tuyo</b>. Ponemos nuestro dinero junto al tuyo y rendimos exactamente igual.</div>
 </section>
@@ -806,7 +841,7 @@ body.final .todo{display:none}
     <tr><td><b>Gestor</b> (CdU de 0 a ÉXITO)</td><td>35.000 €</td><td>21,57%</td><td>20,92%</td></tr>
     <tr><td><b>Operación</b></td><td><b>162.212 €</b></td><td>100%</td><td><b>20,92%</b></td></tr>
   </table>
-  <p><b>Modelo servicer sobre Cuentas en Participación</b> (arts. 239-243 CCom): <b>todo el capital rinde igual</b> — el del gestor y el de los inversores, al mismo porcentaje (20,92% en el realista; 30,17% en el optimista). Sin clases de capital, sin letra pequeña.</p>
+  <p><b>Modelo servicer sobre Cuentas en Participación</b> (arts. 239-243 CCom): <b>todo el capital rinde igual</b> — el del gestor y el de los inversores, al mismo porcentaje (<b>20,92%</b> en el escenario realista). Sin clases de capital, sin letra pequeña. Si la venta supera los 205.000 €, ese extra se reparte aparte como <b>bonus</b> (ver «La propuesta»).</p>
   <p><b>El partícipe:</b> invierte, no gestiona, no aparece frente a terceros, y su riesgo queda limitado estrictamente a su aportación.</p>
   <p><b>El gestor:</b> responde frente a terceros, fondos en cuenta exclusiva del proyecto, contabilidad separada, información periódica, derecho de auditoría externa, seguro RC.</p>
   <p style="font-size:13px;color:var(--grey)">Fiscalidad del partícipe: rendimiento del capital mobiliario (19-23%), retención 19% practicada por el gestor.</p>
@@ -859,7 +894,7 @@ body.final .todo{display:none}
   <p>La sociedad gestora está al corriente de sus obligaciones y sin deudas pendientes. La cuenta exclusiva de la operación está en apertura.</p>
   <div class="docbtns">
     <a class="btn-doc" href="https://drive.google.com/file/d/1sbevSkWtwdgQ-PWKcJkUGH7-a2Sm38zx/view" target="_blank" rel="noopener"><span class="ic">🟢</span> Al corriente · Hacienda</a>
-    <span class="btn-doc" style="opacity:.45;cursor:default" title="Certificado en trámite, lo incorporamos en breve">🟢 Al corriente · Seguridad Social (pendiente)</span>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1akSt4WfnBTHATmp_SsZZa2MIDZdx1-6q/view" target="_blank" rel="noopener"><span class="ic">🟢</span> Al corriente · Seguridad Social</a>
     <a class="btn-doc" href="https://drive.google.com/file/d/1BvPuvKJHjp6ACfU9vmJ4r7r7Z2wzwKMg/view" target="_blank" rel="noopener"><span class="ic">📋</span> CIRBE · sin deudas (1)</a>
     <a class="btn-doc" href="https://drive.google.com/file/d/1XO5ozDkE8CXMQsNG9Yk88f-srvNZPdX2/view" target="_blank" rel="noopener"><span class="ic">📋</span> CIRBE · sin deudas (2)</a>
   </div>
@@ -871,7 +906,7 @@ body.final .todo{display:none}
   <span class="phase-badge invers"><span class="dot"></span>Bloque inversión</span>
   <div class="kicker">Solvencia y transparencia · Tu cuadro de mandos</div>
   <h2>Tu cuadro de mandos — desde el día uno</h2>
-  <div class="quote">"Vamos todos en el mismo coche: nosotros al volante y tú al lado, viéndolo todo casi en tiempo real — en qué fase está la operación, qué hito viene, fotos de la obra y qué ha pasado con cada euro."</div>
+  <div class="quote">"Todos montados en el mismo vehículo. El equipo CdU de 0 a ÉXITO conduce y tú, como invitado, disfrutas del viaje — viendo en tiempo real cómo trabaja tu dinero: en qué fase está la operación, qué hito viene, las fotos de la obra y qué ha pasado con cada euro."</div>
   <div class="dash">
     <h3>📊 El visor del partícipe <span style="font-size:11px;color:var(--ochre);letter-spacing:1px">· HERRAMIENTA CdU DE 0 A ÉXITO</span></h3>
     <p>Todas nuestras operaciones se siguen así. No es un PDF que envejece: es la operación en vivo.</p>
@@ -879,11 +914,12 @@ body.final .todo{display:none}
       <div class="pill"><b>Fase actual</b> · GO ✅ → MAP 🟡 → ÉXITO ⬜</div>
       <div class="pill"><b>Hitos</b> · cumplidos y próximos</div>
       <div class="pill"><b>Obra</b> · Gantt vivo + fotos/timelapse</div>
-      <div class="pill"><b>Dinero</b> · tramos y destino de fondos</div>
+      <div class="pill"><b>Dinero</b> · cuenta dedicada, tramos y cada movimiento</div>
       <div class="pill"><b>Drive</b> · toda la documentación a 1 clic</div>
       <div class="pill"><b>Próximo reporte</b> · fecha comprometida</div>
     </div>
   </div>
+  <a class="btn-doc gold" href="https://xaviriera.github.io/operaciones-gestor/torres-cotillas/visor/" target="_blank" rel="noopener" style="margin-top:14px"><span class="ic">📊</span> Abrir el Cuadro de Mandos oficial (demo en vivo)</a>
   <p style="margin-top:12px;font-size:13px;color:var(--grey)">Acceso privado para partícipes. Demo en vivo durante la presentación.</p>
 </section>
 
@@ -935,6 +971,7 @@ body.final .todo{display:none}
         <a class="btn-doc gold" href="https://drive.google.com/file/d/1Iq-y2pIv6K_8UJhru4KZ31oFK6tTgxeO/view" target="_blank" rel="noopener"><span class="ic">📑</span> Modelo de contrato CCP</a>
         <a class="btn-doc" href="https://drive.google.com/file/d/1qYTLCnIsf32TJh-z_jTfLWjWyvX8hkwW/view" target="_blank" rel="noopener"><span class="ic">📎</span> Anexo del CCP</a>
         <a class="btn-doc" href="https://drive.google.com/file/d/1sbevSkWtwdgQ-PWKcJkUGH7-a2Sm38zx/view" target="_blank" rel="noopener"><span class="ic">🟢</span> Al corriente · Hacienda</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/1akSt4WfnBTHATmp_SsZZa2MIDZdx1-6q/view" target="_blank" rel="noopener"><span class="ic">🟢</span> Al corriente · Seg. Social</a>
         <a class="btn-doc" href="https://drive.google.com/file/d/1BvPuvKJHjp6ACfU9vmJ4r7r7Z2wzwKMg/view" target="_blank" rel="noopener"><span class="ic">📋</span> CIRBE (1)</a>
         <a class="btn-doc" href="https://drive.google.com/file/d/1XO5ozDkE8CXMQsNG9Yk88f-srvNZPdX2/view" target="_blank" rel="noopener"><span class="ic">📋</span> CIRBE (2)</a>
       </div>
@@ -942,6 +979,14 @@ body.final .todo{display:none}
   </div>
   <h3>Siguiente paso</h3>
   <p class="lead">Si quieres estudiarla a fondo, toda la documentación está aquí a un clic. Si quieres entrar: hablamos 1 a 1 esta semana — los contratos de cuentas en participación se firman por orden de compromiso.</p>
+  <a href="https://plataforma.inversor.in/slides/3viv-murcia-las-torres-de-cotillas-c-d-estoup-17-1001" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;flex-wrap:wrap;gap:10px 14px;background:var(--navy);color:#fff;text-decoration:none;padding:13px 14px 13px 20px;border-radius:13px;font-weight:700;font-size:14px;margin-top:8px"><span>Accede a esta oportunidad en la plataforma del <span class="prog-in light" style="font-size:14px"><span class="pg" style="color:#fff">PROGRAMA</span><span class="in">IN</span></span></span><span style="background:var(--in-coral);color:#fff;padding:7px 14px;border-radius:30px;font-size:12.5px;font-weight:800;white-space:nowrap">Abrir en la plataforma →</span></a>
+</section>
+
+<section class="sec" style="text-align:center;background:linear-gradient(140deg,var(--navy),var(--navy2));color:var(--cream)">
+  <div class="kicker" style="color:var(--ochre)">El siguiente paso es tuyo</div>
+  <h2 style="color:#fff;max-width:820px;margin:0 auto 10px">De la viabilidad al beneficio real — contigo dentro</h2>
+  <p class="lead" style="color:rgba(253,251,247,.9);max-width:760px;margin:0 auto 8px">Has visto la operación entera: medida, documentada y visible de principio a fin. Si quieres entrar, hablamos 1 a 1 esta semana — los CCP se firman por orden de compromiso.</p>
+  <p style="color:var(--ochre);font-weight:700;margin-top:14px">CdU de 0 a ÉXITO × IM·PULSO · Oportunidad del Programa IN</p>
 </section>
 
 <div class="foot"><b>CdU de 0 a ÉXITO</b> · tucambiodeuso.com × <b>IM·PULSO</b> · Oportunidad del <b>Programa IN</b> · Oportunidades IN · Las Torres de Cotillas · Murcia · 2026<br>
