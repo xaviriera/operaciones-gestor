@@ -1125,17 +1125,5 @@ body.final .todo{display:none}
   });
 })();
 </script>
-<script id="cond-marks">/* MARCAS DE CONDUCCIÓN (temporal — quitar tras la presentación) */
-(function(){
-  var who={equipo:'X',track:'X',resumen:'X',fase1:'D',proyecto:'D',suministros:'D',numeros:'X',escenarios:'X',riesgos:'X',ejecucion:'X',gantt:'D',plan:'X',propuesta:'D',ccp:'D',compromisos:'D',visor:'X',docs:'D'};
-  Object.keys(who).forEach(function(id){
-    var s=document.getElementById(id); if(!s||getComputedStyle(s).display==='none')return;
-    var b=s.querySelector('.phase-badge'), t=b||s.querySelector('.kicker'); if(!t)return;
-    var m=document.createElement('span'); m.className='cond-mark'; m.textContent=' – '+who[id];
-    m.style.cssText='font-size:.82em;font-weight:600;opacity:.5;margin-left:.45em;letter-spacing:.02em;color:'+(who[id]==='X'?'#1d4e89':'#b8860b');
-    if(b){b.parentNode.insertBefore(m,b.nextSibling);}else{t.appendChild(m);}
-  });
-})();
-</script>
 </body>
 </html>
