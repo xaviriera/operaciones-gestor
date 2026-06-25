@@ -368,6 +368,61 @@ body.final .todo{display:none}
 .foot-logos .fl:hover .acc{color:#fff}
 .foot-tag{font-size:11px;color:rgba(253,251,247,.62);letter-spacing:.5px;line-height:1.7}
 .foot-claim{display:inline-block;margin-top:8px;font-style:italic;font-weight:600;font-size:13.5px;letter-spacing:.4px;color:var(--ochre)}
+
+/* === FIX RESPONSIVE MÓVIL (2026-06-25) === */
+@media(max-width:600px){
+  /* 1. 4 patas a 1 columna */
+  #proyecto .patas{grid-template-columns:1fr}
+
+  /* 2. Ocultar columna P×I (3ª) en tabla de riesgos */
+  #riesgos table th:nth-child(3),
+  #riesgos table td:nth-child(3){display:none}
+
+  /* 3. Tablas que desbordan: garantizar scroll horizontal + hint visual */
+  #track .table-wrap,
+  #track table,
+  #escenarios .table-wrap,
+  #escenarios table,
+  #numeros .table-wrap,
+  #numeros table,
+  #suministros .table-wrap,
+  #suministros table{
+    overflow-x:auto;
+    display:block;
+    -webkit-overflow-scrolling:touch;
+  }
+  /* Pista visual de scroll horizontal mediante sombra a la derecha */
+  #track .table-wrap,
+  #escenarios .table-wrap,
+  #numeros .table-wrap,
+  #suministros .table-wrap{
+    position:relative;
+    background:
+      linear-gradient(to right, white 30%, rgba(255,255,255,0)),
+      linear-gradient(to right, rgba(255,255,255,0), white 70%) 100% 0,
+      radial-gradient(farthest-side at 0 50%, rgba(0,0,0,.15), rgba(0,0,0,0)),
+      radial-gradient(farthest-side at 100% 50%, rgba(0,0,0,.15), rgba(0,0,0,0)) 100% 0;
+    background-repeat:no-repeat;
+    background-size:40px 100%, 40px 100%, 14px 100%, 14px 100%;
+    background-attachment:local, local, scroll, scroll;
+  }
+  /* Para tablas sin .table-wrap: overflow directo ya cubre el caso via @media 840 */
+
+  /* 5. .card .lbl mínimo 12.5px */
+  .card .lbl{font-size:12.5px!important}
+
+  /* 6. .btn-doc.doc-hero no ocupa 100% ancho */
+  .btn-doc.doc-hero{align-self:flex-start;max-width:100%}
+
+  /* Evitar overflow del body */
+  body{overflow-x:hidden}
+}
+
+/* === FIX RESPONSIVE MÓVIL — breakpoint 400px (2026-06-25) === */
+@media(max-width:400px){
+  /* 4. Galería a 1 columna */
+  .gal{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
