@@ -1070,5 +1070,17 @@ body.final .todo{display:none}
   });
 })();
 </script>
+<script id="cond-marks">/* MARCAS DE CONDUCCIÓN (temporal — quitar tras la presentación) */
+(function(){
+  var who={equipo:'X',track:'X',resumen:'X',fase1:'D',proyecto:'D',suministros:'D',numeros:'X',escenarios:'X',riesgos:'X',ejecucion:'X',gantt:'D',plan:'X',propuesta:'D',ccp:'D',compromisos:'D',visor:'X',docs:'D'};
+  Object.keys(who).forEach(function(id){
+    var s=document.getElementById(id); if(!s||getComputedStyle(s).display==='none')return;
+    var h=s.querySelector('h2'); if(!h)return;
+    var m=document.createElement('sup'); m.className='cond-mark'; m.textContent='– '+who[id];
+    m.style.cssText='font-size:.42em;font-weight:800;opacity:.6;margin-left:.4em;vertical-align:super;letter-spacing:.04em;color:'+(who[id]==='X'?'#1d4e89':'#b8860b');
+    h.appendChild(m);
+  });
+})();
+</script>
 </body>
 </html>
