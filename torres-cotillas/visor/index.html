@@ -643,6 +643,7 @@ const ORIGEN_DATOS = 'https://xaviriera.github.io/operaciones-gestor/data/tdc/op
 let datosOperacion=null;
 let filtroActivo="Todos";
 const PENDIENTE="pendiente de confirmar";
+const CAMARA_SIN_SENAL="disponible al iniciar la obra";
 const ESTADOS={conseguido:"done",actual:"current",pendiente:"pending"};
 
 function escapeHtml(value){
@@ -787,14 +788,14 @@ function renderEconomico(){
 }
 function renderCamaras(){
   const camaras=datosOperacion.camaras || [];
-  document.getElementById("obraBadge").textContent=camaras.some(camara=>camara.url) ? "Señal activa" : PENDIENTE;
+  document.getElementById("obraBadge").textContent=camaras.some(camara=>camara.url) ? "Señal activa" : CAMARA_SIN_SENAL;
   document.getElementById("cameraGrid").innerHTML=camaras.map(camara=>{
     if(camara.url){
       return `<div class="camera-frame has-stream"><iframe src="${escapeAttr(camara.url)}" title="${escapeAttr(valor(camara.nombre))}" allowfullscreen loading="lazy"></iframe></div>`;
     }
     return `
       <div class="camera-frame">
-        <div class="camera-copy"><strong>${escapeHtml(valor(camara.nombre))}</strong><span>${PENDIENTE}</span></div>
+        <div class="camera-copy"><strong>${escapeHtml(valor(camara.nombre))}</strong><span>${CAMARA_SIN_SENAL}</span></div>
       </div>`;
   }).join("");
 }
