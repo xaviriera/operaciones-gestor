@@ -183,6 +183,7 @@ h1{
 .badge.warn{color:var(--warn);background:#f9eae5;border:1px solid rgba(179,64,31,.2)}
 .badge.navy{background:rgba(22,61,96,.08);color:var(--navy);border:1px solid rgba(22,61,96,.12)}
 .badge.gray{background:#e7e8e8;color:#60686e;border:1px solid rgba(96,104,110,.18)}
+.badge.next{background:rgba(22,61,96,.06);color:#163D60;border:1px solid rgba(22,61,96,.28)}
 .phase-line{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px 0 18px}
 .phase{
   border:1px solid rgba(253,251,247,.14);
@@ -213,6 +214,8 @@ h1{
 .mini{min-height:86px;border:1px solid rgba(253,251,247,.14);background:rgba(255,255,255,.06);border-radius:8px;padding:13px}
 .mini span{display:block;color:#ffe0aa;font-size:10px;font-weight:900;letter-spacing:.9px;text-transform:uppercase}
 .mini b{display:block;margin-top:7px;font-size:13px;color:var(--white)}
+.mini p{margin:6px 0 0;color:rgba(253,251,247,.76);font-size:12px;font-weight:650;line-height:1.35}
+.next-report{margin-top:10px;min-height:0}
 .page{padding:clamp(28px,5vw,62px) clamp(14px,5vw,72px)}
 .section{margin-bottom:clamp(30px,5vw,56px)}
 .section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:16px}
@@ -614,6 +617,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
           <div class="pct" id="progressPct">0%</div>
         </div>
         <div class="pulse-meta" id="pulseMeta"></div>
+        <div class="mini next-report" id="nextReport"></div>
       </section>
     </div>
   </header>
@@ -798,7 +802,10 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 </div>
 
 <script>
-const ORIGEN_DATOS = 'https://xaviriera.github.io/operaciones-gestor/data/tdc/operacion.json';
+// El JSON en claro NO se publica nunca (se retiro del sitio el 14-ago: exponia los datos
+// de la operacion sin cifrar). Por eso la previsualizacion local lo lee por ruta relativa
+// desde el propio repositorio, y el sitio publicado solo sirve el llavero cifrado.
+const ORIGEN_DATOS = '../../data/tdc/operacion.json';
 const ORIGEN_LLAVERO = 'https://xaviriera.github.io/operaciones-gestor/data/tdc/llavero.json';
 
 let datosOperacion=null;
@@ -874,18 +881,27 @@ function renderEstado(){
     <div class="mini"><span>Fase actual</span><b>${escapeHtml(valor(estado.fase_actual))}</b></div>
     <div class="mini"><span>Avance</span><b>${avance}%</b></div>`;
 }
+function renderProximoReporte(){
+  const reporte=datosOperacion.proximo_reporte || {};
+  document.getElementById("nextReport").innerHTML=`
+    <span>Próximo reporte</span>
+    <b>${escapeHtml(valor(reporte.fecha))}</b>
+    <p>${escapeHtml(valor(reporte.texto))}</p>`;
+}
 function renderHitos(){
   const items=datosOperacion.hitos || [];
   const conseguidos=items.filter(item=>item.estado==="conseguido").length;
   const total=items.length;
+  const proximoIndex=items.findIndex(item=>item.estado==="pendiente");
   document.getElementById("milestoneCounter").textContent=total ? `${conseguidos} de ${total} hitos` : PENDIENTE;
   document.getElementById("milestoneTitle").textContent=total ? `${conseguidos} de ${total} hitos conseguidos` : PENDIENTE;
   document.getElementById("milestones").innerHTML=items.map((hito,i)=>{
     const clase=estadoClase(hito.estado);
+    const proximo=i===proximoIndex ? '<span class="badge next">Próximo</span>' : "";
     return `
     <article class="milestone ${escapeAttr(clase)}" data-index="${i}">
       <div>
-        <div class="toprow"><span class="num">${clase==="done" ? "✓" : i+1}</span>${clase==="current" ? '<span class="spark" aria-hidden="true"></span>' : ""}</div>
+        <div class="toprow"><span class="num">${clase==="done" ? "✓" : i+1}</span>${proximo || (clase==="current" ? '<span class="spark" aria-hidden="true"></span>' : "")}</div>
         <b>${escapeHtml(valor(hito.nombre))}</b><span class="date">${escapeHtml(valor(hito.fecha))}</span><p class="meaning">${escapeHtml(valor(hito.detalle))}</p>
       </div>
       <div><span class="stamp">${clase==="done" ? "✓ Conseguido" : estadoEtiqueta(hito.estado)}</span></div>
@@ -1048,6 +1064,7 @@ function renderContacto(){
 function renderTodo(){
   renderOperacion();
   renderEstado();
+  renderProximoReporte();
   renderHitos();
   renderGantt();
   renderEconomico();
