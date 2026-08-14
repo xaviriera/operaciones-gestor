@@ -207,7 +207,7 @@ h1{
 .dot{width:9px;height:9px;border-radius:50%;background:var(--ochre);box-shadow:0 0 0 5px rgba(226,159,52,.17)}
 .progress-line{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center}
 .bar{height:12px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden}
-.bar span{display:block;width:18%;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--ochre),#f4c36d);animation:progressRun 2.8s ease-in-out infinite}
+.bar span{display:block;width:var(--progress,0%);height:100%;border-radius:999px;background:linear-gradient(90deg,var(--ochre),#f4c36d);animation:progressRun 2.8s ease-in-out infinite}
 .pct{font-size:34px;line-height:1;font-weight:900;color:var(--white)}
 .pulse-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
 .mini{min-height:86px;border:1px solid rgba(253,251,247,.14);background:rgba(255,255,255,.06);border-radius:8px;padding:13px}
@@ -233,8 +233,6 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .milestone.done{border-color:rgba(29,122,79,.36);background:linear-gradient(180deg,#f3fbf6,#fff);box-shadow:0 10px 26px rgba(29,122,79,.10)}
 .milestone.current{border-color:rgba(226,159,52,.9);box-shadow:0 0 0 3px rgba(226,159,52,.18),0 16px 34px rgba(226,159,52,.18);background:#fff8ea}
 .milestone.pending{border-color:rgba(22,61,96,.13);background:#fffdf8;opacity:.78}
-.milestone.new-done{animation:seal .7s ease both}
-.milestone.new-done:after{content:"";position:absolute;inset:-2px;border-radius:10px;pointer-events:none;background:linear-gradient(120deg,transparent 0%,rgba(226,159,52,.2) 45%,transparent 72%);animation:sheen 1.2s ease both}
 .toprow{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .num{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:var(--soft);color:var(--navy);font-weight:900;font-size:12px}
 .done .num{background:var(--ok);color:var(--white);box-shadow:0 0 0 5px rgba(29,122,79,.12)}
@@ -387,7 +385,7 @@ td.amount.out{color:var(--warn)}
 td.amount.in{color:var(--ok)}
 td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 .panel{padding:20px}
-.camera-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.camera-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:16px}
 .camera-frame{
   position:relative;
   aspect-ratio:16/9;
@@ -399,6 +397,9 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
   background:linear-gradient(135deg,rgba(22,61,96,.08),rgba(226,159,52,.12)),#f6f4ef;
 }
 .camera-frame:before{content:"";position:absolute;inset:12px;border:1px solid rgba(22,61,96,.08);border-radius:6px}
+.camera-frame.has-stream{display:block;border:0;background:#000}
+.camera-frame.has-stream:before{display:none}
+.camera-frame iframe{display:block;width:100%;height:100%;border:0}
 .camera-copy{position:relative;text-align:center;padding:18px;color:var(--navy)}
 .camera-copy strong{display:block;font-size:17px}
 .camera-copy span{display:block;margin-top:6px;color:var(--muted);font-size:12px}
@@ -428,10 +429,8 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 .report span{display:block;color:#ffe0aa;font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase}
 .report b{display:block;margin-top:4px;font-size:clamp(20px,3vw,30px)}
 .report p{margin:8px 0 0;color:rgba(253,251,247,.78);font-size:14px}
-.toast{position:fixed;right:18px;bottom:18px;z-index:20;max-width:330px;transform:translateY(110px);opacity:0;transition:.25s ease;padding:14px 16px;border:1px solid rgba(226,159,52,.45);border-radius:8px;background:var(--white);color:var(--navy);box-shadow:0 18px 45px rgba(15,44,71,.22);font-size:13px;font-weight:800}
-.toast.show{transform:translateY(0);opacity:1}
-@keyframes seal{0%{transform:scale(.98)}55%{transform:scale(1.02)}100%{transform:scale(1)}}
-@keyframes sheen{0%{opacity:0;transform:translateX(-30%)}35%{opacity:1}100%{opacity:0;transform:translateX(30%)}}
+.data-warning{position:fixed;right:18px;bottom:18px;z-index:20;max-width:330px;padding:14px 16px;border:1px solid rgba(226,159,52,.45);border-radius:8px;background:var(--white);color:var(--navy);box-shadow:0 18px 45px rgba(15,44,71,.22);font-size:13px;font-weight:800}
+.data-warning[hidden]{display:none}
 @keyframes progressRun{0%,100%{filter:brightness(1)}50%{filter:brightness(1.18);box-shadow:0 0 18px rgba(226,159,52,.38)}}
 @media(max-width:1040px){
   .hero-grid,.plan-wrap{grid-template-columns:1fr}
@@ -488,21 +487,14 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
       <section class="pulse-card" aria-label="Estado y avance">
         <div class="state-line">
           <div class="state">Estado de operación</div>
-          <span class="chip warn">Obra en curso · Semana 3</span>
+          <span class="chip warn" id="operationState"></span>
         </div>
-        <div class="phase-line">
-          <div class="phase done"><small><span class="check">✓</span> Terminada</small><b>Fase 1 · GO — Terminada</b></div>
-          <div class="phase done"><small><span class="check">✓</span> Terminada</small><b>Fase 2 · MAP — Terminada</b></div>
-          <div class="phase active"><small><span class="dot"></span> En proceso</small><b>Fase 3 · ÉXITO — En proceso</b></div>
-        </div>
+        <div class="phase-line" id="phaseLine"></div>
         <div class="progress-line">
-          <div class="bar" aria-label="18% de avance global de operación"><span></span></div>
-          <div class="pct">18%</div>
+          <div class="bar" id="progressBar" aria-label="0% de avance global de operación"><span></span></div>
+          <div class="pct" id="progressPct"></div>
         </div>
-        <div class="pulse-meta">
-          <div class="mini"><span>Horizonte</span><b>Agosto 2026 → T1 2027 · ~12 meses</b></div>
-          <div class="mini"><span>Resultado</span><b>Compra · Aportar Valor · Vender</b></div>
-        </div>
+        <div class="pulse-meta" id="pulseMeta"></div>
       </section>
     </div>
   </header>
@@ -543,25 +535,24 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
       <div class="milestones" id="milestones"></div>
       <div class="action-row">
         <p class="note">Celebración sobria: sello, evidencia y actualización del punto de avance.</p>
-        <button class="btn ochre" id="simulateMilestone" type="button">Simular nuevo hito</button>
       </div>
     </section>
 
     <section class="section" id="cronograma">
       <div class="section-head">
         <div>
-          <div class="kicker">Obra · 16 semanas</div>
-          <h2>Gantt Fase 3 · ÉXITO</h2>
-          <p class="note">Cronograma real de obra de Paco para SPM Construcciones y Reformas: 16 semanas / 4 meses.</p>
+          <div class="kicker" id="ganttKicker"></div>
+          <h2 id="ganttTitle"></h2>
+          <p class="note" id="ganttNoteIntro"></p>
         </div>
       </div>
       <div class="card gantt-card">
-        <div class="gantt-note">Durante toda la obra (S1–S16): Gestión de residuos · Seguridad y salud</div>
+        <div class="gantt-note" id="ganttNote"></div>
         <div class="gantt-inner">
-          <div class="week-current" aria-hidden="true"><span>Semana actual</span></div>
+          <div class="week-current" aria-hidden="true"><span id="ganttCurrentWeek"></span></div>
           <div class="gantt-grid" id="gantt"></div>
         </div>
-        <p class="gantt-foot">Cronograma de obra · SPM Construcciones y Reformas · 16 semanas</p>
+        <p class="gantt-foot" id="ganttFoot"></p>
       </div>
     </section>
 
@@ -582,21 +573,12 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
             </svg>
             <span>Santander</span>
           </div>
-          <div class="iban">ES XX XXXX XXXX XX XXXXXXXXXX <small>Cuenta dedicada de la operación</small></div>
+          <div class="iban" id="iban"></div>
         </div>
-        <div class="exclusive-account">Cuenta dedicada de la operación</div>
-        <div class="tranche-grid">
-          <div class="tranche done"><div class="tranche-top"><span>Aportación 1 de 3</span><span class="badge ok">Realizada</span></div><b>Firma del CCP</b><strong>50.000 €*</strong></div>
-          <div class="tranche done"><div class="tranche-top"><span>Aportación 2 de 3</span><span class="badge ok">Realizada</span></div><b>Licencia + arranque de obra</b><strong>47.212 €*</strong></div>
-          <div class="tranche pending"><div class="tranche-top"><span>Aportación 3 de 3</span><span class="badge warn">Pendiente</span></div><b>Durante la obra</b><strong>30.000 €*</strong></div>
-        </div>
-        <div class="finance-summary">
-          <div class="metric"><span>Comprometido</span><b>127.212 €</b><small>Total comprometido por inversores</small></div>
-          <div class="metric"><span>Aportado</span><b>97.212 €</b><small>Aportaciones 1 y 2 realizadas</small></div>
-          <div class="metric"><span>Pendiente de ingresar</span><b>30.000 €</b><small>Aportación 3 pendiente</small></div>
-          <div class="metric"><span>Saldo actual en cuenta</span><b>~68.712 €</b><small>Aportado menos gastado</small></div>
-        </div>
-        <p class="finance-note">*importes por confirmar con la gestión.</p>
+        <div class="exclusive-account" id="exclusiveAccount"></div>
+        <div class="tranche-grid" id="trancheGrid"></div>
+        <div class="finance-summary" id="financeSummary"></div>
+        <p class="finance-note" id="financeNote"></p>
       </div>
       <div class="card">
         <div class="table-tools">
@@ -624,18 +606,11 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
           <div>
             <div class="kicker">En directo</div>
             <h2>Sigue la obra en tiempo real</h2>
-            <p class="note">Dos puntos de seguimiento preparados para activar la señal durante la ejecución.</p>
+            <p class="note" id="obraNote"></p>
           </div>
-          <span class="badge warn">Inicio obra agosto 2026</span>
+          <span class="badge warn" id="obraBadge"></span>
         </div>
-        <div class="camera-grid">
-          <div class="camera-frame">
-            <div class="camera-copy"><strong>Cámara 1</strong><span>En directo — disponible al iniciar la obra</span></div>
-          </div>
-          <div class="camera-frame">
-            <div class="camera-copy"><strong>Cámara 2</strong><span>En directo — disponible al iniciar la obra</span></div>
-          </div>
-        </div>
+        <div class="camera-grid" id="cameraGrid"></div>
       </div>
     </section>
 
@@ -675,83 +650,68 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
     </section>
   </main>
 </div>
-<div class="toast" id="toast">Hito conseguido. Sello y evidencia actualizados en el Visor del Inversor.</div>
+<div class="data-warning" id="dataWarning" role="status" hidden>No se han podido cargar los datos</div>
 
 <script>
-const milestones=[
-  {title:"Compra del local",status:"done",date:"Jun 2026",meaning:"Activo adquirido y operación activada.",evidence:"Escritura y justificante"},
-  {title:"Escritura pública",status:"done",date:"Jun 2026",meaning:"Formalización notarial de la compra.",evidence:"Protocolo notarial"},
-  {title:"Diagnóstico de viabilidad (GO)",status:"done",date:"Jun 2026",meaning:"Tesis, números base y encaje validados.",evidence:"Diagnóstico CdU"},
-  {title:"Proyecto y licencia (MAP)",status:"done",date:"Jul 2026",meaning:"Documentación técnica y licencia preparadas para ejecutar.",evidence:"Carpeta técnica"},
-  {title:"Inicio de obra",status:"done",date:"Agosto 2026",meaning:"Arranque de la reforma con 16 semanas planificadas.",evidence:"Acta de inicio"},
-  {title:"Estructura y tabiquería",status:"current",date:"Semana 3",meaning:"Aquí estamos: obra en curso y avance inicial de distribución.",evidence:"Parte semanal actual"},
-  {title:"Instalaciones (agua/luz)",status:"pending",date:"S4-S8",meaning:"Fontanería y electricidad desbloquean el cierre técnico.",evidence:"Próximo hito"},
-  {title:"Acabados",status:"pending",date:"S8-S14",meaning:"Revestimientos, pintura y remates hacen visible el valor.",evidence:"Planificado"},
-  {title:"Primera ocupación",status:"pending",date:"Fin obra",meaning:"Cierre administrativo previo a salida comercial.",evidence:"Pendiente"},
-  {title:"Comercialización y venta",status:"pending",date:"T1 2027",meaning:"Materialización del resultado de la operación.",evidence:"Pendiente"}
-];
-const ganttRows=[
-  {cap:"I",task:"Demoliciones y trabajos previos",start:1,end:2,color:"#E29F34"},
-  {cap:"II",task:"Albañilería",start:3,end:7,color:"#163D60"},
-  {cap:"III",task:"Fontanería",start:4,end:7,color:"#2f6f9f"},
-  {cap:"IV",task:"Electricidad",start:5,end:8,color:"#b88725"},
-  {cap:"V",task:"Carpintería de madera",start:9,end:11,color:"#8f5f2a"},
-  {cap:"VI",task:"Carpintería metálica",start:7,end:9,color:"#587083"},
-  {cap:"VII",task:"Revestimientos",start:8,end:11,color:"#0f2c47"},
-  {cap:"VIII",task:"Climatización (preinstalación)",start:6,end:7,color:"#4f8f77"},
-  {cap:"IX",task:"Griferías y sanitarios",start:10,end:12,color:"#1d7a4f"},
-  {cap:"X",task:"Pintura",start:13,end:14,color:"#d6a94c"},
-  {cap:"XI",task:"Hormigón pulido interior",start:12,end:13,color:"#6c7480"},
-  {cap:"XII",task:"Hormigón impreso exterior",start:14,end:15,color:"#b3401f"},
-  {cap:"—",task:"Entrega y recepción de obra",start:16,end:16,color:"#163D60",milestone:true}
-];
-const movements=[
-  ["10 jun 2026","Aportación 1 de 3 · Firma del CCP","Ingreso inversores","+50.000 €","Pagado","justificante"],
-  ["02 ago 2026","Aportación 2 de 3 · Licencia + arranque de obra","Ingreso inversores","+47.212 €","Pagado","justificante"],
-  ["18 jun 2026","Compra local comercial","Compra","-40.000 €","Pagado","viabilidad"],
-  ["20 jun 2026","ITP + notaría + registro","Impuestos y registro","-4.000 €","Pagado","documentación"],
-  ["21 jun 2026","Comisiones operación","Comisiones","-10.900 €","Pagado","factura"],
-  ["30 jun 2026","Proyecto + licencias + AJD","Proyecto y licencia","-12.600 €","Pendiente","licencia"],
-  ["ago 2026","Anticipo reforma","Obra","-24.000 €","Pendiente","presupuesto"],
-  ["ago-dic 2026","Reforma 710 €/m²","Obra","-90.200 €","Pendiente","3 presupuestos"],
-  ["oct 2026","CGP + contadores + imprevistos","Suministros","-4.500 €","Pendiente","suministros"]
-];
-const folders=[
-  ["Viabilidad económica","https://drive.google.com/drive/folders/13EY2UTGiKIOOf7F8s3D5eoDE1BsIORnd"],
-  ["Viabilidad administrativa","https://drive.google.com/drive/folders/1V5uY2SVx29NApzNl_hVOHGcRt8X-9uGO"],
-  ["Viabilidad técnica","https://drive.google.com/drive/folders/14vLIo2ZOmmQ5oSKOUWgqNsBh0lITJBH0"],
-  ["Viabilidad jurídica","https://drive.google.com/drive/folders/1vNVgSdNvr7EPhoLGnnvJEaHd6ym4M-ih"],
-  ["Diagnóstico CdU y conclusiones","https://drive.google.com/drive/folders/1pySNUbYjOlUSzCK6av2nXE935GOhvS_L"],
-  ["Documentación","https://drive.google.com/drive/folders/1NpbXeihguzfPVXvtUX7pVxITKsKoEx-v"],
-  ["Suministros","https://drive.google.com/drive/folders/1rLAnYbq8L-WggopQqnELL4VRJVdU9qUH"],
-  ["Fiscalidad","https://drive.google.com/drive/folders/1-IMq9HLQTFlqrYQPt5-QXGi_yf32fULr"],
-  ["Tu carpeta privada","https://drive.google.com/drive/folders/1THVdPXBuY1VL3NMEAWDTek0jMNW-kLMI"],
-  ["CdU de 0 a Éxito SL","https://drive.google.com/drive/folders/1Q1eQoYrNdSY4sdqrU7B9kFz_GUrfSnEo"],
-  ["Fotografías","https://drive.google.com/drive/folders/1CocdFzosil9tlp_1m-B5JL6vwPzRz0as"]
-];
-const feed=[
-  ["Agosto 2026","Obra en curso · semana 3","Inicio de obra conseguido. Estructura y tabiquería en ejecución."],
-  ["Jun 2026","Económico validado","Inversión total 162.212 €, venta realista 205.000 € y beneficio realista 33.938 €."],
-  ["Jun 2026","Producto definido","Local comercial de 105 m² transformado en 1 apartamento de 1 dormitorio y 2 estudios loft."],
-  ["T1 2027","Objetivo de cierre","Cierre de ventas previsto dentro del primer trimestre de 2027."]
-];
-let achieved=5;
-const totalMilestones=milestones.length;
+let datosOperacion=null;
+let filtroActivo="Todos";
+
+function escapeHtml(value){
+  return String(value ?? "").replace(/[&<>"']/g, char=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[char]));
+}
+function escapeAttr(value){
+  return escapeHtml(value).replace(/`/g,"&#96;");
+}
 function folderIcon(){
   return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4H10l2 2h6.5A2.5 2.5 0 0 1 21 8.5v8A3.5 3.5 0 0 1 17.5 20h-11A3.5 3.5 0 0 1 3 16.5v-10Z"/></svg>';
 }
-function renderMilestones(){
-  document.getElementById("milestones").innerHTML=milestones.map((m,i)=>`
-    <article class="milestone ${m.status}" data-index="${i}">
+function renderEstado(){
+  const estado=datosOperacion.estado_operacion;
+  document.getElementById("operationState").textContent=estado.etiqueta;
+  document.getElementById("phaseLine").innerHTML=estado.fases.map(fase=>{
+    const icono=fase.estado==="done" ? '<span class="check">✓</span>' : '<span class="dot"></span>';
+    return `<div class="phase ${escapeAttr(fase.estado)}"><small>${icono} ${escapeHtml(fase.etiqueta)}</small><b>${escapeHtml(fase.nombre)}</b></div>`;
+  }).join("");
+  const avance=Number(estado.avance_global) || 0;
+  const progressBar=document.getElementById("progressBar");
+  progressBar.setAttribute("aria-label",`${avance}% de avance global de operación`);
+  progressBar.querySelector("span").style.setProperty("--progress",`${avance}%`);
+  document.getElementById("progressPct").textContent=`${avance}%`;
+  document.getElementById("pulseMeta").innerHTML=estado.metadatos.map(item=>`
+    <div class="mini"><span>${escapeHtml(item.etiqueta)}</span><b>${escapeHtml(item.valor)}</b></div>
+  `).join("");
+}
+function renderHitos(){
+  const items=datosOperacion.hitos.items;
+  const conseguidos=datosOperacion.hitos.conseguidos;
+  const total=items.length;
+  document.getElementById("milestoneCounter").textContent=`${conseguidos} de ${total} hitos`;
+  document.getElementById("milestoneTitle").textContent=`${conseguidos} de ${total} hitos conseguidos`;
+  document.getElementById("milestones").innerHTML=items.map((hito,i)=>`
+    <article class="milestone ${escapeAttr(hito.estado)}" data-index="${i}">
       <div>
-        <div class="toprow"><span class="num">${m.status==="done" ? "✓" : i+1}</span>${m.status==="current" ? '<span class="spark" aria-hidden="true"></span>' : ""}</div>
-        <b>${m.title}</b><span class="date">${m.date}</span><p class="meaning">${m.meaning}</p>
+        <div class="toprow"><span class="num">${hito.estado==="done" ? "✓" : i+1}</span>${hito.estado==="current" ? '<span class="spark" aria-hidden="true"></span>' : ""}</div>
+        <b>${escapeHtml(hito.titulo)}</b><span class="date">${escapeHtml(hito.fecha)}</span><p class="meaning">${escapeHtml(hito.significado)}</p>
       </div>
-      <div><span class="stamp">${m.status==="done" ? "✓ Conseguido" : m.status==="current" ? "En proceso" : "Pendiente"}</span><div class="meaning">${m.evidence}</div></div>
+      <div><span class="stamp">${hito.estado==="done" ? "✓ Conseguido" : hito.estado==="current" ? "En proceso" : "Pendiente"}</span><div class="meaning">${escapeHtml(hito.evidencia)}</div></div>
     </article>
   `).join("");
 }
 function renderGantt(){
+  const cronograma=datosOperacion.cronograma;
+  const filas=cronograma.filas;
+  document.getElementById("ganttKicker").textContent=cronograma.kicker;
+  document.getElementById("ganttTitle").textContent=cronograma.titulo;
+  document.getElementById("ganttNoteIntro").textContent=cronograma.nota;
+  document.getElementById("ganttNote").textContent=cronograma.nota_gantt;
+  document.getElementById("ganttCurrentWeek").textContent=cronograma.semana_actual;
+  document.getElementById("ganttFoot").textContent=cronograma.pie;
   const months=`
     <div class="month-head">
       <b></b>
@@ -761,14 +721,14 @@ function renderGantt(){
       <span style="grid-column:15 / 19">Mes 4</span>
     </div>`;
   const head=`<div class="week-head"><b>Cap</b><b>Tarea</b>${Array.from({length:16},(_,i)=>`<span>S${i+1}</span>`).join("")}</div>`;
-  const rows=ganttRows.map(row=>`
+  const rows=filas.map(fila=>`
     <div class="gantt-row">
-      <div class="gantt-cap">${row.cap}</div>
-      <div class="gantt-task">${row.task}</div>
+      <div class="gantt-cap">${escapeHtml(fila.capitulo)}</div>
+      <div class="gantt-task">${escapeHtml(fila.tarea)}</div>
       ${Array.from({length:16},(_,i)=>{
         const week=i+1;
-        const inRange=week>=row.start&&week<=row.end;
-        const marker=row.milestone ? `<div class="gantt-milestone-label">✓ Entrega</div>` : `<div class="bar-seg" style="--bar:${row.color}"></div>`;
+        const inRange=week>=fila.inicio&&week<=fila.fin;
+        const marker=fila.hito ? `<div class="gantt-milestone-label">✓ Entrega</div>` : `<div class="bar-seg" style="--bar:${escapeAttr(fila.color)}"></div>`;
         return `<div class="gcell">${inRange?marker:""}</div>`;
       }).join("")}
     </div>
@@ -776,58 +736,87 @@ function renderGantt(){
   document.getElementById("gantt").innerHTML=months+head+rows;
 }
 function renderMovements(filter="Todos"){
-  document.getElementById("movements").innerHTML=movements
-    .filter(row=>filter==="Todos"||row[4]===filter)
-    .map(row=>{
-      const income=row[3].startsWith("+");
+  const movimientos=datosOperacion.economico.movimientos;
+  document.getElementById("movements").innerHTML=movimientos
+    .filter(item=>filter==="Todos"||item.estado===filter)
+    .map(item=>{
+      const income=item.importe.startsWith("+");
       return `
       <tr>
-        <td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td class="amount ${income?"in":"out"}">${row[3]}</td>
-        <td><span class="badge ${row[4]==="Pagado"?"ok":"warn"}">${row[4]}</span></td>
-        <td class="doc"><a href="#documentacion">${row[5]}</a></td>
+        <td>${escapeHtml(item.fecha)}</td><td>${escapeHtml(item.concepto)}</td><td>${escapeHtml(item.categoria)}</td><td class="amount ${income?"in":"out"}">${escapeHtml(item.importe)}</td>
+        <td><span class="badge ${item.estado==="Pagado"?"ok":"warn"}">${escapeHtml(item.estado)}</span></td>
+        <td class="doc"><a href="#documentacion">${escapeHtml(item.documento)}</a></td>
       </tr>`;
     }).join("");
 }
+function renderEconomico(){
+  const economico=datosOperacion.economico;
+  document.getElementById("iban").innerHTML=`${escapeHtml(economico.iban)} <small>${escapeHtml(economico.texto_cuenta)}</small>`;
+  document.getElementById("exclusiveAccount").textContent=economico.texto_cuenta;
+  document.getElementById("trancheGrid").innerHTML=economico.aportaciones.map(item=>`
+    <div class="tranche ${escapeAttr(item.tipo)}"><div class="tranche-top"><span>${escapeHtml(item.etiqueta)}</span><span class="badge ${item.tipo==="done"?"ok":"warn"}">${escapeHtml(item.estado)}</span></div><b>${escapeHtml(item.concepto)}</b><strong>${escapeHtml(item.importe)}</strong></div>
+  `).join("");
+  document.getElementById("financeSummary").innerHTML=economico.resumen.map(item=>`
+    <div class="metric"><span>${escapeHtml(item.etiqueta)}</span><b>${escapeHtml(item.valor)}</b><small>${escapeHtml(item.detalle)}</small></div>
+  `).join("");
+  document.getElementById("financeNote").textContent=economico.nota;
+  renderMovements(filtroActivo);
+}
+function renderCamaras(){
+  const obra=datosOperacion.obra_directo;
+  document.getElementById("obraNote").textContent=obra.nota;
+  document.getElementById("obraBadge").textContent=obra.insignia;
+  document.getElementById("cameraGrid").innerHTML=datosOperacion.camaras.map(camara=>{
+    if(camara.url){
+      return `<div class="camera-frame has-stream"><iframe src="${escapeAttr(camara.url)}" title="${escapeAttr(camara.nombre)}" allowfullscreen loading="lazy"></iframe></div>`;
+    }
+    return `
+      <div class="camera-frame">
+        <div class="camera-copy"><strong>${escapeHtml(camara.nombre)}</strong><span>En directo — disponible al iniciar la obra</span></div>
+      </div>`;
+  }).join("");
+}
 function renderFolders(){
-  document.getElementById("folders").innerHTML=folders.map(item=>`
-    <a class="folder card" href="${item[1]}" target="_blank" rel="noopener">${folderIcon()}<span>${item[0]}</span></a>
+  document.getElementById("folders").innerHTML=datosOperacion.carpetas.map(item=>`
+    <a class="folder card" href="${escapeAttr(item.url)}" target="_blank" rel="noopener">${folderIcon()}<span>${escapeHtml(item.nombre)}</span></a>
   `).join("");
 }
 function renderFeed(){
-  document.getElementById("feed").innerHTML=feed.map(item=>`
-    <article class="card entry"><div class="entry-date">${item[0]}</div><div><b>${item[1]}</b><p>${item[2]}</p></div></article>
+  document.getElementById("feed").innerHTML=datosOperacion.bitacora.map(item=>`
+    <article class="card entry"><div class="entry-date">${escapeHtml(item.fecha)}</div><div><b>${escapeHtml(item.titulo)}</b><p>${escapeHtml(item.texto)}</p></div></article>
   `).join("");
 }
-function simulateMilestone(){
-  const next=milestones.find(m=>m.status==="current");
-  if(!next) return;
-  next.status="done";
-  next.evidence="Evidencia registrada";
-  achieved=Math.min(achieved+1,milestones.length);
-  const following=milestones.find(m=>m.status==="pending");
-  if(following) following.status="current";
-  renderMilestones();
-  document.getElementById("milestoneCounter").textContent=`${achieved} de ${totalMilestones} hitos`;
-  document.getElementById("milestoneTitle").textContent=`${achieved} de ${totalMilestones} hitos conseguidos`;
-  const card=document.querySelector(`.milestone[data-index="${achieved-1}"]`);
-  if(card) card.classList.add("new-done");
-  const toast=document.getElementById("toast");
-  toast.classList.add("show");
-  window.setTimeout(()=>toast.classList.remove("show"),2600);
+function renderTodo(){
+  renderEstado();
+  renderHitos();
+  renderGantt();
+  renderEconomico();
+  renderCamaras();
+  renderFolders();
+  renderFeed();
+}
+function showDataWarning(){
+  document.getElementById("dataWarning").hidden=false;
+}
+async function cargarDatos(){
+  try{
+    const response=await fetch("datos.json");
+    if(!response.ok) throw new Error("No se han podido cargar los datos");
+    datosOperacion=await response.json();
+    renderTodo();
+  }catch(error){
+    showDataWarning();
+  }
 }
 document.querySelectorAll(".filter").forEach(btn=>{
   btn.addEventListener("click",()=>{
     document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
     btn.classList.add("active");
-    renderMovements(btn.dataset.filter);
+    filtroActivo=btn.dataset.filter;
+    if(datosOperacion) renderMovements(filtroActivo);
   });
 });
-document.getElementById("simulateMilestone").addEventListener("click",simulateMilestone);
-renderMilestones();
-renderGantt();
-renderMovements();
-renderFolders();
-renderFeed();
+cargarDatos();
 </script>
 </body>
 </html>
