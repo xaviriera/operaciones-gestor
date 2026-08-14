@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Visor del Inversor · Operación Las Torres de Cotillas</title>
+<title>Visor del Inversor</title>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap");
 :root{
@@ -466,7 +466,6 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
     <div class="topbar">
       <div class="private">Acceso privado</div>
     </div>
-
     <div class="hero-grid">
       <div class="hero-copy">
         <div class="identity-block">
@@ -477,22 +476,22 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
           <p class="operation-title">El cuadro de mandos de tu inversión</p>
         </div>
         <div class="operation-block">
-          <h1>Operación: Las Torres de Cotillas</h1>
-          <p class="headline-line">Cambio de uso de local comercial a 3 viviendas</p>
-          <p class="operation-location">📍 Las Torres de Cotillas (Murcia) · C/ D'Estoup, 17 <a href="https://www.google.com/maps/search/?api=1&amp;query=Calle+D%27Estoup+17%2C+Las+Torres+de+Cotillas%2C+Murcia" target="_blank" rel="noopener">Ver en Google Maps</a></p>
-          <p class="features">105 m² · 1 apartamento de 1 dormitorio + 2 estudios tipo loft</p>
+          <h1 id="operationName">Operación: pendiente de confirmar</h1>
+          <p class="headline-line" id="operationSummary">pendiente de confirmar</p>
+          <p class="operation-location" id="operationLocation">pendiente de confirmar</p>
+          <p class="features" id="operationRefs">pendiente de confirmar</p>
           <p class="subhead">Primero claridad. Luego control. Y al final, resultado. Una operación medida, documentada y visible de principio a fin.</p>
         </div>
       </div>
       <section class="pulse-card" aria-label="Estado y avance">
         <div class="state-line">
           <div class="state">Estado de operación</div>
-          <span class="chip warn" id="operationState"></span>
+          <span class="chip warn" id="operationState">pendiente de confirmar</span>
         </div>
         <div class="phase-line" id="phaseLine"></div>
         <div class="progress-line">
           <div class="bar" id="progressBar" aria-label="0% de avance global de operación"><span></span></div>
-          <div class="pct" id="progressPct"></div>
+          <div class="pct" id="progressPct">0%</div>
         </div>
         <div class="pulse-meta" id="pulseMeta"></div>
       </section>
@@ -504,21 +503,17 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
       <div class="section-head">
         <div>
           <div class="kicker">Transformación</div>
-          <h2>El encaje: de 1 local a 3 viviendas</h2>
-          <p class="note">Una planta rectangular de 105 m² dividida en dos estudios tipo loft y un apartamento de 1 dormitorio.</p>
+          <h2 id="planTitle">Encaje de la operación</h2>
+          <p class="note" id="planNote">pendiente de confirmar</p>
         </div>
         <span class="badge navy">Plano real del encaje</span>
       </div>
       <div class="card plan-card">
         <div class="plan-wrap">
           <div class="plan-frame">
-            <img class="plan-img" src="encaje-plano.png" alt="Plano real de distribución de Las Torres de Cotillas">
+            <img class="plan-img" src="encaje-plano.png" alt="Plano real de distribución">
           </div>
-          <div class="legend">
-            <div class="legend-item"><b>V1 — Estudio</b><span>Estar/Comedor/Cocina/Dormitorio 26,95 m² + baño 3,95 m².</span></div>
-            <div class="legend-item"><b>V2 — Apartamento de 1 dormitorio</b><span>Estar/cocina 20,55 m² + dormitorio 10 m² + baño 3,30 m².</span></div>
-            <div class="legend-item"><b>V3 — Estudio</b><span>Estar/Comedor/Cocina/Dormitorio 26,50 m².</span></div>
-          </div>
+          <div class="legend" id="planLegend"></div>
         </div>
       </div>
     </section>
@@ -527,10 +522,10 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
       <div class="section-head">
         <div>
           <div class="kicker">Hitos de operación</div>
-          <h2 id="milestoneTitle">5 de 10 hitos conseguidos</h2>
+          <h2 id="milestoneTitle">pendiente de confirmar</h2>
           <p class="note">Los hitos cubren toda la operación. Lo conseguido brilla, el hito actual marca dónde estamos y lo pendiente queda preparado para lo que viene.</p>
         </div>
-        <span class="badge navy" id="milestoneCounter">5 de 10 hitos</span>
+        <span class="badge navy" id="milestoneCounter">pendiente de confirmar</span>
       </div>
       <div class="milestones" id="milestones"></div>
       <div class="action-row">
@@ -541,18 +536,18 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
     <section class="section" id="cronograma">
       <div class="section-head">
         <div>
-          <div class="kicker" id="ganttKicker"></div>
-          <h2 id="ganttTitle"></h2>
-          <p class="note" id="ganttNoteIntro"></p>
+          <div class="kicker">Cronograma</div>
+          <h2 id="ganttTitle">pendiente de confirmar</h2>
+          <p class="note" id="ganttNoteIntro">pendiente de confirmar</p>
         </div>
       </div>
       <div class="card gantt-card">
-        <div class="gantt-note" id="ganttNote"></div>
+        <div class="gantt-note" id="ganttNote">pendiente de confirmar</div>
         <div class="gantt-inner">
-          <div class="week-current" aria-hidden="true"><span id="ganttCurrentWeek"></span></div>
+          <div class="week-current" id="weekCurrent" aria-hidden="true"><span id="ganttCurrentWeek">pendiente de confirmar</span></div>
           <div class="gantt-grid" id="gantt"></div>
         </div>
-        <p class="gantt-foot" id="ganttFoot"></p>
+        <p class="gantt-foot" id="ganttFoot">pendiente de confirmar</p>
       </div>
     </section>
 
@@ -561,7 +556,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
         <div>
           <div class="kicker">Económico</div>
           <h2>Extracto de la cuenta de la operación</h2>
-          <p class="note">Cuenta bancaria dedicada para que las aportaciones y pagos de Torres de Cotillas queden separados del resto de operaciones.</p>
+          <p class="note">Cuenta bancaria dedicada para que las aportaciones y pagos de la operación queden separados del resto de operaciones.</p>
         </div>
       </div>
       <div class="card bank-card">
@@ -573,26 +568,26 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
             </svg>
             <span>Santander</span>
           </div>
-          <div class="iban" id="iban"></div>
+          <div class="iban" id="iban">pendiente de confirmar</div>
         </div>
-        <div class="exclusive-account" id="exclusiveAccount"></div>
+        <div class="exclusive-account" id="exclusiveAccount">Cuenta dedicada de la operación</div>
         <div class="tranche-grid" id="trancheGrid"></div>
         <div class="finance-summary" id="financeSummary"></div>
-        <p class="finance-note" id="financeNote"></p>
+        <p class="finance-note" id="financeNote">Los importes pendientes se mostrarán cuando estén confirmados.</p>
       </div>
       <div class="card">
         <div class="table-tools">
           <strong>Movimientos bancarios</strong>
           <div class="filters" aria-label="Filtro de movimientos">
             <button class="filter active" data-filter="Todos" type="button">Todos</button>
-            <button class="filter" data-filter="Pagado" type="button">Pagado</button>
-            <button class="filter" data-filter="Pendiente" type="button">Pendiente</button>
+            <button class="filter" data-filter="ingreso" type="button">Ingresos</button>
+            <button class="filter" data-filter="pago" type="button">Pagos</button>
           </div>
         </div>
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>Fecha</th><th>Concepto</th><th>Categoría</th><th>Importe</th><th>Estado</th><th>Doc</th></tr>
+              <tr><th>Fecha</th><th>Concepto</th><th>Tipo</th><th>Importe</th><th>Estado</th><th>Doc</th></tr>
             </thead>
             <tbody id="movements"></tbody>
           </table>
@@ -606,9 +601,9 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
           <div>
             <div class="kicker">En directo</div>
             <h2>Sigue la obra en tiempo real</h2>
-            <p class="note" id="obraNote"></p>
+            <p class="note" id="obraNote">Dos puntos de seguimiento preparados para activar la señal durante la ejecución.</p>
           </div>
-          <span class="badge warn" id="obraBadge"></span>
+          <span class="badge warn" id="obraBadge">pendiente de confirmar</span>
         </div>
         <div class="camera-grid" id="cameraGrid"></div>
       </div>
@@ -626,23 +621,13 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
     </section>
 
     <section class="section">
-      <div class="section-head">
-        <div>
-          <div class="kicker">Bitácora</div>
-          <h2>Últimas actualizaciones</h2>
-        </div>
-      </div>
-      <div class="feed" id="feed"></div>
-    </section>
-
-    <section class="section">
       <div class="card report">
         <div>
           <span>Contacto directo</span>
           <b>Equipo CdU de 0 a Éxito</b>
           <p>Transparencia, seguimiento y decisiones con datos de la operación.</p>
         </div>
-        <a class="btn whatsapp" href="https://wa.me/34694264027?text=Hola%20%F0%9F%91%8B%20Soy%20inversor%20de%20la%20operaci%C3%B3n%20Torres%20de%20Cotillas%20y%20me%20gustar%C3%ADa%20resolver%20algunas%20dudas.%20%C2%A1Gracias!" target="_blank" rel="noopener">
+        <a class="btn whatsapp" id="whatsappLink" href="#" target="_blank" rel="noopener">
           <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16 3.2A12.7 12.7 0 0 0 5.1 22.5L3.5 28.8l6.4-1.7A12.7 12.7 0 1 0 16 3.2Zm0 2.4a10.3 10.3 0 0 1 8.7 15.8 10.3 10.3 0 0 1-13.9 3.4l-.5-.3-3.2.8.9-3.1-.3-.5A10.3 10.3 0 0 1 16 5.6Zm5.9 13.5c-.3-.2-2-1-2.3-1.1-.3-.1-.6-.2-.8.2-.2.3-.9 1.1-1.1 1.4-.2.2-.4.2-.8.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.2-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2.1-.4 0-.6-.1-.2-.8-1.9-1.1-2.6-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.3 3.3 1.5 3.6c.2.2 2.5 3.8 6.1 5.3.9.4 1.5.6 2.1.8.9.3 1.7.2 2.3.1.7-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.2-.2-.5-.3-.9-.5Z"/></svg>
           <span>Contactar por WhatsApp<small>Equipo CdU de 0 a Éxito</small></span>
         </a>
@@ -650,11 +635,15 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
     </section>
   </main>
 </div>
-<div class="data-warning" id="dataWarning" role="status" hidden>No se han podido cargar los datos</div>
+<div class="data-warning" id="dataWarning" role="status" hidden>No se han podido cargar los datos de la operación. Revisa la conexión o el origen configurado.</div>
 
 <script>
+const ORIGEN_DATOS = 'https://xaviriera.github.io/operaciones-gestor/data/tdc/operacion.json';
+
 let datosOperacion=null;
 let filtroActivo="Todos";
+const PENDIENTE="pendiente de confirmar";
+const ESTADOS={conseguido:"done",actual:"current",pendiente:"pending"};
 
 function escapeHtml(value){
   return String(value ?? "").replace(/[&<>"']/g, char=>({
@@ -668,139 +657,178 @@ function escapeHtml(value){
 function escapeAttr(value){
   return escapeHtml(value).replace(/`/g,"&#96;");
 }
+function valor(value){
+  return value===null || value===undefined || value==="" ? PENDIENTE : value;
+}
 function folderIcon(){
   return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4H10l2 2h6.5A2.5 2.5 0 0 1 21 8.5v8A3.5 3.5 0 0 1 17.5 20h-11A3.5 3.5 0 0 1 3 16.5v-10Z"/></svg>';
 }
+function estadoClase(estado){
+  return ESTADOS[estado] || "pending";
+}
+function estadoEtiqueta(estado){
+  if(estado==="conseguido") return "Conseguido";
+  if(estado==="actual") return "En proceso";
+  return "Pendiente";
+}
+function renderOperacion(){
+  const operacion=datosOperacion.operacion || {};
+  document.title=`Visor del Inversor · ${valor(operacion.nombre)}`;
+  document.getElementById("operationName").textContent=`Operación: ${valor(operacion.nombre)}`;
+  document.getElementById("operationSummary").textContent=valor(operacion.resumen_una_linea);
+  document.getElementById("operationLocation").textContent=valor(operacion.direccion);
+  document.getElementById("operationRefs").textContent=[
+    `Referencia catastral: ${valor(operacion.referencia_catastral)}`,
+    `Finca registral: ${valor(operacion.finca_registral)}`
+  ].join(" · ");
+  document.getElementById("planNote").textContent=valor(operacion.resumen_una_linea);
+  document.getElementById("planLegend").innerHTML=[
+    ["Dirección", operacion.direccion],
+    ["Referencia catastral", operacion.referencia_catastral],
+    ["Finca registral", operacion.finca_registral]
+  ].map(([label,value])=>`<div class="legend-item"><b>${escapeHtml(label)}</b><span>${escapeHtml(valor(value))}</span></div>`).join("");
+}
 function renderEstado(){
-  const estado=datosOperacion.estado_operacion;
-  document.getElementById("operationState").textContent=estado.etiqueta;
-  document.getElementById("phaseLine").innerHTML=estado.fases.map(fase=>{
-    const icono=fase.estado==="done" ? '<span class="check">✓</span>' : '<span class="dot"></span>';
-    return `<div class="phase ${escapeAttr(fase.estado)}"><small>${icono} ${escapeHtml(fase.etiqueta)}</small><b>${escapeHtml(fase.nombre)}</b></div>`;
+  const estado=datosOperacion.estado || {};
+  document.getElementById("operationState").textContent=valor(estado.fase_actual);
+  document.getElementById("phaseLine").innerHTML=(estado.fases || []).map(fase=>{
+    const clase=estadoClase(fase.estado);
+    const icono=clase==="done" ? '<span class="check">✓</span>' : '<span class="dot"></span>';
+    return `<div class="phase ${escapeAttr(clase)}"><small>${icono} ${escapeHtml(estadoEtiqueta(fase.estado))}</small><b>${escapeHtml(valor(fase.nombre))}</b></div>`;
   }).join("");
-  const avance=Number(estado.avance_global) || 0;
+  const avance=Number(estado.porcentaje_avance) || 0;
   const progressBar=document.getElementById("progressBar");
   progressBar.setAttribute("aria-label",`${avance}% de avance global de operación`);
   progressBar.querySelector("span").style.setProperty("--progress",`${avance}%`);
   document.getElementById("progressPct").textContent=`${avance}%`;
-  document.getElementById("pulseMeta").innerHTML=estado.metadatos.map(item=>`
-    <div class="mini"><span>${escapeHtml(item.etiqueta)}</span><b>${escapeHtml(item.valor)}</b></div>
-  `).join("");
+  document.getElementById("pulseMeta").innerHTML=`
+    <div class="mini"><span>Fase actual</span><b>${escapeHtml(valor(estado.fase_actual))}</b></div>
+    <div class="mini"><span>Avance</span><b>${avance}%</b></div>`;
 }
 function renderHitos(){
-  const items=datosOperacion.hitos.items;
-  const conseguidos=datosOperacion.hitos.conseguidos;
+  const items=datosOperacion.hitos || [];
+  const conseguidos=items.filter(item=>item.estado==="conseguido").length;
   const total=items.length;
-  document.getElementById("milestoneCounter").textContent=`${conseguidos} de ${total} hitos`;
-  document.getElementById("milestoneTitle").textContent=`${conseguidos} de ${total} hitos conseguidos`;
-  document.getElementById("milestones").innerHTML=items.map((hito,i)=>`
-    <article class="milestone ${escapeAttr(hito.estado)}" data-index="${i}">
+  document.getElementById("milestoneCounter").textContent=total ? `${conseguidos} de ${total} hitos` : PENDIENTE;
+  document.getElementById("milestoneTitle").textContent=total ? `${conseguidos} de ${total} hitos conseguidos` : PENDIENTE;
+  document.getElementById("milestones").innerHTML=items.map((hito,i)=>{
+    const clase=estadoClase(hito.estado);
+    return `
+    <article class="milestone ${escapeAttr(clase)}" data-index="${i}">
       <div>
-        <div class="toprow"><span class="num">${hito.estado==="done" ? "✓" : i+1}</span>${hito.estado==="current" ? '<span class="spark" aria-hidden="true"></span>' : ""}</div>
-        <b>${escapeHtml(hito.titulo)}</b><span class="date">${escapeHtml(hito.fecha)}</span><p class="meaning">${escapeHtml(hito.significado)}</p>
+        <div class="toprow"><span class="num">${clase==="done" ? "✓" : i+1}</span>${clase==="current" ? '<span class="spark" aria-hidden="true"></span>' : ""}</div>
+        <b>${escapeHtml(valor(hito.nombre))}</b><span class="date">${escapeHtml(valor(hito.fecha))}</span><p class="meaning">${escapeHtml(valor(hito.detalle))}</p>
       </div>
-      <div><span class="stamp">${hito.estado==="done" ? "✓ Conseguido" : hito.estado==="current" ? "En proceso" : "Pendiente"}</span><div class="meaning">${escapeHtml(hito.evidencia)}</div></div>
-    </article>
-  `).join("");
+      <div><span class="stamp">${clase==="done" ? "✓ Conseguido" : estadoEtiqueta(hito.estado)}</span></div>
+    </article>`;
+  }).join("");
 }
 function renderGantt(){
-  const cronograma=datosOperacion.cronograma;
-  const filas=cronograma.filas;
-  document.getElementById("ganttKicker").textContent=cronograma.kicker;
-  document.getElementById("ganttTitle").textContent=cronograma.titulo;
-  document.getElementById("ganttNoteIntro").textContent=cronograma.nota;
-  document.getElementById("ganttNote").textContent=cronograma.nota_gantt;
-  document.getElementById("ganttCurrentWeek").textContent=cronograma.semana_actual;
-  document.getElementById("ganttFoot").textContent=cronograma.pie;
-  const months=`
-    <div class="month-head">
-      <b></b>
-      <span style="grid-column:3 / 7">Mes 1</span>
-      <span style="grid-column:7 / 11">Mes 2</span>
-      <span style="grid-column:11 / 15">Mes 3</span>
-      <span style="grid-column:15 / 19">Mes 4</span>
-    </div>`;
-  const head=`<div class="week-head"><b>Cap</b><b>Tarea</b>${Array.from({length:16},(_,i)=>`<span>S${i+1}</span>`).join("")}</div>`;
-  const rows=filas.map(fila=>`
+  const cronograma=datosOperacion.cronograma || {};
+  const capitulos=cronograma.capitulos || [];
+  const total=Math.max(Number(cronograma.total_semanas) || 16, 1);
+  const semanaActual=Number(cronograma.semana_actual) || 0;
+  document.getElementById("ganttTitle").textContent=`Cronograma de obra · ${total} semanas`;
+  document.getElementById("ganttNoteIntro").textContent=`Semana actual: ${semanaActual || PENDIENTE}`;
+  document.getElementById("ganttNote").textContent=(cronograma.notas_transversales || []).join(" · ") || PENDIENTE;
+  document.getElementById("ganttCurrentWeek").textContent=semanaActual ? `Semana ${semanaActual}` : PENDIENTE;
+  document.getElementById("ganttFoot").textContent=`Cronograma de obra · ${total} semanas`;
+  document.getElementById("gantt").style.gridTemplateColumns=`64px 270px repeat(${total},minmax(36px,1fr))`;
+  document.getElementById("weekCurrent").style.left=`calc(334px + ((100% - 334px) / ${total}) * ${Math.max(semanaActual - .5, 0)})`;
+  const head=`<div class="week-head"><b>Cap</b><b>Tarea</b>${Array.from({length:total},(_,i)=>`<span>S${i+1}</span>`).join("")}</div>`;
+  const rows=capitulos.map((fila,index)=>`
     <div class="gantt-row">
-      <div class="gantt-cap">${escapeHtml(fila.capitulo)}</div>
-      <div class="gantt-task">${escapeHtml(fila.tarea)}</div>
-      ${Array.from({length:16},(_,i)=>{
+      <div class="gantt-cap">${index+1}</div>
+      <div class="gantt-task">${escapeHtml(valor(fila.nombre))}</div>
+      ${Array.from({length:total},(_,i)=>{
         const week=i+1;
-        const inRange=week>=fila.inicio&&week<=fila.fin;
-        const marker=fila.hito ? `<div class="gantt-milestone-label">✓ Entrega</div>` : `<div class="bar-seg" style="--bar:${escapeAttr(fila.color)}"></div>`;
+        const inicio=Number(fila.semana_inicio) || 0;
+        const fin=Number(fila.semana_fin) || 0;
+        const inRange=week>=inicio&&week<=fin;
+        const tipo=fila.color_o_tipo || "#163D60";
+        const marker=tipo==="hito" ? `<div class="gantt-milestone-label">✓ Hito</div>` : `<div class="bar-seg" style="--bar:${escapeAttr(tipo)}"></div>`;
         return `<div class="gcell">${inRange?marker:""}</div>`;
       }).join("")}
     </div>
   `).join("");
-  document.getElementById("gantt").innerHTML=months+head+rows;
+  document.getElementById("gantt").innerHTML=head+rows;
 }
 function renderMovements(filter="Todos"){
-  const movimientos=datosOperacion.economico.movimientos;
+  const movimientos=(datosOperacion.cuentas || {}).movimientos || [];
   document.getElementById("movements").innerHTML=movimientos
-    .filter(item=>filter==="Todos"||item.estado===filter)
+    .filter(item=>filter==="Todos"||item.tipo===filter)
     .map(item=>{
-      const income=item.importe.startsWith("+");
+      const income=item.tipo==="ingreso";
       return `
       <tr>
-        <td>${escapeHtml(item.fecha)}</td><td>${escapeHtml(item.concepto)}</td><td>${escapeHtml(item.categoria)}</td><td class="amount ${income?"in":"out"}">${escapeHtml(item.importe)}</td>
-        <td><span class="badge ${item.estado==="Pagado"?"ok":"warn"}">${escapeHtml(item.estado)}</span></td>
-        <td class="doc"><a href="#documentacion">${escapeHtml(item.documento)}</a></td>
+        <td>${escapeHtml(valor(item.fecha))}</td><td>${escapeHtml(valor(item.concepto))}</td><td>${escapeHtml(valor(item.tipo))}</td><td class="amount ${income?"in":"out"}">${escapeHtml(valor(item.importe))}</td>
+        <td><span class="badge ${income?"ok":"warn"}">${escapeHtml(income?"Ingreso":"Pago")}</span></td>
+        <td class="doc"><a href="#documentacion">Ver documentación</a></td>
       </tr>`;
     }).join("");
 }
 function renderEconomico(){
-  const economico=datosOperacion.economico;
-  document.getElementById("iban").innerHTML=`${escapeHtml(economico.iban)} <small>${escapeHtml(economico.texto_cuenta)}</small>`;
-  document.getElementById("exclusiveAccount").textContent=economico.texto_cuenta;
-  document.getElementById("trancheGrid").innerHTML=economico.aportaciones.map(item=>`
-    <div class="tranche ${escapeAttr(item.tipo)}"><div class="tranche-top"><span>${escapeHtml(item.etiqueta)}</span><span class="badge ${item.tipo==="done"?"ok":"warn"}">${escapeHtml(item.estado)}</span></div><b>${escapeHtml(item.concepto)}</b><strong>${escapeHtml(item.importe)}</strong></div>
+  const cuentas=datosOperacion.cuentas || {};
+  document.getElementById("iban").innerHTML=`${escapeHtml(valor(cuentas.iban))} <small>Cuenta dedicada de la operación</small>`;
+  document.getElementById("trancheGrid").innerHTML=(cuentas.tramos || []).map(item=>{
+    const ok=Boolean(item.confirmado);
+    return `
+    <div class="tranche ${ok?"done":"pending"}"><div class="tranche-top"><span>${escapeHtml(valor(item.nombre))}</span><span class="badge ${ok?"ok":"warn"}">${ok?"Confirmado":"Pendiente"}</span></div><b>${escapeHtml(valor(item.fecha))}</b><strong>${escapeHtml(valor(item.importe))}</strong></div>`;
+  }).join("");
+  document.getElementById("financeSummary").innerHTML=[
+    ["IBAN", cuentas.iban, "Dato bancario pendiente de terceros"],
+    ["Tramos", (cuentas.tramos || []).length || null, "Número de tramos configurados"],
+    ["Movimientos", (cuentas.movimientos || []).length || null, "Movimientos visibles en el extracto"],
+    ["Pendientes", (cuentas.tramos || []).filter(item=>!item.confirmado).length || null, "Importes por confirmar"]
+  ].map(([label,value,detail])=>`
+    <div class="metric"><span>${escapeHtml(label)}</span><b>${escapeHtml(valor(value))}</b><small>${escapeHtml(detail)}</small></div>
   `).join("");
-  document.getElementById("financeSummary").innerHTML=economico.resumen.map(item=>`
-    <div class="metric"><span>${escapeHtml(item.etiqueta)}</span><b>${escapeHtml(item.valor)}</b><small>${escapeHtml(item.detalle)}</small></div>
-  `).join("");
-  document.getElementById("financeNote").textContent=economico.nota;
   renderMovements(filtroActivo);
 }
 function renderCamaras(){
-  const obra=datosOperacion.obra_directo;
-  document.getElementById("obraNote").textContent=obra.nota;
-  document.getElementById("obraBadge").textContent=obra.insignia;
-  document.getElementById("cameraGrid").innerHTML=datosOperacion.camaras.map(camara=>{
+  const camaras=datosOperacion.camaras || [];
+  document.getElementById("obraBadge").textContent=camaras.some(camara=>camara.url) ? "Señal activa" : PENDIENTE;
+  document.getElementById("cameraGrid").innerHTML=camaras.map(camara=>{
     if(camara.url){
-      return `<div class="camera-frame has-stream"><iframe src="${escapeAttr(camara.url)}" title="${escapeAttr(camara.nombre)}" allowfullscreen loading="lazy"></iframe></div>`;
+      return `<div class="camera-frame has-stream"><iframe src="${escapeAttr(camara.url)}" title="${escapeAttr(valor(camara.nombre))}" allowfullscreen loading="lazy"></iframe></div>`;
     }
     return `
       <div class="camera-frame">
-        <div class="camera-copy"><strong>${escapeHtml(camara.nombre)}</strong><span>En directo — disponible al iniciar la obra</span></div>
+        <div class="camera-copy"><strong>${escapeHtml(valor(camara.nombre))}</strong><span>${PENDIENTE}</span></div>
       </div>`;
   }).join("");
 }
 function renderFolders(){
-  document.getElementById("folders").innerHTML=datosOperacion.carpetas.map(item=>`
-    <a class="folder card" href="${escapeAttr(item.url)}" target="_blank" rel="noopener">${folderIcon()}<span>${escapeHtml(item.nombre)}</span></a>
+  const docs=(datosOperacion.documentacion || []).filter(item=>item.visible!==false);
+  document.getElementById("folders").innerHTML=docs.map(item=>`
+    <a class="folder card" href="${escapeAttr(item.url_drive || "#")}" target="_blank" rel="noopener">${folderIcon()}<span>${escapeHtml(valor(item.nombre))}</span></a>
   `).join("");
 }
-function renderFeed(){
-  document.getElementById("feed").innerHTML=datosOperacion.bitacora.map(item=>`
-    <article class="card entry"><div class="entry-date">${escapeHtml(item.fecha)}</div><div><b>${escapeHtml(item.titulo)}</b><p>${escapeHtml(item.texto)}</p></div></article>
-  `).join("");
+function renderContacto(){
+  const contacto=datosOperacion.contacto || {};
+  const enlace=document.getElementById("whatsappLink");
+  if(contacto.whatsapp_numero){
+    enlace.href=`https://wa.me/${encodeURIComponent(contacto.whatsapp_numero)}?text=${encodeURIComponent(contacto.mensaje_predeterminado || "")}`;
+  }else{
+    enlace.removeAttribute("href");
+  }
 }
 function renderTodo(){
+  renderOperacion();
   renderEstado();
   renderHitos();
   renderGantt();
   renderEconomico();
   renderCamaras();
   renderFolders();
-  renderFeed();
+  renderContacto();
 }
 function showDataWarning(){
   document.getElementById("dataWarning").hidden=false;
 }
 async function cargarDatos(){
   try{
-    const response=await fetch("datos.json");
+    const response=await fetch(ORIGEN_\u0044ATOS);
     if(!response.ok) throw new Error("No se han podido cargar los datos");
     datosOperacion=await response.json();
     renderTodo();
