@@ -778,7 +778,10 @@ let filtroActivo="Todos";
 let claveMaestra=null;
 let llaveroCifrado=null;
 let visorMontado=false;
-const MODO_CLARO=new URLSearchParams(window.location.search).get("claro")==="1";
+// El modo de previsualizacion en claro SOLO se permite en local (localhost/127.0.0.1).
+// En el sitio publicado queda desactivado: si no, ?claro=1 saltaria la contrasena y el cifrado no serviria de nada.
+const ES_ENTORNO_LOCAL=["localhost","127.0.0.1","::1",""].includes(window.location.hostname);
+const MODO_CLARO=ES_ENTORNO_LOCAL && new URLSearchParams(window.location.search).get("claro")==="1";
 const PENDIENTE="pendiente de confirmar";
 const CAMARA_SIN_SENAL="disponible al iniciar la obra";
 const ESTADOS={conseguido:"done",actual:"current",pendiente:"pending"};

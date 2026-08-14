@@ -22,3 +22,8 @@ CLAUDE.md
 
 # Contrasenas generadas para participes (no publicar)
 CONTRASENAS-participes-NO-SUBIR.txt
+
+# Datos en claro de las operaciones: NUNCA se publican (el visor solo sirve el llavero cifrado)
+data/**/operacion.json
+tools/__pycache__/
+
