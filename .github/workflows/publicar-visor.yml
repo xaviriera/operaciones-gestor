@@ -1,0 +1,78 @@
+# Publica automáticamente el Visor del Inversor en el repositorio público cdu-visor
+# (que se sirve en visor.tucambiodeuso.com) cada vez que se toca el visor de origen
+# o el llavero cifrado. NUNCA debe copiar data/tdc/operacion.json (datos en claro).
+name: Publicar visor en cdu-visor
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "torres-cotillas/visor/**"
+      - "data/tdc/llavero.json"
+
+# Solo necesitamos leer este repo; la escritura va contra cdu-visor con el token propio.
+permissions:
+  contents: read
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar operaciones-gestor (origen)
+        uses: actions/checkout@v4
+
+      - name: Clonar cdu-visor (destino de publicación)
+        uses: actions/checkout@v4
+        with:
+          repository: xaviriera/cdu-visor
+          # Token con permiso de escritura sobre cdu-visor. Debe crearse como secreto de
+          # repositorio en operaciones-gestor. Ver README/informe de despliegue para el
+          # procedimiento exacto (tipo de token y permisos mínimos).
+          token: ${{ secrets.TOKEN_PUBLICAR_VISOR }}
+          path: cdu-visor
+
+      - name: Copiar visor e imágenes
+        run: |
+          set -euo pipefail
+          mkdir -p cdu-visor/tdc
+
+          # Visor y sus imágenes tal cual están en el origen.
+          cp torres-cotillas/visor/index.html cdu-visor/tdc/index.html
+          cp torres-cotillas/visor/*.png cdu-visor/tdc/ 2>/dev/null || true
+
+          # Ajuste de rutas para la copia PUBLICADA (mismo ajuste que se hizo a mano al
+          # crear el repo cdu-visor):
+          # - ORIGEN_LLAVERO pasa a apuntar al propio dominio publicado del visor.
+          # - ORIGEN_DATOS (el JSON en claro) se deja vacío/inutilizado: en la copia
+          #   publicada no debe apuntar a ninguna URL que pudiera servir datos sin cifrar.
+          #   El modo de previsualización en claro del visor ya está limitado a localhost
+          #   por JS, pero esto es una segunda barrera a nivel de origen de datos.
+          sed -i -E "s#(const ORIGEN_LLAVERO = ).*#\1'https://visor.tucambiodeuso.com/tdc/llavero.json';#" cdu-visor/tdc/index.html
+          sed -i -E "s#(const ORIGEN_DATOS = ).*#\1'';#" cdu-visor/tdc/index.html
+
+          # Llavero CIFRADO: sí se publica (puede no existir todavía si aún no se ha
+          # generado para esta operación).
+          if [ -f data/tdc/llavero.json ]; then
+            cp data/tdc/llavero.json cdu-visor/tdc/llavero.json
+          fi
+
+          # NUNCA copiar operacion.json: son los datos EN CLARO de la operación (importes,
+          # nombres y datos personales de los partícipes). cdu-visor es un repositorio
+          # PÚBLICO — este fichero no debe llegar aquí bajo ningún concepto. No forma parte
+          # de la copia anterior (no se referencia en ningún cp), y esta línea es además una
+          # red de seguridad explícita por si en el futuro alguien cambia el paso de copia.
+          rm -f cdu-visor/tdc/operacion.json
+
+      - name: Confirmar y publicar en cdu-visor
+        run: |
+          set -euo pipefail
+          cd cdu-visor
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add tdc/
+          if git diff --cached --quiet; then
+            echo "Sin cambios que publicar."
+          else
+            git commit -m "Sincronización automática del visor desde operaciones-gestor (${{ github.sha }})"
+            git push
+          fi
