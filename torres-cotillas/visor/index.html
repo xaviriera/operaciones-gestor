@@ -403,6 +403,17 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 .camera-copy{position:relative;text-align:center;padding:18px;color:var(--navy)}
 .camera-copy strong{display:block;font-size:17px}
 .camera-copy span{display:block;margin-top:6px;color:var(--muted);font-size:12px}
+.photos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
+.photo-card{overflow:hidden}
+.photo-button{display:block;width:100%;border:0;padding:0;background:transparent;text-align:left}
+.photo-button img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#f6f4ef}
+.photo-meta{padding:13px 14px 15px}
+.photo-date{display:block;color:var(--ochre);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.8px}
+.photo-caption{margin:5px 0 0;color:var(--navy);font-size:13px;font-weight:800;line-height:1.35}
+.photos-empty{margin:16px 0 0;padding:16px;border:1px dashed rgba(22,61,96,.22);border-radius:8px;background:#fffdf8;color:var(--muted);font-size:13px;font-weight:700}
+.lightbox{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:22px;background:rgba(15,44,71,.82)}
+.lightbox[hidden]{display:none}
+.lightbox img{display:block;max-width:min(100%,1100px);max-height:82vh;border-radius:8px;box-shadow:0 24px 80px rgba(0,0,0,.34)}
 .folder-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
 .folder{
   min-height:88px;
@@ -718,6 +729,20 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
       </div>
     </section>
 
+    <section class="section" id="fotosAvanceSection">
+      <div class="card panel">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Fotos del avance de obra</div>
+            <h2>Seguimiento fotográfico</h2>
+            <p class="note">Evolución visual de los trabajos, organizada por fecha.</p>
+          </div>
+        </div>
+        <div class="photos-grid" id="photosGrid"></div>
+        <p class="photos-empty" id="photosEmpty">Las primeras fotografías se publicarán al iniciar la obra.</p>
+      </div>
+    </section>
+
     <section class="section" id="documentacion">
       <div class="section-head">
         <div>
@@ -768,6 +793,9 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 </div>
 </template>
 <div class="data-warning" id="dataWarning" role="status" hidden>No se han podido cargar los datos de la operación. Revisa la conexión o el origen configurado.</div>
+<div class="lightbox" id="photoLightbox" hidden>
+  <img id="photoLightboxImage" src="" alt="">
+</div>
 
 <script>
 const ORIGEN_DATOS = 'https://xaviriera.github.io/operaciones-gestor/data/tdc/operacion.json';
@@ -939,6 +967,42 @@ function renderCamaras(){
       </div>`;
   }).join("");
 }
+function abrirFotoAvance(url,pie){
+  const lightbox=document.getElementById("photoLightbox");
+  const image=document.getElementById("photoLightboxImage");
+  image.src=url;
+  image.alt=pie || "Fotografía del avance de obra";
+  lightbox.hidden=false;
+}
+function cerrarFotoAvance(){
+  const lightbox=document.getElementById("photoLightbox");
+  const image=document.getElementById("photoLightboxImage");
+  lightbox.hidden=true;
+  image.src="";
+  image.alt="";
+}
+function renderFotosAvance(){
+  const fotos=Array.isArray(datosOperacion.fotos_avance) ? datosOperacion.fotos_avance : [];
+  const grid=document.getElementById("photosGrid");
+  const empty=document.getElementById("photosEmpty");
+  empty.hidden=fotos.length>0;
+  grid.innerHTML=fotos.map((foto,index)=>{
+    const pie=valor(foto.pie);
+    const fecha=valor(foto.fecha);
+    return `
+      <article class="card photo-card">
+        <button class="photo-button" type="button" data-photo-url="${escapeAttr(foto.url || "")}" data-photo-caption="${escapeAttr(pie)}">
+          <img src="${escapeAttr(foto.url || "")}" alt="${escapeAttr(pie)}" loading="lazy">
+          <div class="photo-meta"><span class="photo-date">${escapeHtml(fecha)}</span><p class="photo-caption">${escapeHtml(pie)}</p></div>
+        </button>
+      </article>`;
+  }).join("");
+  grid.querySelectorAll(".photo-button").forEach(button=>{
+    button.addEventListener("click",()=>{
+      abrirFotoAvance(button.dataset.photoUrl,button.dataset.photoCaption);
+    });
+  });
+}
 function renderFolders(){
   const docs=(datosOperacion.documentacion || []).filter(item=>item.visible!==false);
   document.getElementById("folders").innerHTML=docs.map(item=>`
@@ -988,6 +1052,7 @@ function renderTodo(){
   renderGantt();
   renderEconomico();
   renderCamaras();
+  renderFotosAvance();
   renderFolders();
   renderBitacora();
   renderNoticiasMercado();
@@ -1009,6 +1074,12 @@ function montarVisor(){
       filtroActivo=btn.dataset.filter;
       if(datosOperacion) renderMovements(filtroActivo);
     });
+  });
+  document.getElementById("photoLightbox").addEventListener("click",event=>{
+    if(event.target.id==="photoLightbox") cerrarFotoAvance();
+  });
+  document.addEventListener("keydown",event=>{
+    if(event.key==="Escape" && !document.getElementById("photoLightbox").hidden) cerrarFotoAvance();
   });
 }
 function base64ToBytes(value){
