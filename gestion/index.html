@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión privada de operación</title>
+<style>
+:root{
+  --navy:#163D60;
+  --navy2:#0f2c47;
+  --ochre:#E29F34;
+  --cream:#FDFBF7;
+  --ink:#1a1a1a;
+  --muted:#617180;
+  --line:rgba(22,61,96,.16);
+  --soft:#f3f0e9;
+  --ok:#1d7a4f;
+  --warn:#b3401f;
+  --white:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Montserrat,Arial,sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.5;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:disabled{cursor:not-allowed;opacity:.58}
+.hidden{display:none!important}
+.shell{min-height:100vh}
+.top{
+  background:linear-gradient(135deg,var(--navy2),var(--navy));
+  color:var(--white);
+  padding:22px clamp(16px,4vw,52px);
+  border-bottom:5px solid var(--ochre);
+}
+.top-inner{
+  max-width:1240px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:24px;
+}
+.kicker{
+  margin:0 0 7px;
+  color:#ffe0aa;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+h1{
+  margin:0;
+  color:var(--cream);
+  font-size:clamp(24px,3.5vw,38px);
+  line-height:1.12;
+  letter-spacing:0;
+}
+.subtitle{margin:9px 0 0;max-width:760px;color:rgba(253,251,247,.82);font-size:14px}
+.status-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border:1px solid rgba(253,251,247,.22);
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  color:rgba(253,251,247,.9);
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+  white-space:nowrap;
+}
+.status-pill:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ochre)}
+.page{max-width:1240px;margin:0 auto;padding:24px clamp(14px,4vw,52px) 48px}
+.notice{
+  border:1px solid rgba(179,64,31,.24);
+  background:#fff5ef;
+  color:#7a2a17;
+  border-radius:8px;
+  padding:12px 14px;
+  margin-bottom:16px;
+  font-size:13px;
+  font-weight:650;
+}
+.notice.info{border-color:rgba(22,61,96,.16);background:#f3f7f8;color:var(--navy)}
+.panel{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:8px;
+  box-shadow:0 18px 44px rgba(22,61,96,.08);
+}
+.login{max-width:760px;padding:22px}
+.row{display:grid;grid-template-columns:1fr;gap:12px}
+.file-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:12px;
+  align-items:end;
+}
+label{display:grid;gap:6px;font-size:12px;font-weight:850;color:var(--navy);letter-spacing:.2px}
+input,textarea,select{
+  width:100%;
+  border:1px solid rgba(22,61,96,.22);
+  border-radius:7px;
+  background:#fff;
+  color:var(--ink);
+  padding:10px 11px;
+  outline:none;
+  min-height:42px;
+}
+textarea{min-height:86px;resize:vertical}
+input:focus,textarea:focus,select:focus{border-color:var(--ochre);box-shadow:0 0 0 3px rgba(226,159,52,.16)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:40px;
+  border:1px solid transparent;
+  border-radius:7px;
+  padding:9px 13px;
+  font-weight:850;
+  font-size:13px;
+}
+.btn.primary{background:var(--navy);color:#fff}
+.btn.primary:hover{background:var(--navy2)}
+.btn.ochre{background:var(--ochre);color:var(--navy)}
+.btn.light{background:#f4f1ea;color:var(--navy);border-color:var(--line)}
+.btn.danger{background:#fff0eb;color:var(--warn);border-color:rgba(179,64,31,.22)}
+.btn.small{min-height:32px;padding:6px 9px;font-size:12px}
+.btn.icon{width:34px;min-height:34px;padding:0}
+.muted{color:var(--muted);font-size:12px}
+.error{color:var(--warn);font-size:13px;font-weight:750}
+.success{color:var(--ok);font-size:13px;font-weight:750}
+.toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  padding:14px 0 18px;
+}
+.toolbar h2{margin:0;color:var(--navy);font-size:20px;line-height:1.2}
+.toolbar-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px}
+.quick{
+  display:grid;
+  grid-template-columns:minmax(220px,1.2fr) minmax(180px,.8fr);
+  gap:14px;
+  padding:16px;
+  margin-bottom:16px;
+}
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:14px 0;
+}
+.tab{
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--navy);
+  border-radius:999px;
+  padding:8px 13px;
+  font-size:12px;
+  font-weight:900;
+}
+.tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.section{padding:0}
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:14px 16px;
+  border-bottom:1px solid var(--line);
+}
+.section-title h3{margin:0;color:var(--navy);font-size:17px}
+.section-title p{margin:3px 0 0;color:var(--muted);font-size:12px}
+.list{display:grid;gap:12px;padding:14px}
+.item{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:8px;
+  padding:12px;
+}
+.item-top{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+  align-items:center;
+}
+.item-title{display:flex;align-items:center;gap:9px;color:var(--navy);font-weight:900;font-size:13px}
+.index{
+  display:inline-grid;
+  place-items:center;
+  min-width:28px;
+  height:28px;
+  border-radius:50%;
+  color:#fff;
+  background:var(--navy);
+  font-size:12px;
+}
+.item-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:7px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid-3{display:grid;grid-template-columns:1fr 170px 190px;gap:10px}
+.full{grid-column:1/-1}
+.segmented{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  border:1px solid var(--line);
+  border-radius:7px;
+  overflow:hidden;
+  min-height:42px;
+}
+.segmented button{
+  border:0;
+  border-right:1px solid var(--line);
+  background:#fff;
+  color:var(--navy);
+  font-size:12px;
+  font-weight:850;
+}
+.segmented button:last-child{border-right:0}
+.segmented button.active{background:var(--navy);color:#fff}
+.segmented button.done.active{background:var(--ok)}
+.empty{
+  border:1px dashed rgba(22,61,96,.3);
+  border-radius:8px;
+  padding:20px;
+  color:var(--muted);
+  text-align:center;
+  font-size:13px;
+}
+.download-warning{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  margin-top:10px;
+  padding:10px 12px;
+  background:#fff5ef;
+  border:1px solid rgba(179,64,31,.22);
+  border-radius:8px;
+  color:#7a2a17;
+  font-size:12px;
+  font-weight:700;
+}
+.spinner{
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  border:2px solid rgba(22,61,96,.22);
+  border-top-color:var(--navy);
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (max-width:860px){
+  .top-inner,.toolbar{display:grid}
+  .status-pill{width:max-content}
+  .file-row,.quick,.grid-2,.grid-3{grid-template-columns:1fr}
+  .section-head{align-items:flex-start;display:grid}
+  .item-top{display:grid}
+  .item-actions{justify-content:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="top">
+    <div class="top-inner">
+      <div>
+        <p class="kicker">Panel privado</p>
+        <h1>Gestión de operación</h1>
+        <p class="subtitle">Editar el fichero cifrado que alimenta el visor de inversores. La clave maestra queda solo en memoria durante esta sesión.</p>
+      </div>
+      <div class="status-pill" id="sessionState">Sin abrir</div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="notice hidden" id="fileWarning">WebCrypto no funciona abriendo este archivo con <strong>file://</strong>. Sírvelo desde HTTPS o desde <strong>http://localhost</strong>.</div>
+    <section class="panel login" id="loginPanel" aria-label="Abrir llavero cifrado">
+      <div class="row">
+        <label>
+          Fichero llavero.json
+          <input id="fileInput" type="file" accept="application/json,.json">
+        </label>
+        <label>
+          Contraseña del gestor
+          <input id="passwordInput" type="password" autocomplete="current-password" placeholder="Contraseña">
+        </label>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="openButton" type="button">Abrir operación</button>
+        <span class="muted" id="loginHint">Selecciona el fichero cifrado y escribe tu contraseña.</span>
+      </div>
+      <p class="error hidden" id="loginError"></p>
+    </section>
+
+    <section id="editorPanel" class="hidden" aria-label="Editor de operación">
+      <div class="toolbar">
+        <div>
+          <h2 id="operationTitle">Operación abierta</h2>
+          <div class="muted" id="operationMeta">Cambios pendientes: no</div>
+        </div>
+        <div class="toolbar-actions">
+          <button class="btn ochre" id="downloadEncrypted" type="button">Generar fichero actualizado</button>
+          <button class="btn light" id="downloadPlain" type="button">Descargar datos en claro</button>
+        </div>
+      </div>
+
+      <div class="download-warning">
+        <strong>Aviso:</strong>
+        <span>El JSON en claro contiene información operativa sin cifrar. No debe publicarse ni compartirse fuera del circuito privado.</span>
+      </div>
+
+      <section class="panel quick" aria-label="Estado rápido">
+        <label>
+          Porcentaje de avance
+          <input id="avanceInput" type="number" min="0" max="100" step="1">
+        </label>
+        <label>
+          Estado
+          <input id="estadoInput" type="text" placeholder="Fase actual">
+        </label>
+      </section>
+
+      <nav class="tabs" aria-label="Secciones editables">
+        <button class="tab active" type="button" data-tab="hitos">Hitos</button>
+        <button class="tab" type="button" data-tab="bitacora">Bitácora de la operación</button>
+        <button class="tab" type="button" data-tab="noticias">Noticias del mercado</button>
+      </nav>
+
+      <section class="panel section" id="tab-hitos">
+        <div class="section-head">
+          <div class="section-title">
+            <h3>Hitos</h3>
+            <p>Lista ordenada visible para inversores.</p>
+          </div>
+          <button class="btn primary small" type="button" data-add="hitos">Añadir hito</button>
+        </div>
+        <div class="list" id="hitosList"></div>
+      </section>
+
+      <section class="panel section hidden" id="tab-bitacora">
+        <div class="section-head">
+          <div class="section-title">
+            <h3>Bitácora de la operación</h3>
+            <p>Noticias internas de la operación para inversores.</p>
+          </div>
+          <button class="btn primary small" type="button" data-add="bitacora">Añadir entrada</button>
+        </div>
+        <div class="list" id="bitacoraList"></div>
+      </section>
+
+      <section class="panel section hidden" id="tab-noticias">
+        <div class="section-head">
+          <div class="section-title">
+            <h3>Noticias del mercado</h3>
+            <p>Contexto externo separado de la bitácora.</p>
+          </div>
+          <button class="btn primary small" type="button" data-add="noticias_mercado">Añadir noticia</button>
+        </div>
+        <div class="list" id="noticiasList"></div>
+      </section>
+    </section>
+  </main>
+</div>
+
+<script>
+const ENCODER=new TextEncoder();
+const DECODER=new TextDecoder();
+const ESTADOS_HITO=["conseguido","actual","pendiente"];
+let encryptedWallet=null;
+let operationData=null;
+let masterKeyBytes=null;
+let currentFileName="llavero.json";
+let originalSobresJson=null;
+let dirty=false;
+
+const $=selector=>document.querySelector(selector);
+
+function bytesToBase64(bytes){
+  let binary="";
+  const chunk=0x8000;
+  for(let i=0;i<bytes.length;i+=chunk){
+    binary+=String.fromCharCode(...bytes.subarray(i,i+chunk));
+  }
+  return btoa(binary);
+}
+
+function base64ToBytes(value){
+  const binary=atob(String(value || ""));
+  const bytes=new Uint8Array(binary.length);
+  for(let i=0;i<binary.length;i+=1) bytes[i]=binary.charCodeAt(i);
+  return bytes;
+}
+
+async function derivePasswordKey(password,salt,iterations){
+  const material=await crypto.subtle.importKey("raw",ENCODER.encode(password),"PBKDF2",false,["deriveKey"]);
+  return crypto.subtle.deriveKey(
+    {name:"PBKDF2",salt,iterations,hash:"SHA-256"},
+    material,
+    {name:"AES-GCM",length:256},
+    false,
+    ["decrypt"]
+  );
+}
+
+async function importAesKey(bytes,usages){
+  return crypto.subtle.importKey("raw",bytes,{name:"AES-GCM"},false,usages);
+}
+
+async function openEnvelope(password,envelope,iterations){
+  const passwordKey=await derivePasswordKey(password,base64ToBytes(envelope.salt),iterations);
+  const clear=await crypto.subtle.decrypt(
+    {name:"AES-GCM",iv:base64ToBytes(envelope.iv)},
+    passwordKey,
+    base64ToBytes(envelope.clave_cifrada)
+  );
+  const bytes=new Uint8Array(clear);
+  if(bytes.byteLength!==32) throw new Error("La clave maestra no tiene 32 bytes.");
+  return bytes;
+}
+
+async function decryptContent(wallet,masterBytes){
+  const key=await importAesKey(masterBytes,["decrypt"]);
+  const clear=await crypto.subtle.decrypt(
+    {name:"AES-GCM",iv:base64ToBytes(wallet.contenido.iv)},
+    key,
+    base64ToBytes(wallet.contenido.datos)
+  );
+  return JSON.parse(DECODER.decode(clear));
+}
+
+async function encryptContent(data,masterBytes){
+  const iv=crypto.getRandomValues(new Uint8Array(12));
+  const key=await importAesKey(masterBytes,["encrypt"]);
+  const encrypted=await crypto.subtle.encrypt(
+    {name:"AES-GCM",iv},
+    key,
+    ENCODER.encode(JSON.stringify(data,null,2))
+  );
+  return {iv:bytesToBase64(iv),datos:bytesToBase64(new Uint8Array(encrypted))};
+}
+
+async function tryOpenWallet(wallet,password){
+  if(!wallet || !Array.isArray(wallet.sobres) || !wallet.contenido) throw new Error("El fichero no parece un llavero válido.");
+  const iterations=Number(wallet.iteraciones);
+  if(!iterations) throw new Error("El llavero no indica iteraciones PBKDF2 válidas.");
+  let lastError=null;
+  for(const envelope of wallet.sobres){
+    try{
+      const master=await openEnvelope(password,envelope,iterations);
+      const data=await decryptContent(wallet,master);
+      return {master,data};
+    }catch(error){
+      lastError=error;
+    }
+  }
+  throw lastError || new Error("No se ha podido abrir ningún sobre.");
+}
+
+function ensureEditableShape(){
+  if(!operationData || typeof operationData!=="object" || Array.isArray(operationData)) operationData={};
+  if(!Array.isArray(operationData.hitos)) operationData.hitos=[];
+  if(!Array.isArray(operationData.bitacora)) operationData.bitacora=[];
+  if(!Array.isArray(operationData.noticias_mercado)) operationData.noticias_mercado=[];
+  if(!operationData.estado || typeof operationData.estado!=="object" || Array.isArray(operationData.estado)){
+    operationData.estado={fase_actual:String(operationData.estado || ""),porcentaje_avance:0};
+  }
+  if(operationData.estado.porcentaje_avance===undefined) operationData.estado.porcentaje_avance=0;
+  if(operationData.estado.fase_actual===undefined) operationData.estado.fase_actual="";
+}
+
+function escapeHtml(value){
+  return String(value ?? "").replace(/[&<>"']/g,char=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[char]));
+}
+
+function extractJsonMemberRaw(jsonText,key){
+  const needle=`"${key}"`;
+  let pos=jsonText.indexOf(needle);
+  while(pos!==-1){
+    let colon=pos+needle.length;
+    while(/\s/.test(jsonText[colon] || "")) colon+=1;
+    if(jsonText[colon]!==":"){
+      pos=jsonText.indexOf(needle,pos+1);
+      continue;
+    }
+    let start=colon+1;
+    while(/\s/.test(jsonText[start] || "")) start+=1;
+    const opener=jsonText[start];
+    const closer=opener==="[" ? "]" : opener==="{" ? "}" : null;
+    if(!closer) throw new Error(`La clave ${key} no contiene un objeto o array JSON.`);
+    let depth=0;
+    let inString=false;
+    let escaped=false;
+    for(let i=start;i<jsonText.length;i+=1){
+      const char=jsonText[i];
+      if(inString){
+        if(escaped){
+          escaped=false;
+        }else if(char==="\\"){
+          escaped=true;
+        }else if(char==='"'){
+          inString=false;
+        }
+        continue;
+      }
+      if(char==='"'){
+        inString=true;
+      }else if(char===opener){
+        depth+=1;
+      }else if(char===closer){
+        depth-=1;
+        if(depth===0) return jsonText.slice(start,i+1);
+      }
+    }
+    throw new Error(`No se ha podido extraer la clave ${key}.`);
+  }
+  throw new Error(`No existe la clave ${key}.`);
+}
+
+function setDirty(value=true){
+  dirty=value;
+  $("#operationMeta").textContent=`Cambios pendientes: ${dirty ? "sí" : "no"}`;
+}
+
+function updateFromQuickFields(){
+  operationData.estado.porcentaje_avance=Math.max(0,Math.min(100,Number($("#avanceInput").value) || 0));
+  operationData.estado.fase_actual=$("#estadoInput").value;
+  setDirty();
+}
+
+function moveItem(key,index,delta){
+  const list=operationData[key];
+  const target=index+delta;
+  if(target<0 || target>=list.length) return;
+  [list[index],list[target]]=[list[target],list[index]];
+  setDirty();
+  renderAll();
+}
+
+function deleteItem(key,index){
+  operationData[key].splice(index,1);
+  setDirty();
+  renderAll();
+}
+
+function insertItem(key,index){
+  const templates={
+    hitos:{nombre:"",fecha:"",detalle:"",estado:"pendiente"},
+    bitacora:{fecha:"",titulo:"",texto:""},
+    noticias_mercado:{fecha:"",titular:"",texto:"",enlace:""}
+  };
+  operationData[key].splice(index,0,{...templates[key]});
+  setDirty();
+  renderAll();
+}
+
+function updateField(key,index,field,value){
+  operationData[key][index][field]=value;
+  setDirty();
+}
+
+function renderStatusSelector(item,index){
+  return `<div class="segmented" role="group" aria-label="Estado del hito">
+    ${ESTADOS_HITO.map(state=>`<button class="${state==="conseguido" ? "done " : ""}${item.estado===state ? "active" : ""}" type="button" data-status-index="${index}" data-status="${state}">${escapeHtml(state)}</button>`).join("")}
+  </div>`;
+}
+
+function renderHitos(){
+  const root=$("#hitosList");
+  if(!operationData.hitos.length){
+    root.innerHTML='<div class="empty">No hay hitos configurados.</div>';
+    return;
+  }
+  root.innerHTML=operationData.hitos.map((item,index)=>`
+    <article class="item">
+      <div class="item-top">
+        <div class="item-title"><span class="index">${index+1}</span><span>Hito</span></div>
+        <div class="item-actions">
+          <button class="btn light small" type="button" data-insert="hitos" data-index="${index}">Añadir antes</button>
+          <button class="btn light icon" type="button" data-move="hitos" data-index="${index}" data-delta="-1" title="Subir">↑</button>
+          <button class="btn light icon" type="button" data-move="hitos" data-index="${index}" data-delta="1" title="Bajar">↓</button>
+          <button class="btn danger small" type="button" data-delete="hitos" data-index="${index}">Eliminar</button>
+        </div>
+      </div>
+      <div class="grid-3">
+        <label>Nombre<input data-list="hitos" data-index="${index}" data-field="nombre" value="${escapeHtml(item.nombre)}"></label>
+        <label>Fecha<input data-list="hitos" data-index="${index}" data-field="fecha" value="${escapeHtml(item.fecha)}"></label>
+        <label>Estado${renderStatusSelector(item,index)}</label>
+        <label class="full">Detalle<textarea data-list="hitos" data-index="${index}" data-field="detalle">${escapeHtml(item.detalle)}</textarea></label>
+      </div>
+    </article>`).join("");
+}
+
+function renderBitacora(){
+  const root=$("#bitacoraList");
+  if(!operationData.bitacora.length){
+    root.innerHTML='<div class="empty">No hay entradas de bitácora.</div>';
+    return;
+  }
+  root.innerHTML=operationData.bitacora.map((item,index)=>`
+    <article class="item">
+      <div class="item-top">
+        <div class="item-title"><span class="index">${index+1}</span><span>Entrada</span></div>
+        <div class="item-actions">
+          <button class="btn light small" type="button" data-insert="bitacora" data-index="${index}">Añadir antes</button>
+          <button class="btn light icon" type="button" data-move="bitacora" data-index="${index}" data-delta="-1" title="Subir">↑</button>
+          <button class="btn light icon" type="button" data-move="bitacora" data-index="${index}" data-delta="1" title="Bajar">↓</button>
+          <button class="btn danger small" type="button" data-delete="bitacora" data-index="${index}">Eliminar</button>
+        </div>
+      </div>
+      <div class="grid-2">
+        <label>Fecha<input data-list="bitacora" data-index="${index}" data-field="fecha" value="${escapeHtml(item.fecha)}"></label>
+        <label>Título<input data-list="bitacora" data-index="${index}" data-field="titulo" value="${escapeHtml(item.titulo)}"></label>
+        <label class="full">Texto<textarea data-list="bitacora" data-index="${index}" data-field="texto">${escapeHtml(item.texto)}</textarea></label>
+      </div>
+    </article>`).join("");
+}
+
+function renderNoticias(){
+  const root=$("#noticiasList");
+  if(!operationData.noticias_mercado.length){
+    root.innerHTML='<div class="empty">No hay noticias de mercado.</div>';
+    return;
+  }
+  root.innerHTML=operationData.noticias_mercado.map((item,index)=>`
+    <article class="item">
+      <div class="item-top">
+        <div class="item-title"><span class="index">${index+1}</span><span>Noticia</span></div>
+        <div class="item-actions">
+          <button class="btn light small" type="button" data-insert="noticias_mercado" data-index="${index}">Añadir antes</button>
+          <button class="btn light icon" type="button" data-move="noticias_mercado" data-index="${index}" data-delta="-1" title="Subir">↑</button>
+          <button class="btn light icon" type="button" data-move="noticias_mercado" data-index="${index}" data-delta="1" title="Bajar">↓</button>
+          <button class="btn danger small" type="button" data-delete="noticias_mercado" data-index="${index}">Eliminar</button>
+        </div>
+      </div>
+      <div class="grid-2">
+        <label>Fecha<input data-list="noticias_mercado" data-index="${index}" data-field="fecha" value="${escapeHtml(item.fecha)}"></label>
+        <label>Titular<input data-list="noticias_mercado" data-index="${index}" data-field="titular" value="${escapeHtml(item.titular)}"></label>
+        <label class="full">Texto<textarea data-list="noticias_mercado" data-index="${index}" data-field="texto">${escapeHtml(item.texto)}</textarea></label>
+        <label class="full">Enlace<input data-list="noticias_mercado" data-index="${index}" data-field="enlace" value="${escapeHtml(item.enlace)}" placeholder="https://"></label>
+      </div>
+    </article>`).join("");
+}
+
+function renderAll(){
+  $("#avanceInput").value=operationData.estado.porcentaje_avance ?? 0;
+  $("#estadoInput").value=operationData.estado.fase_actual ?? "";
+  renderHitos();
+  renderBitacora();
+  renderNoticias();
+}
+
+function downloadText(filename,text,type){
+  const blob=new Blob([text],{type});
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement("a");
+  link.href=url;
+  link.download=filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+async function downloadEncryptedWallet(){
+  if(!encryptedWallet || !masterKeyBytes || !operationData) return;
+  const rebuilt={...encryptedWallet,contenido:await encryptContent(operationData,masterKeyBytes),sobres:encryptedWallet.sobres};
+  const marker=`__SOBRES_ORIGINALES_${Date.now()}_${Math.random()}__`;
+  const text=JSON.stringify({...rebuilt,sobres:marker},null,2).replace(JSON.stringify(marker),originalSobresJson || JSON.stringify(encryptedWallet.sobres,null,2));
+  downloadText("llavero.json",text,"application/json;charset=utf-8");
+  setDirty(false);
+}
+
+function downloadPlainData(){
+  const ok=window.confirm("Vas a descargar datos en claro. Este fichero no debe publicarse ni compartirse fuera del circuito privado.");
+  if(!ok) return;
+  downloadText("operacion-en-claro.json",JSON.stringify(operationData,null,2),"application/json;charset=utf-8");
+}
+
+async function openSelectedFile(){
+  const file=$("#fileInput").files[0];
+  const password=$("#passwordInput").value;
+  const error=$("#loginError");
+  error.classList.add("hidden");
+  if(!file || !password){
+    error.textContent="Selecciona llavero.json y escribe la contraseña.";
+    error.classList.remove("hidden");
+    return;
+  }
+  $("#openButton").disabled=true;
+  $("#loginHint").innerHTML='<span class="spinner" aria-hidden="true"></span> Comprobando...';
+  try{
+    const text=await file.text();
+    const wallet=JSON.parse(text);
+    const opened=await tryOpenWallet(wallet,password);
+    encryptedWallet=wallet;
+    operationData=opened.data;
+    masterKeyBytes=opened.master;
+    originalSobresJson=extractJsonMemberRaw(text,"sobres");
+    currentFileName=file.name || "llavero.json";
+    ensureEditableShape();
+    $("#loginPanel").classList.add("hidden");
+    $("#editorPanel").classList.remove("hidden");
+    $("#sessionState").textContent="Abierto en memoria";
+    $("#operationTitle").textContent=(operationData.operacion && operationData.operacion.nombre) ? operationData.operacion.nombre : currentFileName;
+    renderAll();
+    setDirty(false);
+    $("#passwordInput").value="";
+  }catch(err){
+    error.textContent="No se ha podido abrir el llavero con esa contraseña.";
+    error.classList.remove("hidden");
+    $("#loginHint").textContent="Revisa el fichero o la contraseña y vuelve a intentarlo.";
+  }finally{
+    $("#openButton").disabled=false;
+  }
+}
+
+function bindEvents(){
+  if(location.protocol==="file:") $("#fileWarning").classList.remove("hidden");
+  $("#openButton").addEventListener("click",openSelectedFile);
+  $("#passwordInput").addEventListener("keydown",event=>{
+    if(event.key==="Enter") openSelectedFile();
+  });
+  $("#downloadEncrypted").addEventListener("click",downloadEncryptedWallet);
+  $("#downloadPlain").addEventListener("click",downloadPlainData);
+  $("#avanceInput").addEventListener("input",updateFromQuickFields);
+  $("#estadoInput").addEventListener("input",updateFromQuickFields);
+  document.addEventListener("input",event=>{
+    const target=event.target;
+    if(!target.matches("[data-list][data-index][data-field]")) return;
+    updateField(target.dataset.list,Number(target.dataset.index),target.dataset.field,target.value);
+  });
+  document.addEventListener("click",event=>{
+    const target=event.target.closest("button");
+    if(!target) return;
+    if(target.dataset.tab){
+      document.querySelectorAll(".tab").forEach(tab=>tab.classList.toggle("active",tab===target));
+      document.querySelectorAll("[id^='tab-']").forEach(section=>section.classList.add("hidden"));
+      $(`#tab-${target.dataset.tab}`).classList.remove("hidden");
+    }
+    if(target.dataset.add){
+      insertItem(target.dataset.add,operationData[target.dataset.add].length);
+    }
+    if(target.dataset.insert){
+      insertItem(target.dataset.insert,Number(target.dataset.index));
+    }
+    if(target.dataset.move){
+      moveItem(target.dataset.move,Number(target.dataset.index),Number(target.dataset.delta));
+    }
+    if(target.dataset.delete){
+      deleteItem(target.dataset.delete,Number(target.dataset.index));
+    }
+    if(target.dataset.statusIndex){
+      const index=Number(target.dataset.statusIndex);
+      operationData.hitos[index].estado=target.dataset.status;
+      setDirty();
+      renderHitos();
+    }
+  });
+  window.addEventListener("beforeunload",event=>{
+    if(!dirty) return;
+    event.preventDefault();
+    event.returnValue="";
+  });
+}
+
+bindEvents();
+</script>
+</body>
+</html>
