@@ -24,6 +24,7 @@ from typing import Iterable
 
 ITERACIONES = 250_000
 FICHERO_PASSWORDS = "CONTRASENAS-participes-NO-SUBIR.txt"
+PATRONES_DEFINICIONES = ("definicion-accesos*.json", "definicion-accesos*.txt")
 DIGITOS_SEGUROS = "23456789"
 
 # Palabras espanolas ASCII, cortas y legibles. Se evitan acentos, enes con tilde,
@@ -152,6 +153,12 @@ class ResultadoCifrado:
     passwords: list[tuple[str, str]]
 
 
+@dataclass(frozen=True)
+class DefinicionAcceso:
+    alias: str
+    password: str | None = None
+
+
 class ParserEspanol(argparse.ArgumentParser):
     def format_usage(self) -> str:
         return super().format_usage().replace("usage:", "uso:")
@@ -219,6 +226,17 @@ def generar_password() -> str:
     return "-".join(palabras) + digitos
 
 
+def normalizar_password(password: str) -> str:
+    # ======================================================================
+    # NORMALIZACION CRITICA Y COMPARTIDA:
+    # El visor publico y el panel de gestion DEBEN aplicar EXACTAMENTE esta
+    # misma transformacion antes de derivar PBKDF2: quitar espacios, guiones
+    # y puntos, y pasar a MAYUSCULAS. Si no coincide byte a byte, el mismo DNI
+    # escrito como "12345678A", "12345678-a" o "12345678 A" no abrira.
+    # ======================================================================
+    return "".join(car for car in password if not car.isspace() and car not in {"-", "."}).upper()
+
+
 def derivar_clave(password: str, salt: bytes) -> bytes:
     AESGCM, PBKDF2HMAC, hashes, _InvalidTag = cargar_cryptography()
     kdf = PBKDF2HMAC(
@@ -227,10 +245,24 @@ def derivar_clave(password: str, salt: bytes) -> bytes:
         salt=salt,
         iterations=ITERACIONES,
     )
-    return kdf.derive(password.encode("utf-8"))
+    return kdf.derive(normalizar_password(password).encode("utf-8"))
 
 
-def cifrar_operacion_bytes(datos_json: bytes, participes: Iterable[str]) -> ResultadoCifrado:
+def crear_sobre(alias: str, password: str, clave_maestra: bytes) -> dict:
+    AESGCM, _PBKDF2HMAC, _hashes, _InvalidTag = cargar_cryptography()
+    salt = secrets.token_bytes(16)
+    clave_participe = derivar_clave(password, salt)
+    iv_sobre = secrets.token_bytes(12)
+    clave_cifrada = AESGCM(clave_participe).encrypt(iv_sobre, clave_maestra, None)
+    return {
+        "alias": alias,
+        "salt": b64(salt),
+        "iv": b64(iv_sobre),
+        "clave_cifrada": b64(clave_cifrada),
+    }
+
+
+def cifrar_operacion_bytes(datos_json: bytes, accesos: Iterable[str | DefinicionAcceso]) -> ResultadoCifrado:
     AESGCM, _PBKDF2HMAC, _hashes, _InvalidTag = cargar_cryptography()
 
     clave_maestra = secrets.token_bytes(32)
@@ -239,20 +271,14 @@ def cifrar_operacion_bytes(datos_json: bytes, participes: Iterable[str]) -> Resu
 
     sobres = []
     passwords: list[tuple[str, str]] = []
-    for alias in participes:
-        password = generar_password()
-        salt = secrets.token_bytes(16)
-        clave_participe = derivar_clave(password, salt)
-        iv_sobre = secrets.token_bytes(12)
-        clave_cifrada = AESGCM(clave_participe).encrypt(iv_sobre, clave_maestra, None)
-        sobres.append(
-            {
-                "alias": alias,
-                "salt": b64(salt),
-                "iv": b64(iv_sobre),
-                "clave_cifrada": b64(clave_cifrada),
-            }
-        )
+    for acceso in accesos:
+        if isinstance(acceso, DefinicionAcceso):
+            alias = acceso.alias
+            password = acceso.password or generar_password()
+        else:
+            alias = acceso
+            password = generar_password()
+        sobres.append(crear_sobre(alias, password, clave_maestra))
         passwords.append((alias, password))
 
     return ResultadoCifrado(
@@ -280,6 +306,18 @@ def leer_json_como_bytes(ruta: Path) -> bytes:
     return datos
 
 
+def leer_llavero(ruta: Path) -> dict:
+    if not ruta.exists():
+        raise FileNotFoundError(f"No encuentro el llavero: {ruta}")
+    try:
+        llavero = json.loads(ruta.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"El llavero no es un JSON valido: {exc}") from exc
+    if not isinstance(llavero, dict) or not isinstance(llavero.get("sobres"), list):
+        raise ValueError("El fichero no parece un llavero valido.")
+    return llavero
+
+
 def escribir_llavero(ruta: Path, llavero: dict) -> None:
     ruta.parent.mkdir(parents=True, exist_ok=True)
     ruta.write_text(
@@ -292,17 +330,43 @@ def repo_root() -> Path:
     return Path(__file__).resolve().parents[1]
 
 
+def ruta_relativa_o_nombre(root: Path, ruta: Path) -> str:
+    try:
+        return ruta.resolve().relative_to(root.resolve()).as_posix()
+    except ValueError:
+        return ruta.name
+
+
 def asegurar_gitignore(root: Path) -> None:
     ruta = root / ".gitignore"
-    entrada = FICHERO_PASSWORDS
+    entradas = [FICHERO_PASSWORDS, *PATRONES_DEFINICIONES]
     contenido = ruta.read_text(encoding="utf-8") if ruta.exists() else ""
     lineas = [line.strip() for line in contenido.splitlines()]
-    if entrada in lineas:
+    pendientes = [entrada for entrada in entradas if entrada not in lineas]
+    if not pendientes:
         return
     separador = "" if not contenido or contenido.endswith("\n") else "\n"
     ruta.write_text(
-        contenido + separador + "\n# Contrasenas generadas para participes (no publicar)\n" + entrada + "\n",
+        contenido
+        + separador
+        + "\n# Contrasenas y definiciones privadas de accesos (no publicar)\n"
+        + "\n".join(pendientes)
+        + "\n",
         encoding="utf-8",
+    )
+
+
+def asegurar_definicion_ignorada(root: Path, ruta_definicion: Path) -> None:
+    asegurar_gitignore(root)
+    ruta_gitignore = root / ".gitignore"
+    contenido = ruta_gitignore.read_text(encoding="utf-8") if ruta_gitignore.exists() else ""
+    lineas = [line.strip() for line in contenido.splitlines()]
+    relativa = ruta_relativa_o_nombre(root, ruta_definicion)
+    if ruta_definicion.resolve().is_relative_to(root.resolve()) and relativa not in lineas:
+        separador = "" if not contenido or contenido.endswith("\n") else "\n"
+        ruta_gitignore.write_text(contenido + separador + relativa + "\n", encoding="utf-8")
+    print(
+        f"AVISO: el fichero de definicion de accesos es privado y no debe subirse al repositorio: {ruta_definicion}"
     )
 
 
@@ -347,19 +411,90 @@ def confirmar_sobres_invalidos(salida: Path, forzar: bool) -> None:
         raise SystemExit("Operacion cancelada. No se ha cambiado el llavero.")
 
 
-def crear_parser() -> argparse.ArgumentParser:
-    parser = ParserEspanol(
-        description=(
-            "Cifra el JSON de una operacion inmobiliaria para publicarlo en una web estatica, "
-            "creando un sobre por participe."
-        ),
-        add_help=False,
-    )
-    parser._optionals.title = "opciones"
-    parser.add_argument("-h", "--help", action="help", help="Muestra esta ayuda y termina.")
+def validar_aliases_unicos(accesos: Iterable[DefinicionAcceso]) -> list[DefinicionAcceso]:
+    lista = list(accesos)
+    if not lista:
+        raise ValueError("Indica al menos un acceso.")
+    vistos: set[str] = set()
+    for acceso in lista:
+        if not acceso.alias:
+            raise ValueError("Hay una entrada sin alias.")
+        clave = acceso.alias.casefold()
+        if clave in vistos:
+            raise ValueError(f"El alias '{acceso.alias}' esta repetido. Dejalo una sola vez.")
+        vistos.add(clave)
+    return lista
+
+
+def cargar_definiciones_acceso(ruta: Path) -> list[DefinicionAcceso]:
+    if not ruta.exists():
+        raise FileNotFoundError(f"No encuentro el fichero de definicion de accesos: {ruta}")
+    texto = ruta.read_text(encoding="utf-8")
+    if ruta.suffix.lower() == ".json":
+        datos = json.loads(texto)
+        if isinstance(datos, dict) and "accesos" in datos:
+            datos = datos["accesos"]
+        if isinstance(datos, dict):
+            accesos = [DefinicionAcceso(str(alias).strip(), None if password is None else str(password)) for alias, password in datos.items()]
+        elif isinstance(datos, list):
+            accesos = []
+            for entrada in datos:
+                if not isinstance(entrada, dict):
+                    raise ValueError("Cada entrada JSON debe ser un objeto con alias y, opcionalmente, password.")
+                accesos.append(
+                    DefinicionAcceso(
+                        str(entrada.get("alias", "")).strip(),
+                        None if entrada.get("password") is None else str(entrada.get("password")),
+                    )
+                )
+        else:
+            raise ValueError("El fichero JSON debe ser una lista, un objeto alias:password o {\"accesos\": [...]}.")
+        return validar_aliases_unicos(accesos)
+
+    accesos: list[DefinicionAcceso] = []
+    for numero, linea in enumerate(texto.splitlines(), start=1):
+        limpia = linea.strip()
+        if not limpia or limpia.startswith("#"):
+            continue
+        separador = next((sep for sep in ("=", ",", ";", ":") if sep in limpia), None)
+        if separador is None:
+            alias, password = limpia, None
+        else:
+            alias, password = (parte.strip() for parte in limpia.split(separador, 1))
+            password = password or None
+        if not alias:
+            raise ValueError(f"La linea {numero} no tiene alias.")
+        accesos.append(DefinicionAcceso(alias, password))
+    return validar_aliases_unicos(accesos)
+
+
+def abrir_clave_maestra(llavero: dict, password: str) -> bytes:
+    AESGCM, _PBKDF2HMAC, _hashes, InvalidTag = cargar_cryptography()
+    for sobre in llavero["sobres"]:
+        try:
+            clave_participe = derivar_clave(password, desde_b64(sobre["salt"]))
+            return AESGCM(clave_participe).decrypt(
+                desde_b64(sobre["iv"]),
+                desde_b64(sobre["clave_cifrada"]),
+                None,
+            )
+        except (InvalidTag, KeyError, ValueError):
+            continue
+    raise ValueError("La contrasena indicada no abre ningun acceso existente. No se ha cambiado el llavero.")
+
+
+def crear_parser_crear(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--participes",
         help='Aliases separados por comas. Ejemplo: "Xavi,Paco,Antonio,Dani".',
+    )
+    parser.add_argument(
+        "--definicion-accesos",
+        help=(
+            "Fichero privado JSON o texto con accesos. JSON: "
+            '[{"alias":"p-01","password":"12345678A"},{"alias":"p-02"}]. '
+            "Texto: una linea por acceso, alias=password; si no hay password se genera una aleatoria."
+        ),
     )
     parser.add_argument(
         "--entrada",
@@ -376,34 +511,134 @@ def crear_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Sobrescribe un llavero existente sin pedir confirmacion.",
     )
+
+
+def crear_parser() -> argparse.ArgumentParser:
+    parser = ParserEspanol(
+        description=(
+            "Cifra el JSON de una operacion inmobiliaria para publicarlo en una web estatica, "
+            "creando un sobre por acceso."
+        ),
+        add_help=False,
+    )
+    parser._optionals.title = "opciones"
+    parser.add_argument("-h", "--help", action="help", help="Muestra esta ayuda y termina.")
+    subparsers = parser.add_subparsers(dest="comando", title="comandos", parser_class=ParserEspanol)
+
+    crear = subparsers.add_parser(
+        "crear",
+        help="Crea un llavero nuevo cifrando el JSON de entrada.",
+        add_help=False,
+        formatter_class=parser.formatter_class,
+    )
+    crear._optionals.title = "opciones"
+    crear.add_argument("-h", "--help", action="help", help="Muestra esta ayuda y termina.")
+    crear_parser_crear(crear)
+
+    anadir = subparsers.add_parser(
+        "anadir",
+        aliases=["añadir"],
+        help="Anade un acceso a un llavero existente sin recifrar el contenido.",
+        add_help=False,
+        formatter_class=parser.formatter_class,
+    )
+    anadir._optionals.title = "opciones"
+    anadir.add_argument("-h", "--help", action="help", help="Muestra esta ayuda y termina.")
+    anadir.add_argument("--llavero", default="data/tdc/llavero.json", help="Ruta del llavero. Por defecto: data/tdc/llavero.json.")
+    anadir.add_argument("--password-actual", required=True, help="Contrasena de una persona que ya tiene acceso.")
+    anadir.add_argument("--alias", required=True, help='Alias opaco del nuevo acceso. Ejemplo: "p-05".')
+    anadir.add_argument("--password", required=True, help="Contrasena del nuevo acceso.")
+
+    quitar = subparsers.add_parser(
+        "quitar",
+        help="Quita un alias del llavero sin tocar los demas sobres.",
+        add_help=False,
+        formatter_class=parser.formatter_class,
+    )
+    quitar._optionals.title = "opciones"
+    quitar.add_argument("-h", "--help", action="help", help="Muestra esta ayuda y termina.")
+    quitar.add_argument("--llavero", default="data/tdc/llavero.json", help="Ruta del llavero. Por defecto: data/tdc/llavero.json.")
+    quitar.add_argument("--alias", required=True, help='Alias que se va a quitar. Ejemplo: "p-05".')
     return parser
+
+
+def resolver_ruta(root: Path, ruta: str) -> Path:
+    path = Path(ruta)
+    return path if path.is_absolute() else (root / path).resolve()
+
+
+def ejecutar_crear(args: argparse.Namespace, root: Path, parser: argparse.ArgumentParser) -> int:
+    entrada = resolver_ruta(root, args.entrada)
+    salida = resolver_ruta(root, args.salida)
+
+    if args.definicion_accesos:
+        ruta_definicion = resolver_ruta(root, args.definicion_accesos)
+        asegurar_definicion_ignorada(root, ruta_definicion)
+        accesos = cargar_definiciones_acceso(ruta_definicion)
+    else:
+        if not args.participes:
+            parser.error("faltan argumentos obligatorios: --participes o --definicion-accesos")
+        accesos = [DefinicionAcceso(alias) for alias in parsear_participes(args.participes)]
+
+    confirmar_sobres_invalidos(salida, args.forzar)
+    datos_json = leer_json_como_bytes(entrada)
+    resultado = cifrar_operacion_bytes(datos_json, accesos)
+    escribir_llavero(salida, resultado.llavero)
+    asegurar_gitignore(root)
+    ruta_passwords = escribir_passwords(root, resultado.passwords)
+
+    print(f"Llavero cifrado escrito en: {salida}")
+    print(f"Entropia estimada por contrasena aleatoria: {entropia_password():.1f} bits")
+    imprimir_tabla_passwords(resultado.passwords, ruta_passwords)
+    return 0
+
+
+def ejecutar_anadir(args: argparse.Namespace, root: Path) -> int:
+    ruta_llavero = resolver_ruta(root, args.llavero)
+    llavero = leer_llavero(ruta_llavero)
+    if any(sobre.get("alias", "").casefold() == args.alias.casefold() for sobre in llavero["sobres"]):
+        raise ValueError(f"El alias '{args.alias}' ya existe. No se ha cambiado el llavero.")
+    clave_maestra = abrir_clave_maestra(llavero, args.password_actual)
+    llavero["sobres"].append(crear_sobre(args.alias, args.password, clave_maestra))
+    escribir_llavero(ruta_llavero, llavero)
+    print(f"Acceso anadido para alias '{args.alias}' en: {ruta_llavero}")
+    return 0
+
+
+def ejecutar_quitar(args: argparse.Namespace, root: Path) -> int:
+    ruta_llavero = resolver_ruta(root, args.llavero)
+    llavero = leer_llavero(ruta_llavero)
+    sobres = llavero["sobres"]
+    restantes = [sobre for sobre in sobres if sobre.get("alias", "").casefold() != args.alias.casefold()]
+    if len(restantes) == len(sobres):
+        raise ValueError(f"No existe ningun acceso con alias '{args.alias}'. No se ha cambiado el llavero.")
+    llavero["sobres"] = restantes
+    escribir_llavero(ruta_llavero, llavero)
+    print(f"Acceso quitado para alias '{args.alias}' en: {ruta_llavero}")
+    return 0
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = crear_parser()
-    args = parser.parse_args(argv)
+    argumentos = list(sys.argv[1:] if argv is None else argv)
+    if argumentos and argumentos[0] not in {"crear", "anadir", "añadir", "quitar", "-h", "--help"}:
+        argumentos.insert(0, "crear")
+    args = parser.parse_args(argumentos)
     root = repo_root()
-    entrada = (root / args.entrada).resolve() if not Path(args.entrada).is_absolute() else Path(args.entrada)
-    salida = (root / args.salida).resolve() if not Path(args.salida).is_absolute() else Path(args.salida)
 
     try:
-        if not args.participes:
-            parser.error("faltan argumentos obligatorios: --participes")
-        participes = parsear_participes(args.participes)
-        confirmar_sobres_invalidos(salida, args.forzar)
-        datos_json = leer_json_como_bytes(entrada)
-        resultado = cifrar_operacion_bytes(datos_json, participes)
-        escribir_llavero(salida, resultado.llavero)
-        asegurar_gitignore(root)
-        ruta_passwords = escribir_passwords(root, resultado.passwords)
-    except (OSError, ValueError) as exc:
+        if args.comando is None:
+            parser.error("faltan argumentos obligatorios: --participes o --definicion-accesos")
+        if args.comando == "crear":
+            return ejecutar_crear(args, root, parser)
+        if args.comando in {"anadir", "añadir"}:
+            return ejecutar_anadir(args, root)
+        if args.comando == "quitar":
+            return ejecutar_quitar(args, root)
+        parser.error("indica un comando: crear, anadir o quitar")
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"Error: {exc}", file=sys.stderr)
         return 1
-
-    print(f"Llavero cifrado escrito en: {salida}")
-    print(f"Entropia estimada por contrasena: {entropia_password():.1f} bits")
-    imprimir_tabla_passwords(resultado.passwords, ruta_passwords)
-    return 0
 
 
 if __name__ == "__main__":
