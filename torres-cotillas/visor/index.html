@@ -431,6 +431,96 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 .report p{margin:8px 0 0;color:rgba(253,251,247,.78);font-size:14px}
 .data-warning{position:fixed;right:18px;bottom:18px;z-index:20;max-width:330px;padding:14px 16px;border:1px solid rgba(226,159,52,.45);border-radius:8px;background:var(--white);color:var(--navy);box-shadow:0 18px 45px rgba(15,44,71,.22);font-size:13px;font-weight:800}
 .data-warning[hidden]{display:none}
+.access-screen{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:34px 18px;
+  color:var(--cream);
+  background:var(--navy);
+}
+.access-panel{
+  width:min(100%,420px);
+  display:grid;
+  gap:18px;
+  justify-items:center;
+  text-align:center;
+}
+.access-logo{
+  width:min(178px,52vw);
+  height:auto;
+  display:block;
+  filter:drop-shadow(0 12px 22px rgba(0,0,0,.2));
+}
+.access-title{
+  margin:8px 0 0;
+  color:var(--cream);
+  font-size:clamp(23px,7vw,34px);
+  line-height:1.12;
+  font-weight:800;
+}
+.access-context{
+  margin:0;
+  max-width:36ch;
+  color:rgba(253,251,247,.78);
+  font-size:14px;
+  font-weight:600;
+}
+.access-form{
+  width:100%;
+  display:grid;
+  gap:12px;
+  margin-top:8px;
+}
+.access-field{
+  display:grid;
+  gap:7px;
+  text-align:left;
+}
+.access-field label{
+  color:#ffe0aa;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+}
+.access-field input{
+  width:100%;
+  min-height:48px;
+  border:1px solid rgba(253,251,247,.25);
+  border-radius:8px;
+  padding:12px 13px;
+  background:rgba(255,255,255,.08);
+  color:var(--cream);
+  font-size:16px;
+  outline:none;
+}
+.access-field input:focus{
+  border-color:var(--ochre);
+  box-shadow:0 0 0 3px rgba(226,159,52,.24);
+}
+.access-field input::placeholder{color:rgba(253,251,247,.45)}
+.access-submit{
+  min-height:48px;
+  border:0;
+  border-radius:999px;
+  padding:12px 18px;
+  background:var(--ochre);
+  color:var(--navy);
+  font-size:13px;
+  font-weight:900;
+}
+.access-submit:disabled{
+  cursor:wait;
+  opacity:.68;
+}
+.access-error{
+  min-height:20px;
+  margin:0;
+  color:#ffe0aa;
+  font-size:13px;
+  font-weight:800;
+}
 @keyframes progressRun{0%,100%{filter:brightness(1)}50%{filter:brightness(1.18);box-shadow:0 0 18px rgba(226,159,52,.38)}}
 @media(max-width:1040px){
   .hero-grid,.plan-wrap{grid-template-columns:1fr}
@@ -461,6 +551,22 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 </style>
 </head>
 <body>
+<section class="access-screen" id="accessScreen" aria-labelledby="accessTitle">
+  <div class="access-panel">
+    <img class="access-logo" src="logo-cdu-blanco.png" alt="CdU">
+    <h1 class="access-title" id="accessTitle">Visor del Inversor</h1>
+    <p class="access-context">Acceso privado a los datos de la operación Torres de Cotillas.</p>
+    <form class="access-form" id="accessForm" autocomplete="off">
+      <div class="access-field">
+        <label for="accessPassword">Contraseña</label>
+        <input id="accessPassword" name="password" type="password" autocomplete="current-password" required>
+      </div>
+      <button class="access-submit" id="accessSubmit" type="submit">Entrar</button>
+      <p class="access-error" id="accessError" role="alert" aria-live="assertive"></p>
+    </form>
+  </div>
+</section>
+<template id="visorTemplate">
 <div class="shell">
   <header class="hero">
     <div class="topbar">
@@ -635,13 +741,19 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
     </section>
   </main>
 </div>
+</template>
 <div class="data-warning" id="dataWarning" role="status" hidden>No se han podido cargar los datos de la operación. Revisa la conexión o el origen configurado.</div>
 
 <script>
 const ORIGEN_DATOS = 'https://xaviriera.github.io/operaciones-gestor/data/tdc/operacion.json';
+const ORIGEN_LLAVERO = 'https://xaviriera.github.io/operaciones-gestor/data/tdc/llavero.json';
 
 let datosOperacion=null;
 let filtroActivo="Todos";
+let claveMaestra=null;
+let llaveroCifrado=null;
+let visorMontado=false;
+const MODO_CLARO=new URLSearchParams(window.location.search).get("claro")==="1";
 const PENDIENTE="pendiente de confirmar";
 const CAMARA_SIN_SENAL="disponible al iniciar la obra";
 const ESTADOS={conseguido:"done",actual:"current",pendiente:"pending"};
@@ -827,25 +939,132 @@ function renderTodo(){
 function showDataWarning(){
   document.getElementById("dataWarning").hidden=false;
 }
-async function cargarDatos(){
+function montarVisor(){
+  if(visorMontado) return;
+  const template=document.getElementById("visorTemplate");
+  document.getElementById("accessScreen")?.remove();
+  document.body.insertBefore(template.content.cloneNode(true), document.getElementById("dataWarning"));
+  visorMontado=true;
+  document.querySelectorAll(".filter").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      filtroActivo=btn.dataset.filter;
+      if(datosOperacion) renderMovements(filtroActivo);
+    });
+  });
+}
+function base64ToBytes(value){
+  const binary=atob(value);
+  const bytes=new Uint8Array(binary.length);
+  for(let i=0;i<binary.length;i+=1) bytes[i]=binary.charCodeAt(i);
+  return bytes;
+}
+function bytesToText(bytes){
+  return new TextDecoder().decode(bytes);
+}
+async function derivarClavePassword(password,salt,iteraciones){
+  const material=await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(password),
+    "PBKDF2",
+    false,
+    ["deriveKey"]
+  );
+  return crypto.subtle.deriveKey(
+    {name:"PBKDF2",salt,iterations:iteraciones,hash:"SHA-256"},
+    material,
+    {name:"AES-GCM",length:256},
+    false,
+    ["decrypt"]
+  );
+}
+async function abrirSobre(password,sobre,iteraciones){
+  const clavePassword=await derivarClavePassword(password,base64ToBytes(sobre.salt),iteraciones);
+  const clavePlano=await crypto.subtle.decrypt(
+    {name:"AES-GCM",iv:base64ToBytes(sobre.iv)},
+    clavePassword,
+    base64ToBytes(sobre.clave_cifrada)
+  );
+  return crypto.subtle.importKey("raw",clavePlano,{name:"AES-GCM"},false,["decrypt"]);
+}
+async function obtenerClaveMaestra(password,llavero){
+  for(const sobre of llavero.sobres || []){
+    try{
+      return await abrirSobre(password,sobre,llavero.iteraciones);
+    }catch(error){
+      continue;
+    }
+  }
+  throw new Error("Contraseña incorrecta");
+}
+async function cargarLlavero(){
+  if(llaveroCifrado) return llaveroCifrado;
+  const response=await fetch(ORIGEN_LLAVERO);
+  if(!response.ok) throw new Error("No se ha podido cargar el llavero");
+  llaveroCifrado=await response.json();
+  return llaveroCifrado;
+}
+async function descifrarContenido(llavero,masterKey){
+  const contenido=llavero.contenido || {};
+  const plano=await crypto.subtle.decrypt(
+    {name:"AES-GCM",iv:base64ToBytes(contenido.iv)},
+    masterKey,
+    base64ToBytes(contenido.datos)
+  );
+  return JSON.parse(bytesToText(plano));
+}
+async function cargarDatosClaros(){
   try{
-    const response=await fetch(ORIGEN_\u0044ATOS);
+    const response=await fetch(ORIGEN_DATOS);
     if(!response.ok) throw new Error("No se han podido cargar los datos");
     datosOperacion=await response.json();
+    montarVisor();
     renderTodo();
   }catch(error){
     showDataWarning();
   }
 }
-document.querySelectorAll(".filter").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-    filtroActivo=btn.dataset.filter;
-    if(datosOperacion) renderMovements(filtroActivo);
+async function cargarDatosCifrados(password){
+  const llavero=await cargarLlavero();
+  claveMaestra=await obtenerClaveMaestra(password,llavero);
+  datosOperacion=await descifrarContenido(llavero,claveMaestra);
+  montarVisor();
+  renderTodo();
+}
+function configurarAcceso(){
+  const form=document.getElementById("accessForm");
+  const input=document.getElementById("accessPassword");
+  const button=document.getElementById("accessSubmit");
+  const error=document.getElementById("accessError");
+  input.focus();
+  form.addEventListener("submit",async event=>{
+    event.preventDefault();
+    const password=input.value;
+    if(!password) return;
+    error.textContent="";
+    button.disabled=true;
+    input.disabled=true;
+    button.textContent="Comprobando...";
+    try{
+      await cargarDatosCifrados(password);
+    }catch(err){
+      claveMaestra=null;
+      error.textContent="Contraseña incorrecta";
+      input.disabled=false;
+      button.disabled=false;
+      button.textContent="Entrar";
+      input.value="";
+      input.focus();
+    }
   });
-});
-cargarDatos();
+}
+if(MODO_CLARO){
+  // Modo de previsualización local: mantiene el origen JSON en claro solo con ?claro=1 mientras se validan cambios sin llavero cifrado.
+  cargarDatosClaros();
+}else{
+  configurarAcceso();
+}
 </script>
 </body>
 </html>
