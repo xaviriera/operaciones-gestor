@@ -319,6 +319,29 @@
       "visible": true
     }
   ],
+  "bitacora": [
+    {
+      "fecha": "Agosto 2026",
+      "titulo": "Obra en curso · semana 3",
+      "texto": "Inicio de obra conseguido. Estructura y tabiquería en ejecución."
+    },
+    {
+      "fecha": "Jun 2026",
+      "titulo": "Económico validado",
+      "texto": "Inversión total 162.212 €, venta realista 205.000 € y beneficio realista 33.938 €."
+    },
+    {
+      "fecha": "Jun 2026",
+      "titulo": "Producto definido",
+      "texto": "Local comercial de 105 m² transformado en 1 apartamento de 1 dormitorio y 2 estudios loft."
+    },
+    {
+      "fecha": "T1 2027",
+      "titulo": "Objetivo de cierre",
+      "texto": "Cierre de ventas previsto dentro del primer trimestre de 2027."
+    }
+  ],
+  "noticias_mercado": [],
   "contacto": {
     "whatsapp_numero": "34694264027",
     "mensaje_predeterminado": "Hola 👋 Soy inversor de la operación Las Torres de Cotillas y me gustaría resolver algunas dudas. ¡Gracias!"

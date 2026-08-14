@@ -423,8 +423,11 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 .feed{display:grid;gap:12px}
 .entry{display:grid;grid-template-columns:112px 1fr;gap:14px;padding:16px}
 .entry-date{color:var(--ochre);font-size:11px;font-weight:900;text-transform:uppercase}
+.entry.market .entry-date{color:var(--navy)}
 .entry b{display:block;color:var(--navy);font-size:15px}
 .entry p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.entry-source{display:inline-block;margin-top:8px;color:var(--navy);font-size:12px;font-weight:900;text-decoration:none}
+.entry-source:hover{color:var(--ochre)}
 .report{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:24px;color:var(--white);background:linear-gradient(135deg,var(--navy2),var(--navy))}
 .report span{display:block;color:#ffe0aa;font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase}
 .report b{display:block;margin-top:4px;font-size:clamp(20px,3vw,30px)}
@@ -726,6 +729,28 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
       <div class="folder-grid" id="folders"></div>
     </section>
 
+    <section class="section" id="bitacoraSection" hidden>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Bitácora</div>
+          <h2>Últimas actualizaciones</h2>
+          <p class="note">Novedades propias de esta operación, registradas por el gestor.</p>
+        </div>
+      </div>
+      <div class="feed" id="bitacoraFeed"></div>
+    </section>
+
+    <section class="section" id="noticiasMercadoSection" hidden>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Noticias del mercado</div>
+          <h2>Contexto externo</h2>
+          <p class="note">Precios de la zona, cambios normativos y noticias del sector.</p>
+        </div>
+      </div>
+      <div class="feed" id="noticiasMercadoFeed"></div>
+    </section>
+
     <section class="section">
       <div class="card report">
         <div>
@@ -917,6 +942,33 @@ function renderFolders(){
     <a class="folder card" href="${escapeAttr(item.url_drive || "#")}" target="_blank" rel="noopener">${folderIcon()}<span>${escapeHtml(valor(item.nombre))}</span></a>
   `).join("");
 }
+function renderBitacora(){
+  const section=document.getElementById("bitacoraSection");
+  const feed=document.getElementById("bitacoraFeed");
+  const items=Array.isArray(datosOperacion.bitacora) ? datosOperacion.bitacora : [];
+  section.hidden=items.length===0;
+  if(section.hidden){
+    feed.innerHTML="";
+    return;
+  }
+  feed.innerHTML=items.map(item=>`
+    <article class="card entry"><div class="entry-date">${escapeHtml(valor(item.fecha))}</div><div><b>${escapeHtml(valor(item.titulo))}</b><p>${escapeHtml(valor(item.texto))}</p></div></article>
+  `).join("");
+}
+function renderNoticiasMercado(){
+  const section=document.getElementById("noticiasMercadoSection");
+  const feed=document.getElementById("noticiasMercadoFeed");
+  const items=Array.isArray(datosOperacion.noticias_mercado) ? datosOperacion.noticias_mercado : [];
+  section.hidden=items.length===0;
+  if(section.hidden){
+    feed.innerHTML="";
+    return;
+  }
+  feed.innerHTML=items.map(item=>{
+    const enlace=item.enlace ? `<a class="entry-source" href="${escapeAttr(item.enlace)}" target="_blank" rel="noopener">Fuente</a>` : "";
+    return `<article class="card entry market"><div class="entry-date">${escapeHtml(valor(item.fecha))}</div><div><b>${escapeHtml(valor(item.titular))}</b><p>${escapeHtml(valor(item.texto))}</p>${enlace}</div></article>`;
+  }).join("");
+}
 function renderContacto(){
   const contacto=datosOperacion.contacto || {};
   const enlace=document.getElementById("whatsappLink");
@@ -934,6 +986,8 @@ function renderTodo(){
   renderEconomico();
   renderCamaras();
   renderFolders();
+  renderBitacora();
+  renderNoticiasMercado();
   renderContacto();
 }
 function showDataWarning(){
