@@ -1108,10 +1108,23 @@ function base64ToBytes(value){
 function bytesToText(bytes){
   return new TextDecoder().decode(bytes);
 }
+function esEspacioPython(ch){
+  const cp=ch.codePointAt(0);
+  return (cp>=0x09 && cp<=0x0D) || (cp>=0x1C && cp<=0x20) || cp===0x85 || cp===0xA0 || cp===0x1680 || (cp>=0x2000 && cp<=0x200A) || (cp>=0x2028 && cp<=0x2029) || cp===0x202F || cp===0x205F || cp===0x3000;
+}
+function normalizarPassword(password){
+  // ======================================================================
+  // NORMALIZACION CRITICA Y COMPARTIDA:
+  // Esta funcion debe mantenerse IDENTICA a tools/cifrar-visor.py. Si se
+  // cambia aqui, hay que cambiarla tambien en gestion/index.html y en
+  // tools/cifrar-visor.py, o se rompe el acceso al derivar PBKDF2.
+  // ======================================================================
+  return Array.from(password).filter(ch=>!esEspacioPython(ch) && ch!=="-" && ch!==".").join("").toUpperCase();
+}
 async function derivarClavePassword(password,salt,iteraciones){
   const material=await crypto.subtle.importKey(
     "raw",
-    new TextEncoder().encode(password),
+    new TextEncoder().encode(normalizarPassword(password)),
     "PBKDF2",
     false,
     ["deriveKey"]
