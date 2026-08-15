@@ -918,14 +918,19 @@ function renderEstado(){
     const icono=clase==="done" ? '<span class="check">✓</span>' : '<span class="dot"></span>';
     return `<div class="phase ${escapeAttr(clase)}"><small>${icono} ${escapeHtml(estadoEtiqueta(fase.estado))}</small><b>${escapeHtml(valor(fase.nombre))}</b></div>`;
   }).join("");
-  const avance=Number(estado.porcentaje_avance) || 0;
+  // Sin dato de avance NO se pinta un 0%: un cero se lee como "no ha avanzado nada",
+  // que es peor que reconocer que el dato aun no esta confirmado.
+  const hayAvance = estado.porcentaje_avance !== null && estado.porcentaje_avance !== undefined && estado.porcentaje_avance !== "";
+  const avance = hayAvance ? Number(estado.porcentaje_avance) : null;
   const progressBar=document.getElementById("progressBar");
-  progressBar.setAttribute("aria-label",`${avance}% de avance global de operación`);
-  progressBar.querySelector("span").style.setProperty("--progress",`${avance}%`);
-  document.getElementById("progressPct").textContent=`${avance}%`;
+  progressBar.setAttribute("aria-label", hayAvance ? `${avance}% de avance global de operación` : "Avance global pendiente de confirmar");
+  progressBar.querySelector("span").style.setProperty("--progress", hayAvance ? `${avance}%` : "0%");
+  const pct=document.getElementById("progressPct");
+  pct.textContent = hayAvance ? `${avance}%` : PENDIENTE;
+  pct.style.fontSize = hayAvance ? "" : "15px";
   document.getElementById("pulseMeta").innerHTML=`
     <div class="mini"><span>Fase actual</span><b>${escapeHtml(valor(estado.fase_actual))}</b></div>
-    <div class="mini"><span>Avance</span><b>${avance}%</b></div>`;
+    <div class="mini"><span>Avance</span><b>${hayAvance ? `${avance}%` : PENDIENTE}</b></div>`;
 }
 function renderProximoReporte(){
   const reporte=datosOperacion.proximo_reporte || {};
