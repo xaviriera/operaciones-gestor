@@ -438,10 +438,6 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .metric span{display:block;color:var(--muted);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.7px}
 .metric b{display:block;margin-top:8px;color:var(--navy);font-size:clamp(20px,2.3vw,28px);line-height:1}
 .metric small{display:block;margin-top:6px;color:var(--muted);font-size:11px}
-.table-tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px 14px 0}
-.filters{display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:#eef1f2}
-.filter{border:0;border-radius:999px;padding:8px 11px;background:transparent;color:var(--navy);font-size:12px;font-weight:800}
-.filter.active{background:var(--white);box-shadow:0 1px 5px rgba(22,61,96,.12)}
 .table-wrap{overflow-x:auto;padding:14px}
 table{width:100%;min-width:820px;border-collapse:collapse}
 th,td{padding:13px 11px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}
@@ -632,7 +628,6 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
   .account-balance{justify-content:flex-start}
   .bank-statement-head{display:block}
   .statement-open{width:100%;margin-top:10px}
-  .table-tools{align-items:flex-start}
   .entry{grid-template-columns:1fr}
   .report{display:block}
   .report .btn{margin-top:16px}
@@ -792,24 +787,6 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
         <p class="finance-note" id="financeNote">Los importes pendientes se mostrarán cuando estén confirmados.</p>
         <div class="bank-statement" id="bankStatement" hidden></div>
       </div>
-      <div class="card">
-        <div class="table-tools">
-          <strong>Movimientos bancarios</strong>
-          <div class="filters" aria-label="Filtro de movimientos">
-            <button class="filter active" data-filter="Todos" type="button">Todos</button>
-            <button class="filter" data-filter="ingreso" type="button">Ingresos</button>
-            <button class="filter" data-filter="pago" type="button">Pagos</button>
-          </div>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>Fecha</th><th>Concepto</th><th>Tipo</th><th>Importe</th><th>Estado</th><th>Doc</th></tr>
-            </thead>
-            <tbody id="movements"></tbody>
-          </table>
-        </div>
-      </div>
     </section>
 
     <section class="section" id="obra">
@@ -854,8 +831,8 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
     <section class="section" id="bitacoraSection" hidden>
       <div class="section-head">
         <div>
-          <div class="kicker">Bitácora</div>
-          <h2>Últimas actualizaciones</h2>
+          <div class="kicker">Novedades</div>
+          <h2>Novedades de la operación</h2>
           <p class="note">Novedades propias de esta operación, registradas por el gestor.</p>
         </div>
       </div>
@@ -865,8 +842,8 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
     <section class="section" id="noticiasMercadoSection" hidden>
       <div class="section-head">
         <div>
-          <div class="kicker">Noticias del mercado</div>
-          <h2>Contexto externo</h2>
+          <div class="kicker">Entorno y mercado</div>
+          <h2>Entorno y mercado</h2>
           <p class="note">Precios de la zona, cambios normativos y noticias del sector.</p>
         </div>
       </div>
@@ -902,7 +879,6 @@ const ORIGEN_DATOS = '../../data/tdc/operacion.json';
 const ORIGEN_LLAVERO = 'https://xaviriera.github.io/operaciones-gestor/data/tdc/llavero.json';
 
 let datosOperacion=null;
-let filtroActivo="Todos";
 let claveMaestra=null;
 let llaveroCifrado=null;
 let visorMontado=false;
@@ -1112,20 +1088,6 @@ function renderGantt(){
   `).join("");
   document.getElementById("gantt").innerHTML=head+rows;
 }
-function renderMovements(filter="Todos"){
-  const movimientos=(datosOperacion.cuentas || {}).movimientos || [];
-  document.getElementById("movements").innerHTML=movimientos
-    .filter(item=>filter==="Todos"||item.tipo===filter)
-    .map(item=>{
-      const income=item.tipo==="ingreso";
-      return `
-      <tr>
-        <td>${escapeHtml(valor(item.fecha))}</td><td>${escapeHtml(valor(item.concepto))}</td><td>${escapeHtml(valor(item.tipo))}</td><td class="amount ${income?"in":"out"}">${escapeHtml(valor(item.importe))}</td>
-        <td><span class="badge ${income?"ok":"warn"}">${escapeHtml(income?"Ingreso":"Pago")}</span></td>
-        <td class="doc"><a href="#documentacion">Ver documentación</a></td>
-      </tr>`;
-    }).join("");
-}
 function renderEconomico(){
   const cuentas=datosOperacion.cuentas || {};
   document.getElementById("iban").innerHTML=`${escapeHtml(valor(cuentas.iban))} <small>Cuenta dedicada de la operación</small>`;
@@ -1145,7 +1107,6 @@ function renderEconomico(){
     <div class="metric"><span>${escapeHtml(label)}</span><b>${escapeHtml(valor(value))}</b><small>${escapeHtml(detail)}</small></div>
   `).join("");
   renderExtractoBancario(cuentas);
-  renderMovements(filtroActivo);
 }
 function renderExtractoBancario(cuentas){
   const contenedor=document.getElementById("bankStatement");
@@ -1304,14 +1265,6 @@ function montarVisor(){
   document.getElementById("accessScreen")?.remove();
   document.body.insertBefore(template.content.cloneNode(true), document.getElementById("dataWarning"));
   visorMontado=true;
-  document.querySelectorAll(".filter").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
-      btn.classList.add("active");
-      filtroActivo=btn.dataset.filter;
-      if(datosOperacion) renderMovements(filtroActivo);
-    });
-  });
   document.getElementById("photoLightbox").addEventListener("click",event=>{
     if(event.target.id==="photoLightbox") cerrarFotoAvance();
   });
