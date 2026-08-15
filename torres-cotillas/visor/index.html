@@ -226,7 +226,7 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .note{margin:6px 0 0;color:var(--muted);font-size:14px}
 .card{background:var(--white);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 10px rgba(22,61,96,.05)}
 .forecast-card{padding:20px;background:linear-gradient(180deg,#fff,#fffdfa);overflow:hidden}
-/* 6 cifras en 3 columnas = 2 filas exactas, sin huecos muertos.
+/* 7 cifras en 3 columnas.
    La rentabilidad destaca por estilo (.forecast-item.hero), no por ocupar mas espacio. */
 .forecast-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .forecast-item{
@@ -265,7 +265,7 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
   overflow-wrap:anywhere;
 }
 .forecast-item.hero .forecast-label{color:#ffe0aa}
-.forecast-item.hero .forecast-value{color:var(--white);font-size:clamp(38px,6.2vw,76px)}
+.forecast-item.hero .forecast-value{color:var(--white);font-size:clamp(26px,3.8vw,44px)}
 .forecast-item.positive .forecast-value{color:var(--ok)}
 .forecast-item.pending .forecast-value{font-size:clamp(16px,2vw,22px);line-height:1.14;color:var(--muted)}
 .forecast-item.hero.pending .forecast-value{color:rgba(253,251,247,.86);font-size:clamp(23px,3.4vw,38px)}
@@ -420,6 +420,7 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .tranche span{display:block;color:var(--muted);font-size:10px;font-weight:900;letter-spacing:.8px;text-transform:uppercase}
 .tranche b{display:block;color:var(--navy);font-size:14px}
 .tranche strong{display:block;margin-top:10px;color:var(--navy);font-size:22px;line-height:1}
+.tranche-note{margin:8px 0 0;color:var(--muted);font-size:12px;line-height:1.4}
 .finance-note{margin:10px 0 0;color:var(--muted);font-size:11px;font-weight:700}
 .bank-statement{margin:16px 0 0;padding-top:16px;border-top:1px solid var(--line)}
 .bank-statement-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
@@ -427,7 +428,7 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .bank-statement-title b{display:block;margin-top:4px;color:var(--navy);font-size:15px}
 .statement-open{display:inline-flex;align-items:center;justify-content:center;min-height:40px;border:1px solid rgba(22,61,96,.18);border-radius:999px;padding:9px 13px;background:var(--navy);color:var(--white);font-size:12px;font-weight:900;text-decoration:none;white-space:nowrap}
 .statement-open:hover{background:var(--navy2)}
-.statement-frame{width:100%;height:600px;border:1px solid rgba(22,61,96,.16);border-radius:8px;background:#f6f4ef}
+.statement-frame{width:100%;height:820px;border:1px solid rgba(22,61,96,.16);border-radius:8px;background:#f6f4ef}
 .statement-mobile{display:none;margin-top:4px;padding:14px;border:1px solid rgba(226,159,52,.35);border-radius:8px;background:#fff8eb}
 .statement-mobile p{margin:0 0 12px;color:var(--navy);font-size:13px;font-weight:800}
 .statement-fallback .statement-frame{display:none}
@@ -786,7 +787,6 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
             <div class="account-balance" id="accountBalance">Saldo en cuenta <span>· pendiente de confirmar</span></div>
           </div>
         </div>
-        <div class="exclusive-account" id="exclusiveAccount">Cuenta dedicada de la operación</div>
         <div class="tranche-grid" id="trancheGrid"></div>
         <div class="finance-summary" id="financeSummary"></div>
         <p class="finance-note" id="financeNote">Los importes pendientes se mostrarán cuando estén confirmados.</p>
@@ -1046,6 +1046,7 @@ function renderEscenarioEconomico(){
     ["Rentabilidad sobre el capital", escenario.rentabilidad_capital, "hero positive"],
     ["Inversión total", escenario.inversion_total, ""],
     ["Capital de los inversores", escenario.capital_inversores, ""],
+    ["Capital del equipo gestor", escenario.capital_equipo_gestor, ""],
     ["Venta prevista realista", escenario.venta_prevista_realista, ""],
     ["Venta prevista optimista", escenario.venta_prevista_optimista, ""],
     ["Beneficio previsto", escenario.beneficio_realista, "positive"]
@@ -1086,7 +1087,8 @@ function renderGantt(){
   const total=Math.max(Number(cronograma.total_semanas) || 16, 1);
   const semanaActual=Number(cronograma.semana_actual) || 0;
   document.getElementById("ganttTitle").textContent=`Cronograma de obra · ${total} semanas`;
-  document.getElementById("ganttNoteIntro").textContent=`Semana actual: ${semanaActual || PENDIENTE}`;
+  const inicioTxt=cronograma.fecha_inicio ? ` · Inicio de obra: ${cronograma.fecha_inicio}` : "";
+  document.getElementById("ganttNoteIntro").textContent=`Semana actual: ${semanaActual || PENDIENTE}${inicioTxt}`;
   document.getElementById("ganttNote").textContent=(cronograma.notas_transversales || []).join(" · ") || PENDIENTE;
   document.getElementById("ganttCurrentWeek").textContent=semanaActual ? `Semana ${semanaActual}` : PENDIENTE;
   document.getElementById("ganttFoot").textContent=`Cronograma de obra · ${total} semanas`;
@@ -1132,13 +1134,12 @@ function renderEconomico(){
   document.getElementById("accountBalance").innerHTML=`Saldo en cuenta <span>· ${escapeHtml(saldo)}</span>${fechaSaldo}`;
   document.getElementById("trancheGrid").innerHTML=(cuentas.tramos || []).map(item=>{
     const ok=Boolean(item.confirmado);
+    const nota=item.nota ? `<p class="tranche-note">${escapeHtml(item.nota)}</p>` : "";
     return `
-    <div class="tranche ${ok?"done":"pending"}"><div class="tranche-top"><span>${escapeHtml(valor(item.nombre))}</span><span class="badge ${ok?"ok":"warn"}">${ok?"Confirmado":"Pendiente"}</span></div><b>${escapeHtml(valor(item.fecha))}</b><strong>${escapeHtml(valor(item.importe))}</strong></div>`;
+    <div class="tranche ${ok?"done":"pending"}"><div class="tranche-top"><span>${escapeHtml(valor(item.nombre))}</span><span class="badge ${ok?"ok":"warn"}">${ok?"Confirmado":"Pendiente"}</span></div><b>${escapeHtml(valor(item.fecha))}</b><strong>${escapeHtml(valor(item.importe))}</strong>${nota}</div>`;
   }).join("");
   document.getElementById("financeSummary").innerHTML=[
-    ["IBAN", cuentas.iban, "Dato bancario pendiente de terceros"],
     ["Tramos", (cuentas.tramos || []).length || null, "Número de tramos configurados"],
-    ["Movimientos", (cuentas.movimientos || []).length || null, "Movimientos visibles en el extracto"],
     ["Pendientes", (cuentas.tramos || []).filter(item=>!item.confirmado).length || null, "Importes por confirmar"]
   ].map(([label,value,detail])=>`
     <div class="metric"><span>${escapeHtml(label)}</span><b>${escapeHtml(valor(value))}</b><small>${escapeHtml(detail)}</small></div>
@@ -1176,7 +1177,7 @@ function renderExtractoBancario(cuentas){
       <div class="bank-statement-title"><span>Extracto bancario</span><b>Documento oficial · ${escapeHtml(periodo)}</b></div>
       <a class="statement-open" href="${escapeAttr(pdfUrl)}" target="_blank" rel="noopener">Abrir en pestaña nueva</a>
     </div>
-    ${fallback ? "" : `<iframe class="statement-frame" src="${escapeAttr(pdfUrl)}" title="Extracto bancario Santander ${escapeAttr(periodo)}"></iframe>`}
+    ${fallback ? "" : `<iframe class="statement-frame" src="${escapeAttr(pdfUrl)}#navpanes=0&toolbar=1" title="Extracto bancario Santander ${escapeAttr(periodo)}"></iframe>`}
     <div class="statement-mobile">
       <p>En móvil el visor integrado puede no estar disponible.</p>
       <a class="statement-open" href="${escapeAttr(pdfUrl)}" target="_blank" rel="noopener">Abrir el extracto del banco</a>
