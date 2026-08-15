@@ -272,8 +272,17 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .forecast-note{margin-top:12px}
 .plan-card{padding:18px;overflow:hidden;background:linear-gradient(180deg,#fff,#fffdfa)}
 .plan-wrap{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:18px;align-items:center}
-.plan-frame{padding:14px;border:1px solid rgba(22,61,96,.13);border-radius:12px;background:#fbf6eb;box-shadow:0 16px 38px rgba(22,61,96,.08)}
+.plan-gallery{min-width:0;display:grid;gap:12px}
+.plan-frame{position:relative;padding:14px;border:1px solid rgba(22,61,96,.13);border-radius:12px;background:#fbf6eb;box-shadow:0 16px 38px rgba(22,61,96,.08)}
 .plan-img{display:block;width:100%;max-width:860px;height:auto;max-height:620px;object-fit:contain;margin:0 auto;border-radius:8px;background:var(--cream)}
+.plan-action{display:block;width:100%;border:0;padding:0;background:transparent;cursor:zoom-in}
+.plan-action:focus-visible{outline:3px solid rgba(226,159,52,.72);outline-offset:4px;border-radius:10px}
+.plan-counter{position:absolute;left:24px;top:24px;display:inline-flex;align-items:center;border-radius:999px;padding:7px 10px;background:rgba(15,44,71,.88);color:var(--white);font-size:11px;font-weight:900;letter-spacing:.3px}
+.plan-expand{position:absolute;right:24px;bottom:24px;display:inline-flex;align-items:center;border-radius:999px;padding:8px 11px;background:rgba(253,251,247,.94);border:1px solid rgba(22,61,96,.15);color:var(--navy);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;box-shadow:0 10px 22px rgba(22,61,96,.12)}
+.plan-tabs{display:flex;gap:8px;max-width:100%;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
+.plan-tab{flex:0 0 auto;max-width:190px;border:1px solid rgba(22,61,96,.16);border-radius:999px;padding:8px 11px;background:#fff;color:var(--navy2);font:inherit;font-size:12px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+.plan-tab.active{border-color:rgba(226,159,52,.95);background:#fff2d9;color:var(--navy);box-shadow:0 0 0 3px rgba(226,159,52,.16)}
+.plan-empty{padding:28px;border:1px dashed rgba(22,61,96,.22);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
 .legend{display:grid;gap:10px}
 .legend-item{border:1px solid var(--line);border-radius:8px;padding:12px;background:#fff}
 .legend-item b{display:block;color:var(--navy);font-size:13px}
@@ -719,8 +728,15 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
       </div>
       <div class="card plan-card">
         <div class="plan-wrap">
-          <div class="plan-frame">
-            <img class="plan-img" src="encaje-plano.png" alt="Plano real de distribución">
+          <div class="plan-gallery" id="planGallery">
+            <div class="plan-frame">
+              <button class="plan-action" type="button" id="activePlanButton" aria-label="Ampliar plano activo">
+                <img class="plan-img" id="activePlanImage" src="" alt="">
+              </button>
+              <span class="plan-counter" id="planCounter">0 / 0</span>
+              <span class="plan-expand">Ampliar</span>
+            </div>
+            <div class="plan-tabs" id="planTabs" role="tablist" aria-label="Planos y renders de la operación"></div>
           </div>
           <div class="legend" id="planLegend"></div>
         </div>
@@ -977,6 +993,53 @@ function renderOperacion(){
     ["Finca registral", operacion.finca_registral]
   ].map(([label,value])=>`<div class="legend-item"><b>${escapeHtml(label)}</b><span>${escapeHtml(valor(value))}</span></div>`).join("");
 }
+function renderPlanos(){
+  const planos=Array.isArray(datosOperacion.planos) ? datosOperacion.planos.filter(plano=>plano && plano.fichero) : [];
+  const image=document.getElementById("activePlanImage");
+  const button=document.getElementById("activePlanButton");
+  const counter=document.getElementById("planCounter");
+  const tabs=document.getElementById("planTabs");
+  if(!planos.length){
+    image.removeAttribute("src");
+    image.alt=PENDIENTE;
+    button.disabled=true;
+    button.removeAttribute("data-plan-url");
+    button.removeAttribute("data-plan-name");
+    counter.textContent="0 / 0";
+    tabs.innerHTML=`<div class="plan-empty">${escapeHtml(PENDIENTE)}</div>`;
+    return;
+  }
+  button.disabled=false;
+  tabs.innerHTML=planos.map((plano,index)=>`
+    <button class="plan-tab" type="button" role="tab" aria-selected="${index===0 ? "true" : "false"}" data-plan-index="${escapeAttr(index)}">
+      ${escapeHtml(valor(plano.nombre))}
+    </button>
+  `).join("");
+  const activarPlano=index=>{
+    const plano=planos[index] || planos[0];
+    const nombre=valor(plano.nombre);
+    const fichero=plano.fichero || "";
+    image.src=fichero;
+    image.alt=nombre;
+    button.dataset.planUrl=fichero;
+    button.dataset.planName=nombre;
+    counter.textContent=`${index+1} / ${planos.length}`;
+    tabs.querySelectorAll(".plan-tab").forEach(tab=>{
+      const activo=Number(tab.dataset.planIndex)===index;
+      tab.classList.toggle("active",activo);
+      tab.setAttribute("aria-selected",activo ? "true" : "false");
+    });
+  };
+  tabs.querySelectorAll(".plan-tab").forEach(tab=>{
+    tab.addEventListener("click",()=>{
+      activarPlano(Number(tab.dataset.planIndex));
+    });
+  });
+  button.onclick=()=>{
+    abrirFotoAvance(button.dataset.planUrl,button.dataset.planName);
+  };
+  activarPlano(0);
+}
 function renderEstado(){
   const estado=datosOperacion.estado || {};
   document.getElementById("operationState").textContent=valor(estado.fase_actual);
@@ -1005,7 +1068,7 @@ function renderEstado(){
 function renderProximoReporte(){
   const reporte=datosOperacion.proximo_reporte || {};
   document.getElementById("nextReport").innerHTML=`
-    <span>Próximo reporte</span>
+    <span>Próxima reunión de avances</span>
     <b>${escapeHtml(valor(reporte.fecha))}</b>
     <p>${escapeHtml(valor(reporte.texto))}</p>`;
 }
@@ -1096,9 +1159,14 @@ function renderEconomico(){
   document.getElementById("accountBalance").innerHTML=`Saldo en cuenta <span>· ${escapeHtml(saldo)}</span>${fechaSaldo}`;
   document.getElementById("trancheGrid").innerHTML=(cuentas.tramos || []).map(item=>{
     const ok=Boolean(item.confirmado);
-    const nota=item.nota ? `<p class="tranche-note">${escapeHtml(item.nota)}</p>` : "";
+    const tieneNota=Boolean(item.nota);
+    const nota=tieneNota ? `<p class="tranche-note">${escapeHtml(item.nota)}</p>` : "";
+    // Si hay un texto de estado (nota) y el importe/fecha vienen vacios, no pintar el
+    // placeholder "pendiente de confirmar": la nota ya informa, y repetirlo no aporta.
+    const fecha=item.fecha ? `<b>${escapeHtml(item.fecha)}</b>` : (tieneNota ? "" : `<b>${escapeHtml(PENDIENTE)}</b>`);
+    const importe=item.importe ? `<strong>${escapeHtml(item.importe)}</strong>` : (tieneNota ? "" : `<strong>${escapeHtml(PENDIENTE)}</strong>`);
     return `
-    <div class="tranche ${ok?"done":"pending"}"><div class="tranche-top"><span>${escapeHtml(valor(item.nombre))}</span><span class="badge ${ok?"ok":"warn"}">${ok?"Confirmado":"Pendiente"}</span></div><b>${escapeHtml(valor(item.fecha))}</b><strong>${escapeHtml(valor(item.importe))}</strong>${nota}</div>`;
+    <div class="tranche ${ok?"done":"pending"}"><div class="tranche-top"><span>${escapeHtml(valor(item.nombre))}</span><span class="badge ${ok?"ok":"warn"}">${ok?"Confirmado":"Pendiente"}</span></div>${fecha}${importe}${nota}</div>`;
   }).join("");
   document.getElementById("financeSummary").innerHTML=[
     ["Tramos", (cuentas.tramos || []).length || null, "Número de tramos configurados"],
@@ -1243,6 +1311,7 @@ function renderContacto(){
 }
 function renderTodo(){
   renderOperacion();
+  renderPlanos();
   renderEstado();
   renderProximoReporte();
   renderEscenarioEconomico();
