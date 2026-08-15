@@ -277,8 +277,8 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .plan-img{display:block;width:100%;max-width:860px;height:auto;max-height:620px;object-fit:contain;margin:0 auto;border-radius:8px;background:var(--cream)}
 .plan-action{display:block;width:100%;border:0;padding:0;background:transparent;cursor:zoom-in}
 .plan-action:focus-visible{outline:3px solid rgba(226,159,52,.72);outline-offset:4px;border-radius:10px}
-.plan-counter{position:absolute;left:24px;top:24px;display:inline-flex;align-items:center;border-radius:999px;padding:7px 10px;background:rgba(15,44,71,.88);color:var(--white);font-size:11px;font-weight:900;letter-spacing:.3px}
-.plan-expand{position:absolute;right:24px;bottom:24px;display:inline-flex;align-items:center;border-radius:999px;padding:8px 11px;background:rgba(253,251,247,.94);border:1px solid rgba(22,61,96,.15);color:var(--navy);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;box-shadow:0 10px 22px rgba(22,61,96,.12)}
+.plan-counter{position:absolute;left:24px;top:24px;display:inline-flex;align-items:center;border-radius:999px;padding:7px 10px;background:rgba(15,44,71,.88);color:var(--white);font-size:11px;font-weight:900;letter-spacing:.3px;pointer-events:none}
+.plan-expand{position:absolute;right:24px;bottom:24px;display:inline-flex;align-items:center;border-radius:999px;padding:8px 11px;background:rgba(253,251,247,.94);border:1px solid rgba(22,61,96,.15);color:var(--navy);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;box-shadow:0 10px 22px rgba(22,61,96,.12);pointer-events:none}
 .plan-tabs{display:flex;gap:8px;max-width:100%;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
 .plan-tab{flex:0 0 auto;max-width:190px;border:1px solid rgba(22,61,96,.16);border-radius:999px;padding:8px 11px;background:#fff;color:var(--navy2);font:inherit;font-size:12px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
 .plan-tab.active{border-color:rgba(226,159,52,.95);background:#fff2d9;color:var(--navy);box-shadow:0 0 0 3px rgba(226,159,52,.16)}
@@ -287,8 +287,25 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .legend-item{border:1px solid var(--line);border-radius:8px;padding:12px;background:#fff}
 .legend-item b{display:block;color:var(--navy);font-size:13px}
 .legend-item span{display:block;margin-top:4px;color:var(--muted);font-size:12px}
-.milestones{display:grid;grid-template-columns:repeat(10,minmax(158px,1fr));gap:10px;overflow-x:auto;padding-bottom:4px}
-.milestone{position:relative;min-height:218px;display:flex;flex-direction:column;justify-content:space-between;padding:14px;border:1px solid var(--line);border-radius:8px;background:var(--white)}
+.milestones{display:grid;gap:14px;min-width:0}
+.milestone-phase{border:1px solid rgba(22,61,96,.13);border-radius:8px;background:linear-gradient(180deg,#fff,#fffdfa);box-shadow:0 16px 36px rgba(22,61,96,.08);overflow:hidden}
+.milestone-phase.phase-done{border-color:rgba(29,122,79,.24)}
+.milestone-phase.phase-current{border-color:rgba(226,159,52,.42);box-shadow:0 0 0 3px rgba(226,159,52,.12),0 16px 36px rgba(22,61,96,.08)}
+.milestone-phase.phase-pending{border-color:rgba(22,61,96,.1)}
+.milestone-phase-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 16px;border-bottom:1px solid rgba(22,61,96,.1);background:#f7f3ea}
+.milestone-phase.phase-done .milestone-phase-head{background:#f3fbf6}
+.milestone-phase.phase-current .milestone-phase-head{background:#fff8ea}
+.milestone-phase-title{min-width:0}
+.milestone-phase-title h3{margin:3px 0 0;color:var(--navy);font-size:17px;line-height:1.15}
+.milestone-phase-title small{display:block;color:var(--muted);font-size:10px;font-weight:900;letter-spacing:.8px;text-transform:uppercase}
+.milestone-phase-meta{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;flex:0 0 auto}
+.milestone-phase-body{display:grid;gap:12px;padding:14px}
+.milestone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;min-width:0}
+.milestone-group{display:grid;gap:8px;min-width:0}
+.milestone-group-label{display:flex;align-items:center;gap:9px;color:var(--navy2);font-size:10px;font-weight:900;letter-spacing:.7px;text-transform:uppercase}
+.milestone-group-label:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ochre);box-shadow:0 0 0 4px rgba(226,159,52,.14)}
+.milestone-group-label:after{content:"";height:1px;flex:1;background:rgba(22,61,96,.11)}
+.milestone{position:relative;min-height:148px;display:flex;flex-direction:column;justify-content:space-between;padding:12px;border:1px solid var(--line);border-radius:8px;background:var(--white);min-width:0}
 .milestone.done{border-color:rgba(29,122,79,.36);background:linear-gradient(180deg,#f3fbf6,#fff);box-shadow:0 10px 26px rgba(29,122,79,.10)}
 .milestone.current{border-color:rgba(226,159,52,.9);box-shadow:0 0 0 3px rgba(226,159,52,.18),0 16px 34px rgba(226,159,52,.18);background:#fff8ea}
 .milestone.pending{border-color:rgba(22,61,96,.13);background:#fffdf8;opacity:.78}
@@ -298,13 +315,13 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .current .num{background:var(--ochre);color:var(--navy)}
 .pending .num{background:#fff;border:1px solid rgba(22,61,96,.18);color:rgba(22,61,96,.55)}
 .spark{width:9px;height:9px;border-radius:50%;background:var(--ochre);box-shadow:0 0 18px rgba(226,159,52,.65)}
-.milestone b{display:block;margin:12px 0 8px;color:var(--navy);font-size:13px;line-height:1.24}
+.milestone b{display:block;margin:9px 0 6px;color:var(--navy);font-size:12px;line-height:1.22}
 .date{color:var(--muted);font-size:11px;font-weight:800}
-.meaning{margin:10px 0;color:#3f4d5a;font-size:12px;line-height:1.38}
+.meaning{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:7px 0;color:#3f4d5a;font-size:11px;line-height:1.32}
 .stamp{display:inline-flex;align-items:center;gap:5px;width:max-content;max-width:100%;border-radius:999px;padding:5px 8px;background:#e7e8e8;color:#60686e;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.5px}
-.done .stamp{background:#e7f5ed;color:var(--ok);border:1px solid rgba(29,122,79,.22)}
-.current .stamp{background:#fff2d9;color:#8a5a14}
-.pending .stamp{background:#fff;border:1px solid rgba(22,61,96,.14);color:rgba(22,61,96,.55)}
+.done .stamp,.stamp.done{background:#e7f5ed;color:var(--ok);border:1px solid rgba(29,122,79,.22)}
+.current .stamp,.stamp.current{background:#fff2d9;color:#8a5a14}
+.pending .stamp,.stamp.pending{background:#fff;border:1px solid rgba(22,61,96,.14);color:rgba(22,61,96,.55)}
 .action-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
 .btn{
   display:inline-flex;
@@ -611,6 +628,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
   .hero-grid,.plan-wrap{grid-template-columns:1fr}
   .forecast-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .forecast-item.hero{grid-column:1/-1}
+  .milestone-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .finance-summary{grid-template-columns:1fr}
   .tranche-grid{grid-template-columns:1fr}
   .folder-grid{grid-template-columns:repeat(2,1fr)}
@@ -629,7 +647,11 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
   .forecast-item{min-height:112px;padding:14px}
   .forecast-value{font-size:clamp(22px,8vw,32px)}
   .section-head{display:block}
-  .milestones{grid-template-columns:repeat(10,162px);margin-inline:-14px;padding-inline:14px}
+  .milestone-phase-head{display:block}
+  .milestone-phase-meta{justify-content:flex-start;margin-top:10px}
+  .milestone-phase-body{padding:12px}
+  .milestone-grid{grid-template-columns:1fr}
+  .milestone{min-height:140px}
   .gantt-note{flex-wrap:wrap;align-items:flex-start}
   .gantt-note:before{flex-shrink:0;margin-top:2px}
   .bank-top{display:block}
@@ -680,7 +702,6 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
           <h1 id="operationName">Operación: pendiente de confirmar</h1>
           <p class="headline-line" id="operationSummary">pendiente de confirmar</p>
           <p class="operation-location" id="operationLocation">pendiente de confirmar</p>
-          <p class="features" id="operationRefs">pendiente de confirmar</p>
           <p class="subhead">Primero claridad. Luego control. Y al final, resultado. Una operación medida, documentada y visible de principio a fin.</p>
         </div>
       </div>
@@ -982,10 +1003,6 @@ function renderOperacion(){
   document.getElementById("operationName").textContent=`Operación: ${valor(operacion.nombre)}`;
   document.getElementById("operationSummary").textContent=valor(operacion.resumen_una_linea);
   document.getElementById("operationLocation").textContent=valor(operacion.direccion);
-  document.getElementById("operationRefs").textContent=[
-    `Referencia catastral: ${valor(operacion.referencia_catastral)}`,
-    `Finca registral: ${valor(operacion.finca_registral)}`
-  ].join(" · ");
   document.getElementById("planNote").textContent=valor(operacion.resumen_una_linea);
   document.getElementById("planLegend").innerHTML=[
     ["Dirección", operacion.direccion],
@@ -994,7 +1011,13 @@ function renderOperacion(){
   ].map(([label,value])=>`<div class="legend-item"><b>${escapeHtml(label)}</b><span>${escapeHtml(valor(value))}</span></div>`).join("");
 }
 function renderPlanos(){
-  const planos=Array.isArray(datosOperacion.planos) ? datosOperacion.planos.filter(plano=>plano && plano.fichero) : [];
+  const planosVistos=new Set();
+  const planos=Array.isArray(datosOperacion.planos) ? datosOperacion.planos.filter(plano=>{
+    if(!plano || !plano.fichero) return false;
+    if(planosVistos.has(plano.fichero)) return false;
+    planosVistos.add(plano.fichero);
+    return true;
+  }) : [];
   const image=document.getElementById("activePlanImage");
   const button=document.getElementById("activePlanButton");
   const counter=document.getElementById("planCounter");
@@ -1102,22 +1125,67 @@ function renderEscenarioEconomico(){
 }
 function renderHitos(){
   const items=datosOperacion.hitos || [];
+  const fases=(datosOperacion.estado && datosOperacion.estado.fases) || [];
   const conseguidos=items.filter(item=>item.estado==="conseguido").length;
   const total=items.length;
   const proximoIndex=items.findIndex(item=>item.estado==="pendiente");
   document.getElementById("milestoneCounter").textContent=total ? `${conseguidos} de ${total} hitos` : PENDIENTE;
   document.getElementById("milestoneTitle").textContent=total ? `${conseguidos} de ${total} hitos conseguidos` : PENDIENTE;
-  document.getElementById("milestones").innerHTML=items.map((hito,i)=>{
+  const renderCard=(hito,index)=>{
     const clase=estadoClase(hito.estado);
-    const proximo=i===proximoIndex ? '<span class="badge next">Próximo</span>' : "";
+    const proximo=index===proximoIndex ? '<span class="badge next">Próximo</span>' : "";
     return `
-    <article class="milestone ${escapeAttr(clase)}" data-index="${i}">
-      <div>
-        <div class="toprow"><span class="num">${clase==="done" ? "✓" : i+1}</span>${proximo || (clase==="current" ? '<span class="spark" aria-hidden="true"></span>' : "")}</div>
-        <b>${escapeHtml(valor(hito.nombre))}</b><span class="date">${escapeHtml(valor(hito.fecha))}</span><p class="meaning">${escapeHtml(valor(hito.detalle))}</p>
-      </div>
-      <div><span class="stamp">${clase==="done" ? "✓ Conseguido" : estadoEtiqueta(hito.estado)}</span></div>
-    </article>`;
+      <article class="milestone ${escapeAttr(clase)}" data-index="${index}">
+        <div>
+          <div class="toprow"><span class="num">${clase==="done" ? "✓" : index+1}</span>${proximo || (clase==="current" ? '<span class="spark" aria-hidden="true"></span>' : "")}</div>
+          <b>${escapeHtml(valor(hito.nombre))}</b>
+          <span class="date">${escapeHtml(valor(hito.fecha))}</span>
+          <p class="meaning">${escapeHtml(valor(hito.detalle))}</p>
+        </div>
+        <div><span class="stamp ${escapeAttr(clase)}">${clase==="done" ? "✓ Conseguido" : estadoEtiqueta(hito.estado)}</span></div>
+      </article>`;
+  };
+  const gruposExito=[
+    "Kick-off y gobierno",
+    "Licencias y validaciones técnicas",
+    "Plan de obra y contratación",
+    "Ejecución controlada y reporting",
+    "Cierre documental y salida"
+  ];
+  document.getElementById("milestones").innerHTML=fases.map(fase=>{
+    const hitosFase=items
+      .map((hito,index)=>({hito,index}))
+      .filter(item=>item.hito.fase===fase.nombre);
+    const hechosFase=hitosFase.filter(item=>item.hito.estado==="conseguido").length;
+    const claseFase=estadoClase(fase.estado);
+    const cuerpo=fase.nombre==="Fase 3 · ÉXITO" ? gruposExito.map(grupo=>{
+      const hitosGrupo=hitosFase.filter(item=>item.hito.grupo===grupo);
+      if(!hitosGrupo.length) return "";
+      return `
+        <div class="milestone-group">
+          <div class="milestone-group-label">${escapeHtml(grupo)}</div>
+          <div class="milestone-grid">
+            ${hitosGrupo.map(item=>renderCard(item.hito,item.index)).join("")}
+          </div>
+        </div>`;
+    }).join("") : `
+      <div class="milestone-grid">
+        ${hitosFase.map(item=>renderCard(item.hito,item.index)).join("")}
+      </div>`;
+    return `
+      <section class="milestone-phase phase-${escapeAttr(claseFase)}">
+        <div class="milestone-phase-head">
+          <div class="milestone-phase-title">
+            <small>${escapeHtml(estadoEtiqueta(fase.estado))}</small>
+            <h3>${escapeHtml(valor(fase.nombre))}</h3>
+          </div>
+          <div class="milestone-phase-meta">
+            <span class="stamp ${escapeAttr(claseFase)}">${claseFase==="done" ? "✓ Cerrada" : estadoEtiqueta(fase.estado)}</span>
+            <span class="badge navy">${hechosFase} de ${hitosFase.length} hitos</span>
+          </div>
+        </div>
+        <div class="milestone-phase-body">${cuerpo}</div>
+      </section>`;
   }).join("");
 }
 function renderGantt(){
