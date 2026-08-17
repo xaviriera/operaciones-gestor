@@ -1145,13 +1145,12 @@ function renderHitos(){
         <div><span class="stamp ${escapeAttr(clase)}">${clase==="done" ? "✓ Conseguido" : estadoEtiqueta(hito.estado)}</span></div>
       </article>`;
   };
-  const gruposExito=[
-    "Kick-off y gobierno",
-    "Licencias y validaciones técnicas",
-    "Plan de obra y contratación",
-    "Ejecución controlada y reporting",
-    "Cierre documental y salida"
-  ];
+  // Los grupos se derivan de los propios datos, en su orden de aparición.
+  // NUNCA volver a fijarlos a mano: si un grupo del JSON no estaba en la lista,
+  // sus hitos desaparecian del visor sin avisar (paso el 16-ago-2026: 10 hitos invisibles).
+  const gruposExito=[...new Set(
+    items.filter(h=>h.fase==="Fase 3 · ÉXITO" && h.grupo).map(h=>h.grupo)
+  )];
   document.getElementById("milestones").innerHTML=fases.map(fase=>{
     const hitosFase=items
       .map((hito,index)=>({hito,index}))
@@ -1168,7 +1167,11 @@ function renderHitos(){
             ${hitosGrupo.map(item=>renderCard(item.hito,item.index)).join("")}
           </div>
         </div>`;
-    }).join("") : `
+    }).join("") + (()=>{
+      // Red de seguridad: ningun hito puede quedar sin pintar por no tener grupo.
+      const sueltos=hitosFase.filter(item=>!item.hito.grupo);
+      return sueltos.length ? `<div class="milestone-grid">${sueltos.map(item=>renderCard(item.hito,item.index)).join("")}</div>` : "";
+    })() : `
       <div class="milestone-grid">
         ${hitosFase.map(item=>renderCard(item.hito,item.index)).join("")}
       </div>`;
