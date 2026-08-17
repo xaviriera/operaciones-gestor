@@ -539,6 +539,11 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 .photos-empty{margin:16px 0 0;padding:16px;border:1px dashed rgba(22,61,96,.22);border-radius:8px;background:#fffdf8;color:var(--muted);font-size:13px;font-weight:700}
 .lightbox{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:22px;background:rgba(15,44,71,.82)}
 .lightbox[hidden]{display:none}
+.lightbox-stage{position:relative;width:min(100%,1100px);height:82vh;overflow:hidden;border-radius:8px;touch-action:none;cursor:grab;display:grid;place-items:center}
+.lightbox-stage.dragging{cursor:grabbing}
+.lightbox-stage img{display:block;max-width:100%;max-height:82vh;border-radius:8px;box-shadow:0 24px 80px rgba(0,0,0,.34);transform-origin:center center;will-change:transform;user-select:none;-webkit-user-drag:none}
+.lightbox-hint{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);padding:8px 16px;border-radius:999px;background:rgba(15,44,71,.72);color:rgba(255,255,255,.92);font-size:12px;font-weight:600;letter-spacing:.2px;pointer-events:none;transition:opacity .6s ease}
+.lightbox-hint.oculto{opacity:0}
 .lightbox img{display:block;max-width:min(100%,1100px);max-height:82vh;border-radius:8px;box-shadow:0 24px 80px rgba(0,0,0,.34)}
 .folder-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
 .folder{
@@ -966,7 +971,10 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 </template>
 <div class="data-warning" id="dataWarning" role="status" hidden>No se han podido cargar los datos de la operación. Revisa la conexión o el origen configurado.</div>
 <div class="lightbox" id="photoLightbox" hidden>
-  <img id="photoLightboxImage" src="" alt="">
+  <div class="lightbox-stage" id="lightboxStage">
+    <img id="photoLightboxImage" src="" alt="" draggable="false">
+  </div>
+  <div class="lightbox-hint" id="lightboxHint">Rueda o pellizco para ampliar · doble toque para acercar</div>
 </div>
 
 <script>
@@ -1366,17 +1374,113 @@ function renderCamaras(){
       </div>`;
   }).join("");
 }
+// --- Zoom del plano ampliado: rueda, pellizco, doble toque y arrastre ---
+const zoomEstado={escala:1,x:0,y:0,punteros:new Map(),distIni:0,escIni:1,arrastrando:false,ultX:0,ultY:0,movido:false,ultimoTap:0};
+function zoomAplicar(){
+  const img=document.getElementById("photoLightboxImage");
+  if(!img) return;
+  const stage=document.getElementById("lightboxStage");
+  if(stage && zoomEstado.escala>1){
+    // Limite: la imagen no puede salirse de la vista
+    const maxX=Math.max(0,(img.clientWidth*zoomEstado.escala-stage.clientWidth)/2);
+    const maxY=Math.max(0,(img.clientHeight*zoomEstado.escala-stage.clientHeight)/2);
+    zoomEstado.x=Math.max(-maxX,Math.min(maxX,zoomEstado.x));
+    zoomEstado.y=Math.max(-maxY,Math.min(maxY,zoomEstado.y));
+  }else{ zoomEstado.x=0; zoomEstado.y=0; }
+  img.style.transform=`translate(${zoomEstado.x}px,${zoomEstado.y}px) scale(${zoomEstado.escala})`;
+}
+function zoomReset(){
+  zoomEstado.escala=1; zoomEstado.x=0; zoomEstado.y=0;
+  zoomEstado.punteros.clear(); zoomEstado.arrastrando=false;
+  zoomAplicar();
+}
+function zoomA(nuevaEscala,cx,cy){
+  const stage=document.getElementById("lightboxStage");
+  if(!stage) return;
+  const esc=Math.max(1,Math.min(6,nuevaEscala));
+  const r=stage.getBoundingClientRect();
+  const px=(cx??(r.left+r.width/2))-r.left-r.width/2;
+  const py=(cy??(r.top+r.height/2))-r.top-r.height/2;
+  const factor=esc/zoomEstado.escala;
+  zoomEstado.x=(zoomEstado.x-px)*factor+px;
+  zoomEstado.y=(zoomEstado.y-py)*factor+py;
+  zoomEstado.escala=esc;
+  zoomAplicar();
+}
+function zoomInit(){
+  const stage=document.getElementById("lightboxStage");
+  if(!stage || stage.dataset.zoomListo) return;
+  stage.dataset.zoomListo="1";
+  stage.addEventListener("wheel",e=>{
+    e.preventDefault();
+    zoomA(zoomEstado.escala*(e.deltaY<0?1.18:1/1.18),e.clientX,e.clientY);
+  },{passive:false});
+  stage.addEventListener("pointerdown",e=>{
+    stage.setPointerCapture(e.pointerId);
+    zoomEstado.punteros.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    zoomEstado.movido=false;
+    if(zoomEstado.punteros.size===2){
+      const [a,b]=[...zoomEstado.punteros.values()];
+      zoomEstado.distIni=Math.hypot(a.x-b.x,a.y-b.y);
+      zoomEstado.escIni=zoomEstado.escala;
+    }else if(zoomEstado.escala>1){
+      zoomEstado.arrastrando=true; zoomEstado.ultX=e.clientX; zoomEstado.ultY=e.clientY;
+      stage.classList.add("dragging");
+    }
+  });
+  stage.addEventListener("pointermove",e=>{
+    if(!zoomEstado.punteros.has(e.pointerId)) return;
+    zoomEstado.punteros.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(zoomEstado.punteros.size===2 && zoomEstado.distIni>0){
+      const [a,b]=[...zoomEstado.punteros.values()];
+      const d=Math.hypot(a.x-b.x,a.y-b.y);
+      zoomEstado.movido=true;
+      zoomA(zoomEstado.escIni*(d/zoomEstado.distIni),(a.x+b.x)/2,(a.y+b.y)/2);
+    }else if(zoomEstado.arrastrando){
+      zoomEstado.x+=e.clientX-zoomEstado.ultX;
+      zoomEstado.y+=e.clientY-zoomEstado.ultY;
+      zoomEstado.ultX=e.clientX; zoomEstado.ultY=e.clientY;
+      zoomEstado.movido=true;
+      zoomAplicar();
+    }
+  });
+  const soltar=e=>{
+    zoomEstado.punteros.delete(e.pointerId);
+    if(zoomEstado.punteros.size<2) zoomEstado.distIni=0;
+    if(zoomEstado.punteros.size===0){
+      zoomEstado.arrastrando=false; stage.classList.remove("dragging");
+      // doble toque / doble clic: alterna 1 <-> 2.5
+      const ahora=e.timeStamp||0;
+      if(!zoomEstado.movido && ahora-zoomEstado.ultimoTap<320){
+        zoomA(zoomEstado.escala>1.05?1:2.5,e.clientX,e.clientY);
+        zoomEstado.ultimoTap=0;
+      }else if(!zoomEstado.movido){ zoomEstado.ultimoTap=ahora; }
+    }
+  };
+  stage.addEventListener("pointerup",soltar);
+  stage.addEventListener("pointercancel",soltar);
+}
 function abrirFotoAvance(url,pie){
   const lightbox=document.getElementById("photoLightbox");
   const image=document.getElementById("photoLightboxImage");
   image.src=url;
   image.alt=pie || "Fotografía del avance de obra";
   lightbox.hidden=false;
+  zoomInit();
+  zoomReset();
+  const pista=document.getElementById("lightboxHint");
+  if(pista){
+    pista.classList.remove("oculto");
+    clearTimeout(window._pistaZoom);
+    window._pistaZoom=setTimeout(()=>pista.classList.add("oculto"),3000);
+  }
 }
 function cerrarFotoAvance(){
   const lightbox=document.getElementById("photoLightbox");
   const image=document.getElementById("photoLightboxImage");
   lightbox.hidden=true;
+  zoomReset();
+  image.style.transform="";
   image.src="";
   image.alt="";
 }
@@ -1475,7 +1579,7 @@ function montarVisor(){
   document.body.insertBefore(template.content.cloneNode(true), document.getElementById("dataWarning"));
   visorMontado=true;
   document.getElementById("photoLightbox").addEventListener("click",event=>{
-    if(event.target.id==="photoLightbox") cerrarFotoAvance();
+    if(event.target.id==="photoLightbox" && !zoomEstado.movido) cerrarFotoAvance();
   });
   document.addEventListener("keydown",event=>{
     if(event.key==="Escape" && !document.getElementById("photoLightbox").hidden) cerrarFotoAvance();
