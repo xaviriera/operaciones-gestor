@@ -331,6 +331,24 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
   .plan-tab-label{white-space:normal;line-height:1.25}
   .plan-tabs-hint{margin-bottom:12px}
 }
+.lightbox-close{position:fixed;top:14px;right:14px;z-index:2;width:46px;height:46px;display:grid;place-items:center;border:0;border-radius:50%;background:rgba(255,255,255,.94);color:var(--navy);font-size:19px;font-weight:700;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.28)}
+.lightbox-close:active{transform:scale(.94)}
+/* Aviso de que hay mas contenido a la derecha */
+.scroll-shadow{position:relative}
+.scroll-shadow:after{content:"";position:absolute;top:0;right:0;width:52px;height:100%;pointer-events:none;background:linear-gradient(90deg,rgba(253,251,247,0),rgba(253,251,247,.96));opacity:1;transition:opacity .25s ease}
+.scroll-shadow.at-end:after{opacity:0}
+.scroll-nudge{display:none;align-items:center;gap:6px;margin:8px 0 0;color:var(--ochre);font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase}
+.scroll-nudge b{font-size:14px;line-height:1}
+@media(max-width:720px){.scroll-nudge{display:inline-flex}}
+@media(max-width:720px){
+  .milestone.done{padding:10px 12px;background:rgba(22,61,96,.028);border-color:rgba(22,61,96,.08);box-shadow:none;opacity:.72}
+  .milestone.done .meaning{display:none}
+  .milestone.done b{font-size:13px;font-weight:600}
+  .milestone.done .date{font-size:11px}
+  .milestone.done .stamp{font-size:9px;padding:3px 7px}
+  .milestone.current{border-color:rgba(226,159,52,.55);box-shadow:0 12px 28px rgba(226,159,52,.16)}
+  .milestone.current b,.milestone.todo b{font-size:15px}
+}
 .plan-empty{padding:28px;border:1px dashed rgba(22,61,96,.22);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
 .legend{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45}
 .legend-item{display:inline-flex;align-items:baseline;gap:5px;min-width:0}
@@ -830,7 +848,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
         <div class="plan-wrap">
           <div class="legend" id="planLegend"></div>
           <div class="plan-gallery" id="planGallery">
-            <p class="plan-tabs-hint">Selecciona un plano</p>
+            <p class="plan-tabs-hint">Selecciona un plano <span class="scroll-nudge"><b>&#8250;</b> desliza para ver los 4</span></p>
             <div class="plan-tabs" id="planTabs" role="tablist" aria-label="Planos y renders de la operación"></div>
             <div class="plan-frame">
               <button class="plan-action" type="button" id="activePlanButton" aria-label="Ampliar plano activo">
@@ -996,6 +1014,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
   <div class="lightbox-stage" id="lightboxStage">
     <img id="photoLightboxImage" src="" alt="" draggable="false">
   </div>
+  <button class="lightbox-close" type="button" id="lightboxClose" aria-label="Cerrar">&#10005;</button>
   <div class="lightbox-hint" id="lightboxHint">Rueda o pellizco para ampliar · doble toque para acercar</div>
 </div>
 
@@ -1156,6 +1175,25 @@ function renderPlanos(){
     abrirFotoAvance(button.dataset.planUrl,button.dataset.planName);
   };
   activarPlano(0);
+}
+// Aviso visual de que un contenedor tiene mas contenido a la derecha
+function marcarScrollHorizontal(el){
+  if(!el || el.dataset.scrollAviso) return;
+  el.dataset.scrollAviso="1";
+  el.classList.add("scroll-shadow");
+  const actualizar=()=>{
+    const fin=el.scrollLeft+el.clientWidth>=el.scrollWidth-4;
+    el.classList.toggle("at-end",fin || el.scrollWidth<=el.clientWidth+4);
+  };
+  el.addEventListener("scroll",actualizar,{passive:true});
+  window.addEventListener("resize",actualizar);
+  actualizar();
+}
+function activarAvisosScroll(){
+  marcarScrollHorizontal(document.getElementById("planTabs"));
+  document.querySelectorAll(".gantt-card,.gantt-inner,#gantt").forEach(el=>{
+    if(el && el.scrollWidth>el.clientWidth+4) marcarScrollHorizontal(el);
+  });
 }
 function renderEstado(){
   const estado=datosOperacion.estado || {};
@@ -1590,6 +1628,7 @@ function renderTodo(){
   renderBitacora();
   renderNoticiasMercado();
   renderContacto();
+  activarAvisosScroll();
 }
 function showDataWarning(){
   document.getElementById("dataWarning").hidden=false;
@@ -1600,6 +1639,8 @@ function montarVisor(){
   document.getElementById("accessScreen")?.remove();
   document.body.insertBefore(template.content.cloneNode(true), document.getElementById("dataWarning"));
   visorMontado=true;
+  const btnCerrar=document.getElementById("lightboxClose");
+  if(btnCerrar) btnCerrar.addEventListener("click",cerrarFotoAvance);
   document.getElementById("photoLightbox").addEventListener("click",event=>{
     if(event.target.id==="photoLightbox" && !zoomEstado.movido) cerrarFotoAvance();
   });
