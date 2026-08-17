@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Visor del Inversor</title>
+<link rel="icon" type="image/png" href="logo-cdu.png">
+<link rel="apple-touch-icon" href="logo-cdu.png">
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap");
 :root{
@@ -212,7 +214,7 @@ h1{
 .bar span{display:block;width:var(--progress,0%);height:100%;border-radius:999px;background:linear-gradient(90deg,var(--ochre),#f4c36d);animation:progressRun 2.8s ease-in-out infinite}
 .pct{font-size:34px;line-height:1;font-weight:900;color:var(--white)}
 .progress-scope{margin:8px 0 0;color:rgba(253,251,247,.62);font-size:11px;font-weight:600;letter-spacing:.2px}
-.pulse-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.pulse-meta{margin-top:16px}
 .mini{min-height:86px;border:1px solid rgba(253,251,247,.14);background:rgba(255,255,255,.06);border-radius:8px;padding:13px}
 .mini span{display:block;color:#ffe0aa;font-size:10px;font-weight:900;letter-spacing:.9px;text-transform:uppercase}
 .mini b{display:block;margin-top:7px;font-size:13px;color:var(--white)}
@@ -226,49 +228,56 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .note{margin:6px 0 0;color:var(--muted);font-size:14px}
 .card{background:var(--white);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 10px rgba(22,61,96,.05)}
 .forecast-card{padding:20px;background:linear-gradient(180deg,#fff,#fffdfa);overflow:hidden}
-/* 7 cifras en 3 columnas.
-   La rentabilidad destaca por estilo (.forecast-item.hero), no por ocupar mas espacio. */
-.forecast-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.forecast-item{
+.micro-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  overflow:hidden;
+}
+.micro-cell{
   min-width:0;
   display:grid;
-  align-content:space-between;
-  min-height:126px;
-  border:1px solid rgba(22,61,96,.13);
-  border-radius:8px;
-  padding:15px;
+  align-content:start;
+  gap:6px;
+  min-height:0;
+  padding:12px 14px;
   background:#fff;
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
 }
-.forecast-item.hero{
-  min-height:154px;
-  background:linear-gradient(135deg,var(--navy2),var(--navy));
-  border-color:rgba(22,61,96,.26);
-  color:var(--cream);
-  box-shadow:0 18px 42px rgba(22,61,96,.18);
-}
-.forecast-label{
+.micro-label{
   color:var(--muted);
   font-size:10px;
   font-weight:900;
-  letter-spacing:.8px;
+  letter-spacing:1px;
   line-height:1.25;
   text-transform:uppercase;
 }
-.forecast-value{
+.micro-value{
   display:block;
   min-width:0;
-  margin-top:18px;
   color:var(--navy);
-  font-size:clamp(23px,3.1vw,38px);
-  font-weight:900;
-  line-height:1;
+  font-size:18px;
+  font-weight:700;
+  line-height:1.12;
   overflow-wrap:anywhere;
 }
-.forecast-item.hero .forecast-label{color:#ffe0aa}
-.forecast-item.hero .forecast-value{color:var(--white);font-size:clamp(26px,3.8vw,44px)}
-.forecast-item.positive .forecast-value{color:var(--ok)}
-.forecast-item.pending .forecast-value{font-size:clamp(16px,2vw,22px);line-height:1.14;color:var(--muted)}
-.forecast-item.hero.pending .forecast-value{color:rgba(253,251,247,.86);font-size:clamp(23px,3.4vw,38px)}
+.micro-detail{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700;
+  line-height:1.3;
+}
+.micro-cell.positive .micro-value{color:var(--ok)}
+.micro-cell.pending .micro-value{color:var(--muted);font-size:15px}
+.micro-grid.compact{grid-template-columns:repeat(2,minmax(0,1fr))}
+.micro-grid.dark .micro-cell{background:rgba(255,255,255,.06);border-color:rgba(253,251,247,.14)}
+.micro-grid.dark .micro-label{color:#ffe0aa}
+.micro-grid.dark .micro-value{color:var(--white);font-size:16px}
+.forecast-grid{
+  border:1px solid rgba(22,61,96,.11);
+  border-radius:8px;
+}
 .forecast-note{margin-top:12px}
 .plan-card{padding:18px;overflow:hidden;background:linear-gradient(180deg,#fff,#fffdfa)}
 .plan-wrap{display:grid;gap:14px}
@@ -440,16 +449,24 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .account-balance{display:inline-flex;flex-wrap:wrap;justify-content:flex-end;gap:6px;margin-top:2px;color:var(--navy);font-size:15px;font-weight:900;line-height:1.25}
 .account-balance span{color:var(--ochre)}
 .exclusive-account{margin:0 0 12px;padding:10px 12px;border:1px solid rgba(226,159,52,.35);border-radius:8px;background:#fff8eb;color:var(--navy);font-size:12px;font-weight:900}
-.finance-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.tranche-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 10px}
-.tranche{padding:14px;border:1px solid var(--line);border-radius:8px;background:#fff}
-.tranche.done{border-color:rgba(29,122,79,.22);background:#f7fcf9}
-.tranche.pending{border-color:rgba(226,159,52,.3);background:#fff9ed}
-.tranche-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
-.tranche span{display:block;color:var(--muted);font-size:10px;font-weight:900;letter-spacing:.8px;text-transform:uppercase}
-.tranche b{display:block;color:var(--navy);font-size:14px}
-.tranche strong{display:block;margin-top:10px;color:var(--navy);font-size:22px;line-height:1}
-.tranche-note{margin:8px 0 0;color:var(--muted);font-size:12px;line-height:1.4}
+.finance-summary{
+  margin-top:10px;
+  border:1px solid rgba(22,61,96,.11);
+  border-radius:8px;
+}
+.tranche-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 10px}
+.tranche{display:grid;gap:7px;align-content:center;min-height:66px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff}
+.tranche.done{border-color:rgba(29,122,79,.2);background:#fbfefc}
+.tranche.pending{border-color:rgba(22,61,96,.16);background:#fffdfa}
+.tranche-line{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:8px;min-width:0}
+.tranche-name{min-width:0;color:var(--navy);font-size:12px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tranche-amount{color:var(--navy);font-size:14px;font-weight:900;line-height:1;white-space:nowrap}
+.tranche-pill{display:inline-flex;align-items:center;justify-content:center;width:max-content;max-width:100%;border-radius:999px;padding:5px 9px;font-size:10px;font-weight:900;letter-spacing:.3px;white-space:nowrap}
+.tranche-pill.done{color:#145c3b;background:#eaf6ef;border:1px solid rgba(29,122,79,.2)}
+.tranche-pill.pending{color:var(--navy);background:rgba(22,61,96,.07);border:1px solid rgba(22,61,96,.15)}
+.tranche-detail{margin:0;color:var(--muted);font-size:12px;line-height:1.4}
+.tranche-detail summary{width:max-content;max-width:100%;color:var(--ochre);font-size:11px;font-weight:900;letter-spacing:.4px;cursor:pointer}
+.tranche-detail p{margin:6px 0 0}
 .finance-note{margin:10px 0 0;color:var(--muted);font-size:11px;font-weight:700}
 .bank-statement{margin:16px 0 0;padding-top:16px;border-top:1px solid var(--line)}
 .bank-statement-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
@@ -463,10 +480,6 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .statement-fallback .statement-frame{display:none}
 .statement-fallback .bank-statement-head .statement-open{display:none}
 .statement-fallback .statement-mobile{display:block}
-.metric{padding:15px;background:#fff;border:1px solid var(--line);border-radius:8px}
-.metric span{display:block;color:var(--muted);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.7px}
-.metric b{display:block;margin-top:8px;color:var(--navy);font-size:clamp(20px,2.3vw,28px);line-height:1}
-.metric small{display:block;margin-top:6px;color:var(--muted);font-size:11px}
 .table-wrap{overflow-x:auto;padding:14px}
 table{width:100%;min-width:820px;border-collapse:collapse}
 th,td{padding:13px 11px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}
@@ -528,8 +541,16 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 .entry.market .entry-date{color:var(--navy)}
 .entry b{display:block;color:var(--navy);font-size:15px}
 .entry p{margin:4px 0 0;color:var(--muted);font-size:13px}
-.entry-source{display:inline-block;margin-top:8px;color:var(--navy);font-size:12px;font-weight:900;text-decoration:none}
-.entry-source:hover{color:var(--ochre)}
+.entry-source{display:inline-flex;align-items:center;gap:4px;min-height:32px;margin-top:4px;padding:4px 0;color:var(--ochre);font-size:13px;font-weight:600;text-decoration:none}
+.entry-source:hover{text-decoration:underline}
+.entry-source:active{color:#c9841e;opacity:.82}
+#bitacoraFeed{position:relative;gap:14px;padding-left:20px}
+#bitacoraFeed::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.bitacora-entry{position:relative;border-left:1px solid var(--line)}
+.bitacora-entry::before{content:"";position:absolute;left:-18px;top:20px;width:7px;height:7px;border-radius:50%;background:rgba(22,61,96,.28);box-shadow:0 0 0 4px var(--cream)}
+.bitacora-entry.latest{border-left:4px solid var(--ochre);background:#fffaf0}
+.bitacora-entry.latest::before{left:-20px;top:24px;width:10px;height:10px;background:var(--ochre);box-shadow:0 0 0 5px rgba(226,159,52,.18)}
+.entry-latest-label{display:inline-flex;width:max-content;max-width:100%;margin-bottom:8px;padding:5px 9px;border-radius:999px;background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.4px;line-height:1;text-transform:uppercase}
 .report{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:24px;color:var(--white);background:linear-gradient(135deg,var(--navy2),var(--navy))}
 .report span{display:block;color:#ffe0aa;font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase}
 .report b{display:block;margin-top:4px;font-size:clamp(20px,3vw,30px)}
@@ -636,10 +657,9 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 }
 @media(max-width:1040px){
   .hero-grid,.plan-wrap{grid-template-columns:1fr}
-  .forecast-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .forecast-item.hero{grid-column:1/-1}
+  .micro-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .micro-grid.compact{grid-template-columns:repeat(2,minmax(0,1fr))}
   .milestone-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .finance-summary{grid-template-columns:1fr}
   .tranche-grid{grid-template-columns:1fr}
   .folder-grid{grid-template-columns:repeat(2,1fr)}
 }
@@ -651,11 +671,11 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
   .private{padding:7px 9px;font-size:10px}
   .hero-copy{min-height:0}
   .operation-location{width:100%;font-size:13px}
-  .phase-line,.pulse-meta,.camera-grid,.folder-grid{grid-template-columns:1fr}
-  .forecast-grid{grid-template-columns:1fr}
+  .phase-line,.camera-grid,.folder-grid{grid-template-columns:1fr}
+  .micro-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .forecast-card{padding:14px}
-  .forecast-item{min-height:112px;padding:14px}
-  .forecast-value{font-size:clamp(22px,8vw,32px)}
+  .micro-cell{padding:10px 11px}
+  .micro-value{font-size:16px}
   .section-head{display:block}
   .milestone-phase-head{display:block}
   .milestone-phase-meta{justify-content:flex-start;margin-top:10px}
@@ -744,7 +764,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
         </div>
       </div>
       <div class="card forecast-card">
-        <div class="forecast-grid" id="forecastGrid"></div>
+        <div class="forecast-grid micro-grid" id="forecastGrid"></div>
       </div>
     </section>
 
@@ -830,7 +850,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
           </div>
         </div>
         <div class="tranche-grid" id="trancheGrid"></div>
-        <div class="finance-summary" id="financeSummary"></div>
+        <div class="finance-summary micro-grid compact" id="financeSummary"></div>
         <p class="finance-note" id="financeNote">Los importes pendientes se mostrarán cuando estén confirmados.</p>
         <div class="bank-statement" id="bankStatement" hidden></div>
       </div>
@@ -1095,8 +1115,10 @@ function renderEstado(){
   pct.textContent = hayAvance ? `${avance}%` : PENDIENTE;
   pct.style.fontSize = hayAvance ? "" : "15px";
   document.getElementById("pulseMeta").innerHTML=`
-    <div class="mini"><span>Fase actual</span><b>${escapeHtml(valor(estado.fase_actual))}</b></div>
-    <div class="mini"><span>Avance</span><b>${hayAvance ? `${avance}%` : PENDIENTE}</b></div>`;
+    <div class="micro-grid compact dark">
+      <div class="micro-cell"><span class="micro-label">Fase actual</span><b class="micro-value">${escapeHtml(valor(estado.fase_actual))}</b></div>
+      <div class="micro-cell"><span class="micro-label">Avance</span><b class="micro-value">${hayAvance ? `${avance}%` : PENDIENTE}</b></div>
+    </div>`;
 }
 function renderProximoReporte(){
   const reporte=datosOperacion.proximo_reporte || {};
@@ -1126,10 +1148,11 @@ function renderEscenarioEconomico(){
   section.hidden=false;
   grid.innerHTML=items.map(([label,value,classes])=>{
     const pendiente=value===null || value===undefined || value==="";
+    const microClasses=classes.replace(/\bhero\b/g,"").trim();
     return `
-      <article class="forecast-item ${escapeAttr(classes)}${pendiente ? " pending" : ""}">
-        <span class="forecast-label">${escapeHtml(label)}</span>
-        <b class="forecast-value">${escapeHtml(valor(value))}</b>
+      <article class="micro-cell ${escapeAttr(microClasses)}${pendiente ? " pending" : ""}">
+        <span class="micro-label">${escapeHtml(label)}</span>
+        <b class="micro-value">${escapeHtml(valor(value))}</b>
       </article>`;
   }).join("");
 }
@@ -1241,19 +1264,16 @@ function renderEconomico(){
   document.getElementById("trancheGrid").innerHTML=(cuentas.tramos || []).map(item=>{
     const ok=Boolean(item.confirmado);
     const tieneNota=Boolean(item.nota);
-    const nota=tieneNota ? `<p class="tranche-note">${escapeHtml(item.nota)}</p>` : "";
-    // Si hay un texto de estado (nota) y el importe/fecha vienen vacios, no pintar el
-    // placeholder "pendiente de confirmar": la nota ya informa, y repetirlo no aporta.
-    const fecha=item.fecha ? `<b>${escapeHtml(item.fecha)}</b>` : (tieneNota ? "" : `<b>${escapeHtml(PENDIENTE)}</b>`);
-    const importe=item.importe ? `<strong>${escapeHtml(item.importe)}</strong>` : (tieneNota ? "" : `<strong>${escapeHtml(PENDIENTE)}</strong>`);
+    const nota=tieneNota ? `<details class="tranche-detail"><summary>Ver detalle</summary><p>${escapeHtml(item.nota)}</p></details>` : "";
+    const importe=item.importe ? `<strong class="tranche-amount">${escapeHtml(item.importe)}</strong>` : "";
     return `
-    <div class="tranche ${ok?"done":"pending"}"><div class="tranche-top"><span>${escapeHtml(valor(item.nombre))}</span><span class="badge ${ok?"ok":"warn"}">${ok?"Confirmado":"Pendiente"}</span></div>${fecha}${importe}${nota}</div>`;
+    <div class="tranche ${ok?"done":"pending"}"><div class="tranche-line"><span class="tranche-name">${escapeHtml(valor(item.nombre))}</span><span class="tranche-pill ${ok?"done":"pending"}">${ok?"Confirmado":"Pendiente"}</span>${importe}</div>${nota}</div>`;
   }).join("");
   document.getElementById("financeSummary").innerHTML=[
     ["Tramos", (cuentas.tramos || []).length || null, "Número de tramos configurados"],
     ["Pendientes", (cuentas.tramos || []).filter(item=>!item.confirmado).length || null, "Importes por confirmar"]
   ].map(([label,value,detail])=>`
-    <div class="metric"><span>${escapeHtml(label)}</span><b>${escapeHtml(valor(value))}</b><small>${escapeHtml(detail)}</small></div>
+    <div class="micro-cell"><span class="micro-label">${escapeHtml(label)}</span><b class="micro-value">${escapeHtml(valor(value))}</b><small class="micro-detail">${escapeHtml(detail)}</small></div>
   `).join("");
   renderExtractoBancario(cuentas);
 }
@@ -1363,9 +1383,12 @@ function renderBitacora(){
     feed.innerHTML="";
     return;
   }
-  feed.innerHTML=items.map(item=>`
-    <article class="card entry"><div class="entry-date">${escapeHtml(valor(item.fecha))}</div><div><b>${escapeHtml(valor(item.titulo))}</b><p>${escapeHtml(valor(item.texto))}</p></div></article>
-  `).join("");
+  feed.innerHTML=items.map((item,index)=>{
+    const esUltima=index===0;
+    const etiqueta=esUltima ? `<span class="entry-latest-label">ÚLTIMA ACTUALIZACIÓN</span>` : "";
+    return `
+    <article class="card entry bitacora-entry ${esUltima?"latest":""}"><div class="entry-date">${escapeHtml(valor(item.fecha))}</div><div>${etiqueta}<b>${escapeHtml(valor(item.titulo))}</b><p>${escapeHtml(valor(item.texto))}</p></div></article>`;
+  }).join("");
 }
 function renderNoticiasMercado(){
   const section=document.getElementById("noticiasMercadoSection");
@@ -1377,7 +1400,9 @@ function renderNoticiasMercado(){
     return;
   }
   feed.innerHTML=items.map(item=>{
-    const enlace=item.enlace ? `<a class="entry-source" href="${escapeAttr(item.enlace)}" target="_blank" rel="noopener">Fuente</a>` : "";
+    const medio=item.medio || item.fuente || "";
+    const textoEnlace=medio ? `${escapeHtml(medio)} · Ver noticia ↗` : "Ver noticia ↗";
+    const enlace=item.enlace ? `<a class="entry-source" href="${escapeAttr(item.enlace)}" target="_blank" rel="noopener noreferrer">${textoEnlace}</a>` : "";
     return `<article class="card entry market"><div class="entry-date">${escapeHtml(valor(item.fecha))}</div><div><b>${escapeHtml(valor(item.titular))}</b><p>${escapeHtml(valor(item.texto))}</p>${enlace}</div></article>`;
   }).join("");
 }
