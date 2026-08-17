@@ -1541,7 +1541,7 @@ async function obtenerClaveMaestra(password,llavero){
 // acceso salio. Trazabilidad, no proteccion criptografica.
 function pintarMarcaAgua(alias){
   if(!alias) return;
-  const texto=`${alias} · CdU de 0 a Exito · uso privado`;
+  const texto=`${alias} · CdU de 0 a Éxito · uso privado`;
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="420" height="240"><text x="0" y="130" transform="rotate(-24 0 130)" font-family="Montserrat,Arial,sans-serif" font-size="15" font-weight="700" fill="%23163D60" fill-opacity="0.055">${texto}</text></svg>`;
   let capa=document.getElementById("marcaAgua");
   if(!capa){
