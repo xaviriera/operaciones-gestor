@@ -282,13 +282,13 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .plan-card{padding:18px;overflow:hidden;background:linear-gradient(180deg,#fff,#fffdfa)}
 .plan-wrap{display:grid;gap:14px}
 .plan-gallery{min-width:0;display:grid;gap:12px}
-.plan-frame{position:relative;padding:14px;border:1px solid rgba(22,61,96,.13);border-radius:12px;background:#fbf6eb;box-shadow:0 16px 38px rgba(22,61,96,.08)}
+.plan-frame{position:relative;padding:10px;border:1px solid rgba(22,61,96,.13);border-radius:12px;background:#fbf6eb;box-shadow:0 16px 38px rgba(22,61,96,.08)}
 .plan-img{display:block;width:100%;height:auto;max-height:720px;object-fit:contain;margin:0 auto;border-radius:8px;background:var(--cream)}
 .plan-action{display:block;width:100%;border:0;padding:0;background:transparent;cursor:zoom-in}
 .plan-action:focus-visible{outline:3px solid rgba(226,159,52,.72);outline-offset:4px;border-radius:10px}
 .plan-counter{position:absolute;left:24px;top:24px;display:inline-flex;align-items:center;border-radius:999px;padding:7px 10px;background:rgba(15,44,71,.88);color:var(--white);font-size:11px;font-weight:900;letter-spacing:.3px;pointer-events:none}
 .plan-expand{position:absolute;right:24px;bottom:24px;display:inline-flex;align-items:center;border-radius:999px;padding:8px 11px;background:rgba(253,251,247,.94);border:1px solid rgba(22,61,96,.15);color:var(--navy);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;box-shadow:0 10px 22px rgba(22,61,96,.12);pointer-events:none}
-.plan-tabs{display:flex;gap:10px;max-width:100%;overflow-x:auto;padding:2px 2px 8px;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+.plan-tabs{display:flex;gap:12px;max-width:100%;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
 .plan-tabs::-webkit-scrollbar{display:none}
 .plan-tab{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:6px;border:1px solid var(--line);border-radius:12px;padding:6px;background:#fff;font:inherit;scroll-snap-align:start;cursor:pointer}
 .plan-tab-thumb{width:72px;height:54px;object-fit:cover;border-radius:8px;opacity:.72}
@@ -297,16 +297,22 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .plan-tab.active{border:2px solid var(--ochre);box-shadow:0 8px 18px rgba(226,159,52,.18)}
 .plan-tab.active .plan-tab-thumb{opacity:1}
 .plan-tab.active .plan-tab-label{color:var(--navy);font-weight:700}
-.legal{margin:26px 0 8px;padding:22px 20px;border-top:1px solid var(--line);border-radius:14px;background:rgba(22,61,96,.035);color:var(--muted);font-size:12px;line-height:1.6;text-align:center}
-.legal-mark{margin-bottom:10px;color:var(--navy);font-size:11px;font-weight:900;letter-spacing:1.6px;text-transform:uppercase}
-.legal p{margin:0 auto 8px;max-width:660px}
+.legal{margin:34px 0 18px;padding:30px 32px;border:1px solid var(--line);border-top:3px solid var(--ochre);border-radius:16px;background:linear-gradient(180deg,rgba(22,61,96,.045),rgba(22,61,96,.015));color:var(--muted);font-size:12.5px;line-height:1.7;text-align:center}
+.legal-mark{margin-bottom:16px;color:var(--navy);font-size:12px;font-weight:900;letter-spacing:2.2px;text-transform:uppercase}
+.legal p{margin:0 auto 12px;max-width:600px}
 .legal b{color:var(--navy);font-weight:700}
 .legal-access{margin-top:10px!important;color:var(--muted);font-size:11px;font-style:italic;opacity:.9}
 .legal-year{margin-top:14px!important;padding-top:12px;border-top:1px solid var(--line);color:var(--navy);font-size:11px;font-weight:600;letter-spacing:.3px}
-@media(max-width:720px){.legal{padding:20px 16px;text-align:left}.legal p{margin-left:0}}
+@media(max-width:720px){.legal{padding:24px 20px;text-align:left}.legal p{margin-left:0;max-width:100%}.legal-mark{letter-spacing:1.6px}}
 #marcaAgua{position:fixed;inset:0;z-index:9;pointer-events:none;background-repeat:repeat;background-position:0 0;mix-blend-mode:multiply}
-@media print{#marcaAgua{opacity:.5}}
+@media print{#marcaAgua{opacity:.6}}
 .cdu-tdc-8f3a91{--cdu-src:'CdU de 0 a Exito'}
+.plan-tab{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.plan-tab:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(22,61,96,.12);border-color:rgba(226,159,52,.55)}
+.plan-tab:hover .plan-tab-thumb{opacity:1}
+.plan-tab:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+.plan-tab.active .plan-tab-label{color:var(--navy);font-weight:800}
+.plan-tabs-hint{margin:0 0 8px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase}
 .plan-empty{padding:28px;border:1px dashed rgba(22,61,96,.22);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
 .legend{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45}
 .legend-item{display:inline-flex;align-items:baseline;gap:5px;min-width:0}
@@ -669,7 +675,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 }
 @keyframes progressRun{0%,100%{filter:brightness(1)}50%{filter:brightness(1.18);box-shadow:0 0 18px rgba(226,159,52,.38)}}
 @media(min-width:900px){
-  .plan-gallery{grid-template-columns:220px minmax(0,1fr);align-items:start}
+  .plan-gallery{grid-template-columns:150px minmax(0,1fr);align-items:start}
   .plan-tabs{grid-column:1;grid-row:1;padding:2px 2px 2px 0;flex-direction:column;align-items:flex-start;overflow-x:auto;overflow-y:visible}
   .plan-tab{width:max-content;max-width:none}
   .plan-tab-thumb{width:92px;height:68px}
@@ -797,7 +803,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
           <h2 id="planTitle">Encaje de la operación</h2>
           <p class="note" id="planNote">pendiente de confirmar</p>
         </div>
-        <span class="badge navy">Plano real del encaje</span>
+        <span class="badge navy" id="planActivoBadge">Encaje</span>
       </div>
       <div class="card plan-card">
         <div class="plan-wrap">
@@ -955,8 +961,8 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 
     <footer class="legal">
       <div class="legal-mark">CdU de 0 a Éxito</div>
-      <p>Visor del Inversor desarrollado por <b>CdU de 0 a Éxito</b> para el seguimiento privado de sus operaciones. El acceso es personal e intransferible.</p>
-      <p>Su contenido, su estructura y su diseño son propiedad de CdU de 0 a Éxito. Queda prohibida su reproducción, copia, difusión o cesión a terceros, total o parcial, sin autorización expresa y por escrito.</p>
+      <p>Visor del Inversor desarrollado por <b>CdU de 0 a Éxito</b> para el seguimiento privado de sus operaciones. El acceso es <b>personal e intransferible</b>.</p>
+      <p>Su contenido, su estructura y su diseño son <b>propiedad de CdU de 0 a Éxito</b>. Queda prohibida su reproducción, copia, difusión o cesión a terceros, total o parcial, sin autorización expresa y por escrito.</p>
       <p class="legal-access">El acceso es nominativo y queda registrado por motivos de seguridad.</p>
       <p class="legal-year">© 2026 CdU de 0 a Éxito · Todos los derechos reservados</p>
     </footer>
@@ -1108,6 +1114,8 @@ function renderPlanos(){
     button.dataset.planUrl=fichero;
     button.dataset.planName=nombre;
     counter.textContent=`${index+1} / ${planos.length}`;
+    const badgePlano=document.getElementById("planActivoBadge");
+    if(badgePlano) badgePlano.textContent=nombre.replace(/^Plano de venta\s*·\s*/i,"");
     tabs.querySelectorAll(".plan-tab").forEach(tab=>{
       const activo=Number(tab.dataset.planIndex)===index;
       tab.classList.toggle("active",activo);
@@ -1279,7 +1287,7 @@ function renderGantt(){
         const fin=Number(fila.semana_fin) || 0;
         const inRange=week>=inicio&&week<=fin;
         const tipo=fila.color_o_tipo || "#163D60";
-        const marker=tipo==="hito" ? `<div class="gantt-milestone-label">✓ Hito</div>` : `<div class="bar-seg" style="--bar:${escapeAttr(tipo)}"></div>`;
+        const marker=tipo==="hito" ? `<div class="gantt-milestone-label">◆ Entrega</div>` : `<div class="bar-seg" style="--bar:${escapeAttr(tipo)}"></div>`;
         return `<div class="gcell">${inRange?marker:""}</div>`;
       }).join("")}
     </div>
@@ -1544,7 +1552,7 @@ async function obtenerClaveMaestra(password,llavero){
 function pintarMarcaAgua(alias){
   if(!alias) return;
   const texto=`${alias} · CdU de 0 a Éxito · uso privado`;
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="420" height="240"><text x="0" y="130" transform="rotate(-24 0 130)" font-family="Montserrat,Arial,sans-serif" font-size="15" font-weight="700" fill="%23163D60" fill-opacity="0.055">${texto}</text></svg>`;
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="620" height="420"><text x="0" y="130" transform="rotate(-24 0 130)" font-family="Montserrat,Arial,sans-serif" font-size="13" font-weight="600" fill="%23163D60" fill-opacity="0.022">${texto}</text></svg>`;
   let capa=document.getElementById("marcaAgua");
   if(!capa){
     capa=document.createElement("div");
