@@ -297,10 +297,22 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .plan-tab.active{border:2px solid var(--ochre);box-shadow:0 8px 18px rgba(226,159,52,.18)}
 .plan-tab.active .plan-tab-thumb{opacity:1}
 .plan-tab.active .plan-tab-label{color:var(--navy);font-weight:700}
+.legal{margin:26px 0 8px;padding:22px 20px;border-top:1px solid var(--line);border-radius:14px;background:rgba(22,61,96,.035);color:var(--muted);font-size:12px;line-height:1.6;text-align:center}
+.legal-mark{margin-bottom:10px;color:var(--navy);font-size:11px;font-weight:900;letter-spacing:1.6px;text-transform:uppercase}
+.legal p{margin:0 auto 8px;max-width:660px}
+.legal b{color:var(--navy);font-weight:700}
+.legal-year{margin-top:14px!important;padding-top:12px;border-top:1px solid var(--line);color:var(--navy);font-size:11px;font-weight:600;letter-spacing:.3px}
+@media(max-width:720px){.legal{padding:20px 16px;text-align:left}.legal p{margin-left:0}}
 .plan-empty{padding:28px;border:1px dashed rgba(22,61,96,.22);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
-.legend{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45}
-.legend-item{display:inline-flex;align-items:center;gap:4px}
+.legend{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45}
+.legend-item{display:inline-flex;align-items:baseline;gap:5px;min-width:0}
 .legend-item:not(:last-child):after{content:"·";margin-left:8px;color:var(--muted)}
+@media(max-width:720px){
+  .legend{flex-direction:column;align-items:flex-start;gap:3px}
+  .legend-item{width:100%;flex-wrap:wrap}
+  .legend-item:not(:last-child):after{content:none}
+  .legend-item b{flex:0 0 auto}
+}
 .legend-item b{color:var(--muted);font-size:inherit;font-weight:600}
 .legend-item span{color:var(--muted)}
 .milestones{display:grid;gap:14px;min-width:0}
@@ -934,6 +946,13 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
         </a>
       </div>
     </section>
+
+    <footer class="legal">
+      <div class="legal-mark">CdU de 0 a Éxito</div>
+      <p>Visor del Inversor desarrollado por <b>CdU de 0 a Éxito</b> para el seguimiento privado de sus operaciones. El acceso es personal e intransferible.</p>
+      <p>Su contenido, su estructura y su diseño son propiedad de CdU de 0 a Éxito. Queda prohibida su reproducción, copia, difusión o cesión a terceros, total o parcial, sin autorización expresa y por escrito.</p>
+      <p class="legal-year">© 2026 CdU de 0 a Éxito · Todos los derechos reservados</p>
+    </footer>
   </main>
 </div>
 </template>
