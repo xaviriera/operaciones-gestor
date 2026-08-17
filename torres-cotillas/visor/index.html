@@ -271,22 +271,25 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .forecast-item.hero.pending .forecast-value{color:rgba(253,251,247,.86);font-size:clamp(23px,3.4vw,38px)}
 .forecast-note{margin-top:12px}
 .plan-card{padding:18px;overflow:hidden;background:linear-gradient(180deg,#fff,#fffdfa)}
-.plan-wrap{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:18px;align-items:center}
+.plan-wrap{display:grid;gap:14px}
 .plan-gallery{min-width:0;display:grid;gap:12px}
 .plan-frame{position:relative;padding:14px;border:1px solid rgba(22,61,96,.13);border-radius:12px;background:#fbf6eb;box-shadow:0 16px 38px rgba(22,61,96,.08)}
-.plan-img{display:block;width:100%;max-width:860px;height:auto;max-height:620px;object-fit:contain;margin:0 auto;border-radius:8px;background:var(--cream)}
+.plan-img{display:block;width:100%;height:auto;max-height:720px;object-fit:contain;margin:0 auto;border-radius:8px;background:var(--cream)}
 .plan-action{display:block;width:100%;border:0;padding:0;background:transparent;cursor:zoom-in}
 .plan-action:focus-visible{outline:3px solid rgba(226,159,52,.72);outline-offset:4px;border-radius:10px}
 .plan-counter{position:absolute;left:24px;top:24px;display:inline-flex;align-items:center;border-radius:999px;padding:7px 10px;background:rgba(15,44,71,.88);color:var(--white);font-size:11px;font-weight:900;letter-spacing:.3px;pointer-events:none}
 .plan-expand{position:absolute;right:24px;bottom:24px;display:inline-flex;align-items:center;border-radius:999px;padding:8px 11px;background:rgba(253,251,247,.94);border:1px solid rgba(22,61,96,.15);color:var(--navy);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;box-shadow:0 10px 22px rgba(22,61,96,.12);pointer-events:none}
-.plan-tabs{display:flex;gap:8px;max-width:100%;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
-.plan-tab{flex:0 0 auto;max-width:190px;border:1px solid rgba(22,61,96,.16);border-radius:999px;padding:8px 11px;background:#fff;color:var(--navy2);font:inherit;font-size:12px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
-.plan-tab.active{border-color:rgba(226,159,52,.95);background:#fff2d9;color:var(--navy);box-shadow:0 0 0 3px rgba(226,159,52,.16)}
+.plan-tabs{position:relative;display:flex;gap:8px;max-width:100%;overflow-x:auto;padding:2px 28px 8px 2px;scroll-snap-type:x proximity;scroll-behavior:smooth;scrollbar-width:none}
+.plan-tabs::-webkit-scrollbar{display:none}
+.plan-tabs:after{content:"";position:sticky;right:-28px;flex:0 0 28px;margin-left:-28px;background:linear-gradient(90deg,rgba(255,255,255,0),#fffdfa 76%);pointer-events:none}
+.plan-tab{flex:0 0 auto;min-height:44px;border:1px solid rgba(22,61,96,.3);border-radius:999px;padding:10px 15px;background:#fff;color:var(--navy);font:inherit;font-size:12px;font-weight:600;white-space:nowrap;scroll-snap-align:start;cursor:pointer}
+.plan-tab.active{border-color:var(--ochre);background:var(--ochre);color:var(--white);font-weight:600;box-shadow:0 8px 18px rgba(226,159,52,.18)}
 .plan-empty{padding:28px;border:1px dashed rgba(22,61,96,.22);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
-.legend{display:grid;gap:10px}
-.legend-item{border:1px solid var(--line);border-radius:8px;padding:12px;background:#fff}
-.legend-item b{display:block;color:var(--navy);font-size:13px}
-.legend-item span{display:block;margin-top:4px;color:var(--muted);font-size:12px}
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45}
+.legend-item{display:inline-flex;align-items:center;gap:4px}
+.legend-item:not(:last-child):after{content:"·";margin-left:8px;color:var(--muted)}
+.legend-item b{color:var(--muted);font-size:inherit;font-weight:600}
+.legend-item span{color:var(--muted)}
 .milestones{display:grid;gap:14px;min-width:0}
 .milestone-phase{border:1px solid rgba(22,61,96,.13);border-radius:8px;background:linear-gradient(180deg,#fff,#fffdfa);box-shadow:0 16px 36px rgba(22,61,96,.08);overflow:hidden}
 .milestone-phase.phase-done{border-color:rgba(29,122,79,.24)}
@@ -624,6 +627,13 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
   font-weight:800;
 }
 @keyframes progressRun{0%,100%{filter:brightness(1)}50%{filter:brightness(1.18);box-shadow:0 0 18px rgba(226,159,52,.38)}}
+@media(min-width:900px){
+  .plan-gallery{grid-template-columns:220px minmax(0,1fr);align-items:start}
+  .plan-tabs{grid-column:1;grid-row:1;padding:2px 2px 2px 0;flex-direction:column;align-items:flex-start;overflow-x:auto;overflow-y:visible}
+  .plan-tabs:after{display:none}
+  .plan-tab{width:max-content;max-width:none}
+  .plan-frame{grid-column:2;grid-row:1}
+}
 @media(max-width:1040px){
   .hero-grid,.plan-wrap{grid-template-columns:1fr}
   .forecast-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -749,7 +759,9 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
       </div>
       <div class="card plan-card">
         <div class="plan-wrap">
+          <div class="legend" id="planLegend"></div>
           <div class="plan-gallery" id="planGallery">
+            <div class="plan-tabs" id="planTabs" role="tablist" aria-label="Planos y renders de la operación"></div>
             <div class="plan-frame">
               <button class="plan-action" type="button" id="activePlanButton" aria-label="Ampliar plano activo">
                 <img class="plan-img" id="activePlanImage" src="" alt="">
@@ -757,9 +769,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
               <span class="plan-counter" id="planCounter">0 / 0</span>
               <span class="plan-expand">Ampliar</span>
             </div>
-            <div class="plan-tabs" id="planTabs" role="tablist" aria-label="Planos y renders de la operación"></div>
           </div>
-          <div class="legend" id="planLegend"></div>
         </div>
       </div>
     </section>
@@ -1006,8 +1016,8 @@ function renderOperacion(){
   document.getElementById("planNote").textContent=valor(operacion.resumen_una_linea);
   document.getElementById("planLegend").innerHTML=[
     ["Dirección", operacion.direccion],
-    ["Referencia catastral", operacion.referencia_catastral],
-    ["Finca registral", operacion.finca_registral]
+    ["Ref. cat.", operacion.referencia_catastral],
+    ["Finca", operacion.finca_registral]
   ].map(([label,value])=>`<div class="legend-item"><b>${escapeHtml(label)}</b><span>${escapeHtml(valor(value))}</span></div>`).join("");
 }
 function renderPlanos(){
