@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Visor del Inversor</title>
-<link rel="icon" type="image/png" href="logo-cdu.png">
-<link rel="apple-touch-icon" href="logo-cdu.png">
+<link rel="icon" type="image/png" href="favicon-cdu.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap");
 :root{
@@ -288,11 +288,15 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .plan-action:focus-visible{outline:3px solid rgba(226,159,52,.72);outline-offset:4px;border-radius:10px}
 .plan-counter{position:absolute;left:24px;top:24px;display:inline-flex;align-items:center;border-radius:999px;padding:7px 10px;background:rgba(15,44,71,.88);color:var(--white);font-size:11px;font-weight:900;letter-spacing:.3px;pointer-events:none}
 .plan-expand{position:absolute;right:24px;bottom:24px;display:inline-flex;align-items:center;border-radius:999px;padding:8px 11px;background:rgba(253,251,247,.94);border:1px solid rgba(22,61,96,.15);color:var(--navy);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;box-shadow:0 10px 22px rgba(22,61,96,.12);pointer-events:none}
-.plan-tabs{position:relative;display:flex;gap:8px;max-width:100%;overflow-x:auto;padding:2px 28px 8px 2px;scroll-snap-type:x proximity;scroll-behavior:smooth;scrollbar-width:none}
+.plan-tabs{display:flex;gap:10px;max-width:100%;overflow-x:auto;padding:2px 2px 8px;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
 .plan-tabs::-webkit-scrollbar{display:none}
-.plan-tabs:after{content:"";position:sticky;right:-28px;flex:0 0 28px;margin-left:-28px;background:linear-gradient(90deg,rgba(255,255,255,0),#fffdfa 76%);pointer-events:none}
-.plan-tab{flex:0 0 auto;min-height:44px;border:1px solid rgba(22,61,96,.3);border-radius:999px;padding:10px 15px;background:#fff;color:var(--navy);font:inherit;font-size:12px;font-weight:600;white-space:nowrap;scroll-snap-align:start;cursor:pointer}
-.plan-tab.active{border-color:var(--ochre);background:var(--ochre);color:var(--white);font-weight:600;box-shadow:0 8px 18px rgba(226,159,52,.18)}
+.plan-tab{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:6px;border:1px solid var(--line);border-radius:12px;padding:6px;background:#fff;font:inherit;scroll-snap-align:start;cursor:pointer}
+.plan-tab-thumb{width:72px;height:54px;object-fit:cover;border-radius:8px;opacity:.72}
+.plan-tab-label{color:var(--muted);font-size:11px;font-weight:600;line-height:1.1;white-space:nowrap}
+.plan-tab:hover .plan-tab-thumb{opacity:1}
+.plan-tab.active{border:2px solid var(--ochre);box-shadow:0 8px 18px rgba(226,159,52,.18)}
+.plan-tab.active .plan-tab-thumb{opacity:1}
+.plan-tab.active .plan-tab-label{color:var(--navy);font-weight:700}
 .plan-empty{padding:28px;border:1px dashed rgba(22,61,96,.22);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
 .legend{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45}
 .legend-item{display:inline-flex;align-items:center;gap:4px}
@@ -651,8 +655,8 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 @media(min-width:900px){
   .plan-gallery{grid-template-columns:220px minmax(0,1fr);align-items:start}
   .plan-tabs{grid-column:1;grid-row:1;padding:2px 2px 2px 0;flex-direction:column;align-items:flex-start;overflow-x:auto;overflow-y:visible}
-  .plan-tabs:after{display:none}
   .plan-tab{width:max-content;max-width:none}
+  .plan-tab-thumb{width:92px;height:68px}
   .plan-frame{grid-column:2;grid-row:1}
 }
 @media(max-width:1040px){
@@ -1065,7 +1069,8 @@ function renderPlanos(){
   button.disabled=false;
   tabs.innerHTML=planos.map((plano,index)=>`
     <button class="plan-tab" type="button" role="tab" aria-selected="${index===0 ? "true" : "false"}" data-plan-index="${escapeAttr(index)}">
-      ${escapeHtml(valor(plano.nombre))}
+      <img class="plan-tab-thumb" src="${escapeAttr(plano.fichero || "")}" alt="">
+      <span class="plan-tab-label">${escapeHtml((valor(plano.nombre).match(/Vivienda\s+\d+/i) || [valor(plano.nombre).toLowerCase().includes("encaje") ? "Encaje" : valor(plano.nombre).split(/\s+/).slice(0,2).join(" ")])[0])}</span>
     </button>
   `).join("");
   const activarPlano=index=>{
