@@ -349,6 +349,13 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
   .milestone.current{border-color:rgba(226,159,52,.55);box-shadow:0 12px 28px rgba(226,159,52,.16)}
   .milestone.current b,.milestone.todo b{font-size:15px}
 }
+.statement-open.block{display:block;margin-top:6px;text-align:center}
+.statement-doc{padding:20px 18px;border:1px solid var(--line);border-radius:14px;background:#fff;text-align:center}
+.statement-doc-badge{display:inline-block;margin-bottom:12px;padding:5px 12px;border-radius:999px;background:rgba(29,122,79,.1);color:var(--ok);font-size:10px;font-weight:900;letter-spacing:1.1px;text-transform:uppercase}
+.statement-doc b{display:block;color:var(--navy);font-size:15px;font-weight:800}
+.statement-doc>span{display:block;margin-top:3px;color:var(--muted);font-size:12px;font-weight:600}
+.statement-doc p{margin:12px auto 16px;max-width:340px;color:var(--muted);font-size:12px;line-height:1.55}
+.statement-open.block{display:block;padding:13px 18px;border-radius:10px;background:var(--navy);color:#fff;font-size:13px;font-weight:700;text-align:center;text-decoration:none}
 .plan-empty{padding:28px;border:1px dashed rgba(22,61,96,.22);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
 .legend{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45}
 .legend-item{display:inline-flex;align-items:baseline;gap:5px;min-width:0}
@@ -1411,8 +1418,13 @@ function renderExtractoBancario(cuentas){
     </div>
     ${fallback ? "" : `<iframe class="statement-frame" src="${escapeAttr(pdfUrl)}#navpanes=0&toolbar=1" title="Extracto bancario Santander ${escapeAttr(periodo)}"></iframe>`}
     <div class="statement-mobile">
-      <p>En móvil el visor integrado puede no estar disponible.</p>
-      <a class="statement-open" href="${escapeAttr(pdfUrl)}" target="_blank" rel="noopener">Abrir el extracto del banco</a>
+      <div class="statement-doc">
+        <div class="statement-doc-badge">Documento oficial</div>
+        <b>Extracto del Banco Santander</b>
+        <span>${escapeHtml(periodo)}</span>
+        <p>Documento emitido por el banco, íntegro y sin modificar. Recoge todos los movimientos de la cuenta de la operación.</p>
+        <a class="statement-open block" href="${escapeAttr(pdfUrl)}" target="_blank" rel="noopener">Ver el extracto completo</a>
+      </div>
     </div>`;
   const frame=contenedor.querySelector(".statement-frame");
   if(frame){
