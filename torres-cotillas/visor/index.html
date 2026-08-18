@@ -358,35 +358,26 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .milestone.done .num{background:rgba(29,122,79,.12);color:var(--ok)}
 .milestone.current .num{background:var(--ochre);color:#fff}
 @media(max-width:720px){
-  /* HITOS: formato lista, no tarjetones. Conseguidos discretos pero legibles;
-     el actual y los pendientes conservan su matiz (2 lineas de detalle). */
-  .milestone-grid{gap:0}
-  .milestone{display:flex;align-items:flex-start;gap:10px;padding:11px 12px;border-radius:0;border:0;border-bottom:1px solid rgba(22,61,96,.08);box-shadow:none;background:transparent}
-  .milestone:last-child{border-bottom:0}
+  /* HITOS en movil: tarjeta con cuerpo, no una linea suelta.
+     Se conserva el detalle (el "por que" de cada hito) en TODOS los estados. */
+  .milestone-grid{gap:10px}
+  .milestone{display:flex;align-items:flex-start;gap:11px;padding:13px 13px;border:1px solid rgba(22,61,96,.12);border-radius:12px;background:#fff;box-shadow:0 6px 16px rgba(22,61,96,.06)}
   .milestone .toprow{margin:0}
-  .milestone .num{width:24px;height:24px;font-size:11px}
-  .milestone b{font-size:14px;line-height:1.3}
-  .milestone .date{font-size:11px}
-  .milestone .meaning{margin-top:4px;font-size:12px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .milestone .stamp{display:none}
-  .milestone.done{opacity:.62}
-  .milestone.done .meaning{display:none}
-  .milestone.done b{font-weight:600}
-  .milestone.current{background:rgba(226,159,52,.07);border-left:3px solid var(--ochre);padding-left:9px;opacity:1}
-  .milestone.current b{font-size:15px}
-  .milestone.current .meaning{-webkit-line-clamp:4}
-  /* Cabecera de fase compacta y clara */
-  .milestone-phase-head{padding:12px 13px;gap:8px}
+  .milestone .num{width:26px;height:26px;font-size:11px}
+  .milestone b{font-size:14.5px;line-height:1.3}
+  .milestone .date{font-size:11.5px}
+  .milestone .meaning{margin-top:6px;font-size:12.5px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .milestone .stamp{display:inline-flex;margin-top:8px;font-size:9.5px;padding:4px 9px}
+  .milestone.done{opacity:.78;background:rgba(22,61,96,.022)}
+  .milestone.done .meaning{display:-webkit-box;-webkit-line-clamp:2}
+  .milestone.current{background:#fffaf1;border-color:rgba(226,159,52,.55);border-left:3px solid var(--ochre);box-shadow:0 10px 24px rgba(226,159,52,.14)}
+  .milestone.current b{font-size:15.5px}
+  .milestone.current .meaning{-webkit-line-clamp:5}
+  .milestone-phase-head{padding:14px 14px;gap:8px}
   .milestone-phase-title h3{font-size:15px}
-  .milestone-phase-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-  .milestone-phase-meta .badge{font-size:10px}
-  .milestone-phase.phase-current .milestone-phase-head{background:linear-gradient(90deg,rgba(226,159,52,.16),rgba(226,159,52,.05))}
-  /* SELECTOR DE PLANOS: que quepan y se vean */
-  .plan-tab{padding:8px 13px 8px 8px;gap:7px}
-  .plan-tab-num{min-width:22px;height:22px;font-size:10px}
+  .plan-tab{padding:10px 10px 10px 8px}
   .plan-tab-label{font-size:12px}
-  .plan-tabs-hint{margin-bottom:7px;font-size:9px}
-  .scroll-nudge{font-size:9px}
+  .plan-tabs-hint{margin-bottom:8px;font-size:9.5px}
 }
 .gantt-scroll{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
 .gantt-swipe{margin:0 0 6px}
@@ -413,7 +404,7 @@ body.bloqueado{background:var(--navy)}
 }
 /* Fases: cerradas por defecto, con resumen de lo que contienen y aspecto de desplegable */
 .phase-resumen{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.4;font-weight:500;max-width:52ch}
-.phase-toggle{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--navy);font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;transition:background .2s ease,border-color .2s ease}
+.phase-toggle{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;margin-top:12px;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--navy);font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;transition:background .2s ease,border-color .2s ease}
 .milestone-phase-head:hover .phase-toggle{border-color:rgba(226,159,52,.6);background:rgba(226,159,52,.07)}
 .milestone-phase[data-abierta] .phase-toggle-txt{display:none}
 .milestone-phase[data-abierta] .phase-toggle:after{content:"Ocultar";font:inherit}
@@ -465,6 +456,15 @@ body.bloqueado{background:var(--navy)}
 .gantt-scroll.at-end + .gantt-swipe,.gantt-scroll.at-end .scroll-nudge{opacity:.35}
 @media(prefers-reduced-motion:reduce){.gantt-swipe .scroll-nudge b{animation:none}}
 .tranche-fecha{margin-left:auto;color:var(--muted);font-size:11px;font-weight:700;white-space:nowrap}
+.pass-wrap{position:relative;display:block}
+.pass-wrap input{width:100%;padding-right:52px}
+.pass-eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:10px;background:transparent;color:rgba(253,251,247,.72);cursor:pointer;transition:color .2s ease,background .2s ease}
+.pass-eye:hover,.pass-eye:focus-visible{color:var(--ochre);background:rgba(253,251,247,.08)}
+.pass-eye:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+/* Barra indicadora ARRIBA del cronograma: se ve desde el principio que hay mas a la derecha */
+.gantt-railtop{position:relative;height:6px;margin:0 0 10px;border-radius:99px;background:rgba(22,61,96,.10);overflow:hidden}
+.gantt-railtop span{position:absolute;left:0;top:0;height:100%;width:30%;border-radius:99px;background:var(--ochre);transition:left .12s linear,width .12s linear}
+@media(min-width:721px){.gantt-railtop{display:none}}
 .plan-empty{padding:28px;border:1px dashed rgba(22,61,96,.22);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
 .legend{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45}
 .legend-item{display:inline-flex;align-items:baseline;gap:5px;min-width:0}
@@ -894,7 +894,16 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
     <form class="access-form" id="accessForm" autocomplete="off">
       <div class="access-field">
         <label for="accessPassword">Contraseña</label>
-        <input id="accessPassword" name="password" type="password" autocomplete="current-password" required>
+        <div class="pass-wrap">
+          <input id="accessPassword" name="password" type="password" autocomplete="current-password" required>
+          <button class="pass-eye" id="passEye" type="button" aria-label="Mostrar contraseña" aria-pressed="false">
+            <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path class="eye-on" d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z"/>
+              <circle class="eye-on" cx="12" cy="12" r="3"/>
+              <path class="eye-off" d="M3 3l18 18" style="display:none"/>
+            </svg>
+          </button>
+        </div>
       </div>
       <button class="access-submit" id="accessSubmit" type="submit">Entrar</button>
       <p class="access-error" id="accessError" role="alert" aria-live="assertive"></p>
@@ -1010,6 +1019,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
       <div class="card gantt-card">
         <div class="gantt-note" id="ganttNote">pendiente de confirmar</div>
         <p class="gantt-swipe"><span class="scroll-nudge">desliza para ver las 16 semanas <b>&#8250;</b></span></p>
+        <div class="gantt-railtop" aria-hidden="true"><span id="ganttRail"></span></div>
         <div class="gantt-scroll scroll-shadow">
         <div class="gantt-inner">
           <div class="week-current" id="weekCurrent" aria-hidden="true"><span id="ganttCurrentWeek">pendiente de confirmar</span></div>
@@ -1452,6 +1462,22 @@ function renderHitos(){
   }).join("");
 }
 // Las fases se pliegan: las cerradas arrancan recogidas, la que esta en curso abierta.
+// La barra superior refleja la posicion dentro del cronograma
+function sincronizarRailGantt(){
+  const zona=document.querySelector(".gantt-scroll");
+  const rail=document.getElementById("ganttRail");
+  if(!zona || !rail || zona.dataset.rail) return;
+  zona.dataset.rail="1";
+  const pinta=()=>{
+    const visible=zona.clientWidth/zona.scrollWidth;
+    const avance=zona.scrollLeft/(zona.scrollWidth-zona.clientWidth || 1);
+    rail.style.width=Math.max(visible*100,12)+"%";
+    rail.style.left=(avance*(100-Math.max(visible*100,12)))+"%";
+  };
+  zona.addEventListener("scroll",pinta,{passive:true});
+  window.addEventListener("resize",pinta);
+  pinta();
+}
 function activarAcordeonFases(){
   document.querySelectorAll(".milestone-phase").forEach(sec=>{
     const head=sec.querySelector(".milestone-phase-head");
@@ -1772,6 +1798,7 @@ function renderTodo(){
   renderContacto();
   activarAvisosScroll();
   activarAcordeonFases();
+  sincronizarRailGantt();
 }
 function showDataWarning(){
   document.getElementById("dataWarning").hidden=false;
@@ -1926,6 +1953,20 @@ if(MODO_CLARO){
   configurarAcceso();
 }
 window.addEventListener("pagehide",liberarExtractoPdfUrl);
+// Ver/ocultar la contrasena: menos errores al teclear un DNI en el movil
+(function(){
+  const ojo=document.getElementById("passEye");
+  const campo=document.getElementById("accessPassword");
+  if(!ojo || !campo) return;
+  ojo.addEventListener("click",()=>{
+    const visible=campo.type==="text";
+    campo.type=visible ? "password" : "text";
+    ojo.setAttribute("aria-pressed", visible ? "false" : "true");
+    ojo.setAttribute("aria-label", visible ? "Mostrar contraseña" : "Ocultar contraseña");
+    ojo.querySelector(".eye-off").style.display = visible ? "none" : "";
+    campo.focus();
+  });
+})();
 </script>
 </body>
 </html>
