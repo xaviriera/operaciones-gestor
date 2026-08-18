@@ -348,8 +348,7 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .statement-open.block{display:block;padding:13px 18px;border-radius:10px;background:var(--navy);color:#fff;font-size:13px;font-weight:700;text-align:center;text-decoration:none}
 /* --- Fases plegables --- */
 .milestone-phase-head{width:100%;border:0;font-family:inherit;text-align:left;cursor:pointer}
-.milestone-phase-body{display:none}
-.milestone-phase[data-abierta] .milestone-phase-body{display:block}
+.milestone-phase:not([data-abierta])>.milestone-phase-body{display:none!important}
 .phase-caret{flex:0 0 auto;width:11px;height:11px;margin-left:6px;border-right:2px solid var(--navy);border-bottom:2px solid var(--navy);transform:rotate(45deg);transition:transform .2s ease;opacity:.55}
 .milestone-phase[data-abierta] .phase-caret{transform:rotate(-135deg)}
 .milestone-phase.phase-current{border-color:rgba(226,159,52,.5);box-shadow:0 16px 40px rgba(226,159,52,.14)}
@@ -389,6 +388,9 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
   .plan-tabs-hint{margin-bottom:7px;font-size:9px}
   .scroll-nudge{font-size:9px}
 }
+.gantt-scroll{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.gantt-swipe{margin:0 0 6px}
+@media(min-width:721px){.gantt-swipe{display:none}}
 .plan-empty{padding:28px;border:1px dashed rgba(22,61,96,.22);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
 .legend{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45}
 .legend-item{display:inline-flex;align-items:baseline;gap:5px;min-width:0}
@@ -927,9 +929,12 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
       </div>
       <div class="card gantt-card">
         <div class="gantt-note" id="ganttNote">pendiente de confirmar</div>
+        <p class="gantt-swipe"><span class="scroll-nudge"><b>&#8250;</b> desliza para ver las 16 semanas</span></p>
+        <div class="gantt-scroll scroll-shadow">
         <div class="gantt-inner">
           <div class="week-current" id="weekCurrent" aria-hidden="true"><span id="ganttCurrentWeek">pendiente de confirmar</span></div>
           <div class="gantt-grid" id="gantt"></div>
+        </div>
         </div>
         <p class="gantt-foot" id="ganttFoot">pendiente de confirmar</p>
       </div>
@@ -1231,7 +1236,7 @@ function marcarScrollHorizontal(el){
 }
 function activarAvisosScroll(){
   marcarScrollHorizontal(document.getElementById("planTabs"));
-  document.querySelectorAll(".gantt-card,.gantt-inner,#gantt").forEach(el=>{
+  document.querySelectorAll(".gantt-scroll").forEach(el=>{
     if(el && el.scrollWidth>el.clientWidth+4) marcarScrollHorizontal(el);
   });
 }
