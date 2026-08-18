@@ -417,6 +417,23 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
   .access-panel{gap:9px}
   .access-context{display:none}
 }
+body.bloqueado{background:var(--navy)}
+/* --- Patron de app: al enfocar el campo, la cabecera se compacta con animacion ---
+   No se pelea por que quepa: se aparta a proposito. El logo NO desaparece,
+   se reduce, asi la marca sigue presente y el formulario nunca queda tapado. */
+.access-logo{transition:width .28s cubic-bezier(.4,0,.2,1)}
+.access-title{transition:font-size .28s cubic-bezier(.4,0,.2,1),margin .28s ease}
+.access-context{transition:opacity .2s ease,max-height .28s cubic-bezier(.4,0,.2,1),margin .28s ease;max-height:80px;overflow:hidden}
+.access-panel{transition:gap .28s cubic-bezier(.4,0,.2,1)}
+
+.access-screen:focus-within .access-logo{width:min(84px,24vw)}
+.access-screen:focus-within .access-title{font-size:20px;margin-top:0}
+.access-screen:focus-within .access-context{opacity:0;max-height:0;margin:0}
+.access-screen:focus-within .access-panel{gap:12px}
+
+@media(prefers-reduced-motion:reduce){
+  .access-logo,.access-title,.access-context,.access-panel{transition:none}
+}
 .plan-empty{padding:28px;border:1px dashed rgba(22,61,96,.22);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
 .legend{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45}
 .legend-item{display:inline-flex;align-items:baseline;gap:5px;min-width:0}
@@ -693,13 +710,9 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 .data-warning{position:fixed;right:18px;bottom:18px;z-index:20;max-width:330px;padding:14px 16px;border:1px solid rgba(226,159,52,.45);border-radius:8px;background:var(--white);color:var(--navy);box-shadow:0 18px 45px rgba(15,44,71,.22);font-size:13px;font-weight:800}
 .data-warning[hidden]{display:none}
 .access-screen{
-  position:fixed;
-  inset:0;
-  height:100dvh;
-  z-index:60;
+  min-height:100vh;
+  min-height:100dvh;
   display:flex;
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
   padding:clamp(14px,3vh,30px) 18px;
   color:var(--cream);
   background:var(--navy);
@@ -833,7 +846,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 }
 </style>
 </head>
-<body>
+<body class="bloqueado">
 <!-- cdu-tdc-8f3a91 · Visor del Inversor · CdU de 0 a Exito · marcado de autoria, no eliminar -->
 
 <section class="access-screen" id="accessScreen" aria-labelledby="accessTitle">
@@ -1718,6 +1731,7 @@ function montarVisor(){
   if(visorMontado) return;
   const template=document.getElementById("visorTemplate");
   document.getElementById("accessScreen")?.remove();
+  document.body.classList.remove("bloqueado");
   document.body.insertBefore(template.content.cloneNode(true), document.getElementById("dataWarning"));
   visorMontado=true;
   const btnCerrar=document.getElementById("lightboxClose");
@@ -1857,25 +1871,6 @@ if(MODO_CLARO){
   configurarAcceso();
 }
 window.addEventListener("pagehide",liberarExtractoPdfUrl);
-// El teclado movil NO encoge la ventana en iOS: desplaza la vista. Por eso una capa
-// fijada se descoloca y el logo se sale por arriba. visualViewport si informa del area
-// REALMENTE visible, asi que ajustamos la pantalla de acceso a ella.
-(function(){
-  const vv=window.visualViewport;
-  if(!vv) return;
-  const ajustar=()=>{
-    const capa=document.querySelector(".access-screen");
-    if(!capa || capa.hidden || capa.offsetParent===null) return;
-    capa.style.height=vv.height+"px";
-    capa.style.top=vv.offsetTop+"px";
-    capa.style.left=vv.offsetLeft+"px";
-  };
-  vv.addEventListener("resize",ajustar);
-  vv.addEventListener("scroll",ajustar);
-  window.addEventListener("orientationchange",()=>setTimeout(ajustar,250));
-  document.addEventListener("DOMContentLoaded",ajustar);
-  ajustar();
-})();
 </script>
 </body>
 </html>
