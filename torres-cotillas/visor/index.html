@@ -366,13 +366,11 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
   .milestone .num{width:26px;height:26px;font-size:11px}
   .milestone b{font-size:14.5px;line-height:1.3}
   .milestone .date{font-size:11.5px}
-  .milestone .meaning{margin-top:6px;font-size:12.5px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .milestone .meaning{margin-top:6px;font-size:12.5px;line-height:1.5}
   .milestone .stamp{display:inline-flex;margin-top:8px;font-size:9.5px;padding:4px 9px}
   .milestone.done{opacity:.78;background:rgba(22,61,96,.022)}
-  .milestone.done .meaning{display:-webkit-box;-webkit-line-clamp:2}
   .milestone.current{background:#fffaf1;border-color:rgba(226,159,52,.55);border-left:3px solid var(--ochre);box-shadow:0 10px 24px rgba(226,159,52,.14)}
   .milestone.current b{font-size:15.5px}
-  .milestone.current .meaning{-webkit-line-clamp:5}
   .milestone-phase-head{padding:14px 14px;gap:8px}
   .milestone-phase-title h3{font-size:15px}
   .plan-tab{padding:10px 10px 10px 8px}
@@ -469,12 +467,6 @@ body.bloqueado{background:var(--navy)}
 .milestone-phase[data-abierta] .phase-caret{transform:rotate(-135deg)}
 
 /* Hitos: pulsables para leer el detalle completo (antes quedaba cortado sin remedio) */
-.milestone{cursor:pointer}
-.milestone .meaning{position:relative}
-.milestone .ver-mas{display:none;margin-top:6px;color:var(--ochre);font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase}
-.milestone.abierto .meaning{-webkit-line-clamp:unset!important;display:block!important;overflow:visible!important}
-.milestone.abierto{box-shadow:0 14px 32px rgba(22,61,96,.14)}
-@media(max-width:720px){.milestone .ver-mas{display:block}.milestone.abierto .ver-mas{color:var(--muted)}}
 .plan-empty{padding:28px;border:1px dashed rgba(22,61,96,.22);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
 .legend{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45}
 .legend-item{display:inline-flex;align-items:baseline;gap:5px;min-width:0}
@@ -517,7 +509,7 @@ body.bloqueado{background:var(--navy)}
 .spark{width:9px;height:9px;border-radius:50%;background:var(--ochre);box-shadow:0 0 18px rgba(226,159,52,.65)}
 .milestone b{display:block;margin:9px 0 6px;color:var(--navy);font-size:12px;line-height:1.22}
 .date{color:var(--muted);font-size:11px;font-weight:800}
-.meaning{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:7px 0;color:#3f4d5a;font-size:11px;line-height:1.32}
+.meaning{margin:7px 0;color:#3f4d5a;font-size:11.5px;line-height:1.45}
 .stamp{display:inline-flex;align-items:center;gap:5px;width:max-content;max-width:100%;border-radius:999px;padding:5px 8px;background:#e7e8e8;color:#60686e;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.5px}
 .done .stamp,.stamp.done{background:#e7f5ed;color:var(--ok);border:1px solid rgba(29,122,79,.22)}
 .current .stamp,.stamp.current{background:#fff2d9;color:#8a5a14}
@@ -1427,7 +1419,7 @@ function renderHitos(){
           <div class="toprow"><span class="num">${index+1}</span>${proximo || (clase==="current" ? '<span class="spark" aria-hidden="true"></span>' : "")}</div>
           <b>${escapeHtml(valor(hito.nombre))}</b>
           <span class="date">${escapeHtml(valor(hito.fecha))}${hito.grupo ? ` · <i>${escapeHtml(hito.grupo)}</i>` : ""}</span>
-          <p class="meaning">${escapeHtml(valor(hito.detalle))}</p><span class="ver-mas">Ver detalle</span>
+          <p class="meaning">${escapeHtml(valor(hito.detalle))}</p>
         </div>
         <div><span class="stamp ${escapeAttr(clase)}">${clase==="done" ? "✓ Conseguido" : estadoEtiqueta(hito.estado)}</span></div>
       </article>`;
@@ -1487,19 +1479,6 @@ function sincronizarRailGantt(){
   zona.addEventListener("scroll",pinta,{passive:true});
   window.addEventListener("resize",pinta);
   pinta();
-}
-// Cada hito se puede abrir para leer su detalle completo
-function activarDetalleHitos(){
-  const cont=document.getElementById("milestones");
-  if(!cont || cont.dataset.detalle) return;
-  cont.dataset.detalle="1";
-  cont.addEventListener("click",e=>{
-    const tarjeta=e.target.closest("article.milestone");
-    if(!tarjeta) return;
-    const abierto=tarjeta.classList.toggle("abierto");
-    const vm=tarjeta.querySelector(".ver-mas");
-    if(vm) vm.textContent=abierto ? "Ocultar detalle" : "Ver detalle";
-  });
 }
 function activarAcordeonFases(){
   document.querySelectorAll(".milestone-phase").forEach(sec=>{
@@ -1821,7 +1800,6 @@ function renderTodo(){
   renderContacto();
   activarAvisosScroll();
   activarAcordeonFases();
-  activarDetalleHitos();
   sincronizarRailGantt();
 }
 function showDataWarning(){
