@@ -340,21 +340,55 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .scroll-nudge{display:none;align-items:center;gap:6px;margin:8px 0 0;color:var(--ochre);font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase}
 .scroll-nudge b{font-size:14px;line-height:1}
 @media(max-width:720px){.scroll-nudge{display:inline-flex}}
-@media(max-width:720px){
-  .milestone.done{padding:10px 12px;background:rgba(22,61,96,.028);border-color:rgba(22,61,96,.08);box-shadow:none;opacity:.72}
-  .milestone.done .meaning{display:none}
-  .milestone.done b{font-size:13px;font-weight:600}
-  .milestone.done .date{font-size:11px}
-  .milestone.done .stamp{font-size:9px;padding:3px 7px}
-  .milestone.current{border-color:rgba(226,159,52,.55);box-shadow:0 12px 28px rgba(226,159,52,.16)}
-  .milestone.current b,.milestone.todo b{font-size:15px}
-}
 .statement-open.block{display:block;margin-top:6px;text-align:center}
 .statement-doc{padding:20px 18px;border:1px solid var(--line);border-radius:14px;background:#fff;text-align:center}
 .statement-doc-badge{display:inline-block;margin-bottom:12px;padding:5px 12px;border-radius:999px;background:rgba(29,122,79,.1);color:var(--ok);font-size:10px;font-weight:900;letter-spacing:1.1px;text-transform:uppercase}
 .statement-doc b{display:block;color:var(--navy);font-size:15px;font-weight:800}
 .statement-doc>span{display:block;margin:3px 0 16px;color:var(--muted);font-size:12px;font-weight:600}
 .statement-open.block{display:block;padding:13px 18px;border-radius:10px;background:var(--navy);color:#fff;font-size:13px;font-weight:700;text-align:center;text-decoration:none}
+/* --- Fases plegables --- */
+.milestone-phase-head{width:100%;border:0;font-family:inherit;text-align:left;cursor:pointer}
+.milestone-phase-body{display:none}
+.milestone-phase[data-abierta] .milestone-phase-body{display:block}
+.phase-caret{flex:0 0 auto;width:11px;height:11px;margin-left:6px;border-right:2px solid var(--navy);border-bottom:2px solid var(--navy);transform:rotate(45deg);transition:transform .2s ease;opacity:.55}
+.milestone-phase[data-abierta] .phase-caret{transform:rotate(-135deg)}
+.milestone-phase.phase-current{border-color:rgba(226,159,52,.5);box-shadow:0 16px 40px rgba(226,159,52,.14)}
+.milestone .date i{font-style:normal;opacity:.75}
+/* Numero de hito visible SIEMPRE, para poder referirse a el ("el hito 14") */
+.milestone .num{font-variant-numeric:tabular-nums}
+.milestone.done .num{background:rgba(29,122,79,.12);color:var(--ok)}
+.milestone.current .num{background:var(--ochre);color:#fff}
+@media(max-width:720px){
+  /* HITOS: formato lista, no tarjetones. Conseguidos discretos pero legibles;
+     el actual y los pendientes conservan su matiz (2 lineas de detalle). */
+  .milestone-grid{gap:0}
+  .milestone{display:flex;align-items:flex-start;gap:10px;padding:11px 12px;border-radius:0;border:0;border-bottom:1px solid rgba(22,61,96,.08);box-shadow:none;background:transparent}
+  .milestone:last-child{border-bottom:0}
+  .milestone .toprow{margin:0}
+  .milestone .num{width:24px;height:24px;font-size:11px}
+  .milestone b{font-size:14px;line-height:1.3}
+  .milestone .date{font-size:11px}
+  .milestone .meaning{margin-top:4px;font-size:12px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .milestone .stamp{display:none}
+  .milestone.done{opacity:.62}
+  .milestone.done .meaning{display:none}
+  .milestone.done b{font-weight:600}
+  .milestone.current{background:rgba(226,159,52,.07);border-left:3px solid var(--ochre);padding-left:9px;opacity:1}
+  .milestone.current b{font-size:15px}
+  .milestone.current .meaning{-webkit-line-clamp:4}
+  /* Cabecera de fase compacta y clara */
+  .milestone-phase-head{padding:12px 13px;gap:8px}
+  .milestone-phase-title h3{font-size:15px}
+  .milestone-phase-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .milestone-phase-meta .badge{font-size:10px}
+  .milestone-phase.phase-current .milestone-phase-head{background:linear-gradient(90deg,rgba(226,159,52,.16),rgba(226,159,52,.05))}
+  /* SELECTOR DE PLANOS: que quepan y se vean */
+  .plan-tab{padding:8px 13px 8px 8px;gap:7px}
+  .plan-tab-num{min-width:22px;height:22px;font-size:10px}
+  .plan-tab-label{font-size:12px}
+  .plan-tabs-hint{margin-bottom:7px;font-size:9px}
+  .scroll-nudge{font-size:9px}
+}
 .plan-empty{padding:28px;border:1px dashed rgba(22,61,96,.22);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
 .legend{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45}
 .legend-item{display:inline-flex;align-items:baseline;gap:5px;min-width:0}
@@ -1278,9 +1312,9 @@ function renderHitos(){
     return `
       <article class="milestone ${escapeAttr(clase)}" data-index="${index}">
         <div>
-          <div class="toprow"><span class="num">${clase==="done" ? "✓" : index+1}</span>${proximo || (clase==="current" ? '<span class="spark" aria-hidden="true"></span>' : "")}</div>
+          <div class="toprow"><span class="num">${index+1}</span>${proximo || (clase==="current" ? '<span class="spark" aria-hidden="true"></span>' : "")}</div>
           <b>${escapeHtml(valor(hito.nombre))}</b>
-          <span class="date">${escapeHtml(valor(hito.fecha))}</span>
+          <span class="date">${escapeHtml(valor(hito.fecha))}${hito.grupo ? ` · <i>${escapeHtml(hito.grupo)}</i>` : ""}</span>
           <p class="meaning">${escapeHtml(valor(hito.detalle))}</p>
         </div>
         <div><span class="stamp ${escapeAttr(clase)}">${clase==="done" ? "✓ Conseguido" : estadoEtiqueta(hito.estado)}</span></div>
@@ -1298,27 +1332,13 @@ function renderHitos(){
       .filter(item=>item.hito.fase===fase.nombre);
     const hechosFase=hitosFase.filter(item=>item.hito.estado==="conseguido").length;
     const claseFase=estadoClase(fase.estado);
-    const cuerpo=fase.nombre==="Fase 3 · ÉXITO" ? gruposExito.map(grupo=>{
-      const hitosGrupo=hitosFase.filter(item=>item.hito.grupo===grupo);
-      if(!hitosGrupo.length) return "";
-      return `
-        <div class="milestone-group">
-          <div class="milestone-group-label">${escapeHtml(grupo)}</div>
-          <div class="milestone-grid">
-            ${hitosGrupo.map(item=>renderCard(item.hito,item.index)).join("")}
-          </div>
-        </div>`;
-    }).join("") + (()=>{
-      // Red de seguridad: ningun hito puede quedar sin pintar por no tener grupo.
-      const sueltos=hitosFase.filter(item=>!item.hito.grupo);
-      return sueltos.length ? `<div class="milestone-grid">${sueltos.map(item=>renderCard(item.hito,item.index)).join("")}</div>` : "";
-    })() : `
+    const cuerpo=`
       <div class="milestone-grid">
         ${hitosFase.map(item=>renderCard(item.hito,item.index)).join("")}
       </div>`;
     return `
-      <section class="milestone-phase phase-${escapeAttr(claseFase)}">
-        <div class="milestone-phase-head">
+      <section class="milestone-phase phase-${escapeAttr(claseFase)}" ${claseFase==="done" ? "" : "data-abierta=\"1\""}>
+        <button class="milestone-phase-head" type="button" aria-expanded="${claseFase==="done" ? "false" : "true"}">
           <div class="milestone-phase-title">
             <small>${escapeHtml(estadoEtiqueta(fase.estado))}</small>
             <h3>${escapeHtml(valor(fase.nombre))}</h3>
@@ -1327,10 +1347,24 @@ function renderHitos(){
             <span class="stamp ${escapeAttr(claseFase)}">${claseFase==="done" ? "✓ Cerrada" : estadoEtiqueta(fase.estado)}</span>
             <span class="badge navy">${hechosFase} de ${hitosFase.length} hitos</span>
           </div>
-        </div>
+          <span class="phase-caret" aria-hidden="true"></span>
+        </button>
         <div class="milestone-phase-body">${cuerpo}</div>
       </section>`;
   }).join("");
+}
+// Las fases se pliegan: las cerradas arrancan recogidas, la que esta en curso abierta.
+function activarAcordeonFases(){
+  document.querySelectorAll(".milestone-phase").forEach(sec=>{
+    const head=sec.querySelector(".milestone-phase-head");
+    if(!head || head.dataset.listo) return;
+    head.dataset.listo="1";
+    head.addEventListener("click",()=>{
+      const abierta=sec.hasAttribute("data-abierta");
+      if(abierta) sec.removeAttribute("data-abierta"); else sec.setAttribute("data-abierta","1");
+      head.setAttribute("aria-expanded", abierta ? "false" : "true");
+    });
+  });
 }
 function renderGantt(){
   const cronograma=datosOperacion.cronograma || {};
@@ -1639,6 +1673,7 @@ function renderTodo(){
   renderNoticiasMercado();
   renderContacto();
   activarAvisosScroll();
+  activarAcordeonFases();
 }
 function showDataWarning(){
   document.getElementById("dataWarning").hidden=false;
