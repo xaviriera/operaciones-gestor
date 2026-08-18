@@ -307,12 +307,12 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .plan-expand{position:absolute;right:24px;bottom:24px;display:inline-flex;align-items:center;border-radius:999px;padding:8px 11px;background:rgba(253,251,247,.94);border:1px solid rgba(22,61,96,.15);color:var(--navy);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;box-shadow:0 10px 22px rgba(22,61,96,.12);pointer-events:none}
 .plan-tabs{display:flex;gap:12px;max-width:100%;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
 .plan-tabs::-webkit-scrollbar{display:none}
-.legal{max-width:1240px;margin:34px auto 18px;padding:30px 32px;border:1px solid var(--line);border-top:3px solid var(--ochre);border-radius:16px;background:linear-gradient(180deg,rgba(22,61,96,.045),rgba(22,61,96,.015));color:var(--muted);font-size:12.5px;line-height:1.7;text-align:center}
-.legal-mark{margin-bottom:16px;color:var(--navy);font-size:12px;font-weight:900;letter-spacing:2.2px;text-transform:uppercase}
-.legal p{margin:0 auto 12px;max-width:600px}
+.legal{max-width:720px;margin:28px auto 14px;padding:18px 22px;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;color:var(--muted);font-size:11.5px;line-height:1.6;text-align:center}
+.legal-mark{margin-bottom:9px;color:var(--navy);font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;opacity:.75}
+.legal p{margin:0 auto 7px;max-width:560px}
 .legal b{color:var(--navy);font-weight:700}
-.legal-access{margin-top:10px!important;color:var(--muted);font-size:11px;font-style:italic;opacity:.9}
-.legal-year{margin-top:14px!important;padding-top:12px;border-top:1px solid var(--line);color:var(--navy);font-size:11px;font-weight:600;letter-spacing:.3px}
+.legal-access{margin-top:7px!important;color:var(--muted);font-size:10.5px;font-style:italic;opacity:.75}
+.legal-year{margin-top:10px!important;padding-top:0;border-top:0;color:var(--muted);font-size:10.5px;font-weight:600;opacity:.8}
 @media(max-width:720px){.legal{padding:24px 20px;text-align:left}.legal p{margin-left:0;max-width:100%}.legal-mark{letter-spacing:1.6px}}
 .cdu-tdc-8f3a91{--cdu-src:'CdU de 0 a Exito'}
 .plan-tabs-hint{margin:0 0 8px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase}
@@ -401,13 +401,46 @@ body.bloqueado{background:var(--navy)}
 .access-context{transition:opacity .2s ease,max-height .28s cubic-bezier(.4,0,.2,1),margin .28s ease;max-height:80px;overflow:hidden}
 .access-panel{transition:gap .28s cubic-bezier(.4,0,.2,1)}
 
-.access-screen:focus-within .access-logo{width:min(84px,24vw)}
-.access-screen:focus-within .access-title{font-size:20px;margin-top:0}
-.access-screen:focus-within .access-context{opacity:0;max-height:0;margin:0}
-.access-screen:focus-within .access-panel{gap:12px}
+@media(max-width:900px){
+  .access-screen:focus-within .access-logo{width:min(84px,24vw)}
+  .access-screen:focus-within .access-title{font-size:20px;margin-top:0}
+  .access-screen:focus-within .access-context{opacity:0;max-height:0;margin:0}
+  .access-screen:focus-within .access-panel{gap:12px}
+}
 
 @media(prefers-reduced-motion:reduce){
   .access-logo,.access-title,.access-context,.access-panel{transition:none}
+}
+/* Fases: cerradas por defecto, con resumen de lo que contienen y aspecto de desplegable */
+.phase-resumen{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.4;font-weight:500;max-width:52ch}
+.phase-toggle{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--navy);font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;transition:background .2s ease,border-color .2s ease}
+.milestone-phase-head:hover .phase-toggle{border-color:rgba(226,159,52,.6);background:rgba(226,159,52,.07)}
+.milestone-phase[data-abierta] .phase-toggle-txt{display:none}
+.milestone-phase[data-abierta] .phase-toggle:after{content:"Ocultar";font:inherit}
+@media(max-width:720px){
+  .phase-resumen{font-size:11.5px;margin-top:5px}
+  .milestone-phase-head{align-items:flex-start;flex-wrap:wrap;row-gap:9px}
+  .phase-toggle{padding:9px 14px;font-size:10.5px;min-height:38px}
+  .milestone-phase{border-width:1px}
+  .milestone-phase-head{background:linear-gradient(180deg,#fff,#faf7f1)}
+}
+/* Planos en movil: pastillas mas estrechas y puntos que revelan cuantos hay */
+.plan-dots{display:none}
+@media(max-width:720px){
+  .plan-dots{display:flex;gap:6px;justify-content:center;margin:0 0 9px}
+  .plan-dots i{width:7px;height:7px;border-radius:50%;background:rgba(22,61,96,.22);transition:background .2s ease,width .2s ease}
+  .plan-dots i.on{width:20px;border-radius:999px;background:var(--ochre)}
+  .plan-tab{padding:7px 11px 7px 7px;gap:6px}
+  .plan-tab-num{min-width:20px;height:20px;font-size:9px}
+  .plan-tab-label{font-size:11.5px}
+}
+/* CRONOGRAMA en movil: barra de desplazamiento SIEMPRE visible, no solo un degradado */
+@media(max-width:720px){
+  .gantt-scroll{scrollbar-width:auto;padding-bottom:6px}
+  .gantt-scroll::-webkit-scrollbar{height:8px;-webkit-appearance:none}
+  .gantt-scroll::-webkit-scrollbar-track{background:rgba(22,61,96,.08);border-radius:99px}
+  .gantt-scroll::-webkit-scrollbar-thumb{background:var(--ochre);border-radius:99px}
+  .gantt-swipe .scroll-nudge{background:rgba(226,159,52,.12);padding:6px 11px;border-radius:999px}
 }
 .plan-empty{padding:28px;border:1px dashed rgba(22,61,96,.22);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
 .legend{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45}
@@ -913,7 +946,8 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
         <div class="plan-wrap">
           <div class="legend" id="planLegend"></div>
           <div class="plan-gallery" id="planGallery">
-            <p class="plan-tabs-hint">Selecciona un plano <span class="scroll-nudge"><b>&#8250;</b> desliza para ver los 4</span></p>
+            <p class="plan-tabs-hint">Selecciona un plano</p>
+            <div class="plan-dots" id="planDots" aria-hidden="true"></div>
             <div class="plan-tabs" id="planTabs" role="tablist" aria-label="Planos y renders de la operación"></div>
             <div class="plan-frame">
               <button class="plan-action" type="button" id="activePlanButton" aria-label="Ampliar plano activo">
@@ -1226,6 +1260,13 @@ function renderPlanos(){
     button.dataset.planUrl=fichero;
     button.dataset.planName=nombre;
     counter.textContent=`${index+1} / ${planos.length}`;
+    const dots=document.getElementById("planDots");
+    if(dots){
+      if(dots.children.length!==planos.length){
+        dots.innerHTML=planos.map(()=>"<i></i>").join("");
+      }
+      [...dots.children].forEach((d,i)=>d.classList.toggle("on",i===index));
+    }
     const badgePlano=document.getElementById("planActivoBadge");
     if(badgePlano) badgePlano.textContent=nombre.replace(/^Plano de venta\s*·\s*/i,"");
     tabs.querySelectorAll(".plan-tab").forEach(tab=>{
@@ -1351,6 +1392,11 @@ function renderHitos(){
   // Los grupos se derivan de los propios datos, en su orden de aparición.
   // NUNCA volver a fijarlos a mano: si un grupo del JSON no estaba en la lista,
   // sus hitos desaparecian del visor sin avisar (paso el 16-ago-2026: 10 hitos invisibles).
+  const RESUMEN_FASE={
+    "Fase 1 · GO":"Captación, viabilidad y consulta urbanística hasta el veredicto GO",
+    "Fase 2 · MAP":"Encaje, presupuesto, estructura legal, grupo inversor y compra",
+    "Fase 3 · ÉXITO":"Licencias, contratación, obra completa, comercialización y cierre"
+  };
   const gruposExito=[...new Set(
     items.filter(h=>h.fase==="Fase 3 · ÉXITO" && h.grupo).map(h=>h.grupo)
   )];
@@ -1365,17 +1411,18 @@ function renderHitos(){
         ${hitosFase.map(item=>renderCard(item.hito,item.index)).join("")}
       </div>`;
     return `
-      <section class="milestone-phase phase-${escapeAttr(claseFase)}" ${claseFase==="done" ? "" : "data-abierta=\"1\""}>
-        <button class="milestone-phase-head" type="button" aria-expanded="${claseFase==="done" ? "false" : "true"}">
+      <section class="milestone-phase phase-${escapeAttr(claseFase)}">
+        <button class="milestone-phase-head" type="button" aria-expanded="false">
           <div class="milestone-phase-title">
             <small>${escapeHtml(estadoEtiqueta(fase.estado))}</small>
             <h3>${escapeHtml(valor(fase.nombre))}</h3>
+            <p class="phase-resumen">${escapeHtml(RESUMEN_FASE[fase.nombre] || "")}</p>
           </div>
           <div class="milestone-phase-meta">
             <span class="stamp ${escapeAttr(claseFase)}">${claseFase==="done" ? "✓ Cerrada" : estadoEtiqueta(fase.estado)}</span>
             <span class="badge navy">${hechosFase} de ${hitosFase.length} hitos</span>
           </div>
-          <span class="phase-caret" aria-hidden="true"></span>
+          <span class="phase-toggle"><span class="phase-toggle-txt">Ver hitos</span><span class="phase-caret" aria-hidden="true"></span></span>
         </button>
         <div class="milestone-phase-body">${cuerpo}</div>
       </section>`;
