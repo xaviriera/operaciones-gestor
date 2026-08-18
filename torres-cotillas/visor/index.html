@@ -392,31 +392,6 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .gantt-swipe{margin:0 0 6px}
 @media(min-width:721px){.gantt-swipe{display:none}}
 /* La pantalla de acceso debe caber entera aunque salga el teclado o la pantalla sea baja */
-@media(max-height:640px){
-  .access-logo{width:min(112px,32vw)}
-  .access-title{font-size:22px}
-  .access-panel{gap:11px}
-  .access-context{font-size:12px}
-}
-@media(max-height:500px){
-  .access-logo{width:min(76px,22vw)}
-  .access-title{font-size:17px;margin-top:0}
-  .access-panel{gap:7px}
-  .access-context{display:none}
-  .access-field label{font-size:10px}
-}
-@media(max-height:720px){
-  .access-logo{width:min(132px,40vw)}
-  .access-title{font-size:clamp(20px,5.5vw,26px)}
-  .access-panel{gap:13px}
-  .access-context{font-size:12.5px}
-}
-@media(max-height:560px){
-  .access-logo{width:min(96px,30vw)}
-  .access-title{font-size:19px;margin-top:2px}
-  .access-panel{gap:9px}
-  .access-context{display:none}
-}
 body.bloqueado{background:var(--navy)}
 /* --- Patron de app: al enfocar el campo, la cabecera se compacta con animacion ---
    No se pelea por que quepa: se aparta a proposito. El logo NO desaparece,
@@ -728,6 +703,10 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 .access-logo{
   width:min(178px,52vw);
   height:auto;
+  aspect-ratio:833/430;
+  object-fit:contain;
+  align-self:center;
+  flex-shrink:0;
   display:block;
   filter:drop-shadow(0 12px 22px rgba(0,0,0,.2));
 }
@@ -1842,7 +1821,13 @@ function configurarAcceso(){
   const input=document.getElementById("accessPassword");
   const button=document.getElementById("accessSubmit");
   const error=document.getElementById("accessError");
-  input.focus();
+  // Solo enfocamos solos en escritorio. En movil el enfoque automatico abre el teclado
+  // de golpe y ademas activaba el modo compacto antes de que el usuario tocase nada,
+  // asi que el logo salia ya reducido (y de forma erratica, porque cada navegador
+  // trata el enfoque automatico a su manera).
+  if(window.matchMedia("(min-width:900px)").matches && !("ontouchstart" in window)){
+    input.focus();
+  }
   form.addEventListener("submit",async event=>{
     event.preventDefault();
     const password=input.value;
