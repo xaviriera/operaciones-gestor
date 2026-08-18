@@ -405,9 +405,6 @@ body.bloqueado{background:var(--navy)}
 /* Fases: cerradas por defecto, con resumen de lo que contienen y aspecto de desplegable */
 .phase-resumen{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.4;font-weight:500;max-width:52ch}
 .phase-toggle{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;margin-top:12px;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--navy);font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;transition:background .2s ease,border-color .2s ease}
-.milestone-phase-head:hover .phase-toggle{border-color:rgba(226,159,52,.6);background:rgba(226,159,52,.07)}
-.milestone-phase[data-abierta] .phase-toggle-txt{display:none}
-.milestone-phase[data-abierta] .phase-toggle:after{content:"Ocultar";font:inherit}
 @media(max-width:720px){
   .phase-resumen{font-size:11.5px;margin-top:5px}
   .milestone-phase-head{align-items:flex-start;flex-wrap:wrap;row-gap:9px}
@@ -427,9 +424,9 @@ body.bloqueado{background:var(--navy)}
 }
 /* CRONOGRAMA en movil: barra de desplazamiento SIEMPRE visible, no solo un degradado */
 @media(max-width:720px){
-  .gantt-scroll{scrollbar-width:auto;padding-bottom:6px}
-  .gantt-scroll::-webkit-scrollbar{height:8px;-webkit-appearance:none}
-  .gantt-scroll::-webkit-scrollbar-track{background:rgba(22,61,96,.08);border-radius:99px}
+  .gantt-scroll{scrollbar-width:thin;scrollbar-color:var(--ochre) rgba(22,61,96,.10);padding-bottom:8px}
+  .gantt-scroll::-webkit-scrollbar{height:6px;-webkit-appearance:none}
+  .gantt-scroll::-webkit-scrollbar-track{background:rgba(22,61,96,.10);border-radius:99px}
   .gantt-scroll::-webkit-scrollbar-thumb{background:var(--ochre);border-radius:99px}
   .gantt-swipe .scroll-nudge{background:rgba(226,159,52,.12);padding:6px 11px;border-radius:999px}
 }
@@ -444,8 +441,6 @@ body.bloqueado{background:var(--navy)}
 }
 /* ===== BOTON "VER HITOS" mas marcado que el resto de la cabecera ===== */
 .phase-toggle{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 6px 14px rgba(22,61,96,.22)}
-.milestone-phase-head:hover .phase-toggle{background:var(--ochre);border-color:var(--ochre);color:#fff}
-.milestone-phase[data-abierta] .phase-toggle{background:#fff;color:var(--navy);border-color:var(--line);box-shadow:none}
 @media(max-width:720px){
   .phase-toggle{width:100%;justify-content:center;min-height:44px;font-size:11.5px;letter-spacing:.8px}
 }
@@ -465,6 +460,21 @@ body.bloqueado{background:var(--navy)}
 .gantt-railtop{position:relative;height:6px;margin:0 0 10px;border-radius:99px;background:rgba(22,61,96,.10);overflow:hidden}
 .gantt-railtop span{position:absolute;left:0;top:0;height:100%;width:30%;border-radius:99px;background:var(--ochre);transition:left .12s linear,width .12s linear}
 @media(min-width:721px){.gantt-railtop{display:none}}
+/* Desplegable: SOLO dos estados de color y la flecha siempre en el mismo sitio (a la derecha) */
+.phase-txt-ocultar{display:none}
+.milestone-phase[data-abierta] .phase-txt-ver{display:none}
+.milestone-phase[data-abierta] .phase-txt-ocultar{display:inline}
+.milestone-phase[data-abierta] .phase-toggle{background:#fff;color:var(--navy);border-color:rgba(22,61,96,.35);box-shadow:none}
+.phase-caret{order:9;margin-left:2px;border-color:currentColor;opacity:.85}
+.milestone-phase[data-abierta] .phase-caret{transform:rotate(-135deg)}
+
+/* Hitos: pulsables para leer el detalle completo (antes quedaba cortado sin remedio) */
+.milestone{cursor:pointer}
+.milestone .meaning{position:relative}
+.milestone .ver-mas{display:none;margin-top:6px;color:var(--ochre);font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase}
+.milestone.abierto .meaning{-webkit-line-clamp:unset!important;display:block!important;overflow:visible!important}
+.milestone.abierto{box-shadow:0 14px 32px rgba(22,61,96,.14)}
+@media(max-width:720px){.milestone .ver-mas{display:block}.milestone.abierto .ver-mas{color:var(--muted)}}
 .plan-empty{padding:28px;border:1px dashed rgba(22,61,96,.22);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
 .legend{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45}
 .legend-item{display:inline-flex;align-items:baseline;gap:5px;min-width:0}
@@ -1417,7 +1427,7 @@ function renderHitos(){
           <div class="toprow"><span class="num">${index+1}</span>${proximo || (clase==="current" ? '<span class="spark" aria-hidden="true"></span>' : "")}</div>
           <b>${escapeHtml(valor(hito.nombre))}</b>
           <span class="date">${escapeHtml(valor(hito.fecha))}${hito.grupo ? ` · <i>${escapeHtml(hito.grupo)}</i>` : ""}</span>
-          <p class="meaning">${escapeHtml(valor(hito.detalle))}</p>
+          <p class="meaning">${escapeHtml(valor(hito.detalle))}</p><span class="ver-mas">Ver detalle</span>
         </div>
         <div><span class="stamp ${escapeAttr(clase)}">${clase==="done" ? "✓ Conseguido" : estadoEtiqueta(hito.estado)}</span></div>
       </article>`;
@@ -1455,7 +1465,7 @@ function renderHitos(){
             <span class="stamp ${escapeAttr(claseFase)}">${claseFase==="done" ? "✓ Cerrada" : estadoEtiqueta(fase.estado)}</span>
             <span class="badge navy">${hechosFase} de ${hitosFase.length} hitos</span>
           </div>
-          <span class="phase-toggle"><span class="phase-toggle-txt">Ver hitos</span><span class="phase-caret" aria-hidden="true"></span></span>
+          <span class="phase-toggle"><span class="phase-txt-ver">Ver hitos</span><span class="phase-txt-ocultar">Ocultar</span><span class="phase-caret" aria-hidden="true"></span></span>
         </button>
         <div class="milestone-phase-body">${cuerpo}</div>
       </section>`;
@@ -1477,6 +1487,19 @@ function sincronizarRailGantt(){
   zona.addEventListener("scroll",pinta,{passive:true});
   window.addEventListener("resize",pinta);
   pinta();
+}
+// Cada hito se puede abrir para leer su detalle completo
+function activarDetalleHitos(){
+  const cont=document.getElementById("milestones");
+  if(!cont || cont.dataset.detalle) return;
+  cont.dataset.detalle="1";
+  cont.addEventListener("click",e=>{
+    const tarjeta=e.target.closest("article.milestone");
+    if(!tarjeta) return;
+    const abierto=tarjeta.classList.toggle("abierto");
+    const vm=tarjeta.querySelector(".ver-mas");
+    if(vm) vm.textContent=abierto ? "Ocultar detalle" : "Ver detalle";
+  });
 }
 function activarAcordeonFases(){
   document.querySelectorAll(".milestone-phase").forEach(sec=>{
@@ -1798,6 +1821,7 @@ function renderTodo(){
   renderContacto();
   activarAvisosScroll();
   activarAcordeonFases();
+  activarDetalleHitos();
   sincronizarRailGantt();
 }
 function showDataWarning(){
