@@ -442,6 +442,29 @@ body.bloqueado{background:var(--navy)}
   .gantt-scroll::-webkit-scrollbar-thumb{background:var(--ochre);border-radius:99px}
   .gantt-swipe .scroll-nudge{background:rgba(226,159,52,.12);padding:6px 11px;border-radius:999px}
 }
+/* ===== PLANOS EN MOVIL: los 4 botones VISIBLES en rejilla 2x2. Se acabo el scroll oculto ===== */
+@media(max-width:720px){
+  .plan-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;overflow:visible;padding:0}
+  .plan-tabs:after{display:none}
+  .plan-tab{width:100%;justify-content:flex-start;padding:10px 10px 10px 8px;border-radius:10px;min-height:44px}
+  .plan-tab-label{font-size:12px;white-space:normal;line-height:1.2;text-align:left}
+  .plan-dots{display:none}
+  .scroll-nudge{display:none}
+}
+/* ===== BOTON "VER HITOS" mas marcado que el resto de la cabecera ===== */
+.phase-toggle{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 6px 14px rgba(22,61,96,.22)}
+.milestone-phase-head:hover .phase-toggle{background:var(--ochre);border-color:var(--ochre);color:#fff}
+.milestone-phase[data-abierta] .phase-toggle{background:#fff;color:var(--navy);border-color:var(--line);box-shadow:none}
+@media(max-width:720px){
+  .phase-toggle{width:100%;justify-content:center;min-height:44px;font-size:11.5px;letter-spacing:.8px}
+}
+/* ===== CRONOGRAMA: que se vea SIN DUDA que se desplaza ===== */
+.gantt-swipe .scroll-nudge{display:inline-flex!important;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;background:var(--ochre);color:#fff;font-size:11px;font-weight:800;letter-spacing:.5px}
+.gantt-swipe .scroll-nudge b{font-size:16px;animation:empuja 1.4s ease-in-out infinite}
+@keyframes empuja{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+.gantt-scroll.at-end + .gantt-swipe,.gantt-scroll.at-end .scroll-nudge{opacity:.35}
+@media(prefers-reduced-motion:reduce){.gantt-swipe .scroll-nudge b{animation:none}}
+.tranche-fecha{margin-left:auto;color:var(--muted);font-size:11px;font-weight:700;white-space:nowrap}
 .plan-empty{padding:28px;border:1px dashed rgba(22,61,96,.22);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
 .legend{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45}
 .legend-item{display:inline-flex;align-items:baseline;gap:5px;min-width:0}
@@ -986,7 +1009,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
       </div>
       <div class="card gantt-card">
         <div class="gantt-note" id="ganttNote">pendiente de confirmar</div>
-        <p class="gantt-swipe"><span class="scroll-nudge"><b>&#8250;</b> desliza para ver las 16 semanas</span></p>
+        <p class="gantt-swipe"><span class="scroll-nudge">desliza para ver las 16 semanas <b>&#8250;</b></span></p>
         <div class="gantt-scroll scroll-shadow">
         <div class="gantt-inner">
           <div class="week-current" id="weekCurrent" aria-hidden="true"><span id="ganttCurrentWeek">pendiente de confirmar</span></div>
@@ -1484,7 +1507,7 @@ function renderEconomico(){
     const nota=tieneNota ? `<details class="tranche-detail"><summary>Ver detalle</summary><p>${escapeHtml(item.nota)}</p></details>` : "";
     const importe=item.importe ? `<strong class="tranche-amount">${escapeHtml(item.importe)}</strong>` : "";
     return `
-    <div class="tranche ${ok?"done":"pending"}"><div class="tranche-line"><span class="tranche-name">${escapeHtml(valor(item.nombre))}</span><span class="tranche-pill ${ok?"done":"pending"}">${ok?"Confirmado":"Pendiente"}</span>${importe}</div>${nota}</div>`;
+    <div class="tranche ${ok?"done":"pending"}"><div class="tranche-line"><span class="tranche-name">${escapeHtml(valor(item.nombre))}</span><span class="tranche-pill ${ok?"done":"pending"}">${ok?"Confirmado":"Pendiente"}</span>${importe || (item.fecha ? `<span class="tranche-fecha">${escapeHtml(item.fecha)}</span>` : "")}</div>${nota}</div>`;
   }).join("");
   document.getElementById("financeSummary").innerHTML=[
     ["Tramos", (cuentas.tramos || []).length || null, "Número de tramos configurados"],
