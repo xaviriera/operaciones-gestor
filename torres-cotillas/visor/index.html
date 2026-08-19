@@ -715,6 +715,32 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 .camera-frame.has-stream{display:block;border:0;background:#000}
 .camera-frame.has-stream:before{display:none}
 .camera-frame iframe{display:block;width:100%;height:100%;border:0}
+/* --- Ampliar una camara: en escritorio salen 3 en fila y se ven pequenas.
+       Solo son pulsables las que TIENEN senal; las que aun no emiten no
+       responden, para que nadie pinche y crea que la web esta rota. --- */
+.camera-frame.ampliable{cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,outline-color .18s ease;outline:2px solid transparent}
+/* El video va en un marco incrustado y se traga la pulsacion: esta capa invisible
+   por encima hace que se pueda pulsar en cualquier punto de la tarjeta, no solo el borde. */
+.camera-frame.ampliable:after{content:"";position:absolute;inset:0;z-index:1;cursor:pointer}
+.camera-frame.ampliable:hover,.camera-frame.ampliable:focus-visible{transform:translateY(-2px);box-shadow:0 14px 30px rgba(22,61,96,.22);outline-color:var(--ochre)}
+.camera-zoom-hint{position:absolute;right:10px;bottom:10px;z-index:2;pointer-events:none;
+  padding:4px 9px;border-radius:999px;background:rgba(11,26,41,.72);color:#fff;
+  font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+.camzoom{position:fixed;inset:0;z-index:120;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;padding:20px;background:rgba(11,26,41,.88)}
+.camzoom[hidden]{display:none}
+.camzoom-barra{display:flex;align-items:center;gap:14px;width:min(1100px,100%);justify-content:space-between}
+.camzoom-nombre{color:#fff;font-size:16px;font-weight:800;letter-spacing:.3px}
+.camzoom-cerrar{width:44px;height:44px;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.35);border-radius:999px;background:rgba(255,255,255,.10);color:#fff;
+  font-size:20px;line-height:1;cursor:pointer}
+.camzoom-cerrar:hover,.camzoom-cerrar:focus-visible{background:rgba(255,255,255,.2);outline:2px solid var(--ochre)}
+.camzoom-caja{width:min(1100px,100%);max-height:80vh;aspect-ratio:16/9;background:#000;border-radius:10px;overflow:hidden}
+.camzoom-caja iframe{display:block;width:100%;height:100%;border:0}
+@media(max-width:720px){
+  .camzoom{padding:12px}
+  .camzoom-nombre{font-size:14px}
+}
 .camera-copy{position:relative;text-align:center;padding:18px;color:var(--navy)}
 .camera-copy strong{display:block;font-size:17px}
 .camera-copy span{display:block;margin-top:6px;color:var(--muted);font-size:12px}
@@ -1375,12 +1401,61 @@ function marcarScrollHorizontal(el){
   window.addEventListener("resize",actualizar);
   actualizar();
 }
+// --- Ampliar camara: abre la capa con el video en grande y la cierra devolviendo
+//     el foco a la tarjeta pulsada. Al cerrar se destruye el iframe a proposito. ---
+let camaraFocoPrevio=null;
+function abrirCamara(tarjeta){
+  const capa=document.getElementById("camZoom");
+  const caja=document.getElementById("camZoomCaja");
+  if(!capa || !caja || !tarjeta) return;
+  const url=tarjeta.getAttribute("data-camara-url");
+  if(!url) return;
+  camaraFocoPrevio=tarjeta;
+  document.getElementById("camZoomNombre").textContent=tarjeta.getAttribute("data-camara-nombre") || "";
+  const marco=document.createElement("iframe");
+  marco.src=url; marco.title=tarjeta.getAttribute("data-camara-nombre") || "Camara";
+  marco.setAttribute("allowfullscreen","");
+  caja.innerHTML=""; caja.appendChild(marco);
+  capa.hidden=false;
+  document.body.style.overflow="hidden";
+  document.getElementById("camZoomCerrar").focus();
+}
+function cerrarCamara(){
+  const capa=document.getElementById("camZoom");
+  const caja=document.getElementById("camZoomCaja");
+  if(!capa || capa.hidden) return;
+  const marco=caja.querySelector("iframe");
+  if(marco) marco.src="";       // cortar el stream antes de tirar el nodo
+  caja.innerHTML="";
+  capa.hidden=true;
+  document.body.style.overflow="";
+  if(camaraFocoPrevio){ camaraFocoPrevio.focus(); camaraFocoPrevio=null; }
+}
+function activarAmpliarCamaras(){
+  const rejilla=document.getElementById("cameraGrid");
+  const capa=document.getElementById("camZoom");
+  if(!rejilla || !capa || rejilla.dataset.zoomListo) return;
+  rejilla.dataset.zoomListo="1";
+  rejilla.addEventListener("click",e=>{
+    const t=e.target.closest(".camera-frame.ampliable");
+    if(t) abrirCamara(t);
+  });
+  rejilla.addEventListener("keydown",e=>{
+    if(e.key!=="Enter" && e.key!==" ") return;
+    const t=e.target.closest(".camera-frame.ampliable");
+    if(t){ e.preventDefault(); abrirCamara(t); }
+  });
+  document.getElementById("camZoomCerrar").addEventListener("click",cerrarCamara);
+  capa.addEventListener("click",e=>{ if(e.target===capa) cerrarCamara(); });
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape") cerrarCamara(); });
+}
 function activarAvisosScroll(){
   marcarScrollHorizontal(document.getElementById("planTabs"));
   document.querySelectorAll(".gantt-scroll").forEach(el=>{
     if(el && el.scrollWidth>el.clientWidth+4) marcarScrollHorizontal(el);
   });
   activarCoachDeslizar();
+  activarAmpliarCamaras();
 }
 // La capa "desliza" solo tiene sentido si el cronograma no cabe. Se va al primer
 // gesto (o al primer scroll) y no vuelve en esa visita: cumplido su trabajo, estorba.
@@ -1656,7 +1731,7 @@ function renderCamaras(){
   document.getElementById("obraBadge").textContent=camaras.some(camara=>camara.url) ? "Señal activa" : CAMARA_SIN_SENAL;
   document.getElementById("cameraGrid").innerHTML=camaras.map(camara=>{
     if(camara.url){
-      return `<div class="camera-frame has-stream"><iframe src="${escapeAttr(camara.url)}" title="${escapeAttr(valor(camara.nombre))}" allowfullscreen loading="lazy"></iframe></div>`;
+      return `<div class="camera-frame has-stream ampliable" role="button" tabindex="0" aria-label="Ampliar ${escapeAttr(valor(camara.nombre))}" data-camara-url="${escapeAttr(camara.url)}" data-camara-nombre="${escapeAttr(valor(camara.nombre))}"><iframe src="${escapeAttr(camara.url)}" title="${escapeAttr(valor(camara.nombre))}" allowfullscreen loading="lazy"></iframe><span class="camera-zoom-hint" aria-hidden="true">Ampliar</span></div>`;
     }
     return `
       <div class="camera-frame">
@@ -2030,5 +2105,14 @@ window.addEventListener("pagehide",liberarExtractoPdfUrl);
   });
 })();
 </script>
+  <!-- Capa para ver una camara en grande. Es UNA sola y se reutiliza; el video
+       se crea al abrir y se destruye al cerrar, para no dejar streams consumiendo datos. -->
+  <div class="camzoom" id="camZoom" hidden>
+    <div class="camzoom-barra">
+      <span class="camzoom-nombre" id="camZoomNombre"></span>
+      <button type="button" class="camzoom-cerrar" id="camZoomCerrar" aria-label="Cerrar">&#10005;</button>
+    </div>
+    <div class="camzoom-caja" id="camZoomCaja"></div>
+  </div>
 </body>
 </html>
