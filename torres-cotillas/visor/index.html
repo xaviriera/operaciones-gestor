@@ -447,6 +447,28 @@ body.bloqueado{background:var(--navy)}
 .gantt-swipe .scroll-nudge b{font-size:16px;animation:empuja 1.4s ease-in-out infinite}
 @keyframes empuja{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
 .gantt-scroll.at-end + .gantt-swipe,.gantt-scroll.at-end .scroll-nudge{opacity:.35}
+/* --- Capa "desliza": ensena el gesto en movil. En escritorio NO aparece nunca
+       porque ahi el cronograma se ve entero. No debe bloquear el gesto: pointer-events:none. --- */
+.gantt-coach-wrap{position:relative}
+.gantt-coach{display:none}
+@media(max-width:720px){
+  .gantt-coach{display:flex;position:absolute;inset:0;z-index:6;align-items:center;justify-content:center;
+    background:rgba(22,61,96,.55);border-radius:10px;pointer-events:none;
+    transition:opacity .3s ease,visibility .3s ease}
+  .gantt-coach.oculto{opacity:0;visibility:hidden}
+  .gantt-coach-inner{text-align:center;color:#fff;padding-left:34px}
+  .gantt-coach svg{width:92px;height:92px;display:block;margin:0 auto 4px;color:rgba(255,255,255,.92);
+    filter:drop-shadow(0 3px 8px rgba(0,0,0,.5));animation:coachDesliza 1.8s ease-in-out infinite}
+  .gantt-coach-txt{font-size:19px;font-weight:900;letter-spacing:.3px;line-height:1.15;text-shadow:0 2px 8px rgba(0,0,0,.45)}
+  .gantt-coach-sub{font-size:12.5px;font-weight:700;opacity:.85;margin-top:3px;text-shadow:0 1px 6px rgba(0,0,0,.45)}
+}
+@keyframes coachDesliza{
+  0%{transform:translateX(48px);opacity:0}
+  18%{opacity:1}
+  72%{opacity:1}
+  100%{transform:translateX(-62px);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){.gantt-coach svg{animation:none}}
 @media(prefers-reduced-motion:reduce){.gantt-swipe .scroll-nudge b{animation:none}}
 .tranche-fecha{margin-left:auto;color:var(--muted);font-size:11px;font-weight:700;white-space:nowrap}
 .pass-wrap{position:relative;display:block}
@@ -1022,10 +1044,21 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
         <div class="gantt-note" id="ganttNote">pendiente de confirmar</div>
         <p class="gantt-swipe"><span class="scroll-nudge">desliza para ver las 16 semanas <b>&#8250;</b></span></p>
         <div class="gantt-railtop" aria-hidden="true"><span id="ganttRail"></span></div>
+        <div class="gantt-coach-wrap">
         <div class="gantt-scroll scroll-shadow">
         <div class="gantt-inner">
           <div class="week-current" id="weekCurrent" aria-hidden="true"><span id="ganttCurrentWeek">pendiente de confirmar</span></div>
           <div class="gantt-grid" id="gantt"></div>
+        </div>
+        </div>
+        <!-- Capa que ENSENA el gesto: en movil mucha gente no descubre que el cronograma
+             se desplaza. Se muestra solo si el contenido desborda y se va al primer deslizamiento. -->
+        <div class="gantt-coach" id="ganttCoach" aria-hidden="true">
+          <div class="gantt-coach-inner">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74l-3.43-.72c-.08-.01-.15-.03-.24-.03-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z"/></svg>
+            <div class="gantt-coach-txt">Desliza a la izquierda</div>
+            <div class="gantt-coach-sub">para ver el diagrama completo</div>
+          </div>
         </div>
         </div>
         <p class="gantt-foot" id="ganttFoot">pendiente de confirmar</p>
@@ -1338,6 +1371,24 @@ function activarAvisosScroll(){
   document.querySelectorAll(".gantt-scroll").forEach(el=>{
     if(el && el.scrollWidth>el.clientWidth+4) marcarScrollHorizontal(el);
   });
+  activarCoachDeslizar();
+}
+// La capa "desliza" solo tiene sentido si el cronograma no cabe. Se va al primer
+// gesto (o al primer scroll) y no vuelve en esa visita: cumplido su trabajo, estorba.
+function activarCoachDeslizar(){
+  const coach=document.getElementById("ganttCoach");
+  const caja=document.querySelector(".gantt-coach-wrap .gantt-scroll");
+  if(!coach || !caja) return;
+  if(caja.scrollWidth<=caja.clientWidth+4){ coach.classList.add("oculto"); return; }
+  if(coach.dataset.listo) return;
+  coach.dataset.listo="1";
+  const esconder=()=>{
+    coach.classList.add("oculto");
+    caja.removeEventListener("scroll",esconder);
+    caja.removeEventListener("touchstart",esconder);
+  };
+  caja.addEventListener("scroll",esconder,{passive:true,once:true});
+  caja.addEventListener("touchstart",esconder,{passive:true,once:true});
 }
 function renderEstado(){
   const estado=datosOperacion.estado || {};
