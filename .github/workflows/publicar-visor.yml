@@ -28,7 +28,7 @@ jobs:
           # Token con permiso de escritura sobre cdu-visor. Debe crearse como secreto de
           # repositorio en operaciones-gestor. Ver README/informe de despliegue para el
           # procedimiento exacto (tipo de token y permisos mínimos).
-          token: ${{ secrets.TOKEN_PUBLICAR_VISOR }}
+          token: ${{ secrets.TOKEN_PUBLICAR_VISOR_CDU }}
           path: cdu-visor
 
       - name: Copiar visor e imágenes
