@@ -1473,7 +1473,13 @@ function revisarAvisoCronograma(){
   if(!caja || !aviso) return;
   aviso.classList.toggle("hay-scroll", caja.scrollWidth > caja.clientWidth + 16);
 }
-window.addEventListener("resize", revisarAvisoCronograma);
+// Al redimensionar, el navegador tarda un instante en recalcular las medidas:
+// sin esta pequena espera el aviso no se entera de que ya no cabe.
+let temporizadorAviso=null;
+window.addEventListener("resize", () => {
+  clearTimeout(temporizadorAviso);
+  temporizadorAviso=setTimeout(revisarAvisoCronograma, 180);
+});
 function activarCoachDeslizar(){
   const coach=document.getElementById("ganttCoach");
   const caja=document.querySelector(".gantt-coach-wrap .gantt-scroll");
