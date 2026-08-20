@@ -1137,7 +1137,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
             <h2>Sigue la obra en tiempo real</h2>
             <p class="note" id="obraNote">Tres puntos de seguimiento preparados para activar la señal durante la ejecución.</p>
           </div>
-          <span class="badge warn" id="obraBadge">pendiente de confirmar</span>
+          <span class="badge gray" id="obraBadge">pendiente de confirmar</span>
         </div>
         <div class="camera-grid" id="cameraGrid"></div>
       </div>
@@ -1728,7 +1728,15 @@ function renderExtractoBancario(cuentas){
 }
 function renderCamaras(){
   const camaras=datosOperacion.camaras || [];
-  document.getElementById("obraBadge").textContent=camaras.some(camara=>camara.url) ? "Señal activa" : CAMARA_SIN_SENAL;
+  const haySenal=camaras.some(camara=>camara.url);
+  const insignia=document.getElementById("obraBadge");
+  insignia.textContent=haySenal ? "En directo" : CAMARA_SIN_SENAL;
+  // Verde cuando emite: en naranja parecia una advertencia y transmitia lo contrario.
+  insignia.className="badge " + (haySenal ? "ok" : "gray");
+  const nota=document.getElementById("obraNote");
+  if(nota) nota.textContent=haySenal
+    ? "Tres cámaras enfocando la obra, con imagen en directo. Pulsa cualquiera para verla en grande."
+    : "Tres puntos de seguimiento preparados para activar la señal durante la ejecución.";
   document.getElementById("cameraGrid").innerHTML=camaras.map(camara=>{
     if(camara.url){
       return `<div class="camera-frame has-stream ampliable" role="button" tabindex="0" aria-label="Ampliar ${escapeAttr(valor(camara.nombre))}" data-camara-url="${escapeAttr(camara.url)}" data-camara-nombre="${escapeAttr(valor(camara.nombre))}"><iframe src="${escapeAttr(camara.url)}" title="${escapeAttr(valor(camara.nombre))}" allowfullscreen loading="lazy"></iframe><span class="camera-zoom-hint" aria-hidden="true">Ampliar</span></div>`;
