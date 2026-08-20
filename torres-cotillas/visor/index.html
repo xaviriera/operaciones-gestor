@@ -1322,8 +1322,7 @@ function renderOperacion(){
   document.getElementById("planLegend").innerHTML=[
     ["Dirección", operacion.direccion],
     ["Ref. cat.", operacion.referencia_catastral],
-    ["Finca", operacion.finca_registral],
-    ["Plazo objetivo", operacion.plazo_objetivo]
+    ["Finca", operacion.finca_registral]
   ].map(([label,value])=>`<div class="legend-item"><b>${escapeHtml(label)}</b><span>${escapeHtml(valor(value))}</span></div>`).join("");
 }
 function renderPlanos(){
