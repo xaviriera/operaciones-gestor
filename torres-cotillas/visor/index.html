@@ -2150,11 +2150,16 @@ function configurarAcceso(){
     button.disabled=true;
     input.disabled=true;
     button.textContent="Comprobando...";
+    // Se guarda ANTES: si algo posterior al descifrado falla (un render, por ejemplo),
+    // el usuario ya ha entrado y no tendria sentido perder el recordatorio. Si la
+    // contrasena es mala, el catch lo borra.
+    const casilla=document.getElementById("accessRecordar");
+    if(casilla && casilla.checked) guardarAcceso(password); else olvidarAcceso();
     try{
       await cargarDatosCifrados(password);
-      const casilla=document.getElementById("accessRecordar");
-      if(casilla && casilla.checked) guardarAcceso(password); else olvidarAcceso();
     }catch(err){
+      olvidarAcceso();
+      console.error("[visor] fallo al abrir:", err);
       claveMaestra=null;
       error.textContent="Contraseña incorrecta";
       input.disabled=false;
