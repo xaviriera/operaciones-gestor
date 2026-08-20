@@ -335,7 +335,7 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 .lightbox-close:active{transform:scale(.94)}
 /* Aviso de que hay mas contenido a la derecha */
 .scroll-shadow{position:relative}
-.scroll-shadow:after{content:"";position:absolute;top:0;right:0;width:52px;height:100%;pointer-events:none;background:linear-gradient(90deg,rgba(253,251,247,0),rgba(253,251,247,.96));opacity:1;transition:opacity .25s ease}
+.scroll-shadow:after{content:"";position:absolute;top:0;right:0;width:34px;height:100%;pointer-events:none;background:linear-gradient(90deg,rgba(253,251,247,0),rgba(253,251,247,.82));opacity:1;transition:opacity .25s ease}
 .scroll-shadow.at-end:after{opacity:0}
 .scroll-nudge{display:none;align-items:center;gap:6px;margin:8px 0 0;color:var(--ochre);font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase}
 .scroll-nudge b{font-size:14px;line-height:1}
@@ -1394,8 +1394,8 @@ function marcarScrollHorizontal(el){
   el.dataset.scrollAviso="1";
   el.classList.add("scroll-shadow");
   const actualizar=()=>{
-    const fin=el.scrollLeft+el.clientWidth>=el.scrollWidth-4;
-    el.classList.toggle("at-end",fin || el.scrollWidth<=el.clientWidth+4);
+    const fin=el.scrollLeft+el.clientWidth>=el.scrollWidth-16;
+    el.classList.toggle("at-end",fin || el.scrollWidth<=el.clientWidth+16);
   };
   el.addEventListener("scroll",actualizar,{passive:true});
   window.addEventListener("resize",actualizar);
