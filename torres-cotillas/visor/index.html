@@ -892,6 +892,13 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
   cursor:wait;
   opacity:.68;
 }
+.access-recordar{display:flex;align-items:center;gap:8px;margin:-2px 0 2px;color:rgba(253,251,247,.86);font-size:12.5px;font-weight:700;cursor:pointer}
+.access-recordar input{width:16px;height:16px;accent-color:var(--ochre);cursor:pointer}
+.salir-flotante{position:fixed;right:14px;bottom:14px;z-index:90;display:none;align-items:center;gap:6px;
+  padding:8px 13px;border:1px solid rgba(22,61,96,.2);border-radius:999px;background:rgba(253,251,247,.94);
+  color:var(--navy);font-size:11px;font-weight:800;letter-spacing:.4px;cursor:pointer;box-shadow:0 8px 20px rgba(22,61,96,.14)}
+body:not(.bloqueado) .salir-flotante{display:inline-flex}
+.salir-flotante:hover{background:#fff;border-color:var(--ochre)}
 .access-error{
   min-height:20px;
   margin:0;
@@ -969,6 +976,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
           </button>
         </div>
       </div>
+      <label class="access-recordar"><input type="checkbox" id="accessRecordar" checked> Recordarme en este dispositivo</label>
       <button class="access-submit" id="accessSubmit" type="submit">Entrar</button>
       <p class="access-error" id="accessError" role="alert" aria-live="assertive"></p>
     </form>
@@ -2103,6 +2111,37 @@ function configurarAcceso(){
   if(window.matchMedia("(min-width:900px)").matches && !("ontouchstart" in window)){
     input.focus();
   }
+  // --- Recordar el acceso en este dispositivo -------------------------------
+  // Se guarda en el navegador para no teclear la contrasena cada visita. Ojo: queda
+  // en ESTE dispositivo; cualquiera que lo use desbloqueado entra. Caduca a los 30 dias
+  // y el boton "Salir" lo borra.
+  const RECUERDO="tdc-acceso-v1";
+  const guardarAcceso=pwd=>{
+    try{ localStorage.setItem(RECUERDO, JSON.stringify({p:btoa(encodeURIComponent(pwd)), exp:Date.now()+30*24*3600*1000})); }catch(e){}
+  };
+  const leerAcceso=()=>{
+    try{
+      const r=JSON.parse(localStorage.getItem(RECUERDO)||"null");
+      if(!r || !r.exp || Date.now()>r.exp){ localStorage.removeItem(RECUERDO); return null; }
+      return decodeURIComponent(atob(r.p));
+    }catch(e){ return null; }
+  };
+  const olvidarAcceso=()=>{ try{ localStorage.removeItem(RECUERDO); }catch(e){} };
+
+  const salir=document.getElementById("salirBoton");
+  if(salir) salir.addEventListener("click",()=>{ olvidarAcceso(); location.reload(); });
+
+  // Si hay contrasena recordada, entrar solo.
+  const recordada=leerAcceso();
+  if(recordada){
+    button.disabled=true; input.disabled=true; button.textContent="Entrando...";
+    cargarDatosCifrados(recordada).catch(()=>{
+      olvidarAcceso();                       // caducada o cambiada: volver a pedirla
+      claveMaestra=null;
+      input.disabled=false; button.disabled=false; button.textContent="Entrar"; input.value="";
+    });
+  }
+
   form.addEventListener("submit",async event=>{
     event.preventDefault();
     const password=input.value;
@@ -2113,6 +2152,8 @@ function configurarAcceso(){
     button.textContent="Comprobando...";
     try{
       await cargarDatosCifrados(password);
+      const casilla=document.getElementById("accessRecordar");
+      if(casilla && casilla.checked) guardarAcceso(password); else olvidarAcceso();
     }catch(err){
       claveMaestra=null;
       error.textContent="Contraseña incorrecta";
@@ -2148,6 +2189,7 @@ window.addEventListener("pagehide",liberarExtractoPdfUrl);
 </script>
   <!-- Capa para ver una camara en grande. Es UNA sola y se reutiliza; el video
        se crea al abrir y se destruye al cerrar, para no dejar streams consumiendo datos. -->
+  <button type="button" class="salir-flotante" id="salirBoton" title="Olvidar la contraseña en este dispositivo">Salir</button>
   <div class="camzoom" id="camZoom" hidden>
     <div class="camzoom-barra">
       <span class="camzoom-nombre" id="camZoomNombre"></span>
