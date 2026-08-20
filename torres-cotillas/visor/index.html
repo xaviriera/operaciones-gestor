@@ -1497,13 +1497,15 @@ function activarCoachDeslizar(){
   if(caja.scrollWidth<=caja.clientWidth+4){ coach.classList.add("oculto"); return; }
   if(coach.dataset.listo) return;
   coach.dataset.listo="1";
+  // Antes desaparecia con solo TOCAR la pantalla (aunque fuera para bajar la pagina):
+  // se iba antes de que diera tiempo a leerla. Ahora aguanta hasta que hay
+  // desplazamiento HORIZONTAL de verdad, que es el gesto que quiere ensenar.
   const esconder=()=>{
+    if(caja.scrollLeft < 24) return;       // un roce no cuenta
     coach.classList.add("oculto");
     caja.removeEventListener("scroll",esconder);
-    caja.removeEventListener("touchstart",esconder);
   };
-  caja.addEventListener("scroll",esconder,{passive:true,once:true});
-  caja.addEventListener("touchstart",esconder,{passive:true,once:true});
+  caja.addEventListener("scroll",esconder,{passive:true});
 }
 function renderEstado(){
   const estado=datosOperacion.estado || {};
