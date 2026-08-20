@@ -647,6 +647,11 @@ body.bloqueado{background:var(--navy)}
   line-height:1;
   white-space:nowrap;
 }
+/* La etiqueta "Entrega" necesita ~60px y la celda de semana mide 36: se cortaba.
+   Se deja crecer hacia la izquierda (la celda anterior esta vacia) en vez de
+   recortarla o dejar que se salga por la derecha. */
+.gcell-hito{overflow:visible;z-index:2}
+.gcell-hito .gantt-milestone-label{position:absolute;top:6px;right:2px;width:auto;max-width:none;padding:0 7px;margin:0}
 .gantt-note{display:flex;align-items:center;gap:9px;margin:10px 0 12px;padding:10px 12px;border:1px solid rgba(22,61,96,.13);border-radius:8px;background:#f7f3ea;color:var(--navy);font-size:12px;font-weight:800}
 .gantt-note:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--ochre);box-shadow:0 0 0 4px rgba(226,159,52,.15)}
 .gantt-foot{margin:13px 0 0;color:var(--muted);font-size:12px;font-weight:800}
@@ -1678,7 +1683,7 @@ function renderGantt(){
         const inRange=week>=inicio&&week<=fin;
         const tipo=fila.color_o_tipo || "#163D60";
         const marker=tipo==="hito" ? `<div class="gantt-milestone-label">◆ Entrega</div>` : `<div class="bar-seg" style="--bar:${escapeAttr(tipo)}"></div>`;
-        return `<div class="gcell">${inRange?marker:""}</div>`;
+        return `<div class="gcell${inRange&&tipo==="hito"?" gcell-hito":""}">${inRange?marker:""}</div>`;
       }).join("")}
     </div>
   `).join("");
