@@ -379,7 +379,12 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 }
 .gantt-scroll{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
 .gantt-swipe{margin:0 0 6px}
-@media(min-width:721px){.gantt-swipe{display:none}}
+@media(min-width:721px){
+  .gantt-swipe{display:none}
+  /* Si el cronograma NO cabe (ventana reducida, zoom, media pantalla) se corta sin
+     ninguna pista: ahi si hace falta el aviso tambien en escritorio. */
+  .gantt-swipe.hay-scroll{display:block}
+}
 /* La pantalla de acceso debe caber entera aunque salga el teclado o la pantalla sea baja */
 body.bloqueado{background:var(--navy)}
 /* --- Patron de app: al enfocar el campo, la cabecera se compacta con animacion ---
@@ -1454,11 +1459,21 @@ function activarAvisosScroll(){
   document.querySelectorAll(".gantt-scroll").forEach(el=>{
     if(el && el.scrollWidth>el.clientWidth+4) marcarScrollHorizontal(el);
   });
+  revisarAvisoCronograma();
   activarCoachDeslizar();
   activarAmpliarCamaras();
 }
 // La capa "desliza" solo tiene sentido si el cronograma no cabe. Se va al primer
 // gesto (o al primer scroll) y no vuelve en esa visita: cumplido su trabajo, estorba.
+// El aviso de deslizar depende de si CABE, no de si es movil: en escritorio con la
+// ventana reducida el cronograma tambien se corta.
+function revisarAvisoCronograma(){
+  const caja=document.querySelector(".gantt-coach-wrap .gantt-scroll") || document.querySelector(".gantt-scroll");
+  const aviso=document.querySelector(".gantt-swipe");
+  if(!caja || !aviso) return;
+  aviso.classList.toggle("hay-scroll", caja.scrollWidth > caja.clientWidth + 16);
+}
+window.addEventListener("resize", revisarAvisoCronograma);
 function activarCoachDeslizar(){
   const coach=document.getElementById("ganttCoach");
   const caja=document.querySelector(".gantt-coach-wrap .gantt-scroll");
