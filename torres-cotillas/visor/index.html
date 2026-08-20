@@ -1466,11 +1466,18 @@ function activarAvisosScroll(){
 // El aviso de deslizar depende de si CABE, no de si es movil: en escritorio con la
 // ventana reducida el cronograma tambien se corta.
 function revisarAvisoCronograma(){
-  const caja=document.querySelector(".gantt-coach-wrap .gantt-scroll") || document.querySelector(".gantt-scroll");
-  const aviso=document.querySelector(".gantt-swipe");
-  if(!caja || !aviso) return;
-  aviso.classList.toggle("hay-scroll", caja.scrollWidth > caja.clientWidth + 16);
+  // Recalcula el velo del borde de TODOS los contenedores desplazables. Hace falta
+  // repetirlo: al arrancar, el cronograma aun no tiene su ancho definitivo y el
+  // primer calculo sale mal; sin scroll ni resize (escritorio) no se corregia nunca.
+  document.querySelectorAll(".gantt-scroll,.plan-tabs").forEach(el=>{
+    if(!el) return;
+    const fin=el.scrollLeft+el.clientWidth>=el.scrollWidth-16;
+    el.classList.toggle("at-end", fin || el.scrollWidth<=el.clientWidth+16);
+  });
 }
+// Repasos tras el arranque: fuentes, imagenes y render tardan en asentarse.
+[300,900,2000].forEach(ms=>setTimeout(revisarAvisoCronograma, ms));
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(revisarAvisoCronograma);
 // Al redimensionar, el navegador tarda un instante en recalcular las medidas:
 // sin esta pequena espera el aviso no se entera de que ya no cabe.
 let temporizadorAviso=null;
