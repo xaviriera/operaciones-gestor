@@ -379,12 +379,7 @@ h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1
 }
 .gantt-scroll{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
 .gantt-swipe{margin:0 0 6px}
-@media(min-width:721px){
-  .gantt-swipe{display:none}
-  /* Si el cronograma NO cabe (ventana reducida, zoom, media pantalla) se corta sin
-     ninguna pista: ahi si hace falta el aviso tambien en escritorio. */
-  .gantt-swipe.hay-scroll{display:block}
-}
+@media(min-width:721px){.gantt-swipe{display:none}}
 /* La pantalla de acceso debe caber entera aunque salga el teclado o la pantalla sea baja */
 body.bloqueado{background:var(--navy)}
 /* --- Patron de app: al enfocar el campo, la cabecera se compacta con animacion ---
@@ -1456,8 +1451,11 @@ function activarAmpliarCamaras(){
 }
 function activarAvisosScroll(){
   marcarScrollHorizontal(document.getElementById("planTabs"));
+  // Ojo: hay que llamarla SIEMPRE, tambien cuando el contenido cabe. Es esta funcion
+  // la que apaga el velo del borde; si no se llama, el velo se queda tapando el final
+  // para siempre aunque no haya nada mas que ver.
   document.querySelectorAll(".gantt-scroll").forEach(el=>{
-    if(el && el.scrollWidth>el.clientWidth+4) marcarScrollHorizontal(el);
+    if(el) marcarScrollHorizontal(el);
   });
   revisarAvisoCronograma();
   activarCoachDeslizar();
