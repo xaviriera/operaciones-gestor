@@ -1057,7 +1057,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
         <div>
           <div class="kicker">Hitos de operación</div>
           <h2 id="milestoneTitle">pendiente de confirmar</h2>
-          <p class="note">Los hitos cubren toda la operación. Lo conseguido brilla, el hito actual marca dónde estamos y lo pendiente queda preparado para lo que viene.</p>
+          <p class="note">Los hitos cubren toda la operación, desde que llega la oportunidad hasta la entrega. Lo conseguido brilla, el hito actual marca dónde estamos y lo pendiente queda preparado para lo que viene. El contrato fija una duración estimada de <b>12 meses desde su firma</b> (2 de julio de 2026), con fecha objetivo el <b>2 de julio de 2027</b>.</p>
         </div>
         <span class="badge navy" id="milestoneCounter">pendiente de confirmar</span>
       </div>
@@ -1322,7 +1322,8 @@ function renderOperacion(){
   document.getElementById("planLegend").innerHTML=[
     ["Dirección", operacion.direccion],
     ["Ref. cat.", operacion.referencia_catastral],
-    ["Finca", operacion.finca_registral]
+    ["Finca", operacion.finca_registral],
+    ["Plazo objetivo", operacion.plazo_objetivo]
   ].map(([label,value])=>`<div class="legend-item"><b>${escapeHtml(label)}</b><span>${escapeHtml(valor(value))}</span></div>`).join("");
 }
 function renderPlanos(){
