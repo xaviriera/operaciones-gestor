@@ -797,6 +797,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 .bitacora-entry::before{content:"";position:absolute;left:-18px;top:20px;width:7px;height:7px;border-radius:50%;background:rgba(22,61,96,.28);box-shadow:0 0 0 4px var(--cream)}
 .bitacora-entry.latest{border-left:4px solid var(--ochre);background:#fffaf0}
 .bitacora-entry.latest::before{left:-20px;top:24px;width:10px;height:10px;background:var(--ochre);box-shadow:0 0 0 5px rgba(226,159,52,.18)}
+.entry.market.nueva{border-left:4px solid var(--ochre);background:#fffaf0}
 .entry-latest-label{display:inline-flex;width:max-content;max-width:100%;margin-bottom:8px;padding:5px 9px;border-radius:999px;background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.4px;line-height:1;text-transform:uppercase}
 .report{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:24px;color:var(--white);background:linear-gradient(135deg,var(--navy2),var(--navy))}
 .report span{display:block;color:#ffe0aa;font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase}
@@ -1947,7 +1948,8 @@ function renderNoticiasMercado(){
     const medio=item.medio || item.fuente || "";
     const textoEnlace=medio ? `${escapeHtml(medio)} · Ver noticia ↗` : "Ver noticia ↗";
     const enlace=item.enlace ? `<a class="entry-source" href="${escapeAttr(item.enlace)}" target="_blank" rel="noopener noreferrer">${textoEnlace}</a>` : "";
-    return `<article class="card entry market"><div class="entry-date">${escapeHtml(valor(item.fecha))}</div><div><b>${escapeHtml(valor(item.titular))}</b><p>${escapeHtml(valor(item.texto))}</p>${enlace}</div></article>`;
+    const etiquetaNueva=item.nueva ? `<span class="entry-latest-label">NUEVO</span>` : "";
+    return `<article class="card entry market${item.nueva?" nueva":""}"><div class="entry-date">${escapeHtml(valor(item.fecha))}</div><div>${etiquetaNueva}<b>${escapeHtml(valor(item.titular))}</b><p>${escapeHtml(valor(item.texto))}</p>${enlace}</div></article>`;
   }).join("");
 }
 function renderContacto(){
