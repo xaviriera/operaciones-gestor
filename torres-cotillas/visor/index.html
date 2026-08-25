@@ -1661,11 +1661,24 @@ function activarAcordeonFases(){
     });
   });
 }
+function calcularSemanaActual(cronograma,total){
+  // Si semana_actual trae un numero, manda ese. Si viene vacia y hay fecha de
+  // inicio en ISO, se calcula sola: asi el cronograma avanza sin tocar el JSON.
+  const fijada=Number(cronograma.semana_actual);
+  if(fijada>0) return fijada;
+  const iso=cronograma.fecha_inicio_iso;
+  if(!iso) return 0;
+  const inicio=new Date(iso+"T00:00:00");
+  if(isNaN(inicio)) return 0;
+  const dias=Math.floor((Date.now()-inicio.getTime())/86400000);
+  if(dias<0) return 0;
+  return Math.min(Math.floor(dias/7)+1,total);
+}
 function renderGantt(){
   const cronograma=datosOperacion.cronograma || {};
   const capitulos=cronograma.capitulos || [];
   const total=Math.max(Number(cronograma.total_semanas) || 16, 1);
-  const semanaActual=Number(cronograma.semana_actual) || 0;
+  const semanaActual=calcularSemanaActual(cronograma,total);
   document.getElementById("ganttTitle").textContent=`Cronograma de obra · ${total} semanas`;
   const inicioTxt=cronograma.fecha_inicio ? ` · Inicio de obra: ${cronograma.fecha_inicio}` : "";
   document.getElementById("ganttNoteIntro").textContent=`Semana actual: ${semanaActual || PENDIENTE}${inicioTxt}`;
