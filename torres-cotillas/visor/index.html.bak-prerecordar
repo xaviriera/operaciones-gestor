@@ -1,0 +1,2159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visor del Inversor</title>
+<meta name="description" content="Panel privado de seguimiento de la operación.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#163D60">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CdU de 0 a Éxito">
+<meta property="og:title" content="Visor del Inversor · CdU de 0 a Éxito">
+<meta property="og:description" content="Seguimiento privado de la operación.">
+<meta property="og:url" content="https://visor.tucambiodeuso.com/tdc/">
+<meta property="og:image" content="https://visor.tucambiodeuso.com/tdc/og-visor.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Visor del Inversor de CdU de 0 a Éxito">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Visor del Inversor · CdU de 0 a Éxito">
+<meta name="twitter:description" content="Seguimiento privado de la operación.">
+<meta name="twitter:image" content="https://visor.tucambiodeuso.com/tdc/og-visor.png">
+<link rel="icon" type="image/png" href="favicon-cdu.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap");
+:root{
+  --navy:#163D60;
+  --navy2:#0f2c47;
+  --ochre:#E29F34;
+  --cream:#FDFBF7;
+  --ink:#1a1a1a;
+  --ok:#1d7a4f;
+  --warn:#b3401f;
+  --white:#fff;
+  --line:rgba(22,61,96,.14);
+  --muted:#657382;
+  --soft:#f0f2f1;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Montserrat,Arial,sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.5;
+  overflow-x:hidden;
+}
+button,a{font:inherit}
+button{cursor:pointer}
+.shell{min-height:100vh;min-height:100dvh}
+.hero{
+  color:var(--white);
+  background:linear-gradient(135deg,var(--navy2),var(--navy));
+  padding:22px clamp(16px,5vw,72px) 36px;
+}
+.topbar,.hero-grid,.section{max-width:1240px;margin:0 auto}
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:18px;
+  margin-bottom:18px;
+}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.brand-logo{height:70px;width:auto;display:block;filter:drop-shadow(0 8px 18px rgba(0,0,0,.18))}
+.official-badge{
+  display:inline-flex;
+  width:max-content;
+  max-width:100%;
+  border-radius:30px;
+  padding:8px 18px;
+  background:var(--ochre);
+  color:var(--navy);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1.6px;
+  line-height:1.2;
+  text-transform:uppercase;
+  box-shadow:0 10px 24px rgba(0,0,0,.12);
+}
+.private{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid rgba(253,251,247,.24);
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  color:rgba(253,251,247,.92);
+  background:rgba(255,255,255,.07);
+  white-space:nowrap;
+}
+.private:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(29,122,79,.18)}
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(340px,.82fr);
+  gap:34px;
+  align-items:center;
+  padding-top:4px;
+}
+.hero-copy{display:grid;gap:0;align-content:center;min-height:278px;min-width:0}
+.identity-block{display:grid;gap:9px;align-items:start;margin-bottom:26px;min-width:0}
+.operation-block{display:grid;gap:13px}
+.eyebrow{
+  display:inline-flex;
+  width:max-content;
+  max-width:100%;
+  padding:7px 13px;
+  border-radius:999px;
+  color:#ffe0aa;
+  background:rgba(226,159,52,.14);
+  border:1px solid rgba(226,159,52,.35);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1.3px;
+  text-transform:uppercase;
+}
+h1{
+  margin:0;
+  max-width:760px;
+  font-size:clamp(22px,6vw,40px);
+  line-height:1.08;
+  letter-spacing:0;
+  color:var(--cream);
+  font-weight:800;
+}
+.operation-title{
+  margin:0;
+  color:#ffe0aa;
+  font-size:clamp(15px,1.35vw,17px);
+  font-weight:600;
+  font-style:italic;
+  line-height:1.32;
+}
+.headline-line{
+  margin:2px 0 0;
+  color:#ffe0aa;
+  font-size:clamp(16px,1.65vw,20px);
+  font-weight:800;
+}
+.operation-location{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:9px;
+  width:max-content;
+  max-width:100%;
+  margin:0;
+  padding:9px 12px;
+  border:1px solid rgba(253,251,247,.18);
+  border-radius:8px;
+  color:rgba(253,251,247,.9);
+  background:rgba(255,255,255,.07);
+  font-size:clamp(14px,1.22vw,15px);
+  font-weight:750;
+}
+.operation-location a{color:#ffe0aa;font-size:13px;font-weight:900;text-decoration:none}
+.operation-location a:hover{text-decoration:underline}
+.features{
+  margin:0 0 14px;
+  color:rgba(253,251,247,.85);
+  font-size:clamp(14px,1.45vw,17px);
+  font-weight:650;
+}
+.subhead{
+  max-width:770px;
+  margin:0;
+  color:rgba(253,251,247,.76);
+  font-size:15px;
+}
+.pulse-card{
+  border:1px solid rgba(253,251,247,.16);
+  background:rgba(253,251,247,.08);
+  border-radius:8px;
+  padding:20px;
+  box-shadow:0 24px 58px rgba(0,0,0,.2);
+}
+.state-line{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.state{font-size:13px;font-weight:900;color:#ffe0aa;text-transform:uppercase;letter-spacing:.8px}
+.chip,.badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  width:max-content;
+  max-width:100%;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.3px;
+  white-space:nowrap;
+}
+.chip.warn{background:rgba(226,159,52,.18);color:#ffe0aa;border:1px solid rgba(226,159,52,.34)}
+.badge.ok{color:var(--ok);background:#eaf6ef;border:1px solid rgba(29,122,79,.2)}
+.badge.warn{color:var(--warn);background:#f9eae5;border:1px solid rgba(179,64,31,.2)}
+.badge.navy{background:rgba(22,61,96,.08);color:var(--navy);border:1px solid rgba(22,61,96,.12)}
+.badge.gray{background:#e7e8e8;color:#60686e;border:1px solid rgba(96,104,110,.18)}
+.badge.next{background:rgba(22,61,96,.06);color:#163D60;border:1px solid rgba(22,61,96,.28)}
+.phase-line{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px 0 18px}
+.phase{
+  border:1px solid rgba(253,251,247,.14);
+  border-radius:8px;
+  padding:12px;
+  background:rgba(255,255,255,.06);
+}
+.phase.done{background:rgba(29,122,79,.12)}
+.phase.active{border-color:rgba(226,159,52,.58);background:rgba(226,159,52,.14)}
+.phase small{display:flex;align-items:center;gap:7px;color:rgba(253,251,247,.82);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.6px}
+.phase b{display:block;margin-top:6px;color:var(--white);font-size:13px}
+.phase-desc{display:block;margin-top:3px;color:rgba(253,251,247,.72);font-size:12px;font-weight:600;line-height:1.35}
+.check{
+  display:inline-grid;
+  place-items:center;
+  width:17px;
+  height:17px;
+  border-radius:50%;
+  background:var(--ok);
+  color:#fff;
+  font-size:11px;
+}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--ochre);box-shadow:0 0 0 5px rgba(226,159,52,.17)}
+.progress-line{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center}
+.bar{height:12px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden}
+.bar span{display:block;width:var(--progress,0%);height:100%;border-radius:999px;background:linear-gradient(90deg,var(--ochre),#f4c36d);animation:progressRun 2.8s ease-in-out infinite}
+.pct{font-size:34px;line-height:1;font-weight:900;color:var(--white)}
+.progress-scope{margin:8px 0 0;color:rgba(253,251,247,.62);font-size:11px;font-weight:600;letter-spacing:.2px}
+.pulse-meta{margin-top:16px}
+.mini{min-height:86px;border:1px solid rgba(253,251,247,.14);background:rgba(255,255,255,.06);border-radius:8px;padding:13px}
+.mini span{display:block;color:#ffe0aa;font-size:10px;font-weight:900;letter-spacing:.9px;text-transform:uppercase}
+.mini b{display:block;margin-top:7px;font-size:13px;color:var(--white)}
+.mini p{margin:6px 0 0;color:rgba(253,251,247,.76);font-size:12px;font-weight:650;line-height:1.35}
+.next-report{margin-top:10px;min-height:0}
+.page{padding:clamp(28px,5vw,62px) clamp(14px,5vw,72px)}
+.section{margin-bottom:clamp(30px,5vw,56px)}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:16px}
+.kicker{color:var(--ochre);font-size:11px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase}
+h2{margin:4px 0 0;color:var(--navy);font-size:clamp(24px,3vw,34px);line-height:1.12;letter-spacing:0}
+.note{margin:6px 0 0;color:var(--muted);font-size:14px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 10px rgba(22,61,96,.05)}
+.forecast-card{padding:20px;background:linear-gradient(180deg,#fff,#fffdfa);overflow:hidden}
+.micro-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  overflow:hidden;
+}
+.micro-cell{
+  min-width:0;
+  display:grid;
+  align-content:start;
+  gap:6px;
+  min-height:0;
+  padding:12px 14px;
+  background:#fff;
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.micro-label{
+  color:var(--muted);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1px;
+  line-height:1.25;
+  text-transform:uppercase;
+}
+.micro-value{
+  display:block;
+  min-width:0;
+  color:var(--navy);
+  font-size:18px;
+  font-weight:700;
+  line-height:1.12;
+  overflow-wrap:anywhere;
+}
+.micro-detail{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700;
+  line-height:1.3;
+}
+.micro-cell.positive .micro-value{color:var(--ok)}
+.micro-cell.pending .micro-value{color:var(--muted);font-size:15px}
+.micro-grid.compact{grid-template-columns:repeat(2,minmax(0,1fr))}
+.micro-grid.dark .micro-cell{background:rgba(255,255,255,.06);border-color:rgba(253,251,247,.14)}
+.micro-grid.dark .micro-label{color:#ffe0aa}
+.micro-grid.dark .micro-value{color:var(--white);font-size:16px}
+.forecast-grid{
+  border:1px solid rgba(22,61,96,.11);
+  border-radius:8px;
+}
+.forecast-note{margin-top:12px}
+.plan-card{padding:18px;overflow:hidden;background:linear-gradient(180deg,#fff,#fffdfa)}
+.plan-wrap{display:grid;gap:14px}
+.plan-gallery{min-width:0;display:grid;gap:12px}
+.plan-frame{position:relative;padding:10px;border:1px solid rgba(22,61,96,.13);border-radius:12px;background:#fbf6eb;box-shadow:0 16px 38px rgba(22,61,96,.08)}
+.plan-img{display:block;width:100%;height:auto;max-height:720px;object-fit:contain;margin:0 auto;border-radius:8px;background:var(--cream)}
+.plan-action{display:block;width:100%;border:0;padding:0;background:transparent;cursor:zoom-in}
+.plan-action:focus-visible{outline:3px solid rgba(226,159,52,.72);outline-offset:4px;border-radius:10px}
+.plan-counter{position:absolute;left:24px;top:24px;display:inline-flex;align-items:center;border-radius:999px;padding:7px 10px;background:rgba(15,44,71,.88);color:var(--white);font-size:11px;font-weight:900;letter-spacing:.3px;pointer-events:none}
+.plan-expand{position:absolute;right:24px;bottom:24px;display:inline-flex;align-items:center;border-radius:999px;padding:8px 11px;background:rgba(253,251,247,.94);border:1px solid rgba(22,61,96,.15);color:var(--navy);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;box-shadow:0 10px 22px rgba(22,61,96,.12);pointer-events:none}
+.plan-tabs{display:flex;gap:12px;max-width:100%;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+.plan-tabs::-webkit-scrollbar{display:none}
+.legal{max-width:720px;margin:28px auto 14px;padding:18px 22px;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;color:var(--muted);font-size:11.5px;line-height:1.6;text-align:center}
+.legal-mark{margin-bottom:9px;color:var(--navy);font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;opacity:.75}
+.legal p{margin:0 auto 7px;max-width:560px}
+.legal b{color:var(--navy);font-weight:700}
+.legal-access{margin-top:7px!important;color:var(--muted);font-size:10.5px;font-style:italic;opacity:.75}
+.legal-year{margin-top:10px!important;padding-top:0;border-top:0;color:var(--muted);font-size:10.5px;font-weight:600;opacity:.8}
+@media(max-width:720px){.legal{padding:24px 20px;text-align:left}.legal p{margin-left:0;max-width:100%}.legal-mark{letter-spacing:1.6px}}
+.cdu-tdc-8f3a91{--cdu-src:'CdU de 0 a Exito'}
+.plan-tabs-hint{margin:0 0 8px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase}
+.plan-tabs-hint{margin:0 0 10px;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase}
+.plan-tab{position:relative;flex:0 0 auto;scroll-snap-align:start;display:flex;align-items:center;gap:10px;padding:11px 16px 11px 12px;background:#fff;border:1px solid var(--line);border-radius:999px;cursor:pointer;font-family:inherit;transition:background .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.plan-tab-num{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;border-radius:50%;background:rgba(226,159,52,.14);color:var(--ochre);font-size:11px;font-weight:900;letter-spacing:.3px;transition:background .2s ease,color .2s ease}
+.plan-tab-label{color:var(--navy);font-size:13px;font-weight:600;white-space:nowrap;letter-spacing:.2px}
+.plan-tab:hover{transform:translateY(-2px);border-color:rgba(226,159,52,.6);box-shadow:0 10px 22px rgba(22,61,96,.10)}
+.plan-tab:focus-visible{outline:2px solid var(--ochre);outline-offset:3px}
+.plan-tab.active{background:var(--navy);border-color:var(--navy);box-shadow:0 10px 24px rgba(22,61,96,.22)}
+.plan-tab.active .plan-tab-num{background:var(--ochre);color:#fff}
+.plan-tab.active .plan-tab-label{color:#fff;font-weight:700}
+@media(min-width:900px){
+  .plan-tabs{gap:8px}
+  .plan-tab{width:100%;justify-content:flex-start;padding:10px 14px 10px 10px;border-radius:12px}
+  .plan-tab-label{white-space:normal;line-height:1.25}
+  .plan-tabs-hint{margin-bottom:12px}
+}
+.lightbox-close{position:fixed;top:14px;right:14px;z-index:2;width:46px;height:46px;display:grid;place-items:center;border:0;border-radius:50%;background:rgba(255,255,255,.94);color:var(--navy);font-size:19px;font-weight:700;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.28)}
+.lightbox-close:active{transform:scale(.94)}
+/* Aviso de que hay mas contenido a la derecha */
+.scroll-shadow{position:relative}
+.scroll-shadow:after{content:"";position:absolute;top:0;right:0;width:34px;height:100%;pointer-events:none;background:linear-gradient(90deg,rgba(253,251,247,0),rgba(253,251,247,.82));opacity:1;transition:opacity .25s ease}
+.scroll-shadow.at-end:after{opacity:0}
+.scroll-nudge{display:none;align-items:center;gap:6px;margin:8px 0 0;color:var(--ochre);font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase}
+.scroll-nudge b{font-size:14px;line-height:1}
+@media(max-width:720px){.scroll-nudge{display:inline-flex}}
+.statement-open.block{display:block;margin-top:6px;text-align:center}
+.statement-doc{padding:20px 18px;border:1px solid var(--line);border-radius:14px;background:#fff;text-align:center}
+.statement-doc-badge{display:inline-block;margin-bottom:12px;padding:5px 12px;border-radius:999px;background:rgba(29,122,79,.1);color:var(--ok);font-size:10px;font-weight:900;letter-spacing:1.1px;text-transform:uppercase}
+.statement-doc b{display:block;color:var(--navy);font-size:15px;font-weight:800}
+.statement-doc>span{display:block;margin:3px 0 16px;color:var(--muted);font-size:12px;font-weight:600}
+.statement-open.block{display:block;padding:13px 18px;border-radius:10px;background:var(--navy);color:#fff;font-size:13px;font-weight:700;text-align:center;text-decoration:none}
+/* --- Fases plegables --- */
+.milestone-phase-head{width:100%;border:0;font-family:inherit;text-align:left;cursor:pointer}
+.milestone-phase:not([data-abierta])>.milestone-phase-body{display:none!important}
+.phase-caret{flex:0 0 auto;width:11px;height:11px;margin-left:6px;border-right:2px solid var(--navy);border-bottom:2px solid var(--navy);transform:rotate(45deg);transition:transform .2s ease;opacity:.55}
+.milestone-phase[data-abierta] .phase-caret{transform:rotate(-135deg)}
+.milestone-phase.phase-current{border-color:rgba(226,159,52,.5);box-shadow:0 16px 40px rgba(226,159,52,.14)}
+.milestone .date i{font-style:normal;opacity:.75}
+/* Numero de hito visible SIEMPRE, para poder referirse a el ("el hito 14") */
+.milestone .num{font-variant-numeric:tabular-nums}
+.milestone.done .num{background:rgba(29,122,79,.12);color:var(--ok)}
+.milestone.current .num{background:var(--ochre);color:#fff}
+@media(max-width:720px){
+  /* HITOS en movil: tarjeta con cuerpo, no una linea suelta.
+     Se conserva el detalle (el "por que" de cada hito) en TODOS los estados. */
+  .milestone-grid{gap:10px}
+  .milestone{display:flex;align-items:flex-start;gap:11px;padding:13px 13px;border:1px solid rgba(22,61,96,.12);border-radius:12px;background:#fff;box-shadow:0 6px 16px rgba(22,61,96,.06)}
+  .milestone .toprow{margin:0}
+  .milestone .num{width:26px;height:26px;font-size:11px}
+  .milestone b{font-size:14.5px;line-height:1.3}
+  .milestone .date{font-size:11.5px}
+  .milestone .meaning{margin-top:6px;font-size:12.5px;line-height:1.5}
+  .milestone .stamp{display:inline-flex;margin-top:8px;font-size:9.5px;padding:4px 9px}
+  .milestone.done{opacity:.78;background:rgba(22,61,96,.022)}
+  .milestone.current{background:#fffaf1;border-color:rgba(226,159,52,.55);border-left:3px solid var(--ochre);box-shadow:0 10px 24px rgba(226,159,52,.14)}
+  .milestone.current b{font-size:15.5px}
+  .milestone-phase-head{padding:14px 14px;gap:8px}
+  .milestone-phase-title h3{font-size:15px}
+  .plan-tab{padding:10px 10px 10px 8px}
+  .plan-tab-label{font-size:12px}
+  .plan-tabs-hint{margin-bottom:8px;font-size:9.5px}
+}
+.gantt-scroll{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.gantt-swipe{margin:0 0 6px}
+@media(min-width:721px){.gantt-swipe{display:none}}
+/* La pantalla de acceso debe caber entera aunque salga el teclado o la pantalla sea baja */
+body.bloqueado{background:var(--navy)}
+/* --- Patron de app: al enfocar el campo, la cabecera se compacta con animacion ---
+   No se pelea por que quepa: se aparta a proposito. El logo NO desaparece,
+   se reduce, asi la marca sigue presente y el formulario nunca queda tapado. */
+.access-logo{transition:width .28s cubic-bezier(.4,0,.2,1)}
+.access-title{transition:font-size .28s cubic-bezier(.4,0,.2,1),margin .28s ease}
+.access-context{transition:opacity .2s ease,max-height .28s cubic-bezier(.4,0,.2,1),margin .28s ease;max-height:80px;overflow:hidden}
+.access-panel{transition:gap .28s cubic-bezier(.4,0,.2,1)}
+
+@media(max-width:900px){
+  .access-screen:focus-within .access-logo{width:min(84px,24vw)}
+  .access-screen:focus-within .access-title{font-size:20px;margin-top:0}
+  .access-screen:focus-within .access-context{opacity:0;max-height:0;margin:0}
+  .access-screen:focus-within .access-panel{gap:12px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .access-logo,.access-title,.access-context,.access-panel{transition:none}
+}
+/* Fases: cerradas por defecto, con resumen de lo que contienen y aspecto de desplegable */
+.phase-resumen{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.4;font-weight:500;max-width:52ch}
+.phase-toggle{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;margin-top:12px;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--navy);font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;transition:background .2s ease,border-color .2s ease}
+@media(max-width:720px){
+  .phase-resumen{font-size:11.5px;margin-top:5px}
+  .milestone-phase-head{align-items:flex-start;flex-wrap:wrap;row-gap:9px}
+  .phase-toggle{padding:9px 14px;font-size:10.5px;min-height:38px}
+  .milestone-phase{border-width:1px}
+  .milestone-phase-head{background:linear-gradient(180deg,#fff,#faf7f1)}
+}
+/* Planos en movil: pastillas mas estrechas y puntos que revelan cuantos hay */
+.plan-dots{display:none}
+@media(max-width:720px){
+  .plan-dots{display:flex;gap:6px;justify-content:center;margin:0 0 9px}
+  .plan-dots i{width:7px;height:7px;border-radius:50%;background:rgba(22,61,96,.22);transition:background .2s ease,width .2s ease}
+  .plan-dots i.on{width:20px;border-radius:999px;background:var(--ochre)}
+  .plan-tab{padding:7px 11px 7px 7px;gap:6px}
+  .plan-tab-num{min-width:20px;height:20px;font-size:9px}
+  .plan-tab-label{font-size:11.5px}
+}
+/* CRONOGRAMA en movil: barra de desplazamiento SIEMPRE visible, no solo un degradado */
+@media(max-width:720px){
+  .gantt-scroll{scrollbar-width:thin;scrollbar-color:var(--ochre) rgba(22,61,96,.10);padding-bottom:8px}
+  .gantt-scroll::-webkit-scrollbar{height:6px;-webkit-appearance:none}
+  .gantt-scroll::-webkit-scrollbar-track{background:rgba(22,61,96,.10);border-radius:99px}
+  .gantt-scroll::-webkit-scrollbar-thumb{background:var(--ochre);border-radius:99px}
+  .gantt-swipe .scroll-nudge{background:none;padding:0;border-radius:0}
+}
+/* ===== PLANOS EN MOVIL: los 4 botones VISIBLES en rejilla 2x2. Se acabo el scroll oculto ===== */
+@media(max-width:720px){
+  .plan-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;overflow:visible;padding:0}
+  .plan-tabs:after{display:none}
+  .plan-tab{width:100%;justify-content:flex-start;padding:10px 10px 10px 8px;border-radius:10px;min-height:44px}
+  .plan-tab-label{font-size:12px;white-space:normal;line-height:1.2;text-align:left}
+  .plan-dots{display:none}
+  .scroll-nudge{display:none}
+}
+/* ===== BOTON "VER HITOS" mas marcado que el resto de la cabecera ===== */
+.phase-toggle{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 6px 14px rgba(22,61,96,.22)}
+@media(max-width:720px){
+  .phase-toggle{width:100%;justify-content:center;min-height:44px;font-size:11.5px;letter-spacing:.8px}
+}
+/* ===== CRONOGRAMA: que se vea SIN DUDA que se desplaza ===== */
+.gantt-swipe .scroll-nudge{display:inline-flex!important;align-items:center;gap:6px;padding:0;border-radius:0;background:none;color:var(--ochre);font-size:11.5px;font-weight:800;letter-spacing:.3px;text-transform:none}
+.gantt-swipe .scroll-nudge b{font-size:16px;animation:empuja 1.4s ease-in-out infinite}
+@keyframes empuja{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+.gantt-scroll.at-end + .gantt-swipe,.gantt-scroll.at-end .scroll-nudge{opacity:.35}
+/* --- Capa "desliza": ensena el gesto en movil. En escritorio NO aparece nunca
+       porque ahi el cronograma se ve entero. No debe bloquear el gesto: pointer-events:none. --- */
+.gantt-coach-wrap{position:relative}
+.gantt-coach{display:none}
+@media(max-width:720px){
+  .gantt-coach{display:flex;position:absolute;inset:0;z-index:6;align-items:center;justify-content:center;
+    background:rgba(22,61,96,.55);border-radius:10px;pointer-events:none;
+    transition:opacity .3s ease,visibility .3s ease}
+  .gantt-coach.oculto{opacity:0;visibility:hidden}
+  .gantt-coach-inner{text-align:center;color:#fff;padding-left:34px}
+  .gantt-coach svg{width:92px;height:92px;display:block;margin:0 auto 4px;color:rgba(255,255,255,.92);
+    filter:drop-shadow(0 3px 8px rgba(0,0,0,.5));animation:coachDesliza 1.8s ease-in-out infinite}
+  .gantt-coach-txt{font-size:19px;font-weight:900;letter-spacing:.3px;line-height:1.15;text-shadow:0 2px 8px rgba(0,0,0,.45)}
+  .gantt-coach-sub{font-size:12.5px;font-weight:700;opacity:.85;margin-top:3px;text-shadow:0 1px 6px rgba(0,0,0,.45)}
+}
+@keyframes coachDesliza{
+  0%{transform:translateX(48px);opacity:0}
+  18%{opacity:1}
+  72%{opacity:1}
+  100%{transform:translateX(-62px);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){.gantt-coach svg{animation:none}}
+@media(prefers-reduced-motion:reduce){.gantt-swipe .scroll-nudge b{animation:none}}
+.tranche-fecha{margin-left:auto;color:var(--muted);font-size:11px;font-weight:700;white-space:nowrap}
+.pass-wrap{position:relative;display:block}
+.pass-wrap input{width:100%;padding-right:52px}
+.pass-eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:10px;background:transparent;color:rgba(253,251,247,.72);cursor:pointer;transition:color .2s ease,background .2s ease}
+.pass-eye:hover,.pass-eye:focus-visible{color:var(--ochre);background:rgba(253,251,247,.08)}
+.pass-eye:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+/* Barra indicadora ARRIBA del cronograma: se ve desde el principio que hay mas a la derecha */
+.gantt-railtop{position:relative;height:6px;margin:0 0 10px;border-radius:99px;background:rgba(22,61,96,.10);overflow:hidden}
+.gantt-railtop span{position:absolute;left:0;top:0;height:100%;width:30%;border-radius:99px;background:var(--ochre);transition:left .12s linear,width .12s linear}
+@media(min-width:721px){.gantt-railtop{display:none}}
+/* Desplegable: SOLO dos estados de color y la flecha siempre en el mismo sitio (a la derecha) */
+.phase-txt-ocultar{display:none}
+.milestone-phase[data-abierta] .phase-txt-ver{display:none}
+.milestone-phase[data-abierta] .phase-txt-ocultar{display:inline}
+.milestone-phase[data-abierta] .phase-toggle{background:#fff;color:var(--navy);border-color:rgba(22,61,96,.35);box-shadow:none}
+.phase-caret{order:9;margin-left:2px;border-color:currentColor;opacity:.85}
+.milestone-phase[data-abierta] .phase-caret{transform:rotate(-135deg)}
+
+/* Hitos: pulsables para leer el detalle completo (antes quedaba cortado sin remedio) */
+.plan-empty{padding:28px;border:1px dashed rgba(22,61,96,.22);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
+.legend{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.45}
+.legend-item{display:inline-flex;align-items:baseline;gap:5px;min-width:0}
+.legend-item:not(:last-child):after{content:"·";margin-left:8px;color:var(--muted)}
+@media(max-width:720px){
+  .legend{flex-direction:column;align-items:flex-start;gap:3px}
+  .legend-item{width:100%;flex-wrap:wrap}
+  .legend-item:not(:last-child):after{content:none}
+  .legend-item b{flex:0 0 auto}
+}
+.legend-item b{color:var(--muted);font-size:inherit;font-weight:600}
+.legend-item span{color:var(--muted)}
+.milestones{display:grid;gap:14px;min-width:0}
+.milestone-phase{border:1px solid rgba(22,61,96,.13);border-radius:8px;background:linear-gradient(180deg,#fff,#fffdfa);box-shadow:0 16px 36px rgba(22,61,96,.08);overflow:hidden}
+.milestone-phase.phase-done{border-color:rgba(29,122,79,.24)}
+.milestone-phase.phase-current{border-color:rgba(226,159,52,.42);box-shadow:0 0 0 3px rgba(226,159,52,.12),0 16px 36px rgba(22,61,96,.08)}
+.milestone-phase.phase-pending{border-color:rgba(22,61,96,.1)}
+.milestone-phase-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 16px;border-bottom:1px solid rgba(22,61,96,.1);background:#f7f3ea}
+.milestone-phase.phase-done .milestone-phase-head{background:#f3fbf6}
+.milestone-phase.phase-current .milestone-phase-head{background:#fff8ea}
+.milestone-phase-title{min-width:0}
+.milestone-phase-title h3{margin:3px 0 0;color:var(--navy);font-size:17px;line-height:1.15}
+.milestone-phase-title small{display:block;color:var(--muted);font-size:10px;font-weight:900;letter-spacing:.8px;text-transform:uppercase}
+.milestone-phase-meta{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;flex:0 0 auto}
+/* --- Escritorio: la cabecera de fase tenia DOS chapas sueltas en el centro.
+       La de estado repetia el rotulo que ya aparece sobre el titulo ("CONSEGUIDO"),
+       asi que se retira; el contador de hitos deja de flotar y viaja junto al boton. --- */
+@media(min-width:721px){
+  .milestone-phase-meta .stamp{display:none}
+  .milestone-phase-head{justify-content:flex-start}
+  .milestone-phase-title{flex:1 1 auto;min-width:0}
+  .milestone-phase-meta{margin-left:auto}
+}
+.milestone-phase-body{display:grid;gap:12px;padding:14px}
+.milestone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;min-width:0}
+.milestone-group{display:grid;gap:8px;min-width:0}
+.milestone-group-label{display:flex;align-items:center;gap:9px;color:var(--navy2);font-size:10px;font-weight:900;letter-spacing:.7px;text-transform:uppercase}
+.milestone-group-label:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ochre);box-shadow:0 0 0 4px rgba(226,159,52,.14)}
+.milestone-group-label:after{content:"";height:1px;flex:1;background:rgba(22,61,96,.11)}
+.milestone{position:relative;min-height:148px;display:flex;flex-direction:column;justify-content:space-between;padding:12px;border:1px solid var(--line);border-radius:8px;background:var(--white);min-width:0}
+.milestone.done{border-color:rgba(29,122,79,.36);background:linear-gradient(180deg,#f3fbf6,#fff);box-shadow:0 10px 26px rgba(29,122,79,.10)}
+.milestone.current{border-color:rgba(226,159,52,.9);box-shadow:0 0 0 3px rgba(226,159,52,.18),0 16px 34px rgba(226,159,52,.18);background:#fff8ea}
+.milestone.pending{border-color:rgba(22,61,96,.13);background:#fffdf8;opacity:.78}
+.toprow{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.num{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:var(--soft);color:var(--navy);font-weight:900;font-size:12px}
+.done .num{background:var(--ok);color:var(--white);box-shadow:0 0 0 5px rgba(29,122,79,.12)}
+.current .num{background:var(--ochre);color:var(--navy)}
+.pending .num{background:#fff;border:1px solid rgba(22,61,96,.18);color:rgba(22,61,96,.55)}
+.spark{width:9px;height:9px;border-radius:50%;background:var(--ochre);box-shadow:0 0 18px rgba(226,159,52,.65)}
+.milestone b{display:block;margin:9px 0 6px;color:var(--navy);font-size:12px;line-height:1.22}
+.date{color:var(--muted);font-size:11px;font-weight:800}
+.meaning{margin:7px 0;color:#3f4d5a;font-size:11.5px;line-height:1.45}
+.stamp{display:inline-flex;align-items:center;gap:5px;width:max-content;max-width:100%;border-radius:999px;padding:5px 8px;background:#e7e8e8;color:#60686e;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.5px}
+.done .stamp,.stamp.done{background:#e7f5ed;color:var(--ok);border:1px solid rgba(29,122,79,.22)}
+.current .stamp,.stamp.current{background:#fff2d9;color:#8a5a14}
+.pending .stamp,.stamp.pending{background:#fff;border:1px solid rgba(22,61,96,.14);color:rgba(22,61,96,.55)}
+.action-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  border:0;
+  border-radius:999px;
+  padding:11px 15px;
+  background:var(--navy);
+  color:var(--white);
+  font-size:12px;
+  font-weight:900;
+  text-decoration:none;
+}
+.btn.ochre{background:var(--ochre);color:var(--navy)}
+.btn.whatsapp{padding:12px 18px;background:#25D366;color:#fff;box-shadow:0 14px 34px rgba(15,44,71,.16);text-align:left}
+.btn.whatsapp span{display:block;color:#fff;font-size:13px;line-height:1.15}
+.btn.whatsapp small{display:block;margin-top:2px;color:rgba(255,255,255,.82);font-size:10px;font-weight:700}
+.btn svg{width:22px;height:22px;display:block}
+.gantt-card{padding:18px;overflow-x:auto;overflow-y:hidden}
+.gantt-inner{min-width:1060px;position:relative}
+.gantt-grid{display:grid;grid-template-columns:64px 270px repeat(16,minmax(36px,1fr));gap:3px;position:relative}
+.month-head,.week-head,.gantt-row{display:contents}
+.month-head span,.month-head b{
+  padding:0 0 8px;
+  color:var(--muted);
+  border-bottom:1px solid var(--line);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.8px;
+  text-align:center;
+  text-transform:uppercase;
+}
+.month-head b{grid-column:1 / 3}
+.week-head span,.week-head b{
+  padding:7px 0 8px;
+  color:var(--muted);
+  border-bottom:1px solid var(--line);
+  font-size:10px;
+  font-weight:900;
+  text-align:center;
+  text-transform:uppercase;
+}
+.week-head b{text-align:left}
+.week-current{
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:calc(334px + ((100% - 334px) / 16) * 2.5);
+  width:2px;
+  background:rgba(226,159,52,.58);
+  z-index:3;
+}
+.week-current span{
+  position:absolute;
+  top:30px;
+  left:50%;
+  transform:translateX(-50%);
+  border-radius:999px;
+  padding:4px 8px;
+  background:var(--navy);
+  color:#fff;
+  font-size:10px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.gantt-cap,.gantt-task{
+  min-height:31px;
+  padding:8px 8px 7px 0;
+  color:var(--navy);
+  border-bottom:1px solid rgba(22,61,96,.08);
+  font-size:12px;
+  font-weight:900;
+}
+.gantt-task{font-weight:800}
+.gcell{height:31px;border-bottom:1px solid rgba(22,61,96,.08);position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(22,61,96,.035),rgba(22,61,96,.02))}
+.bar-seg{
+  height:16px;
+  margin-top:7px;
+  border-radius:4px;
+  background:var(--bar);
+  box-shadow:inset 0 0 0 1px rgba(15,44,71,.07);
+}
+.bar-seg.bg{height:12px;margin-top:9px;border-radius:999px;opacity:.72}
+.gantt-milestone-label{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:calc(100% - 8px);
+  max-width:70px;
+  height:18px;
+  margin:6px auto 0;
+  border-radius:5px;
+  color:var(--navy);
+  background:rgba(226,159,52,.2);
+  border:1px solid rgba(226,159,52,.42);
+  font-size:10px;
+  font-weight:900;
+  line-height:1;
+  white-space:nowrap;
+}
+/* La etiqueta "Entrega" necesita ~60px y la celda de semana mide 36: se cortaba.
+   Se deja crecer hacia la izquierda (la celda anterior esta vacia) en vez de
+   recortarla o dejar que se salga por la derecha. */
+.gcell-hito{overflow:visible;z-index:2}
+.gcell-hito .gantt-milestone-label{position:absolute;top:6px;right:2px;width:max-content;max-width:none;padding:0 8px;margin:0}
+.gantt-note{display:flex;align-items:center;gap:9px;margin:10px 0 12px;padding:10px 12px;border:1px solid rgba(22,61,96,.13);border-radius:8px;background:#f7f3ea;color:var(--navy);font-size:12px;font-weight:800}
+.gantt-note:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--ochre);box-shadow:0 0 0 4px rgba(226,159,52,.15)}
+.gantt-foot{margin:13px 0 0;color:var(--muted);font-size:12px;font-weight:800}
+.bank-card{padding:18px;margin-bottom:14px}
+.bank-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:16px}
+.santander{display:flex;align-items:center;gap:10px;color:#EC0000;font-size:26px;font-weight:900;letter-spacing:0}
+.santander svg{width:30px;height:30px;display:block;fill:#EC0000;flex:0 0 auto}
+.iban{color:var(--navy);font-size:13px;font-weight:800}
+.iban small{display:block;margin-top:3px;color:var(--muted);font-size:11px;font-weight:700}
+.bank-status{display:grid;gap:7px;justify-items:end;text-align:right}
+.account-balance{display:inline-flex;flex-wrap:wrap;justify-content:flex-end;gap:6px;margin-top:2px;color:var(--navy);font-size:15px;font-weight:900;line-height:1.25}
+.account-balance span{color:var(--ochre)}
+.exclusive-account{margin:0 0 12px;padding:10px 12px;border:1px solid rgba(226,159,52,.35);border-radius:8px;background:#fff8eb;color:var(--navy);font-size:12px;font-weight:900}
+.finance-summary{
+  margin-top:10px;
+  border:1px solid rgba(22,61,96,.11);
+  border-radius:8px;
+}
+.tranche-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 10px}
+.tranche{display:grid;gap:7px;align-content:center;min-height:66px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff}
+.tranche.done{border-color:rgba(29,122,79,.2);background:#fbfefc}
+.tranche.pending{border-color:rgba(22,61,96,.16);background:#fffdfa}
+.tranche-line{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:8px;min-width:0}
+.tranche-name{min-width:0;color:var(--navy);font-size:12px;font-weight:900;letter-spacing:.2px;text-transform:uppercase;white-space:normal;overflow-wrap:anywhere;line-height:1.25}
+.tranche-amount{color:var(--navy);font-size:14px;font-weight:900;line-height:1;white-space:nowrap}
+.tranche-pill{display:inline-flex;align-items:center;justify-content:center;width:max-content;max-width:100%;border-radius:999px;padding:5px 9px;font-size:10px;font-weight:900;letter-spacing:.3px;white-space:nowrap}
+.tranche-pill.done{color:#145c3b;background:#eaf6ef;border:1px solid rgba(29,122,79,.2)}
+.tranche-pill.pending{color:var(--navy);background:rgba(22,61,96,.07);border:1px solid rgba(22,61,96,.15)}
+.tranche-detail{margin:0;color:var(--muted);font-size:12px;line-height:1.4}
+.tranche-detail summary{display:inline-flex;align-items:center;min-height:40px;padding:6px 2px;width:max-content;max-width:100%;color:var(--ochre);font-size:12px;font-weight:900;letter-spacing:.4px;cursor:pointer}
+.tranche-detail p{margin:6px 0 0}
+.finance-note{margin:10px 0 0;color:var(--muted);font-size:11px;font-weight:700}
+.bank-statement{margin:16px 0 0;padding-top:16px;border-top:1px solid var(--line)}
+.bank-statement-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.bank-statement-title span{display:block;color:var(--ochre);font-size:11px;font-weight:900;letter-spacing:.9px;text-transform:uppercase}
+.bank-statement-title b{display:block;margin-top:4px;color:var(--navy);font-size:15px}
+.statement-open{display:inline-flex;align-items:center;justify-content:center;min-height:40px;border:1px solid rgba(22,61,96,.18);border-radius:999px;padding:9px 13px;background:var(--navy);color:var(--white);font-size:12px;font-weight:900;text-decoration:none;white-space:nowrap}
+.statement-open:hover{background:var(--navy2)}
+.statement-frame{width:100%;height:820px;border:1px solid rgba(22,61,96,.16);border-radius:8px;background:#f6f4ef}
+.statement-mobile{display:none;margin-top:4px;padding:14px;border:1px solid rgba(226,159,52,.35);border-radius:8px;background:#fff8eb}
+.statement-mobile p{margin:0 0 12px;color:var(--navy);font-size:13px;font-weight:800}
+.statement-fallback .statement-frame{display:none}
+.statement-fallback .bank-statement-head .statement-open{display:none}
+.statement-fallback .statement-mobile{display:block}
+.table-wrap{overflow-x:auto;padding:14px}
+table{width:100%;min-width:820px;border-collapse:collapse}
+th,td{padding:13px 11px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}
+th{color:var(--navy);font-size:11px;letter-spacing:.9px;text-transform:uppercase}
+td.amount{font-weight:900;white-space:nowrap}
+td.amount.out{color:var(--warn)}
+td.amount.in{color:var(--ok)}
+td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
+.panel{padding:20px}
+.camera-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:16px}
+.camera-frame{
+  position:relative;
+  aspect-ratio:16/9;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  border:1px dashed rgba(22,61,96,.3);
+  border-radius:8px;
+  background:linear-gradient(135deg,rgba(22,61,96,.08),rgba(226,159,52,.12)),#f6f4ef;
+}
+.camera-frame:before{content:"";position:absolute;inset:12px;border:1px solid rgba(22,61,96,.08);border-radius:6px}
+.camera-frame.has-stream{display:block;border:0;background:#000}
+.camera-frame.has-stream:before{display:none}
+.camera-frame iframe{display:block;width:100%;height:100%;border:0}
+/* --- Ampliar una camara: en escritorio salen 3 en fila y se ven pequenas.
+       Solo son pulsables las que TIENEN senal; las que aun no emiten no
+       responden, para que nadie pinche y crea que la web esta rota. --- */
+.camera-frame.ampliable{cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,outline-color .18s ease;outline:2px solid transparent}
+/* El video va en un marco incrustado y se traga la pulsacion: esta capa invisible
+   por encima hace que se pueda pulsar en cualquier punto de la tarjeta, no solo el borde. */
+.camera-frame.ampliable:after{content:"";position:absolute;inset:0;z-index:1;cursor:pointer}
+.camera-frame.ampliable:hover,.camera-frame.ampliable:focus-visible{transform:translateY(-2px);box-shadow:0 14px 30px rgba(22,61,96,.22);outline-color:var(--ochre)}
+.camera-zoom-hint{position:absolute;right:10px;bottom:10px;z-index:2;pointer-events:none;
+  padding:4px 9px;border-radius:999px;background:rgba(11,26,41,.72);color:#fff;
+  font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+.camzoom{position:fixed;inset:0;z-index:120;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;padding:20px;background:rgba(11,26,41,.88)}
+.camzoom[hidden]{display:none}
+.camzoom-barra{display:flex;align-items:center;gap:14px;width:min(1100px,100%);justify-content:space-between}
+.camzoom-nombre{color:#fff;font-size:16px;font-weight:800;letter-spacing:.3px}
+.camzoom-cerrar{width:44px;height:44px;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.35);border-radius:999px;background:rgba(255,255,255,.10);color:#fff;
+  font-size:20px;line-height:1;cursor:pointer}
+.camzoom-cerrar:hover,.camzoom-cerrar:focus-visible{background:rgba(255,255,255,.2);outline:2px solid var(--ochre)}
+.camzoom-caja{width:min(1100px,100%);max-height:80vh;aspect-ratio:16/9;background:#000;border-radius:10px;overflow:hidden}
+.camzoom-caja iframe{display:block;width:100%;height:100%;border:0}
+@media(max-width:720px){
+  .camzoom{padding:12px}
+  .camzoom-nombre{font-size:14px}
+}
+.camera-copy{position:relative;text-align:center;padding:18px;color:var(--navy)}
+.camera-copy strong{display:block;font-size:17px}
+.camera-copy span{display:block;margin-top:6px;color:var(--muted);font-size:12px}
+.photos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
+.photo-card{overflow:hidden}
+.photo-button{display:block;width:100%;border:0;padding:0;background:transparent;text-align:left}
+.photo-button img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#f6f4ef}
+.photo-meta{padding:13px 14px 15px}
+.photo-date{display:block;color:var(--ochre);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.8px}
+.photo-caption{margin:5px 0 0;color:var(--navy);font-size:13px;font-weight:800;line-height:1.35}
+.photos-empty{margin:16px 0 0;padding:16px;border:1px dashed rgba(22,61,96,.22);border-radius:8px;background:#fffdf8;color:var(--muted);font-size:13px;font-weight:700}
+.lightbox{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:22px;background:rgba(15,44,71,.82)}
+.lightbox[hidden]{display:none}
+.lightbox-stage{position:relative;width:min(100%,1100px);height:82vh;overflow:hidden;border-radius:8px;touch-action:none;cursor:grab;display:grid;place-items:center}
+.lightbox-stage.dragging{cursor:grabbing}
+.lightbox-stage img{display:block;max-width:100%;max-height:82vh;border-radius:8px;box-shadow:0 24px 80px rgba(0,0,0,.34);transform-origin:center center;will-change:transform;user-select:none;-webkit-user-drag:none}
+.lightbox-hint{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);padding:8px 16px;border-radius:999px;background:rgba(15,44,71,.72);color:rgba(255,255,255,.92);font-size:12px;font-weight:600;letter-spacing:.2px;pointer-events:none;transition:opacity .6s ease}
+.lightbox-hint.oculto{opacity:0}
+.lightbox img{display:block;max-width:min(100%,1100px);max-height:82vh;border-radius:8px;box-shadow:0 24px 80px rgba(0,0,0,.34)}
+.folder-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+.folder{
+  min-height:88px;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  color:var(--navy);
+  background:#fff;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:900;
+}
+.folder:hover{border-color:rgba(226,159,52,.75);box-shadow:0 8px 22px rgba(22,61,96,.08)}
+.folder svg{flex:0 0 28px;width:28px;height:28px;fill:var(--ochre)}
+.feed{display:grid;gap:12px}
+.entry{display:grid;grid-template-columns:112px 1fr;gap:14px;padding:16px}
+.entry-date{color:var(--ochre);font-size:11px;font-weight:900;text-transform:uppercase}
+.entry.market .entry-date{color:var(--navy)}
+.entry b{display:block;color:var(--navy);font-size:15px}
+.entry p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.entry-source{display:inline-flex;align-items:center;gap:4px;min-height:40px;margin-top:4px;padding:8px 0;color:var(--ochre);font-size:13px;font-weight:600;text-decoration:none}
+.entry-source:hover{text-decoration:underline}
+.entry-source:active{color:#c9841e;opacity:.82}
+#bitacoraFeed{position:relative;gap:14px;padding-left:20px}
+#bitacoraFeed::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.bitacora-entry{position:relative;border-left:1px solid var(--line)}
+.bitacora-entry::before{content:"";position:absolute;left:-18px;top:20px;width:7px;height:7px;border-radius:50%;background:rgba(22,61,96,.28);box-shadow:0 0 0 4px var(--cream)}
+.bitacora-entry.latest{border-left:4px solid var(--ochre);background:#fffaf0}
+.bitacora-entry.latest::before{left:-20px;top:24px;width:10px;height:10px;background:var(--ochre);box-shadow:0 0 0 5px rgba(226,159,52,.18)}
+.entry-latest-label{display:inline-flex;width:max-content;max-width:100%;margin-bottom:8px;padding:5px 9px;border-radius:999px;background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.4px;line-height:1;text-transform:uppercase}
+.report{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:24px;color:var(--white);background:linear-gradient(135deg,var(--navy2),var(--navy))}
+.report span{display:block;color:#ffe0aa;font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase}
+.report b{display:block;margin-top:4px;font-size:clamp(20px,3vw,30px)}
+.report p{margin:8px 0 0;color:rgba(253,251,247,.78);font-size:14px}
+.data-warning{position:fixed;right:18px;bottom:18px;z-index:20;max-width:330px;padding:14px 16px;border:1px solid rgba(226,159,52,.45);border-radius:8px;background:var(--white);color:var(--navy);box-shadow:0 18px 45px rgba(15,44,71,.22);font-size:13px;font-weight:800}
+.data-warning[hidden]{display:none}
+.access-screen{
+  min-height:100vh;
+  min-height:100dvh;
+  display:flex;
+  padding:clamp(14px,3vh,30px) 18px;
+  color:var(--cream);
+  background:var(--navy);
+}
+.access-panel{
+  width:min(100%,420px);
+  margin:auto;
+  display:grid;
+  gap:18px;
+  justify-items:center;
+  text-align:center;
+}
+.access-logo{
+  width:min(178px,52vw);
+  height:auto;
+  aspect-ratio:833/430;
+  object-fit:contain;
+  align-self:center;
+  flex-shrink:0;
+  display:block;
+  filter:drop-shadow(0 12px 22px rgba(0,0,0,.2));
+}
+.access-title{
+  margin:8px 0 0;
+  color:var(--cream);
+  font-size:clamp(23px,7vw,34px);
+  line-height:1.12;
+  font-weight:800;
+}
+.access-context{
+  margin:0;
+  max-width:36ch;
+  color:rgba(253,251,247,.78);
+  font-size:14px;
+  font-weight:600;
+}
+.access-form{
+  width:100%;
+  display:grid;
+  gap:12px;
+  margin-top:8px;
+}
+.access-field{
+  display:grid;
+  gap:7px;
+  text-align:left;
+}
+.access-field label{
+  color:#ffe0aa;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+}
+.access-field input{
+  width:100%;
+  min-height:48px;
+  border:1px solid rgba(253,251,247,.25);
+  border-radius:8px;
+  padding:12px 13px;
+  background:rgba(255,255,255,.08);
+  color:var(--cream);
+  font-size:16px;
+  outline:none;
+}
+.access-field input:focus{
+  border-color:var(--ochre);
+  box-shadow:0 0 0 3px rgba(226,159,52,.24);
+}
+.access-field input::placeholder{color:rgba(253,251,247,.45)}
+.access-submit{
+  min-height:48px;
+  border:0;
+  border-radius:999px;
+  padding:12px 18px;
+  background:var(--ochre);
+  color:var(--navy);
+  font-size:13px;
+  font-weight:900;
+}
+.access-submit:disabled{
+  cursor:wait;
+  opacity:.68;
+}
+.access-error{
+  min-height:20px;
+  margin:0;
+  color:#ffe0aa;
+  font-size:13px;
+  font-weight:800;
+}
+@keyframes progressRun{0%,100%{filter:brightness(1)}50%{filter:brightness(1.18);box-shadow:0 0 18px rgba(226,159,52,.38)}}
+@media(min-width:900px){
+  .plan-gallery{grid-template-columns:186px minmax(0,1fr);align-items:start}
+  .plan-tabs{grid-column:1;grid-row:1;padding:2px 2px 2px 0;flex-direction:column;align-items:flex-start;overflow-x:auto;overflow-y:visible}
+      .plan-frame{grid-column:2;grid-row:1}
+}
+@media(max-width:1040px){
+  .hero-grid,.plan-wrap{grid-template-columns:1fr}
+  .micro-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .micro-grid.compact{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .milestone-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tranche-grid{grid-template-columns:1fr}
+  .folder-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:700px){
+  .topbar{align-items:flex-start}
+  .brand{gap:10px}
+  .brand-logo{height:56px}
+  .official-badge{font-size:11px;letter-spacing:.9px;padding:7px 12px}
+  .private{padding:7px 9px;font-size:10px}
+  .hero-copy{min-height:0}
+  .operation-location{width:100%;font-size:13px}
+  .phase-line,.camera-grid,.folder-grid{grid-template-columns:1fr}
+  .micro-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .forecast-card{padding:14px}
+  .micro-cell{padding:10px 11px}
+  .micro-value{font-size:16px}
+  .section-head{display:block}
+  .milestone-phase-head{display:block}
+  .milestone-phase-meta{justify-content:flex-start;margin-top:10px}
+  .milestone-phase-body{padding:12px}
+  .milestone-grid{grid-template-columns:1fr}
+  .milestone{min-height:140px}
+  .gantt-note{flex-wrap:wrap;align-items:flex-start}
+  .gantt-note:before{flex-shrink:0;margin-top:2px}
+  .bank-top{display:block}
+  .bank-status{justify-items:start;text-align:left;margin-top:10px}
+  .account-balance{justify-content:flex-start}
+  .bank-statement-head{display:block}
+  .statement-open{width:100%;margin-top:10px}
+  .entry{grid-template-columns:1fr}
+  .report{display:block}
+  .report .btn{margin-top:16px}
+}
+</style>
+</head>
+<body class="bloqueado">
+<!-- cdu-tdc-8f3a91 · Visor del Inversor · CdU de 0 a Exito · marcado de autoria, no eliminar -->
+
+<section class="access-screen" id="accessScreen" aria-labelledby="accessTitle">
+  <div class="access-panel">
+    <img class="access-logo" src="logo-cdu-blanco.png" alt="CdU">
+    <h1 class="access-title" id="accessTitle">Visor del Inversor</h1>
+    <!-- Sin nombre de operacion: esta pantalla se ve SIN contrasena, y el nombre delataria
+         de que operacion se trata a cualquiera que reciba el enlace. Mantener generico. -->
+    <p class="access-context">Acceso privado para partícipes de la operación.</p>
+    <form class="access-form" id="accessForm" autocomplete="off">
+      <div class="access-field">
+        <label for="accessPassword">Contraseña</label>
+        <div class="pass-wrap">
+          <input id="accessPassword" name="password" type="password" autocomplete="current-password" required>
+          <button class="pass-eye" id="passEye" type="button" aria-label="Mostrar contraseña" aria-pressed="false">
+            <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path class="eye-on" d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z"/>
+              <circle class="eye-on" cx="12" cy="12" r="3"/>
+              <path class="eye-off" d="M3 3l18 18" style="display:none"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <button class="access-submit" id="accessSubmit" type="submit">Entrar</button>
+      <p class="access-error" id="accessError" role="alert" aria-live="assertive"></p>
+    </form>
+  </div>
+</section>
+<template id="visorTemplate">
+<div class="shell">
+  <header class="hero">
+    <div class="topbar">
+      <div class="private">Acceso privado</div>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="identity-block">
+          <div class="brand">
+            <img class="brand-logo" src="logo-cdu-blanco.png" alt="CdU">
+          </div>
+          <div class="official-badge">Visor del Inversor · Herramienta oficial</div>
+          <p class="operation-title">El cuadro de mandos de tu inversión</p>
+        </div>
+        <div class="operation-block">
+          <h1 id="operationName">Operación: pendiente de confirmar</h1>
+          <p class="headline-line" id="operationSummary">pendiente de confirmar</p>
+          <p class="operation-location" id="operationLocation">pendiente de confirmar</p>
+          <p class="subhead">Primero claridad. Luego control. Y al final, resultado. Una operación medida, documentada y visible de principio a fin.</p>
+        </div>
+      </div>
+      <section class="pulse-card" aria-label="Estado y avance">
+        <div class="state-line">
+          <div class="state">Estado de operación</div>
+          <span class="chip warn" id="operationState">pendiente de confirmar</span>
+        </div>
+        <div class="phase-line" id="phaseLine"></div>
+        <div class="progress-line">
+          <div class="bar" id="progressBar" aria-label="0% de avance global de operación"><span></span></div>
+          <div class="pct" id="progressPct">0%</div>
+        </div>
+        <!-- Aclara QUE mide el porcentaje: sin esto, ver un 31% con la obra sin empezar
+             se lee como avance de obra y parece inflado. -->
+        <p class="progress-scope">Mide la operación de principio a fin: captación de la oportunidad, viabilidad, presentación a inversores, formalización y compra, transformación, venta de las unidades, reparto y cierre.</p>
+        <div class="pulse-meta" id="pulseMeta"></div>
+        <div class="mini next-report" id="nextReport"></div>
+      </section>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="section" id="escenarioEconomicoSection" hidden>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Escenario económico</div>
+          <h2>Números clave de la operación</h2>
+          <p class="note">Escenario estimado de previsión; no es un resultado cerrado.</p>
+        </div>
+      </div>
+      <div class="card forecast-card">
+        <div class="forecast-grid micro-grid" id="forecastGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="transformacion">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Transformación</div>
+          <h2 id="planTitle">Encaje de la operación</h2>
+          <p class="note" id="planNote">pendiente de confirmar</p>
+        </div>
+        <span class="badge navy" id="planActivoBadge">Encaje</span>
+      </div>
+      <div class="card plan-card">
+        <div class="plan-wrap">
+          <div class="legend" id="planLegend"></div>
+          <div class="plan-gallery" id="planGallery">
+            <p class="plan-tabs-hint">Selecciona un plano</p>
+            <div class="plan-dots" id="planDots" aria-hidden="true"></div>
+            <div class="plan-tabs" id="planTabs" role="tablist" aria-label="Planos y renders de la operación"></div>
+            <div class="plan-frame">
+              <button class="plan-action" type="button" id="activePlanButton" aria-label="Ampliar plano activo">
+                <img class="plan-img" id="activePlanImage" src="" alt="">
+              </button>
+              <span class="plan-counter" id="planCounter">0 / 0</span>
+              <span class="plan-expand">Ampliar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="hitos">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Hitos de operación</div>
+          <h2 id="milestoneTitle">pendiente de confirmar</h2>
+          <p class="note">Los hitos cubren toda la operación, desde que llega la oportunidad hasta la entrega. Lo conseguido brilla, el hito actual marca dónde estamos y lo pendiente queda preparado para lo que viene. El contrato fija una duración estimada de <b>12 meses desde su firma</b> (2 de julio de 2026), con fecha objetivo el <b>2 de julio de 2027</b>.</p>
+        </div>
+        <span class="badge navy" id="milestoneCounter">pendiente de confirmar</span>
+      </div>
+      <div class="milestones" id="milestones"></div>
+      <div class="action-row">
+        <p class="note">Celebración sobria: sello, evidencia y actualización del punto de avance.</p>
+      </div>
+    </section>
+
+    <section class="section" id="cronograma">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Cronograma</div>
+          <h2 id="ganttTitle">pendiente de confirmar</h2>
+          <p class="note" id="ganttNoteIntro">pendiente de confirmar</p>
+        </div>
+      </div>
+      <div class="card gantt-card">
+        <div class="gantt-note" id="ganttNote">pendiente de confirmar</div>
+        <p class="gantt-swipe"><span class="scroll-nudge">Desliza a la izquierda para ver al completo <b>&#8250;</b></span></p>
+        <div class="gantt-railtop" aria-hidden="true"><span id="ganttRail"></span></div>
+        <div class="gantt-coach-wrap">
+        <div class="gantt-scroll scroll-shadow">
+        <div class="gantt-inner">
+          <div class="week-current" id="weekCurrent" aria-hidden="true"><span id="ganttCurrentWeek">pendiente de confirmar</span></div>
+          <div class="gantt-grid" id="gantt"></div>
+        </div>
+        </div>
+        <!-- Capa que ENSENA el gesto: en movil mucha gente no descubre que el cronograma
+             se desplaza. Se muestra solo si el contenido desborda y se va al primer deslizamiento. -->
+        <div class="gantt-coach" id="ganttCoach" aria-hidden="true">
+          <div class="gantt-coach-inner">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74l-3.43-.72c-.08-.01-.15-.03-.24-.03-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z"/></svg>
+            <div class="gantt-coach-txt">Desliza a la izquierda</div>
+            <div class="gantt-coach-sub">para ver el diagrama completo</div>
+          </div>
+        </div>
+        </div>
+        <p class="gantt-foot" id="ganttFoot">pendiente de confirmar</p>
+      </div>
+    </section>
+
+    <section class="section" id="cuentas">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Económico</div>
+          <h2>Extracto de la cuenta de la operación</h2>
+          <p class="note">Cuenta bancaria dedicada para que las aportaciones y pagos de la operación queden separados del resto de operaciones.</p>
+        </div>
+      </div>
+      <div class="card bank-card">
+        <div class="bank-top">
+          <div class="santander">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M31.7 5.2c7.2 9.4 2.9 15.7-2.2 21.1-4.2 4.5-8.9 9.4-4.4 16.7-8.2-4.2-10.8-12.4-6.5-20.2 2.4-4.4 8.1-8.8 13.1-17.6Z"/>
+              <path d="M40.9 13.5c9.1 7.1 13.8 15.1 13.8 23.2 0 11.1-10.2 19.6-22.7 19.6S9.3 47.8 9.3 36.7c0-6.1 3.2-12 9-17.2-1.6 3.9-1.6 7.8.1 11.5 2.5 5.6 8.1 9.5 14.8 10.3-5.2-7.6-.8-13.2 3.4-18.4 2.2-2.8 4.4-5.5 4.3-9.4Z"/>
+            </svg>
+            <span>Santander</span>
+          </div>
+          <div class="bank-status">
+            <div class="iban" id="iban">pendiente de confirmar</div>
+            <div class="account-balance" id="accountBalance">Saldo en cuenta <span>· pendiente de confirmar</span></div>
+          </div>
+        </div>
+        <div class="tranche-grid" id="trancheGrid"></div>
+        <div class="finance-summary micro-grid compact" id="financeSummary"></div>
+        <p class="finance-note" id="financeNote">Los importes pendientes se mostrarán cuando estén confirmados.</p>
+        <div class="bank-statement" id="bankStatement" hidden></div>
+      </div>
+    </section>
+
+    <section class="section" id="obra">
+      <div class="card panel">
+        <div class="section-head">
+          <div>
+            <div class="kicker">En directo</div>
+            <h2>Sigue la obra en tiempo real</h2>
+            <p class="note" id="obraNote">Tres puntos de seguimiento preparados para activar la señal durante la ejecución.</p>
+          </div>
+          <span class="badge gray" id="obraBadge">pendiente de confirmar</span>
+        </div>
+        <div class="camera-grid" id="cameraGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="fotosAvanceSection">
+      <div class="card panel">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Fotos del avance de obra</div>
+            <h2>Seguimiento fotográfico</h2>
+            <p class="note">Evolución visual de los trabajos, organizada por fecha.</p>
+          </div>
+        </div>
+        <div class="photos-grid" id="photosGrid"></div>
+        <p class="photos-empty" id="photosEmpty">Las primeras fotografías se publicarán al iniciar la obra.</p>
+      </div>
+    </section>
+
+    <section class="section" id="documentacion">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Documentación</div>
+          <h2>Documentación de la operación</h2>
+          <p class="note">Carpetas de consulta de la operación. Acceso con tu email autorizado.</p>
+        </div>
+      </div>
+      <div class="folder-grid" id="folders"></div>
+    </section>
+
+    <section class="section" id="bitacoraSection" hidden>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Novedades</div>
+          <h2>Novedades de la operación</h2>
+          <p class="note">Novedades propias de esta operación, registradas por el gestor.</p>
+        </div>
+      </div>
+      <div class="feed" id="bitacoraFeed"></div>
+    </section>
+
+    <section class="section" id="noticiasMercadoSection" hidden>
+      <div class="section-head">
+        <div>
+          <div class="kicker">Entorno y mercado</div>
+          <h2>Entorno y mercado</h2>
+          <p class="note">Precios de la zona, cambios normativos y noticias del sector.</p>
+        </div>
+      </div>
+      <div class="feed" id="noticiasMercadoFeed"></div>
+    </section>
+
+    <section class="section">
+      <div class="card report">
+        <div>
+          <span>Contacto directo</span>
+          <b>Equipo CdU de 0 a Éxito</b>
+          <p>Transparencia, seguimiento y decisiones con datos de la operación.</p>
+        </div>
+        <a class="btn whatsapp" id="whatsappLink" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16 3.2A12.7 12.7 0 0 0 5.1 22.5L3.5 28.8l6.4-1.7A12.7 12.7 0 1 0 16 3.2Zm0 2.4a10.3 10.3 0 0 1 8.7 15.8 10.3 10.3 0 0 1-13.9 3.4l-.5-.3-3.2.8.9-3.1-.3-.5A10.3 10.3 0 0 1 16 5.6Zm5.9 13.5c-.3-.2-2-1-2.3-1.1-.3-.1-.6-.2-.8.2-.2.3-.9 1.1-1.1 1.4-.2.2-.4.2-.8.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.2-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2.1-.4 0-.6-.1-.2-.8-1.9-1.1-2.6-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.3 3.3 1.5 3.6c.2.2 2.5 3.8 6.1 5.3.9.4 1.5.6 2.1.8.9.3 1.7.2 2.3.1.7-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.2-.2-.5-.3-.9-.5Z"/></svg>
+          <span>Contactar por WhatsApp<small>Equipo CdU de 0 a Éxito</small></span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="legal">
+      <div class="legal-mark">CdU de 0 a Éxito</div>
+      <p>Visor del Inversor desarrollado por <b>CdU de 0 a Éxito</b> para el seguimiento privado de sus operaciones. El acceso es <b>personal e intransferible</b>.</p>
+      <p>Su contenido, su estructura y su diseño son <b>propiedad de CdU de 0 a Éxito</b>. Queda prohibida su reproducción, copia, difusión o cesión a terceros, total o parcial, sin autorización expresa y por escrito.</p>
+      <p class="legal-access">El acceso es nominativo y queda registrado por motivos de seguridad.</p>
+      <p class="legal-year">© 2026 CdU de 0 a Éxito · Todos los derechos reservados</p>
+    </footer>
+  </main>
+</div>
+</template>
+<div class="data-warning" id="dataWarning" role="status" hidden>No se han podido cargar los datos de la operación. Revisa la conexión o el origen configurado.</div>
+<div class="lightbox" id="photoLightbox" hidden>
+  <div class="lightbox-stage" id="lightboxStage">
+    <img id="photoLightboxImage" src="" alt="" draggable="false">
+  </div>
+  <button class="lightbox-close" type="button" id="lightboxClose" aria-label="Cerrar">&#10005;</button>
+  <div class="lightbox-hint" id="lightboxHint">Rueda o pellizco para ampliar · doble toque para acercar</div>
+</div>
+
+<script>
+// El JSON en claro NO se publica nunca (se retiro del sitio el 14-ago: exponia los datos
+// de la operacion sin cifrar). Por eso la previsualizacion local lo lee por ruta relativa
+// desde el propio repositorio, y el sitio publicado solo sirve el llavero cifrado.
+const ORIGEN_DATOS = '../../data/tdc/operacion.json';
+const ORIGEN_LLAVERO = 'https://xaviriera.github.io/operaciones-gestor/data/tdc/llavero.json';
+
+let datosOperacion=null;
+let claveMaestra=null;
+let llaveroCifrado=null;
+let visorMontado=false;
+let extractoPdfUrl=null;
+// El modo de previsualizacion en claro SOLO se permite en local (localhost/127.0.0.1).
+// En el sitio publicado queda desactivado: si no, ?claro=1 saltaria la contrasena y el cifrado no serviria de nada.
+const ES_ENTORNO_LOCAL=["localhost","127.0.0.1","::1",""].includes(window.location.hostname);
+const MODO_CLARO=ES_ENTORNO_LOCAL && new URLSearchParams(window.location.search).get("claro")==="1";
+const PENDIENTE="pendiente de confirmar";
+const CAMARA_SIN_SENAL="disponible al iniciar la obra";
+const ESTADOS={conseguido:"done",actual:"current",pendiente:"pending"};
+
+function escapeHtml(value){
+  return String(value ?? "").replace(/[&<>"']/g, char=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[char]));
+}
+function escapeAttr(value){
+  return escapeHtml(value).replace(/`/g,"&#96;");
+}
+function valor(value){
+  return value===null || value===undefined || value==="" ? PENDIENTE : value;
+}
+function esPantallaPequena(){
+  return window.matchMedia("(max-width: 700px)").matches;
+}
+function liberarExtractoPdfUrl(){
+  if(extractoPdfUrl){
+    URL.revokeObjectURL(extractoPdfUrl);
+    extractoPdfUrl=null;
+  }
+}
+function crearPdfUrlDesdeBase64(base64){
+  const limpio=String(base64 || "").replace(/\s/g,"");
+  if(!limpio) return "";
+  const binario=atob(limpio);
+  const bytes=new Uint8Array(binario.length);
+  for(let i=0;i<binario.length;i+=1){
+    bytes[i]=binario.charCodeAt(i);
+  }
+  const blob=new Blob([bytes],{type:"application/pdf"});
+  extractoPdfUrl=URL.createObjectURL(blob);
+  return extractoPdfUrl;
+}
+function folderIcon(){
+  return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4H10l2 2h6.5A2.5 2.5 0 0 1 21 8.5v8A3.5 3.5 0 0 1 17.5 20h-11A3.5 3.5 0 0 1 3 16.5v-10Z"/></svg>';
+}
+function estadoClase(estado){
+  return ESTADOS[estado] || "pending";
+}
+function estadoEtiqueta(estado){
+  if(estado==="conseguido") return "Conseguido";
+  if(estado==="actual") return "En proceso";
+  return "Pendiente";
+}
+function calcularPorcentajeAvance(estado){
+  const avanceManual=Number(estado.porcentaje_avance);
+  if(estado.porcentaje_avance !== null && estado.porcentaje_avance !== undefined && estado.porcentaje_avance !== "" && Number.isFinite(avanceManual)){
+    return avanceManual;
+  }
+  const hitos=Array.isArray(datosOperacion.hitos) ? datosOperacion.hitos : [];
+  const pesoTotal=hitos.reduce((total,hito)=>{
+    const peso=Number(hito.peso);
+    return Number.isFinite(peso) ? total+peso : total;
+  },0);
+  if(pesoTotal<=0) return null;
+  // El avance se calcula desde los pesos de los hitos: conseguido suma todo su peso,
+  // actual suma la mitad y pendiente no suma; solo se escribe a mano para forzar un valor.
+  const avance=hitos.reduce((total,hito)=>{
+    const peso=Number(hito.peso);
+    if(!Number.isFinite(peso)) return total;
+    if(hito.estado==="conseguido") return total+peso;
+    if(hito.estado==="actual") return total+(peso/2);
+    return total;
+  },0);
+  return Math.round(avance);
+}
+function renderOperacion(){
+  const operacion=datosOperacion.operacion || {};
+  document.title=`Visor del Inversor · ${valor(operacion.nombre)}`;
+  document.getElementById("operationName").textContent=`Operación: ${valor(operacion.nombre)}`;
+  document.getElementById("operationSummary").textContent=valor(operacion.resumen_una_linea);
+  document.getElementById("operationLocation").textContent=valor(operacion.direccion);
+  document.getElementById("planNote").textContent=valor(operacion.resumen_una_linea);
+  document.getElementById("planLegend").innerHTML=[
+    ["Dirección", operacion.direccion],
+    ["Ref. cat.", operacion.referencia_catastral],
+    ["Finca", operacion.finca_registral]
+  ].map(([label,value])=>`<div class="legend-item"><b>${escapeHtml(label)}</b><span>${escapeHtml(valor(value))}</span></div>`).join("");
+}
+function renderPlanos(){
+  const planosVistos=new Set();
+  const planos=Array.isArray(datosOperacion.planos) ? datosOperacion.planos.filter(plano=>{
+    if(!plano || !plano.fichero) return false;
+    if(planosVistos.has(plano.fichero)) return false;
+    planosVistos.add(plano.fichero);
+    return true;
+  }) : [];
+  const image=document.getElementById("activePlanImage");
+  const button=document.getElementById("activePlanButton");
+  const counter=document.getElementById("planCounter");
+  const tabs=document.getElementById("planTabs");
+  if(!planos.length){
+    image.removeAttribute("src");
+    image.alt=PENDIENTE;
+    button.disabled=true;
+    button.removeAttribute("data-plan-url");
+    button.removeAttribute("data-plan-name");
+    counter.textContent="0 / 0";
+    tabs.innerHTML=`<div class="plan-empty">${escapeHtml(PENDIENTE)}</div>`;
+    return;
+  }
+  button.disabled=false;
+  tabs.innerHTML=planos.map((plano,index)=>`
+    <button class="plan-tab" type="button" role="tab" aria-selected="${index===0 ? "true" : "false"}" data-plan-index="${escapeAttr(index)}" aria-label="Ver ${escapeAttr(valor(plano.nombre))}">
+      <span class="plan-tab-num">${String(index+1).padStart(2,"0")}</span>
+      <span class="plan-tab-label">${escapeHtml(valor(plano.nombre))}</span>
+    </button>
+  `).join("");
+  const activarPlano=index=>{
+    const plano=planos[index] || planos[0];
+    const nombre=valor(plano.nombre);
+    const fichero=plano.fichero || "";
+    image.src=fichero;
+    image.alt=nombre;
+    button.dataset.planUrl=fichero;
+    button.dataset.planName=nombre;
+    counter.textContent=`${index+1} / ${planos.length}`;
+    const dots=document.getElementById("planDots");
+    if(dots){
+      if(dots.children.length!==planos.length){
+        dots.innerHTML=planos.map(()=>"<i></i>").join("");
+      }
+      [...dots.children].forEach((d,i)=>d.classList.toggle("on",i===index));
+    }
+    const badgePlano=document.getElementById("planActivoBadge");
+    if(badgePlano) badgePlano.textContent=nombre.replace(/^Plano de venta\s*·\s*/i,"");
+    tabs.querySelectorAll(".plan-tab").forEach(tab=>{
+      const activo=Number(tab.dataset.planIndex)===index;
+      tab.classList.toggle("active",activo);
+      tab.setAttribute("aria-selected",activo ? "true" : "false");
+    });
+  };
+  tabs.querySelectorAll(".plan-tab").forEach(tab=>{
+    tab.addEventListener("click",()=>{
+      activarPlano(Number(tab.dataset.planIndex));
+    });
+  });
+  button.onclick=()=>{
+    abrirFotoAvance(button.dataset.planUrl,button.dataset.planName);
+  };
+  activarPlano(0);
+}
+// Aviso visual de que un contenedor tiene mas contenido a la derecha
+function marcarScrollHorizontal(el){
+  if(!el || el.dataset.scrollAviso) return;
+  el.dataset.scrollAviso="1";
+  el.classList.add("scroll-shadow");
+  const actualizar=()=>{
+    const fin=el.scrollLeft+el.clientWidth>=el.scrollWidth-16;
+    el.classList.toggle("at-end",fin || el.scrollWidth<=el.clientWidth+16);
+  };
+  el.addEventListener("scroll",actualizar,{passive:true});
+  window.addEventListener("resize",actualizar);
+  actualizar();
+}
+// --- Ampliar camara: abre la capa con el video en grande y la cierra devolviendo
+//     el foco a la tarjeta pulsada. Al cerrar se destruye el iframe a proposito. ---
+let camaraFocoPrevio=null;
+function abrirCamara(tarjeta){
+  const capa=document.getElementById("camZoom");
+  const caja=document.getElementById("camZoomCaja");
+  if(!capa || !caja || !tarjeta) return;
+  const url=tarjeta.getAttribute("data-camara-url");
+  if(!url) return;
+  camaraFocoPrevio=tarjeta;
+  document.getElementById("camZoomNombre").textContent=tarjeta.getAttribute("data-camara-nombre") || "";
+  const marco=document.createElement("iframe");
+  marco.src=url; marco.title=tarjeta.getAttribute("data-camara-nombre") || "Camara";
+  marco.setAttribute("allowfullscreen","");
+  caja.innerHTML=""; caja.appendChild(marco);
+  capa.hidden=false;
+  document.body.style.overflow="hidden";
+  document.getElementById("camZoomCerrar").focus();
+}
+function cerrarCamara(){
+  const capa=document.getElementById("camZoom");
+  const caja=document.getElementById("camZoomCaja");
+  if(!capa || capa.hidden) return;
+  const marco=caja.querySelector("iframe");
+  if(marco) marco.src="";       // cortar el stream antes de tirar el nodo
+  caja.innerHTML="";
+  capa.hidden=true;
+  document.body.style.overflow="";
+  if(camaraFocoPrevio){ camaraFocoPrevio.focus(); camaraFocoPrevio=null; }
+}
+function activarAmpliarCamaras(){
+  const rejilla=document.getElementById("cameraGrid");
+  const capa=document.getElementById("camZoom");
+  if(!rejilla || !capa || rejilla.dataset.zoomListo) return;
+  rejilla.dataset.zoomListo="1";
+  rejilla.addEventListener("click",e=>{
+    const t=e.target.closest(".camera-frame.ampliable");
+    if(t) abrirCamara(t);
+  });
+  rejilla.addEventListener("keydown",e=>{
+    if(e.key!=="Enter" && e.key!==" ") return;
+    const t=e.target.closest(".camera-frame.ampliable");
+    if(t){ e.preventDefault(); abrirCamara(t); }
+  });
+  document.getElementById("camZoomCerrar").addEventListener("click",cerrarCamara);
+  capa.addEventListener("click",e=>{ if(e.target===capa) cerrarCamara(); });
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape") cerrarCamara(); });
+}
+function activarAvisosScroll(){
+  marcarScrollHorizontal(document.getElementById("planTabs"));
+  // Ojo: hay que llamarla SIEMPRE, tambien cuando el contenido cabe. Es esta funcion
+  // la que apaga el velo del borde; si no se llama, el velo se queda tapando el final
+  // para siempre aunque no haya nada mas que ver.
+  document.querySelectorAll(".gantt-scroll").forEach(el=>{
+    if(el) marcarScrollHorizontal(el);
+  });
+  revisarAvisoCronograma();
+  activarCoachDeslizar();
+  activarAmpliarCamaras();
+}
+// La capa "desliza" solo tiene sentido si el cronograma no cabe. Se va al primer
+// gesto (o al primer scroll) y no vuelve en esa visita: cumplido su trabajo, estorba.
+// El aviso de deslizar depende de si CABE, no de si es movil: en escritorio con la
+// ventana reducida el cronograma tambien se corta.
+function revisarAvisoCronograma(){
+  // Recalcula el velo del borde de TODOS los contenedores desplazables. Hace falta
+  // repetirlo: al arrancar, el cronograma aun no tiene su ancho definitivo y el
+  // primer calculo sale mal; sin scroll ni resize (escritorio) no se corregia nunca.
+  document.querySelectorAll(".gantt-scroll,.plan-tabs").forEach(el=>{
+    if(!el) return;
+    const fin=el.scrollLeft+el.clientWidth>=el.scrollWidth-16;
+    el.classList.toggle("at-end", fin || el.scrollWidth<=el.clientWidth+16);
+  });
+}
+// Repasos tras el arranque: fuentes, imagenes y render tardan en asentarse.
+[300,900,2000].forEach(ms=>setTimeout(revisarAvisoCronograma, ms));
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(revisarAvisoCronograma);
+// Al redimensionar, el navegador tarda un instante en recalcular las medidas:
+// sin esta pequena espera el aviso no se entera de que ya no cabe.
+let temporizadorAviso=null;
+window.addEventListener("resize", () => {
+  clearTimeout(temporizadorAviso);
+  temporizadorAviso=setTimeout(revisarAvisoCronograma, 180);
+});
+function activarCoachDeslizar(){
+  const coach=document.getElementById("ganttCoach");
+  const caja=document.querySelector(".gantt-coach-wrap .gantt-scroll");
+  if(!coach || !caja) return;
+  if(caja.scrollWidth<=caja.clientWidth+4){ coach.classList.add("oculto"); return; }
+  if(coach.dataset.listo) return;
+  coach.dataset.listo="1";
+  // Antes desaparecia con solo TOCAR la pantalla (aunque fuera para bajar la pagina):
+  // se iba antes de que diera tiempo a leerla. Ahora aguanta hasta que hay
+  // desplazamiento HORIZONTAL de verdad, que es el gesto que quiere ensenar.
+  const esconder=()=>{
+    if(caja.scrollLeft < 24) return;       // un roce no cuenta
+    coach.classList.add("oculto");
+    caja.removeEventListener("scroll",esconder);
+  };
+  caja.addEventListener("scroll",esconder,{passive:true});
+}
+function renderEstado(){
+  const estado=datosOperacion.estado || {};
+  document.getElementById("operationState").textContent=valor(estado.fase_actual);
+  document.getElementById("phaseLine").innerHTML=(estado.fases || []).map(fase=>{
+    const clase=estadoClase(fase.estado);
+    const icono=clase==="done" ? '<span class="check">✓</span>' : '<span class="dot"></span>';
+    // La descripcion importa: "GO", "MAP" y "EXITO" no dicen nada a un participe.
+    // Con ella se entiende que la operacion empezo mucho antes de la obra.
+    const desc = fase.descripcion ? `<span class="phase-desc">${escapeHtml(fase.descripcion)}</span>` : "";
+    return `<div class="phase ${escapeAttr(clase)}"><small>${icono} ${escapeHtml(estadoEtiqueta(fase.estado))}</small><b>${escapeHtml(valor(fase.nombre))}</b>${desc}</div>`;
+  }).join("");
+  // Sin dato de avance NO se pinta un 0%: un cero se lee como "no ha avanzado nada",
+  // que es peor que reconocer que el dato aun no esta confirmado.
+  const avance = calcularPorcentajeAvance(estado);
+  const hayAvance = avance !== null;
+  const progressBar=document.getElementById("progressBar");
+  progressBar.setAttribute("aria-label", hayAvance ? `${avance}% de avance global de operación` : "Avance global pendiente de confirmar");
+  progressBar.querySelector("span").style.setProperty("--progress", hayAvance ? `${avance}%` : "0%");
+  const pct=document.getElementById("progressPct");
+  pct.textContent = hayAvance ? `${avance}%` : PENDIENTE;
+  pct.style.fontSize = hayAvance ? "" : "15px";
+  document.getElementById("pulseMeta").innerHTML=`
+    <div class="micro-grid compact dark">
+      <div class="micro-cell"><span class="micro-label">Fase actual</span><b class="micro-value">${escapeHtml(valor(estado.fase_actual))}</b></div>
+      <div class="micro-cell"><span class="micro-label">Avance</span><b class="micro-value">${hayAvance ? `${avance}%` : PENDIENTE}</b></div>
+    </div>`;
+}
+function renderProximoReporte(){
+  const reporte=datosOperacion.proximo_reporte || {};
+  document.getElementById("nextReport").innerHTML=`
+    <span>Próxima reunión de avances</span>
+    <b>${escapeHtml(valor(reporte.fecha))}</b>
+    <p>${escapeHtml(valor(reporte.texto))}</p>`;
+}
+function renderEscenarioEconomico(){
+  const section=document.getElementById("escenarioEconomicoSection");
+  const grid=document.getElementById("forecastGrid");
+  if(!Object.prototype.hasOwnProperty.call(datosOperacion,"escenario_economico")){
+    section.hidden=true;
+    grid.innerHTML="";
+    return;
+  }
+  const escenario=datosOperacion.escenario_economico || {};
+  const items=[
+    ["Rentabilidad sobre el capital", escenario.rentabilidad_capital, "hero positive"],
+    ["Inversión total", escenario.inversion_total, ""],
+    ["Capital de los inversores", escenario.capital_inversores, ""],
+    ["Capital del equipo gestor", escenario.capital_equipo_gestor, ""],
+    ["Venta prevista realista", escenario.venta_prevista_realista, ""],
+    ["Venta prevista optimista", escenario.venta_prevista_optimista, ""],
+    ["Beneficio previsto", escenario.beneficio_realista, "positive"]
+  ];
+  section.hidden=false;
+  grid.innerHTML=items.map(([label,value,classes])=>{
+    const pendiente=value===null || value===undefined || value==="";
+    const microClasses=classes.replace(/\bhero\b/g,"").trim();
+    return `
+      <article class="micro-cell ${escapeAttr(microClasses)}${pendiente ? " pending" : ""}">
+        <span class="micro-label">${escapeHtml(label)}</span>
+        <b class="micro-value">${escapeHtml(valor(value))}</b>
+      </article>`;
+  }).join("");
+}
+function renderHitos(){
+  const items=datosOperacion.hitos || [];
+  const fases=(datosOperacion.estado && datosOperacion.estado.fases) || [];
+  const conseguidos=items.filter(item=>item.estado==="conseguido").length;
+  const total=items.length;
+  const proximoIndex=items.findIndex(item=>item.estado==="pendiente");
+  document.getElementById("milestoneCounter").textContent=total ? `${conseguidos} de ${total} hitos` : PENDIENTE;
+  document.getElementById("milestoneTitle").textContent=total ? `${conseguidos} de ${total} hitos conseguidos` : PENDIENTE;
+  const renderCard=(hito,index)=>{
+    const clase=estadoClase(hito.estado);
+    const proximo=index===proximoIndex ? '<span class="badge next">Próximo</span>' : "";
+    return `
+      <article class="milestone ${escapeAttr(clase)}" data-index="${index}">
+        <div>
+          <div class="toprow"><span class="num">${index+1}</span>${proximo || (clase==="current" ? '<span class="spark" aria-hidden="true"></span>' : "")}</div>
+          <b>${escapeHtml(valor(hito.nombre))}</b>
+          <span class="date">${escapeHtml(valor(hito.fecha))}${hito.grupo ? ` · <i>${escapeHtml(hito.grupo)}</i>` : ""}</span>
+          <p class="meaning">${escapeHtml(valor(hito.detalle))}</p>
+        </div>
+        <div><span class="stamp ${escapeAttr(clase)}">${clase==="done" ? "✓ Conseguido" : estadoEtiqueta(hito.estado)}</span></div>
+      </article>`;
+  };
+  // Los grupos se derivan de los propios datos, en su orden de aparición.
+  // NUNCA volver a fijarlos a mano: si un grupo del JSON no estaba en la lista,
+  // sus hitos desaparecian del visor sin avisar (paso el 16-ago-2026: 10 hitos invisibles).
+  const RESUMEN_FASE={
+    "Fase 1 · GO":"Captación, viabilidad y consulta urbanística hasta el veredicto GO",
+    "Fase 2 · MAP":"Encaje, presupuesto, estructura legal, grupo inversor y compra",
+    "Fase 3 · ÉXITO":"Licencias, contratación, obra completa, comercialización y cierre"
+  };
+  const gruposExito=[...new Set(
+    items.filter(h=>h.fase==="Fase 3 · ÉXITO" && h.grupo).map(h=>h.grupo)
+  )];
+  document.getElementById("milestones").innerHTML=fases.map(fase=>{
+    const hitosFase=items
+      .map((hito,index)=>({hito,index}))
+      .filter(item=>item.hito.fase===fase.nombre);
+    const hechosFase=hitosFase.filter(item=>item.hito.estado==="conseguido").length;
+    const claseFase=estadoClase(fase.estado);
+    const cuerpo=`
+      <div class="milestone-grid">
+        ${hitosFase.map(item=>renderCard(item.hito,item.index)).join("")}
+      </div>`;
+    return `
+      <section class="milestone-phase phase-${escapeAttr(claseFase)}">
+        <button class="milestone-phase-head" type="button" aria-expanded="false">
+          <div class="milestone-phase-title">
+            <small>${escapeHtml(estadoEtiqueta(fase.estado))}</small>
+            <h3>${escapeHtml(valor(fase.nombre))}</h3>
+            <p class="phase-resumen">${escapeHtml(RESUMEN_FASE[fase.nombre] || "")}</p>
+          </div>
+          <div class="milestone-phase-meta">
+            <span class="stamp ${escapeAttr(claseFase)}">${claseFase==="done" ? "✓ Cerrada" : estadoEtiqueta(fase.estado)}</span>
+            <span class="badge navy">${hechosFase} de ${hitosFase.length} hitos</span>
+          </div>
+          <span class="phase-toggle"><span class="phase-txt-ver">Ver hitos</span><span class="phase-txt-ocultar">Ocultar</span><span class="phase-caret" aria-hidden="true"></span></span>
+        </button>
+        <div class="milestone-phase-body">${cuerpo}</div>
+      </section>`;
+  }).join("");
+}
+// Las fases se pliegan: las cerradas arrancan recogidas, la que esta en curso abierta.
+// La barra superior refleja la posicion dentro del cronograma
+function sincronizarRailGantt(){
+  const zona=document.querySelector(".gantt-scroll");
+  const rail=document.getElementById("ganttRail");
+  if(!zona || !rail || zona.dataset.rail) return;
+  zona.dataset.rail="1";
+  const pinta=()=>{
+    const visible=zona.clientWidth/zona.scrollWidth;
+    const avance=zona.scrollLeft/(zona.scrollWidth-zona.clientWidth || 1);
+    rail.style.width=Math.max(visible*100,12)+"%";
+    rail.style.left=(avance*(100-Math.max(visible*100,12)))+"%";
+  };
+  zona.addEventListener("scroll",pinta,{passive:true});
+  window.addEventListener("resize",pinta);
+  pinta();
+}
+function activarAcordeonFases(){
+  document.querySelectorAll(".milestone-phase").forEach(sec=>{
+    const head=sec.querySelector(".milestone-phase-head");
+    if(!head || head.dataset.listo) return;
+    head.dataset.listo="1";
+    head.addEventListener("click",()=>{
+      const abierta=sec.hasAttribute("data-abierta");
+      if(abierta) sec.removeAttribute("data-abierta"); else sec.setAttribute("data-abierta","1");
+      head.setAttribute("aria-expanded", abierta ? "false" : "true");
+    });
+  });
+}
+function renderGantt(){
+  const cronograma=datosOperacion.cronograma || {};
+  const capitulos=cronograma.capitulos || [];
+  const total=Math.max(Number(cronograma.total_semanas) || 16, 1);
+  const semanaActual=Number(cronograma.semana_actual) || 0;
+  document.getElementById("ganttTitle").textContent=`Cronograma de obra · ${total} semanas`;
+  const inicioTxt=cronograma.fecha_inicio ? ` · Inicio de obra: ${cronograma.fecha_inicio}` : "";
+  document.getElementById("ganttNoteIntro").textContent=`Semana actual: ${semanaActual || PENDIENTE}${inicioTxt}`;
+  document.getElementById("ganttNote").textContent=(cronograma.notas_transversales || []).join(" · ") || PENDIENTE;
+  document.getElementById("ganttCurrentWeek").textContent=semanaActual ? `Semana ${semanaActual}` : PENDIENTE;
+  document.getElementById("ganttFoot").textContent=`Cronograma de obra · ${total} semanas`;
+  document.getElementById("gantt").style.gridTemplateColumns=`64px 270px repeat(${total},minmax(36px,1fr))`;
+  document.getElementById("weekCurrent").style.left=`calc(334px + ((100% - 334px) / ${total}) * ${Math.max(semanaActual - .5, 0)})`;
+  const head=`<div class="week-head"><b>Cap</b><b>Tarea</b>${Array.from({length:total},(_,i)=>`<span>S${i+1}</span>`).join("")}</div>`;
+  const rows=capitulos.map((fila,index)=>`
+    <div class="gantt-row">
+      <div class="gantt-cap">${index+1}</div>
+      <div class="gantt-task">${escapeHtml(valor(fila.nombre))}</div>
+      ${Array.from({length:total},(_,i)=>{
+        const week=i+1;
+        const inicio=Number(fila.semana_inicio) || 0;
+        const fin=Number(fila.semana_fin) || 0;
+        const inRange=week>=inicio&&week<=fin;
+        const tipo=fila.color_o_tipo || "#163D60";
+        const marker=tipo==="hito" ? `<div class="gantt-milestone-label">◆ Entrega</div>` : `<div class="bar-seg" style="--bar:${escapeAttr(tipo)}"></div>`;
+        return `<div class="gcell${inRange&&tipo==="hito"?" gcell-hito":""}">${inRange?marker:""}</div>`;
+      }).join("")}
+    </div>
+  `).join("");
+  document.getElementById("gantt").innerHTML=head+rows;
+}
+function renderEconomico(){
+  const cuentas=datosOperacion.cuentas || {};
+  document.getElementById("iban").innerHTML=`${escapeHtml(valor(cuentas.iban))} <small>Cuenta dedicada de la operación</small>`;
+  const saldo=valor(cuentas.saldo);
+  const fechaSaldo=cuentas.saldo_fecha ? ` · a ${escapeHtml(cuentas.saldo_fecha)}` : "";
+  document.getElementById("accountBalance").innerHTML=`Saldo en cuenta <span>· ${escapeHtml(saldo)}</span>${fechaSaldo}`;
+  document.getElementById("trancheGrid").innerHTML=(cuentas.tramos || []).map(item=>{
+    const ok=Boolean(item.confirmado);
+    const tieneNota=Boolean(item.nota);
+    const nota=tieneNota ? `<details class="tranche-detail"><summary>Ver detalle</summary><p>${escapeHtml(item.nota)}</p></details>` : "";
+    const importe=item.importe ? `<strong class="tranche-amount">${escapeHtml(item.importe)}</strong>` : "";
+    return `
+    <div class="tranche ${ok?"done":"pending"}"><div class="tranche-line"><span class="tranche-name">${escapeHtml(valor(item.nombre))}</span><span class="tranche-pill ${ok?"done":"pending"}">${ok?"Confirmado":"Pendiente"}</span>${importe || (item.fecha ? `<span class="tranche-fecha">${escapeHtml(item.fecha)}</span>` : "")}</div>${nota}</div>`;
+  }).join("");
+  document.getElementById("financeSummary").innerHTML=[
+    ["Tramos", (cuentas.tramos || []).length || null, "Número de tramos configurados"],
+    ["Pendientes", (cuentas.tramos || []).filter(item=>!item.confirmado).length || null, "Importes por confirmar"]
+  ].map(([label,value,detail])=>`
+    <div class="micro-cell"><span class="micro-label">${escapeHtml(label)}</span><b class="micro-value">${escapeHtml(valor(value))}</b><small class="micro-detail">${escapeHtml(detail)}</small></div>
+  `).join("");
+  renderExtractoBancario(cuentas);
+}
+function renderExtractoBancario(cuentas){
+  const contenedor=document.getElementById("bankStatement");
+  liberarExtractoPdfUrl();
+  if(!cuentas.extracto_pdf_base64){
+    contenedor.hidden=true;
+    contenedor.innerHTML="";
+    return;
+  }
+  const periodo=valor(cuentas.extracto_periodo);
+  let pdfUrl="";
+  try{
+    pdfUrl=crearPdfUrlDesdeBase64(cuentas.extracto_pdf_base64);
+  }catch(error){
+    contenedor.hidden=false;
+    contenedor.classList.add("statement-fallback");
+    contenedor.innerHTML=`
+      <div class="bank-statement-head">
+        <div class="bank-statement-title"><span>Extracto bancario</span><b>Documento oficial · ${escapeHtml(periodo)}</b></div>
+      </div>
+      <div class="statement-mobile"><p>El extracto del banco no se ha podido preparar en este navegador.</p></div>`;
+    return;
+  }
+  const fallback=esPantallaPequena();
+  contenedor.hidden=false;
+  contenedor.classList.toggle("statement-fallback",fallback);
+  contenedor.innerHTML=`
+    <div class="bank-statement-head">
+      <div class="bank-statement-title"><span>Extracto bancario</span><b>Documento oficial · ${escapeHtml(periodo)}</b></div>
+      <a class="statement-open" href="${escapeAttr(pdfUrl)}" target="_blank" rel="noopener">Abrir en pestaña nueva</a>
+    </div>
+    ${fallback ? "" : `<iframe class="statement-frame" src="${escapeAttr(pdfUrl)}#navpanes=0&toolbar=1" title="Extracto bancario Santander ${escapeAttr(periodo)}"></iframe>`}
+    <div class="statement-mobile">
+      <div class="statement-doc">
+        <div class="statement-doc-badge">Documento oficial</div>
+        <b>Extracto del Banco Santander</b>
+        <span>${escapeHtml(periodo)}</span>
+        <a class="statement-open block" href="${escapeAttr(pdfUrl)}" target="_blank" rel="noopener">Ver el extracto completo</a>
+      </div>
+    </div>`;
+  const frame=contenedor.querySelector(".statement-frame");
+  if(frame){
+    frame.addEventListener("error",()=>{
+      contenedor.classList.add("statement-fallback");
+    });
+  }
+}
+function renderCamaras(){
+  const camaras=datosOperacion.camaras || [];
+  const haySenal=camaras.some(camara=>camara.url);
+  const insignia=document.getElementById("obraBadge");
+  insignia.textContent=haySenal ? "En directo" : CAMARA_SIN_SENAL;
+  // Verde cuando emite: en naranja parecia una advertencia y transmitia lo contrario.
+  insignia.className="badge " + (haySenal ? "ok" : "gray");
+  const nota=document.getElementById("obraNote");
+  if(nota) nota.textContent=haySenal
+    ? "Tres cámaras enfocando la obra, con imagen en directo. Pulsa cualquiera para verla en grande."
+    : "Tres puntos de seguimiento preparados para activar la señal durante la ejecución.";
+  document.getElementById("cameraGrid").innerHTML=camaras.map(camara=>{
+    if(camara.url){
+      return `<div class="camera-frame has-stream ampliable" role="button" tabindex="0" aria-label="Ampliar ${escapeAttr(valor(camara.nombre))}" data-camara-url="${escapeAttr(camara.url)}" data-camara-nombre="${escapeAttr(valor(camara.nombre))}"><iframe src="${escapeAttr(camara.url)}" title="${escapeAttr(valor(camara.nombre))}" allowfullscreen loading="lazy"></iframe><span class="camera-zoom-hint" aria-hidden="true">Ampliar</span></div>`;
+    }
+    return `
+      <div class="camera-frame">
+        <div class="camera-copy"><strong>${escapeHtml(valor(camara.nombre))}</strong><span>${CAMARA_SIN_SENAL}</span></div>
+      </div>`;
+  }).join("");
+}
+// --- Zoom del plano ampliado: rueda, pellizco, doble toque y arrastre ---
+const zoomEstado={escala:1,x:0,y:0,punteros:new Map(),distIni:0,escIni:1,arrastrando:false,ultX:0,ultY:0,movido:false,ultimoTap:0};
+function zoomAplicar(){
+  const img=document.getElementById("photoLightboxImage");
+  if(!img) return;
+  const stage=document.getElementById("lightboxStage");
+  if(stage && zoomEstado.escala>1){
+    // Limite: la imagen no puede salirse de la vista
+    const maxX=Math.max(0,(img.clientWidth*zoomEstado.escala-stage.clientWidth)/2);
+    const maxY=Math.max(0,(img.clientHeight*zoomEstado.escala-stage.clientHeight)/2);
+    zoomEstado.x=Math.max(-maxX,Math.min(maxX,zoomEstado.x));
+    zoomEstado.y=Math.max(-maxY,Math.min(maxY,zoomEstado.y));
+  }else{ zoomEstado.x=0; zoomEstado.y=0; }
+  img.style.transform=`translate(${zoomEstado.x}px,${zoomEstado.y}px) scale(${zoomEstado.escala})`;
+}
+function zoomReset(){
+  zoomEstado.escala=1; zoomEstado.x=0; zoomEstado.y=0;
+  zoomEstado.punteros.clear(); zoomEstado.arrastrando=false;
+  zoomAplicar();
+}
+function zoomA(nuevaEscala,cx,cy){
+  const stage=document.getElementById("lightboxStage");
+  if(!stage) return;
+  const esc=Math.max(1,Math.min(6,nuevaEscala));
+  const r=stage.getBoundingClientRect();
+  const px=(cx??(r.left+r.width/2))-r.left-r.width/2;
+  const py=(cy??(r.top+r.height/2))-r.top-r.height/2;
+  const factor=esc/zoomEstado.escala;
+  zoomEstado.x=(zoomEstado.x-px)*factor+px;
+  zoomEstado.y=(zoomEstado.y-py)*factor+py;
+  zoomEstado.escala=esc;
+  zoomAplicar();
+}
+function zoomInit(){
+  const stage=document.getElementById("lightboxStage");
+  if(!stage || stage.dataset.zoomListo) return;
+  stage.dataset.zoomListo="1";
+  stage.addEventListener("wheel",e=>{
+    e.preventDefault();
+    zoomA(zoomEstado.escala*(e.deltaY<0?1.18:1/1.18),e.clientX,e.clientY);
+  },{passive:false});
+  stage.addEventListener("pointerdown",e=>{
+    stage.setPointerCapture(e.pointerId);
+    zoomEstado.punteros.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    zoomEstado.movido=false;
+    if(zoomEstado.punteros.size===2){
+      const [a,b]=[...zoomEstado.punteros.values()];
+      zoomEstado.distIni=Math.hypot(a.x-b.x,a.y-b.y);
+      zoomEstado.escIni=zoomEstado.escala;
+    }else if(zoomEstado.escala>1){
+      zoomEstado.arrastrando=true; zoomEstado.ultX=e.clientX; zoomEstado.ultY=e.clientY;
+      stage.classList.add("dragging");
+    }
+  });
+  stage.addEventListener("pointermove",e=>{
+    if(!zoomEstado.punteros.has(e.pointerId)) return;
+    zoomEstado.punteros.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(zoomEstado.punteros.size===2 && zoomEstado.distIni>0){
+      const [a,b]=[...zoomEstado.punteros.values()];
+      const d=Math.hypot(a.x-b.x,a.y-b.y);
+      zoomEstado.movido=true;
+      zoomA(zoomEstado.escIni*(d/zoomEstado.distIni),(a.x+b.x)/2,(a.y+b.y)/2);
+    }else if(zoomEstado.arrastrando){
+      zoomEstado.x+=e.clientX-zoomEstado.ultX;
+      zoomEstado.y+=e.clientY-zoomEstado.ultY;
+      zoomEstado.ultX=e.clientX; zoomEstado.ultY=e.clientY;
+      zoomEstado.movido=true;
+      zoomAplicar();
+    }
+  });
+  const soltar=e=>{
+    zoomEstado.punteros.delete(e.pointerId);
+    if(zoomEstado.punteros.size<2) zoomEstado.distIni=0;
+    if(zoomEstado.punteros.size===0){
+      zoomEstado.arrastrando=false; stage.classList.remove("dragging");
+      // doble toque / doble clic: alterna 1 <-> 2.5
+      const ahora=e.timeStamp||0;
+      if(!zoomEstado.movido && ahora-zoomEstado.ultimoTap<320){
+        zoomA(zoomEstado.escala>1.05?1:2.5,e.clientX,e.clientY);
+        zoomEstado.ultimoTap=0;
+      }else if(!zoomEstado.movido){ zoomEstado.ultimoTap=ahora; }
+    }
+  };
+  stage.addEventListener("pointerup",soltar);
+  stage.addEventListener("pointercancel",soltar);
+}
+function abrirFotoAvance(url,pie){
+  const lightbox=document.getElementById("photoLightbox");
+  const image=document.getElementById("photoLightboxImage");
+  image.src=url;
+  image.alt=pie || "Fotografía del avance de obra";
+  lightbox.hidden=false;
+  zoomInit();
+  zoomReset();
+  const pista=document.getElementById("lightboxHint");
+  if(pista){
+    pista.classList.remove("oculto");
+    clearTimeout(window._pistaZoom);
+    window._pistaZoom=setTimeout(()=>pista.classList.add("oculto"),3000);
+  }
+}
+function cerrarFotoAvance(){
+  const lightbox=document.getElementById("photoLightbox");
+  const image=document.getElementById("photoLightboxImage");
+  lightbox.hidden=true;
+  zoomReset();
+  image.style.transform="";
+  image.src="";
+  image.alt="";
+}
+function renderFotosAvance(){
+  const fotos=Array.isArray(datosOperacion.fotos_avance) ? datosOperacion.fotos_avance : [];
+  const grid=document.getElementById("photosGrid");
+  const empty=document.getElementById("photosEmpty");
+  empty.hidden=fotos.length>0;
+  grid.innerHTML=fotos.map((foto,index)=>{
+    const pie=valor(foto.pie);
+    const fecha=valor(foto.fecha);
+    return `
+      <article class="card photo-card">
+        <button class="photo-button" type="button" data-photo-url="${escapeAttr(foto.url || "")}" data-photo-caption="${escapeAttr(pie)}">
+          <img src="${escapeAttr(foto.url || "")}" alt="${escapeAttr(pie)}" loading="lazy">
+          <div class="photo-meta"><span class="photo-date">${escapeHtml(fecha)}</span><p class="photo-caption">${escapeHtml(pie)}</p></div>
+        </button>
+      </article>`;
+  }).join("");
+  grid.querySelectorAll(".photo-button").forEach(button=>{
+    button.addEventListener("click",()=>{
+      abrirFotoAvance(button.dataset.photoUrl,button.dataset.photoCaption);
+    });
+  });
+}
+function renderFolders(){
+  const docs=(datosOperacion.documentacion || []).filter(item=>item.visible!==false);
+  document.getElementById("folders").innerHTML=docs.map(item=>`
+    <a class="folder card" href="${escapeAttr(item.url_drive || "#")}" target="_blank" rel="noopener">${folderIcon()}<span>${escapeHtml(valor(item.nombre))}</span></a>
+  `).join("");
+}
+function renderBitacora(){
+  const section=document.getElementById("bitacoraSection");
+  const feed=document.getElementById("bitacoraFeed");
+  const items=Array.isArray(datosOperacion.bitacora) ? datosOperacion.bitacora : [];
+  section.hidden=items.length===0;
+  if(section.hidden){
+    feed.innerHTML="";
+    return;
+  }
+  feed.innerHTML=items.map((item,index)=>{
+    const esUltima=index===0;
+    const etiqueta=esUltima ? `<span class="entry-latest-label">ÚLTIMA ACTUALIZACIÓN</span>` : "";
+    return `
+    <article class="card entry bitacora-entry ${esUltima?"latest":""}"><div class="entry-date">${escapeHtml(valor(item.fecha))}</div><div>${etiqueta}<b>${escapeHtml(valor(item.titulo))}</b><p>${escapeHtml(valor(item.texto))}</p></div></article>`;
+  }).join("");
+}
+function renderNoticiasMercado(){
+  const section=document.getElementById("noticiasMercadoSection");
+  const feed=document.getElementById("noticiasMercadoFeed");
+  const items=Array.isArray(datosOperacion.noticias_mercado) ? datosOperacion.noticias_mercado : [];
+  section.hidden=items.length===0;
+  if(section.hidden){
+    feed.innerHTML="";
+    return;
+  }
+  feed.innerHTML=items.map(item=>{
+    const medio=item.medio || item.fuente || "";
+    const textoEnlace=medio ? `${escapeHtml(medio)} · Ver noticia ↗` : "Ver noticia ↗";
+    const enlace=item.enlace ? `<a class="entry-source" href="${escapeAttr(item.enlace)}" target="_blank" rel="noopener noreferrer">${textoEnlace}</a>` : "";
+    return `<article class="card entry market"><div class="entry-date">${escapeHtml(valor(item.fecha))}</div><div><b>${escapeHtml(valor(item.titular))}</b><p>${escapeHtml(valor(item.texto))}</p>${enlace}</div></article>`;
+  }).join("");
+}
+function renderContacto(){
+  const contacto=datosOperacion.contacto || {};
+  const enlace=document.getElementById("whatsappLink");
+  if(contacto.whatsapp_numero){
+    enlace.href=`https://wa.me/${encodeURIComponent(contacto.whatsapp_numero)}?text=${encodeURIComponent(contacto.mensaje_predeterminado || "")}`;
+  }else{
+    enlace.removeAttribute("href");
+  }
+}
+function renderTodo(){
+  renderOperacion();
+  renderPlanos();
+  renderEstado();
+  renderProximoReporte();
+  renderEscenarioEconomico();
+  renderHitos();
+  renderGantt();
+  renderEconomico();
+  renderCamaras();
+  renderFotosAvance();
+  renderFolders();
+  renderBitacora();
+  renderNoticiasMercado();
+  renderContacto();
+  activarAvisosScroll();
+  activarAcordeonFases();
+  sincronizarRailGantt();
+}
+function showDataWarning(){
+  document.getElementById("dataWarning").hidden=false;
+}
+function montarVisor(){
+  if(visorMontado) return;
+  const template=document.getElementById("visorTemplate");
+  document.getElementById("accessScreen")?.remove();
+  document.body.classList.remove("bloqueado");
+  document.body.insertBefore(template.content.cloneNode(true), document.getElementById("dataWarning"));
+  visorMontado=true;
+  const btnCerrar=document.getElementById("lightboxClose");
+  if(btnCerrar) btnCerrar.addEventListener("click",cerrarFotoAvance);
+  document.getElementById("photoLightbox").addEventListener("click",event=>{
+    if(event.target.id==="photoLightbox" && !zoomEstado.movido) cerrarFotoAvance();
+  });
+  document.addEventListener("keydown",event=>{
+    if(event.key==="Escape" && !document.getElementById("photoLightbox").hidden) cerrarFotoAvance();
+  });
+}
+function base64ToBytes(value){
+  const binary=atob(value);
+  const bytes=new Uint8Array(binary.length);
+  for(let i=0;i<binary.length;i+=1) bytes[i]=binary.charCodeAt(i);
+  return bytes;
+}
+function bytesToText(bytes){
+  return new TextDecoder().decode(bytes);
+}
+function esEspacioPython(ch){
+  const cp=ch.codePointAt(0);
+  return (cp>=0x09 && cp<=0x0D) || (cp>=0x1C && cp<=0x20) || cp===0x85 || cp===0xA0 || cp===0x1680 || (cp>=0x2000 && cp<=0x200A) || (cp>=0x2028 && cp<=0x2029) || cp===0x202F || cp===0x205F || cp===0x3000;
+}
+function normalizarPassword(password){
+  // ======================================================================
+  // NORMALIZACION CRITICA Y COMPARTIDA:
+  // Esta funcion debe mantenerse IDENTICA a tools/cifrar-visor.py. Si se
+  // cambia aqui, hay que cambiarla tambien en gestion/index.html y en
+  // tools/cifrar-visor.py, o se rompe el acceso al derivar PBKDF2.
+  // ======================================================================
+  return Array.from(password).filter(ch=>!esEspacioPython(ch) && ch!=="-" && ch!==".").join("").toUpperCase();
+}
+async function derivarClavePassword(password,salt,iteraciones){
+  const material=await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(normalizarPassword(password)),
+    "PBKDF2",
+    false,
+    ["deriveKey"]
+  );
+  return crypto.subtle.deriveKey(
+    {name:"PBKDF2",salt,iterations:iteraciones,hash:"SHA-256"},
+    material,
+    {name:"AES-GCM",length:256},
+    false,
+    ["decrypt"]
+  );
+}
+async function abrirSobre(password,sobre,iteraciones){
+  const clavePassword=await derivarClavePassword(password,base64ToBytes(sobre.salt),iteraciones);
+  const clavePlano=await crypto.subtle.decrypt(
+    {name:"AES-GCM",iv:base64ToBytes(sobre.iv)},
+    clavePassword,
+    base64ToBytes(sobre.clave_cifrada)
+  );
+  return crypto.subtle.importKey("raw",clavePlano,{name:"AES-GCM"},false,["decrypt"]);
+}
+let aliasAcceso="";
+async function obtenerClaveMaestra(password,llavero){
+  for(const sobre of llavero.sobres || []){
+    try{
+      const clave=await abrirSobre(password,sobre,llavero.iteraciones);
+      aliasAcceso=sobre.alias || "";
+      return clave;
+    }catch(error){
+      continue;
+    }
+  }
+  throw new Error("Contraseña incorrecta");
+}
+async function cargarLlavero(){
+  if(llaveroCifrado) return llaveroCifrado;
+  const response=await fetch(ORIGEN_LLAVERO);
+  if(!response.ok) throw new Error("No se ha podido cargar el llavero");
+  llaveroCifrado=await response.json();
+  return llaveroCifrado;
+}
+async function descifrarContenido(llavero,masterKey){
+  const contenido=llavero.contenido || {};
+  const plano=await crypto.subtle.decrypt(
+    {name:"AES-GCM",iv:base64ToBytes(contenido.iv)},
+    masterKey,
+    base64ToBytes(contenido.datos)
+  );
+  return JSON.parse(bytesToText(plano));
+}
+async function cargarDatosClaros(){
+  try{
+    const response=await fetch(ORIGEN_DATOS);
+    if(!response.ok) throw new Error("No se han podido cargar los datos");
+    datosOperacion=await response.json();
+    montarVisor();
+    renderTodo();
+  }catch(error){
+    showDataWarning();
+  }
+}
+async function cargarDatosCifrados(password){
+  const llavero=await cargarLlavero();
+  claveMaestra=await obtenerClaveMaestra(password,llavero);
+  datosOperacion=await descifrarContenido(llavero,claveMaestra);
+  montarVisor();
+  renderTodo();
+}
+function configurarAcceso(){
+  const form=document.getElementById("accessForm");
+  const input=document.getElementById("accessPassword");
+  const button=document.getElementById("accessSubmit");
+  const error=document.getElementById("accessError");
+  // Solo enfocamos solos en escritorio. En movil el enfoque automatico abre el teclado
+  // de golpe y ademas activaba el modo compacto antes de que el usuario tocase nada,
+  // asi que el logo salia ya reducido (y de forma erratica, porque cada navegador
+  // trata el enfoque automatico a su manera).
+  if(window.matchMedia("(min-width:900px)").matches && !("ontouchstart" in window)){
+    input.focus();
+  }
+  form.addEventListener("submit",async event=>{
+    event.preventDefault();
+    const password=input.value;
+    if(!password) return;
+    error.textContent="";
+    button.disabled=true;
+    input.disabled=true;
+    button.textContent="Comprobando...";
+    try{
+      await cargarDatosCifrados(password);
+    }catch(err){
+      claveMaestra=null;
+      error.textContent="Contraseña incorrecta";
+      input.disabled=false;
+      button.disabled=false;
+      button.textContent="Entrar";
+      input.value="";
+      input.focus();
+    }
+  });
+}
+if(MODO_CLARO){
+  // Modo de previsualización local: mantiene el origen JSON en claro solo con ?claro=1 mientras se validan cambios sin llavero cifrado.
+  cargarDatosClaros();
+}else{
+  configurarAcceso();
+}
+window.addEventListener("pagehide",liberarExtractoPdfUrl);
+// Ver/ocultar la contrasena: menos errores al teclear un DNI en el movil
+(function(){
+  const ojo=document.getElementById("passEye");
+  const campo=document.getElementById("accessPassword");
+  if(!ojo || !campo) return;
+  ojo.addEventListener("click",()=>{
+    const visible=campo.type==="text";
+    campo.type=visible ? "password" : "text";
+    ojo.setAttribute("aria-pressed", visible ? "false" : "true");
+    ojo.setAttribute("aria-label", visible ? "Mostrar contraseña" : "Ocultar contraseña");
+    ojo.querySelector(".eye-off").style.display = visible ? "none" : "";
+    campo.focus();
+  });
+})();
+</script>
+  <!-- Capa para ver una camara en grande. Es UNA sola y se reutiliza; el video
+       se crea al abrir y se destruye al cerrar, para no dejar streams consumiendo datos. -->
+  <div class="camzoom" id="camZoom" hidden>
+    <div class="camzoom-barra">
+      <span class="camzoom-nombre" id="camZoomNombre"></span>
+      <button type="button" class="camzoom-cerrar" id="camZoomCerrar" aria-label="Cerrar">&#10005;</button>
+    </div>
+    <div class="camzoom-caja" id="camZoomCaja"></div>
+  </div>
+</body>
+</html>
