@@ -27,5 +27,10 @@ definicion-accesos*.txt
 
 # Datos en claro de las operaciones: NUNCA se publican (el visor solo sirve el llavero cifrado)
 data/**/operacion.json
+# ...y CUALQUIER copia suya: los backups se llaman operacion.json.BAK-fecha y no
+# los cubria ni *.bak (no acaban en .bak) ni la regla de arriba. Estaban a un
+# 'git add .' de publicar los datos financieros en claro.
+data/**/operacion.json.*
+data/**/llavero.json.*
 tools/__pycache__/
 
