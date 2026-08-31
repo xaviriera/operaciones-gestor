@@ -1670,6 +1670,12 @@ function calcularSemanaActual(cronograma,total){
   if(!iso) return 0;
   const inicio=new Date(iso+"T00:00:00");
   if(isNaN(inicio)) return 0;
+  // Las semanas de obra se cuentan de LUNES a domingo, como las cuenta el equipo.
+  // La obra arranco en martes (18-ago), asi que sin esto la semana cambiaba los
+  // martes y cada lunes el visor iba una semana por detras de lo que decia el equipo.
+  // Se retrocede al lunes de la semana de inicio; la fecha de inicio real no se toca.
+  const diaSemana=(inicio.getDay()+6)%7; // 0 = lunes
+  inicio.setDate(inicio.getDate()-diaSemana);
   const dias=Math.floor((Date.now()-inicio.getTime())/86400000);
   if(dias<0) return 0;
   return Math.min(Math.floor(dias/7)+1,total);
