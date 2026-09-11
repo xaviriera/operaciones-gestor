@@ -34,3 +34,5 @@ data/**/operacion.json.*
 data/**/llavero.json.*
 tools/__pycache__/
 
+definicion-accesos-demo.txt
+definicion-accesos-tdc.json
