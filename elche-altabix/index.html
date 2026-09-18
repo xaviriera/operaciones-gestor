@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entresuelo Altabix · Propuesta de Inversión · CdU de 0 a ÉXITO</title>
+<!--
+  PLANTILLA PRESENTACIÓN OPORTUNIDAD · CdU de 0 a ÉXITO × IM·PULSO
+  ─ index-v2 (BORRADOR para revisión). Reconstrucción de index-in-preview.html con
+    arquitectura de información en 4 ACTOS · recorrido único · una idea por sección · badge de fase.
+  ─ Los DATOS de la operación viven en el bloque <script id="op-data"> al final.
+  ─ Números provisionales: clase .prov (chip ámbar). class="final" en <body> oculta chips + notas .todo.
+
+  ── ESTRUCTURA (4 actos) ──
+  ACTO 0 · APERTURA: #hero (intacto) · #equipo (intacto) · #track · #servicio (EL MÉTODO una vez)
+  ACTO 1 · FASE 1 GO (diagnóstico viabilidad): #resumen(mercado+activo) · #fase1 (4 patas + doc estrella)
+  ACTO 2 · FASE 2 MAP (plan ejecutable): #proyecto(encaje) · #suministros · #numeros · #escenarios · #riesgos · #gantt
+  ACTO 3 · FASE 3 ÉXITO + INVERSIÓN: #ejecucion · #plan · #propuesta · #ccp · #crono · #venta · #compromisos · #visor · #docs
+
+  ── TABÚS (FUERA del deck público; viven solo en estos comentarios) ──
+  · "comercialización en paralelo" como táctica → se suelta en vivo, NO en el HTML.
+  · "método probado en Crevillente" como táctica comercial → Crevillente solo como track record.
+  · Escenario INVERSO (compradores financian obra → ROE ~35%) → la joya, solo en vivio.
+  · Bonus interno +5K/ud (~15.000€ 70/30) → solo el mecanismo del bonus, no la expectativa.
+  · Audio reunión arquitecto municipal (02_2) → sensible, NO se enseña.
+-->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+:root{
+  --navy:#163D60; --navy2:#0f2c47; --ochre:#E29F34; --cream:#FDFBF7; --ink:#1a1a1a;
+  --line:rgba(22,61,96,.13); --ochre-soft:#f7e9cd; --ok:#1d7a4f; --warn:#b3401f; --grey:#667;
+  --impulso-navy:#141B36; --impulso-orange:#FF4D2E;
+  --in-coral:#E9554F; --in-coral-soft:#fdeceb;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+
+/* ───────── NAV LATERAL ───────── */
+.nav{position:fixed;top:0;left:0;height:100vh;width:248px;background:var(--navy);color:var(--cream);padding:24px 18px;overflow-y:auto;font-size:14px;z-index:50}
+.nav::-webkit-scrollbar{width:4px}.nav::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2)}
+.nav .brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:24px}
+.nav .brand img{height:84px!important}
+.nav .mark{width:42px;height:42px;background:var(--cream);color:var(--navy);border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;position:relative;flex-shrink:0}
+.nav .mark::after{content:"";position:absolute;bottom:5px;left:50%;transform:translateX(-50%);width:18px;height:2px;background:var(--ochre)}
+.nav .brand .t1{font-weight:700;font-size:12.5px;line-height:1.15}
+.nav .brand .t2{font-size:8px;letter-spacing:2px;color:var(--ochre);text-transform:uppercase;margin-top:2px}
+.nav a{display:block;color:rgba(253,251,247,.82);text-decoration:none;padding:7px 10px;border-radius:6px;transition:.15s;line-height:1.3}
+.nav a:hover{background:rgba(255,255,255,.09);color:#fff}
+.nav .grp{font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ochre);font-weight:700;margin:15px 10px 4px}
+
+/* ───────── LAYOUT ───────── */
+main{margin-left:248px}
+.sec{padding:72px 7vw;border-bottom:1px solid var(--line);scroll-margin-top:8px}
+.sec:nth-child(even){background:#fff}
+.kicker{font-size:10.5px;letter-spacing:2.6px;text-transform:uppercase;color:var(--ochre);font-weight:800;margin-bottom:12px}
+h1{font-size:46px;font-weight:900;color:var(--navy);line-height:1.04;letter-spacing:-1.2px}
+h2{font-size:28px;font-weight:800;color:var(--navy);margin-bottom:10px;letter-spacing:-.5px}
+h3{font-size:16.5px;font-weight:700;color:var(--navy);margin:20px 0 8px}
+p{margin-bottom:11px;max-width:1000px;font-size:16px}
+.lead{font-size:19.5px;font-weight:500;color:#27496b;max-width:1040px}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:13.5px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(22,61,96,.07)}
+th{background:var(--navy);color:var(--cream);text-align:left;padding:9px 13px;font-weight:600;font-size:12px;letter-spacing:.4px}
+td{padding:9px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+
+/* ───────── COMPONENTES ───────── */
+.hero{min-height:96vh;display:flex;flex-direction:column;justify-content:center;color:var(--cream);border:none;
+  background:linear-gradient(140deg,rgba(22,61,96,.94) 0%,rgba(15,44,71,.88) 60%,rgba(15,44,71,.96) 100%),url('assets/fotos/original-1.jpg') center/cover no-repeat}
+.hero h1{color:#fff;font-size:58px}
+/* equipo compacto: triángulo protagonista + perfiles con avatar pequeño */
+.tri-row{display:grid;grid-template-columns:minmax(300px,1.1fr) 1fr;gap:30px;align-items:center;margin:18px 0 6px}
+.tri-row img{width:100%;border-radius:14px;box-shadow:0 8px 30px rgba(15,44,71,.3)}
+.profiles{display:flex;flex-direction:column;gap:12px}
+.profile{display:flex;gap:13px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 15px;box-shadow:0 1px 7px rgba(22,61,96,.07)}
+.profile .av{width:56px;height:56px;border-radius:50%;border:3px solid var(--ochre);background-position:center top;background-size:cover;flex-shrink:0}
+.profile .n{font-weight:800;color:var(--navy);font-size:15.5px;display:inline}
+.profile .r{font-size:10px;color:var(--ochre);font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-left:8px;display:inline}
+.profile p{font-size:12px;margin:4px 0 0;line-height:1.5;color:#41526a}
+@media(max-width:840px){.tri-row{grid-template-columns:1fr}}
+.hero .sub{font-size:21px;color:var(--ochre);font-weight:700;margin-top:8px}
+.badge{display:inline-block;background:var(--ochre);color:var(--navy);font-weight:800;font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;padding:7px 16px;border-radius:30px;margin-bottom:20px;width:fit-content}
+.partners{margin-top:30px;font-size:13.5px;letter-spacing:.6px;color:rgba(253,251,247,.75)}
+.partners b{color:#fff}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:15px;margin:20px 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:0 1px 5px rgba(22,61,96,.06)}
+.sec:nth-child(even) .card{background:var(--cream)}
+.card .big{font-size:29px;font-weight:800;color:var(--navy);line-height:1.05}
+.card .lbl{font-size:11.5px;color:var(--grey);margin-top:5px;text-transform:uppercase;font-weight:600;letter-spacing:.4px;line-height:1.4}
+.chip{display:inline-block;background:var(--ochre-soft);color:var(--navy);font-weight:600;font-size:12.5px;padding:4px 12px;border-radius:18px;margin:2px}
+.prov{position:relative}
+.prov::after{content:"PROVISIONAL";font-size:8px;font-weight:800;letter-spacing:1px;background:#fff3da;color:#9a6712;border:1px solid #e8c989;border-radius:8px;padding:1px 6px;margin-left:7px;vertical-align:middle}
+body.final .prov::after{display:none}
+.doc{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1.5px solid var(--navy);border-radius:8px;padding:6px 13px;text-decoration:none;color:var(--navy);font-weight:700;font-size:12px;margin:3px 4px 3px 0;transition:.15s}
+.doc:hover{background:var(--navy);color:#fff}
+.doc::before{content:"📄"}
+.locked{display:flex;gap:13px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-left:4px solid var(--ok);border-radius:10px;padding:15px 18px;margin:10px 0}
+.locked .tick{font-size:21px;line-height:1}
+.locked b{color:var(--navy)}
+.locked p{margin:3px 0 6px;font-size:13.5px}
+.member{border-left:3px solid var(--ochre);padding:6px 0 6px 16px;margin-bottom:8px}
+.member .n{font-weight:800;color:var(--navy);font-size:16.5px}
+.member .r{font-size:13px;color:var(--grey);font-weight:600}
+.member p{font-size:13px;margin:5px 0 0}
+.dash{background:linear-gradient(140deg,var(--navy),var(--navy2));color:var(--cream);border-radius:16px;padding:28px 30px;margin-top:18px}
+.dash h3{color:#fff;margin-top:0;font-size:20px}
+.dash .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+.dash .pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:10px 15px;font-size:12.5px}
+.dash .pill b{color:var(--ochre)}
+.quote{border-left:4px solid var(--ochre);background:#fff;border-radius:0 12px 12px 0;padding:16px 22px;margin:16px 0;font-size:16px;font-weight:600;color:var(--navy);max-width:760px;font-style:italic}
+.dafo{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:14px}
+.dafo div{border-radius:11px;padding:15px 17px;font-size:13px}
+.dafo .f{background:#e9f4ee;border:1px solid #bfdccb}.dafo .o{background:#eaf1f8;border:1px solid #c4d6e8}
+.dafo .d{background:#fdf2e4;border:1px solid #ecd4a8}.dafo .a{background:#faeaea;border:1px solid #e6c3c3}
+.dafo b{display:block;margin-bottom:6px;font-size:12px;letter-spacing:1px;text-transform:uppercase}
+.dafo ul{margin-left:16px}.dafo li{margin-bottom:4px}
+.impulso{background:var(--impulso-navy);color:#fff;border-radius:16px;padding:26px 28px;margin:18px 0}
+.impulso .tag{color:var(--impulso-orange);font-weight:800;letter-spacing:2px;font-size:11px;text-transform:uppercase}
+.impulso h3{color:#fff;margin-top:6px}
+.impulso p{color:rgba(255,255,255,.85);font-size:13.5px}
+.fases{display:flex;gap:0;margin:18px 0;flex-wrap:wrap}
+.fase{flex:1;min-width:170px;background:#fff;border:1px solid var(--line);padding:16px 18px;position:relative}
+.fase:first-child{border-radius:12px 0 0 12px}.fase:last-child{border-radius:0 12px 12px 0}
+.fase .f-tag{font-weight:800;color:var(--ochre);font-size:12px;letter-spacing:1.5px}
+.fase .f-t{font-weight:700;color:var(--navy);font-size:14.5px;margin:4px 0}
+.fase p{font-size:12px;margin:0;color:var(--grey)}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:14px 0}
+.gal .ph{aspect-ratio:4/3;background:repeating-linear-gradient(45deg,#eef2f6,#eef2f6 10px,#e4eaf1 10px,#e4eaf1 20px);border:1px dashed #b9c6d4;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#7d8da0;font-size:11px;font-weight:600;text-align:center;padding:8px}
+.foot{background:var(--navy);color:rgba(253,251,247,.72);text-align:center;padding:28px;font-size:12px;letter-spacing:.8px}
+.foot b{color:var(--ochre)}
+.todo{background:#fffbf2;border:1.5px dashed var(--ochre);border-radius:10px;padding:13px 17px;margin:12px 0;color:#8a5a14;font-weight:600;font-size:13px}
+.todo::before{content:"⏳ ";font-weight:800}
+body.final .todo{display:none}
+/* Botones documento */
+.docbtns{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0 2px}
+.btn-doc{display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-family:inherit;font-weight:700;font-size:13.5px;color:var(--navy);background:#fff;border:1.6px solid var(--navy);border-radius:999px;padding:9px 16px;transition:all .15s;text-decoration:none}
+.btn-doc:hover{background:var(--navy);color:#fff;transform:translateY(-1px)}
+.btn-doc.gold{border-color:var(--ochre);color:#8a5a14}
+.btn-doc.gold:hover{background:var(--ochre);color:#fff}
+.btn-doc .ic{font-size:15px;line-height:1}
+.doc-hero{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:800;padding:11px 22px;margin:6px 0 6px;background:#fff;color:var(--navy);border:1.6px solid var(--navy);box-shadow:0 2px 10px rgba(0,0,0,.10)}
+.doc-hero:hover,.doc-hero:active{background:#fff;border-color:var(--ochre);color:var(--ochre);box-shadow:0 4px 14px rgba(226,159,52,.30);transform:translateY(-1px)}
+/* Visor modal embebido */
+.viewer{position:fixed;inset:0;z-index:99999;background:rgba(10,20,32,.9);backdrop-filter:blur(5px);display:none;flex-direction:column}
+.viewer.open{display:flex}
+.viewer-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 18px;background:var(--navy);color:#fff;box-shadow:0 2px 14px rgba(0,0,0,.3)}
+.viewer-bar .vt{font-weight:700;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.viewer-bar .va{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.viewer-bar a.vlink{color:#fff;text-decoration:none;font-size:12.5px;font-weight:600;border:1px solid rgba(255,255,255,.35);border-radius:8px;padding:6px 12px}
+.viewer-bar a.vlink:hover{background:rgba(255,255,255,.15)}
+.viewer-bar .vclose{cursor:pointer;background:var(--ochre);color:#fff;border:0;border-radius:8px;width:34px;height:34px;font-size:18px;font-weight:800;line-height:1}
+.viewer-stage{flex:1;display:flex;align-items:center;justify-content:center;overflow:auto;background:#33404d}
+.viewer-stage iframe{width:100%;height:100%;border:0;background:#fff}
+.viewer-stage img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.gal img{cursor:zoom-in}
+/* ── GUIÑO IN (Programa IN · Oportunidades IN) ── */
+.in-eyebrow{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(233,85,79,.4);border-left:3px solid var(--in-coral);border-radius:9px;padding:7px 14px;margin-bottom:20px;font-size:12px;color:rgba(253,251,247,.9);letter-spacing:.2px}
+.in-eyebrow b{color:#fff}
+.in-badge{display:inline-flex;align-items:center;gap:5px;font-weight:800;letter-spacing:.6px;font-size:11.5px;color:#fff}
+.in-badge .in{background:var(--in-coral);color:#fff;border-radius:5px;padding:1px 6px;font-weight:900;letter-spacing:1px;font-size:.95em}
+.jv-word{font-weight:900}.jv-word .v{color:var(--in-coral)}
+/* sello IN fijo — guiño presente en todas las secciones */
+.in-stamp{position:fixed;right:14px;bottom:14px;z-index:60;display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.93);border:1px solid var(--line);box-shadow:0 3px 12px rgba(22,61,96,.18);border-radius:30px;padding:5px 12px;font-size:10px;font-weight:800;letter-spacing:.5px;color:var(--navy);pointer-events:none;backdrop-filter:blur(3px)}
+.in-stamp .in{background:var(--in-coral);color:#fff;border-radius:30px;padding:1px 7px;font-weight:900;letter-spacing:1px}
+@media(max-width:600px){.in-stamp{right:9px;bottom:9px;font-size:8.5px;padding:4px 9px}}
+@media print{.in-stamp{display:none}}
+/* logos cabecera portada (CdU izq · Programa IN der) */
+.hero-head{display:flex;flex-direction:column;width:max-content;max-width:100%;align-self:flex-start}
+.toplogos{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:16px;gap:24px}
+.in-lockup{display:inline-flex;align-items:center;gap:7px;font-weight:900;letter-spacing:1px;color:#fff;font-size:21px;line-height:1;text-shadow:0 1px 9px rgba(0,0,0,.6);margin-bottom:8px;text-decoration:none;cursor:pointer}
+.in-lockup:hover .in{filter:brightness(1.08)}
+.in-lockup .in{background:var(--in-coral);color:#fff;border-radius:7px;padding:2px 10px;letter-spacing:2px}
+/* logo PROGRAMA IN (recreado) — navy por defecto, blanco sobre fondo oscuro */
+.prog-in{display:inline-flex;align-items:center;gap:6px;font-weight:900;letter-spacing:.5px;line-height:1;white-space:nowrap}
+.prog-in .pg{color:var(--navy)}
+.prog-in.light .pg{color:#fff}
+.prog-in .in{background:var(--in-coral);color:#fff;border-radius:30px;padding:3px 11px;letter-spacing:1.5px}
+/* acceso a la oportunidad en la plataforma IN (pastilla portada, marcada) */
+.in-access{display:inline-flex;align-items:center;flex-wrap:wrap;gap:10px 14px;font-size:14px;font-weight:600;color:#fff;margin-bottom:16px;background:rgba(233,85,79,.15);border:1px solid rgba(233,85,79,.55);padding:10px 10px 10px 18px;border-radius:13px;text-decoration:none;transition:.15s}
+.in-access:hover{background:rgba(233,85,79,.27);border-color:var(--in-coral)}
+.in-access .go{font-weight:800;color:#fff;background:var(--in-coral);padding:7px 14px;border-radius:30px;font-size:12.5px;white-space:nowrap;box-shadow:0 2px 10px rgba(233,85,79,.4)}
+/* accesos sutiles en el pie */
+.partners a.ft-link{color:rgba(253,251,247,.92);text-decoration:none;font-weight:600;border-bottom:1px dotted rgba(253,251,247,.45);transition:.15s}
+.partners a.ft-link:hover{color:#fff;border-bottom-color:#fff}
+.partners a.ft-imp{display:inline-flex;align-items:center;gap:3px;text-decoration:none;vertical-align:middle}
+.partners a.ft-imp .arr{font-size:11px;color:rgba(253,251,247,.75)}
+.partners a.ft-imp:hover .arr{color:#fff}
+@media(max-width:600px){.toplogos{margin-bottom:20px}.toplogos img{height:60px!important}.in-lockup{font-size:13px;gap:5px}.in-lockup .in{padding:1px 6px;border-radius:5px}}
+/* cronograma CCP */
+.crono{display:flex;gap:0;margin:18px 0;flex-wrap:wrap}
+.crono .step{flex:1;min-width:155px;background:#fff;border:1px solid var(--line);border-top:4px solid var(--in-coral);padding:14px 16px;position:relative}
+.crono .step:not(:last-child)::after{content:"→";position:absolute;right:-9px;top:50%;transform:translateY(-50%);color:var(--in-coral);font-weight:900;z-index:2}
+.crono .st-tag{font-size:10px;font-weight:800;letter-spacing:1px;color:var(--in-coral);text-transform:uppercase}
+.crono .st-t{font-weight:800;color:var(--navy);font-size:13.5px;margin:4px 0 5px}
+.crono .step p{font-size:11.5px;margin:0;color:var(--grey)}
+/* la propuesta (ask) */
+.ask{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.ask .col{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.ask .col.give{border-top:4px solid var(--ochre)}.ask .col.get{border-top:4px solid var(--in-coral)}
+.ask .col h3{margin-top:0}
+/* compromisos del gestor */
+.commit{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:16px 0}
+.commit .c{background:#fff;border:1px solid var(--line);border-left:3px solid var(--ok);border-radius:10px;padding:13px 15px;font-size:13px;color:#41526a}
+.commit .c b{color:var(--navy);display:block;margin-bottom:3px}
+@media(max-width:700px){.ask{grid-template-columns:1fr}}
+/* GANTT visual */
+.gantt{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;overflow-x:auto}
+.g-head{display:grid;grid-template-columns:150px repeat(16,1fr);gap:2px;font-size:9px;font-weight:700;color:var(--grey);margin-bottom:6px}
+.g-head span{text-align:center}
+.g-row{display:grid;grid-template-columns:150px repeat(16,1fr);gap:2px;align-items:center;margin-bottom:4px}
+.g-row .g-lbl{font-size:11px;font-weight:600;color:var(--navy);padding-right:8px;line-height:1.2}
+.g-row i{height:14px;border-radius:3px;background:#edf1f5}
+.g-row i.on{background:var(--ochre)}
+.g-row.cont i.on{background:#b9c9d8}
+.g-mes{display:grid;grid-template-columns:150px repeat(16,1fr);gap:2px;font-size:9.5px;font-weight:800;color:var(--ochre);letter-spacing:1px;margin-bottom:3px}
+.g-mes span{text-align:center;grid-column:span 4}
+/* logo IM·PULSO (texto, hasta asset real) */
+.imp-logo{font-family:'Montserrat',sans-serif;font-weight:800;letter-spacing:.5px;color:#fff;font-size:18px}
+.imp-logo b{color:var(--impulso-orange)}
+/* equipo con foto + triángulo */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:18px 0}
+.t-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 1px 6px rgba(22,61,96,.07)}
+.t-card .t-ph{aspect-ratio:1/1;background:#e8edf2 center/cover no-repeat;display:flex;align-items:center;justify-content:center;color:#8a99aa;font-size:12px;font-weight:600}
+.t-card .t-body{padding:14px 16px}
+.t-card .n{font-weight:800;color:var(--navy);font-size:17px}
+.t-card .r{font-size:11.5px;color:var(--ochre);font-weight:800;text-transform:uppercase;letter-spacing:1px;margin:2px 0 7px}
+.t-card p{font-size:12.5px;margin:0}
+.tri{display:flex;flex-direction:column;align-items:center;margin:22px auto;max-width:420px}
+.tri .apex{background:var(--navy);color:#fff;border-radius:10px;padding:9px 22px;font-weight:800;font-size:13px}
+.tri .base{display:flex;gap:14px;margin-top:14px}
+.tri .base span{background:var(--ochre);color:var(--navy);border-radius:10px;padding:9px 18px;font-weight:800;font-size:13px}
+.tri .lbl{font-size:11px;color:var(--grey);margin-top:8px;font-weight:600;letter-spacing:.5px}
+/* equipo rediseñado: pirámide grande + perfiles horizontales */
+.piramide{display:block;width:100%;max-width:1000px;margin:22px 0 10px;border-radius:14px;box-shadow:0 12px 38px rgba(15,44,71,.3)}
+.team-h{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0 6px;max-width:720px}
+.team-h .th{background:#fff;border:1px solid var(--line);border-top:4px solid var(--ochre);border-radius:12px;padding:16px 18px;box-shadow:0 1px 6px rgba(22,61,96,.07)}
+.team-h .th .n{font-weight:800;color:var(--navy);font-size:18px}
+.team-h .th .r{display:block;font-size:11px;color:var(--ochre);font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin:2px 0 8px}
+.team-h .th p{font-size:13px;margin:0;color:#41526a;line-height:1.55}
+@media(max-width:760px){.team-h{grid-template-columns:1fr}}
+/* triángulo del equipo — recreado en SVG, sin fondo, integrado */
+.pyr{position:relative;width:100%;max-width:720px;margin:52px 0 22px;aspect-ratio:66/38}
+.pyr-bg{position:absolute;inset:0;width:100%;height:100%}
+.pyr .res{position:absolute;left:50%;top:62%;transform:translate(-50%,-50%);color:var(--ochre);font-weight:900;font-size:clamp(14px,2.1vw,20px);letter-spacing:1px}
+.pyr .lab{position:absolute;transform:translate(-50%,-50%);font-weight:800;font-size:11.5px;letter-spacing:2px;color:#90a0b2;text-transform:uppercase}
+.pyr .lab-e{top:28%}
+.pyr .node{position:absolute;display:flex;flex-direction:column;align-items:center;gap:4px;transform:translate(-50%,-50%);text-align:center}
+.pyr .node img{width:92px;height:92px;border-radius:50%;border:3px solid var(--ochre);object-fit:cover;object-position:center 22%;background:#e8edf2;flex-shrink:0;box-shadow:0 4px 16px rgba(15,44,71,.25)}
+.pyr .node .nm{font-size:15px;color:var(--navy);font-weight:800;line-height:1.15;white-space:nowrap}
+.pyr .node .nm b{display:block;color:var(--ochre);font-size:11px;text-transform:uppercase;letter-spacing:1.2px;font-weight:800;margin-top:2px}
+@media(max-width:680px){.pyr{aspect-ratio:1.15/1}.pyr .node img{width:50px;height:50px;border-width:2px}.pyr .node .nm{font-size:11.5px}.pyr .node .nm b{font-size:9px}.pyr .lab{font-size:8.5px;letter-spacing:1px}.pyr .lab-e{top:37%}}
+/* servicio por dentro */
+.serv{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:18px 0}
+.serv .s-card{background:#fff;border:1px solid var(--line);border-top:5px solid var(--ochre);border-radius:12px;padding:18px 20px}
+.serv .s-tag{font-weight:900;color:var(--ochre);font-size:13px;letter-spacing:1.5px}
+.serv .s-t{font-weight:800;color:var(--navy);font-size:16px;margin:4px 0 8px}
+.serv ul{margin-left:17px;font-size:12.5px}
+.serv li{margin-bottom:5px}
+.serv .s-estado{margin-top:10px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+@media(max-width:840px){.nav{display:none}main{margin-left:0}.sec{padding:48px 5vw}.hero{min-height:auto;padding:80px 6vw}.hero h1{font-size:36px}h1{font-size:30px}h2{font-size:23px}.dafo{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}table{font-size:12px;display:block;overflow-x:auto}.fases{flex-direction:column}.fase{border-radius:10px!important;margin-bottom:6px}}
+@media(max-width:520px){.cards{grid-template-columns:1fr}}
+/* ── MÓVIL fino: portada y bloques densos (mucho tráfico será móvil) ── */
+@media(max-width:600px){
+  .sec{padding:40px 6vw}
+  .hero{padding:56px 7vw}
+  .hero>img:first-of-type{height:74px!important;margin-bottom:20px!important}
+  .hero h1{font-size:30px}
+  .hero .sub{font-size:16px}
+  .hero .badge{font-size:9.5px;letter-spacing:1px;padding:6px 12px}
+  .hero p[style]{font-size:15.5px!important;line-height:1.5!important}
+  .hero .partners{font-size:12px!important}
+  .lead{font-size:16.5px}
+  h2{font-size:21px}
+  .kicker{font-size:9.5px;letter-spacing:1.8px}
+  /* tablas: ya scrollean (display:block en 840) — afinamos legibilidad */
+  th,td{padding:8px 10px;font-size:12px}
+  /* Gantt: etiqueta más estrecha para ganar ancho de barras al scrollear */
+  .g-head,.g-row,.g-mes{grid-template-columns:96px repeat(16,16px)}
+  .impulso,.dash{padding:20px 18px}
+  .dafo{grid-template-columns:1fr}
+  .quote{font-size:14.5px;padding:13px 16px}
+  .serv{grid-template-columns:1fr}
+}
+/* IMPRESIÓN: sin perder detalle ni color */
+@media print{
+  .nav{display:none}main{margin-left:0}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sec{padding:26px 24px;page-break-inside:avoid;border-bottom:1px solid #ccc}
+  .hero{min-height:auto;padding:60px 40px}
+  .gal .ph,.todo{border-style:solid}
+  a.doc{border-width:1px}
+  .dash,.impulso,.hero{background:var(--navy)!important}
+}
+/* ── v2: badge de FASE por sección (acto/recorrido único) ── */
+.phase-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(226,159,52,.14);border:1px solid var(--ochre);color:#8a5a14;font-weight:800;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;padding:5px 13px;border-radius:30px;margin-bottom:14px}
+.phase-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--ochre);flex-shrink:0}
+.phase-badge.go .dot{background:var(--ok)}
+.phase-badge.map .dot{background:var(--ochre)}
+.phase-badge.exito .dot{background:var(--in-coral)}
+.phase-badge.invers .dot{background:var(--navy)}
+/* divisor de ACTO (separa los 4 movimientos del recorrido) */
+.act-divider{background:linear-gradient(140deg,var(--navy),var(--navy2));color:var(--cream);padding:42px 7vw;border-bottom:1px solid var(--line)}
+.act-divider .act-n{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ochre);font-weight:800}
+.act-divider h2{color:#fff;margin:8px 0 6px;font-size:30px}
+.act-divider p{color:rgba(253,251,247,.85);max-width:880px;margin:0;font-size:16px}
+@media(max-width:840px){.act-divider{padding:32px 5vw}.act-divider h2{font-size:23px}}
+/* patrón por fase: qué hace en el servicio + qué hicimos en TDC */
+.fase-split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+.fase-split .fs{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.fase-split .fs.servicio{border-top:4px solid var(--ochre)}
+.fase-split .fs.tdc{border-top:4px solid var(--ok)}
+.fase-split .fs .fs-tag{font-size:10.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--grey);margin-bottom:6px}
+.fase-split .fs.servicio .fs-tag{color:#8a5a14}
+.fase-split .fs.tdc .fs-tag{color:var(--ok)}
+.fase-split .fs h3{margin-top:0}
+@media(max-width:760px){.fase-split{grid-template-columns:1fr}}
+/* patas de la Fase 1 (jurídica/urbanística/técnica/económica) */
+.patas{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0}
+.pata{background:#fff;border:1px solid var(--line);border-left:4px solid var(--ok);border-radius:10px;padding:15px 18px}
+.pata .p-tag{font-size:10.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--ok);margin-bottom:6px}
+.pata b{color:var(--navy)}
+.pata p{font-size:13px;margin:4px 0 8px}
+.pata .docbtns{margin:8px 0 0}
+/* bonus destacado (#propuesta) */
+.bonus-box{background:linear-gradient(140deg,#fff,#fff8ec);border:1.5px solid var(--ochre);border-radius:16px;padding:22px 26px;margin:18px 0}
+.bonus-box .bx-tag{font-weight:900;letter-spacing:1.5px;font-size:12px;color:#8a5a14;text-transform:uppercase}
+.bonus-box h3{margin:6px 0 8px}
+.bonus-box>p{font-size:14.5px}
+.bx-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.bx-c{background:#fff;border:1px solid var(--line);border-top:4px solid var(--ochre);border-radius:12px;padding:14px 16px}
+.bx-c.alt{border-top-color:var(--ok)}
+.bx-h{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--grey)}
+.bx-v{font-size:17px;font-weight:800;color:var(--navy);margin:5px 0}
+.bx-n{font-size:12.5px;color:#41526a}
+.bx-foot{font-size:13px;color:#41526a;margin-top:6px}
+@media(max-width:700px){.bx-grid{grid-template-columns:1fr}}
+/* visor del inversor — toque premium + CTA integrado dentro de la caja navy */
+.visor-dash{border:1px solid rgba(226,159,52,.45);box-shadow:0 12px 38px rgba(15,44,71,.36);position:relative;overflow:hidden}
+.visor-dash::before{content:"";position:absolute;top:-40%;right:-10%;width:320px;height:320px;background:radial-gradient(circle,rgba(226,159,52,.16),rgba(226,159,52,0) 70%);pointer-events:none}
+.visor-flag{display:inline-flex;align-items:center;gap:7px;background:rgba(226,159,52,.16);border:1px solid rgba(226,159,52,.5);color:var(--ochre);font-weight:800;font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;padding:5px 13px;border-radius:30px;margin-bottom:14px}
+.visor-cta{display:inline-flex;align-items:center;gap:12px;margin-top:20px;background:var(--navy2);color:#fff;font-weight:800;font-size:14.5px;padding:13px 24px;border-radius:30px;text-decoration:none;border:1.5px solid var(--ochre);box-shadow:0 6px 20px rgba(0,0,0,.3);transition:.18s}
+.visor-cta:hover{background:#15406a;transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.4)}
+.visor-cta .vc-arrow{transition:transform .18s}
+.visor-cta:hover .vc-arrow{transform:translateX(4px)}
+.visor-note{margin-top:14px;font-size:12px;color:rgba(253,251,247,.6);letter-spacing:.3px}
+/* indicador de scroll horizontal en tablas (móvil/tablet) — sombras laterales tipo Lea Verou */
+@media(max-width:840px){
+  table{
+    background-image:
+      linear-gradient(to right, #fff 30%, rgba(255,255,255,0)),
+      linear-gradient(to left, #fff 30%, rgba(255,255,255,0)),
+      radial-gradient(farthest-side at 0 50%, rgba(22,61,96,.22), rgba(22,61,96,0)),
+      radial-gradient(farthest-side at 100% 50%, rgba(22,61,96,.22), rgba(22,61,96,0));
+    background-position:0 0, 100% 0, 0 0, 100% 0;
+    background-repeat:no-repeat;
+    background-size:36px 100%, 36px 100%, 14px 100%, 14px 100%;
+    background-attachment:local, local, scroll, scroll;
+  }
+}
+/* logo (imago CdU) en el CTA del visor */
+.visor-cta .vc-logo{height:26px;width:auto;display:block;flex-shrink:0}
+/* pie con logotipos (CdU · IM·PULSO · Programa IN), cada uno con acceso */
+.foot-logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;gap:24px 48px;margin-bottom:22px}
+.foot-logos .fl{display:flex;flex-direction:column;align-items:center;gap:10px;text-decoration:none}
+.foot-logos .fl img{height:44px;width:auto;opacity:.95;transition:.15s}
+.foot-logos .fl:hover img{opacity:1}
+.foot-logos .fl .acc{font-size:10.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--ochre)}
+.foot-logos .fl:hover .acc{color:#fff}
+.foot-tag{font-size:11px;color:rgba(253,251,247,.62);letter-spacing:.5px;line-height:1.7}
+.foot-claim{display:inline-block;margin-top:8px;font-style:italic;font-weight:600;font-size:13.5px;letter-spacing:.4px;color:var(--ochre)}
+
+/* === FIX RESPONSIVE MÓVIL (2026-06-25) === */
+@media(max-width:600px){
+  /* 1. 4 patas a 1 columna */
+  #proyecto .patas{grid-template-columns:1fr}
+
+  /* 2. Ocultar columna P×I (3ª) en tabla de riesgos */
+  #riesgos table th:nth-child(3),
+  #riesgos table td:nth-child(3){display:none}
+
+  /* 3. Tablas que desbordan: garantizar scroll horizontal + hint visual */
+  #track .table-wrap,
+  #track table,
+  #escenarios .table-wrap,
+  #escenarios table,
+  #numeros .table-wrap,
+  #numeros table,
+  #suministros .table-wrap,
+  #suministros table{
+    overflow-x:auto;
+    display:block;
+    -webkit-overflow-scrolling:touch;
+  }
+  /* Pista visual de scroll horizontal mediante sombra a la derecha */
+  #track .table-wrap,
+  #escenarios .table-wrap,
+  #numeros .table-wrap,
+  #suministros .table-wrap{
+    position:relative;
+    background:
+      linear-gradient(to right, white 30%, rgba(255,255,255,0)),
+      linear-gradient(to right, rgba(255,255,255,0), white 70%) 100% 0,
+      radial-gradient(farthest-side at 0 50%, rgba(0,0,0,.15), rgba(0,0,0,0)),
+      radial-gradient(farthest-side at 100% 50%, rgba(0,0,0,.15), rgba(0,0,0,0)) 100% 0;
+    background-repeat:no-repeat;
+    background-size:40px 100%, 40px 100%, 14px 100%, 14px 100%;
+    background-attachment:local, local, scroll, scroll;
+  }
+  /* Para tablas sin .table-wrap: overflow directo ya cubre el caso via @media 840 */
+
+  /* 5. .card .lbl mínimo 12.5px */
+  .card .lbl{font-size:12.5px!important}
+
+  /* 6. .btn-doc.doc-hero no ocupa 100% ancho */
+  .btn-doc.doc-hero{align-self:flex-start;max-width:100%}
+
+  /* Evitar overflow del body */
+  body{overflow-x:hidden}
+}
+
+/* === FIX RESPONSIVE MÓVIL — breakpoint 400px (2026-06-25) === */
+@media(max-width:400px){
+  /* 4. Galería a 1 columna */
+  .gal{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="brand"><img src="assets/logo-cdu-blanco.png" alt="CdU de 0 a ÉXITO" style="height:54px;width:auto"></div>
+  <div class="grp">Apertura</div>
+  <a href="#equipo">Quiénes somos</a><a href="#track">Track record</a><a href="#servicio">El método (GO·MAP·ÉXITO)</a>
+  <div class="grp">Fase 1 · GO — Diagnóstico</div>
+  <a href="#resumen">Mercado y activo</a><a href="#fase1">Viabilidad</a>
+  <div class="grp">Fase 2 · MAP — Plan</div>
+  <a href="#proyecto">Encaje técnico</a><a href="#suministros">Suministros</a><a href="#numeros">Números</a><a href="#escenarios">Escenarios</a><a href="#riesgos">Riesgos</a><a href="#gantt">Planning · Gantt</a>
+  <div class="grp">Fase 3 · ÉXITO + Inversión</div>
+  <a href="#ejecucion">Ejecución y venta</a><a href="#plan">Quién compra y cómo</a><a href="#propuesta">La propuesta (JV servicer)</a><a href="#ccp">Cómo entras · CCP</a><a href="#compromisos">Compromisos · solvencia</a><a href="#visor">Tu cuadro de mandos</a>
+  <div class="grp">Cierre</div>
+  <a href="#docs">Índice documental</a>
+</nav>
+
+<main>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<!-- ════════════════════  ACTO 0 · APERTURA  ════════════════════════ -->
+<!-- ═════════════════════════════════════════════════════════════════ -->
+
+<!-- ═════════ S0 · PORTADA (INTOCABLE — copiada tal cual) ═════════ -->
+<section class="sec hero">
+  <div class="hero-head">
+    <div class="toplogos">
+      <a href="https://tucambiodeuso.com" target="_blank" rel="noopener" style="display:inline-flex" aria-label="CdU de 0 a ÉXITO — tucambiodeuso.com"><img src="assets/logo-cdu-blanco.png" alt="CdU de 0 a ÉXITO" style="height:120px;width:auto"></a>
+      <a href="https://oportunidades.in" target="_blank" rel="noopener" class="in-lockup" aria-label="Oportunidades IN — plataforma del Programa IN">OPORTUNIDADES <span class="in">IN</span></a>
+    </div>
+    <span class="badge">Propuesta de inversión · Joint Venture · Comprar-Aportar Valor-Vender</span>
+  </div>
+  <h1>Entresuelo Altabix</h1>
+  <div class="sub">Locales en planta baja/entresuelo → viviendas · Alicante · 2026</div>
+  <p class="lead" style="color:rgba(253,251,247,.9);margin-top:22px;max-width:900px;font-size:21px">
+    Una operación de Cambio de Uso con la viabilidad <b>cerrada y certificada</b>, la demanda <b>medida dos veces sobre el terreno</b> y un equipo que la ejecuta de principio a fin.</p>
+  <p style="margin-top:20px;font-size:18px;color:var(--ochre);font-weight:700;max-width:900px">Metodología propia repartida en 3 fases — <span style="display:inline-flex;align-items:center;gap:7px;vertical-align:middle;margin:0 2px">
+    <span style="background:rgba(226,159,52,.16);border:1px solid var(--ochre);color:var(--ochre);padding:2px 9px;border-radius:7px;font-size:.86em;font-weight:800;letter-spacing:.5px">GO</span><span style="color:var(--ochre)">→</span>
+    <span style="background:rgba(226,159,52,.16);border:1px solid var(--ochre);color:var(--ochre);padding:2px 9px;border-radius:7px;font-size:.86em;font-weight:800;letter-spacing:.5px">MAP</span><span style="color:var(--ochre)">→</span>
+    <span style="background:rgba(226,159,52,.16);border:1px solid var(--ochre);color:var(--ochre);padding:2px 9px;border-radius:7px;font-size:.86em;font-weight:800;letter-spacing:.5px">ÉXITO</span></span> — y un objetivo claro: pasar de la viabilidad al beneficio real.<br><span style="color:rgba(253,251,247,.88)">Sin improvisar. Sin sorpresas.</span></p>
+  <div class="partners" style="font-size:14.5px">
+    <a href="#" data-pendiente="URL_PLATAFORMA_IN" title="Documento pendiente: URL_PLATAFORMA_IN" target="_blank" rel="noopener" class="in-access"><span>Oportunidad publicada por el canal oficial del <span class="prog-in light" style="font-size:15px"><span class="pg">PROGRAMA</span><span class="in">IN</span></span></span><span class="go">Ver en la plataforma →</span></a>
+    <div style="margin-top:8px;margin-bottom:13px">Gestiona el equipo <b>CdU de 0 a ÉXITO</b> — <a href="https://tucambiodeuso.com" target="_blank" rel="noopener" class="ft-link">ver servicio completo ↗</a></div>
+    <div>Asociado con <a href="https://im-pulso.app" target="_blank" rel="noopener" class="ft-imp" title="IM·PULSO"><img src="assets/logo-impulso-chapa.png" alt="IM·PULSO" style="height:40px;width:auto;vertical-align:middle;margin:0 6px"></a> para la inteligencia de mercado — <a href="https://im-pulso.app" target="_blank" rel="noopener" class="ft-link">ver servicio completo ↗</a></div></div>
+
+</section>
+
+<!-- ═════════ S0 · EQUIPO (INTOCABLE — copiada tal cual) ═════════ -->
+<section class="sec" id="equipo">
+  <div class="kicker">Equipo gestor</div>
+  <h2>Tres perfiles diferentes. Mismos estándares.<br>Un objetivo: <span style="color:var(--ochre)">el Resultado.</span></h2>
+  <p class="lead">Esto no va solo de un método — va de un equipo humano completo, <b>encajado como un puzzle</b>: tres energías que se complementan.</p>
+  <div class="pyr">
+    <img class="pyr-bg" src="assets/pyramid-puzzle.svg" alt="">
+    <span class="res">RESULTADO</span>
+    <span class="lab lab-e" style="left:50%">ESPÍRITU</span>
+    <span class="lab" style="left:33%;top:88%">MENTE</span>
+    <span class="lab" style="left:67%;top:88%">CORAZÓN</span>
+    <div class="node" style="left:50%;top:6%"><img src="assets/xavi-blanca.png" alt="Xavi"><span class="nm">Xavi<b>Visión</b></span></div>
+    <div class="node" style="left:9%;top:89%"><img src="assets/paco.png" alt="Paco"><span class="nm">Paco<b>Control</b></span></div>
+    <div class="node" style="left:91%;top:89%"><img src="assets/dani.png" alt="Dani"><span class="nm">Dani<b>Ejecución</b></span></div>
+  </div>
+  <div class="team-h">
+    <div class="th"><span class="n">Paco</span><span class="r">Mente · Control</span><p>La toma de tierra del proyecto. El cerebro analítico que estudia cada camino y elige el mejor; números y documentos reales, sin suposiciones. Hace controlables las variables que no lo parecen.</p></div>
+    <div class="th"><span class="n">Xavi</span><span class="r">Espíritu · Visión</span><p>La visión creativa del proyecto: leer hacia dónde va el mercado y qué necesita. Marketing y claridad para convertir la idea en algo palpable — y la IA como palanca para escalar al siguiente nivel.</p></div>
+    <div class="th"><span class="n">Dani</span><span class="r">Corazón · Ejecución</span><p>La acción: ejecuta la obra y la parte técnico-jurídica. Sabe qué toca en cada gestión y con cada ente oficial. Mucho oficio de obra; cercano, resuelve y suma. Pieza clave.</p></div>
+  </div>
+</section>
+
+<!-- ═════════ S0 · TRACK RECORD (Crevillente como PRUEBA, no táctica) ═════════ -->
+<section class="sec" id="track">
+  <div class="kicker">Equipo gestor · Operaciones</div>
+  <h2>Lo que ya hemos hecho — la prueba antes de la promesa</h2>
+  <p class="lead">No hablamos en futuro: tenemos operaciones cerradas y en marcha que demuestran que el método llega hasta el resultado real. Estos son los números.</p>
+  
+  <h3>Cambio de uso (local → viviendas)</h3>
+  <table>
+    <tr><th>Operación</th><th>Inversión</th><th>Venta</th><th>Rentabilidad</th><th>Anualizada</th><th>Estado</th></tr>
+<tr><td><strong>CdU</strong> · 2 viviendas · C/ Diego Fuentes Serrano (Elche)</td><td>140.000 €</td><td>220.000 €</td><td>ROI 57%</td><td>68% anual</td><td>Finalizada · <a href="https://discord.com/channels/818097367508713473/1302444976730406942" target="_blank">Hilo en Discord</a></td></tr>
+<tr><td><strong>CdU</strong> · 4 viviendas · C/ Capitán Alfonso Vives (Elche)</td><td>330.000 €</td><td>473.000 €</td><td>ROI 52%</td><td>48% anual</td><td>Finalizada (pendiente de cierre)</td></tr>
+<tr><td><strong>CdU</strong> · 13 viviendas · C/ Alcalde Mariano Beviá 12-14 (San Vicente del Raspeig)</td><td>930.000 €</td><td>1.640.000 €</td><td>ROI 76%</td><td>38% anual</td><td>En fase final</td></tr>
+<tr><td><strong>CdU</strong> · 1 vivienda · C/ Fossar 15 (Elche, Raval)</td><td>160.000 €</td><td>220.000 €</td><td>ROI 37,5%</td><td>45% anual</td><td>Finalizada</td></tr>
+  </table>
+
+  <h3>Comprar, aportar valor y vender</h3>
+  <table>
+    <tr><th>Operación</th><th>Inversión</th><th>Venta</th><th>Rentabilidad</th><th>Anualizada (plazo)</th><th>Estado</th></tr>
+<tr><td><strong>C/AV/V</strong> · Tríplex · C/ Boquera Calvarí (Crevillente)</td><td>149.026 €</td><td>185.000 €</td><td>ROI 24% · ROE 45,5%</td><td>27,4% anual (10,5 meses)</td><td>Finalizada · <a href="https://discord.com/channels/818097367508713473/1503443427495514333" target="_blank">Hilo en Discord</a></td></tr>
+<tr><td><strong>C/AV/V</strong> · Piso · C/ Juan Ramón Jiménez (Elche)</td><td>45.000 €</td><td>118.000 €</td><td>ROI 44%</td><td>53% anual (10 meses)</td><td>Finalizada · Detalles en el perfil del gestor</td></tr>
+<tr><td><strong>C/AV/V</strong> · Piso · C/ Bahamas (Orihuela Costa)</td><td>38.480 €</td><td>76.500 €</td><td>ROI 60%</td><td>144% anual (5 meses)</td><td>Finalizada · Detalles en el perfil del gestor</td></tr>
+<tr><td><strong>C/AV/V</strong> · Piso · Av. Alcalde Ramón Pastor 12 (Elche)</td><td>216.000 €</td><td>270.000 €</td><td>ROI 25%</td><td>49,9% anual</td><td>Finalizada · <a href="https://discord.com/channels/818097367508713473/1354248845772460173" target="_blank">Hilo en Discord</a></td></tr>
+<tr><td><strong>C/AV/V</strong> · Piso · C/ Churruca, La Veleta (Torrevieja)</td><td>65.836 €</td><td>Objetivo ~145.000 €</td><td>ROI objetivo ~120%</td><td>—</td><td>En venta</td></tr>
+  </table>
+
+  <h3>Comprar, aportar valor y alquilar</h3>
+  <table>
+    <tr><th>Operación</th><th>Inversión</th><th>Renta mensual</th><th>Notas</th><th>Estado</th></tr>
+<tr><td><strong>C/AV/A</strong> · Dúplex · C/ Joan Maragall (Sant Pere de Ribes, Barcelona)</td><td>~167.000 €</td><td>830 €/mes</td><td><strong>Rentabilidad infinita</strong> — operación financiada al 100%, sin capital propio inmovilizado · Valor potencial de venta ~255.000 €</td><td>Alquilada</td></tr>
+  </table>
+</section>
+<section class="sec" id="servicio" style="display:none"><!-- RETIRADA Xavi 15-jun: no vender el servicio aquí; el método se enseña SUTIL dentro de las fases (3x1: IM·PULSO+servicio+oportunidad), eje = la oportunidad. Contenido conservado por si se recupera. -->
+      <div class="s-estado" style="color:var(--grey)">⬜ En esta operación: PREPARADA</div>
+  <div class="cards">
+    <div class="card"><div class="big">Transparencia absoluta</div><div class="lbl">Cobramos por criterio, no por metro construido — el objetivo es la mejor decisión, aunque sea no hacer nada</div></div>
+    <div class="card"><div class="big">Cero conflicto de interés</div><div class="lbl">No somos promotores ni constructores disfrazados: el método protege al inversor desde el minuto cero</div></div>
+    <div class="card"><div class="big">Método replicable</div><div class="lbl">Lo que veis hoy es lo que nuestro servicio hace por cualquier cliente</div></div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<!-- ═══════  ACTO 1 · FASE 1 · GO — DIAGNÓSTICO DE VIABILIDAD  ═══════ -->
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<div class="act-divider">
+  <div class="act-n">Fase 1 · GO</div>
+  <h2>El diagnóstico de viabilidad</h2>
+  <p>Antes de mover capital, comprobamos que la operación se puede hacer. Aquí está lo que medimos en el mercado, el activo del que partimos y los cuatro ejes que la sostienen — con el Informe de Diagnóstico como prueba.</p>
+</div>
+
+<!-- ═════════ S1 · MERCADO + ACTIVO (qué hace F1 en el servicio + qué medimos en TDC) ═════════ -->
+<section class="sec" id="resumen">
+  <span class="phase-badge go"><span class="dot"></span>Fase 1 · GO</span>
+  <div class="kicker">Mercado y activo</div>
+  <h2>El mercado, medido — no opinado</h2>
+  <p class="lead">Todo empieza por una pregunta: ¿hay demanda real para el producto que vamos a crear? La medimos con datos, no con intuición.</p>
+  <div class="cards">
+    <div class="card"><div class="big">2.438 €/m²</div><div class="lbl">El precio de nuestra zona (Altabix, Idealista). Zonas colindantes entre 1.340 y 2.535 €/m².</div></div>
+    <div class="card"><div class="big">60-90 viviendas/año</div><div class="lbl">Compraventas anuales en el barrio de Altabix (Idealista)</div></div>
+    <div class="card"><div class="big">326</div><div class="lbl">Anuncios en alquiler tradicional en el barrio de Altabix</div></div>
+  </div>
+  <p style="margin-top:4px">El precio de salida lo afinamos en la Fase 2; aquí basta una <b>estimación orientativa apoyada en datos reales de mercado</b>, que confirma que hay recorrido para el producto que vamos a crear.</p>
+  <div style="display:flex;align-items:center;gap:10px;margin-top:12px">
+    <img src="assets/logo-impulso-chapa.png" alt="IM·PULSO" style="height:34px;width:auto;flex:none">
+    <span style="font-size:12.5px;color:var(--grey)">Demanda y precios medidos con <b>IM·PULSO</b>. El análisis completo va incluido en el informe de viabilidad de Fase 1.</span>
+  </div>
+  <h3>El activo del que partimos</h3>
+  <div class="cards">
+    <div class="card"><div class="big">127,05 m² útiles · 131 m² construidos</div><div class="lbl">2 locales en planta baja/entresuelo · fincas registrales 65.406 y 74.310 · uso comercial actual</div></div>
+    <div class="card"><div class="big">→ 2 viviendas</div><div class="lbl">2 viviendas de 2 dormitorios cada una — Vivienda 1 con 1 baño, Vivienda 2 con 2 baños</div></div>
+    <div class="card"><div class="big">14</div><div class="lbl">Pisos en venta en el barrio de Altabix con características similares (MTVV) — mercado con oferta activa, no somos los únicos</div></div>
+  </div>
+  <p><b>El problema:</b> Altabix es el barrio residencial de mayor crecimiento de Elche, pegado al campus de la <b>UMH</b> —a apenas 300 m en línea recta— y con fuerte componente universitario: una demanda de vivienda que no encuentra oferta suficiente, con solo 14 pisos comparables en venta frente a 326 anuncios de alquiler activos en la misma zona. Ahí mismo hay dos locales comerciales en planta baja/entresuelo, hoy infrautilizados, mientras el mercado real —verificado con 5 inmobiliarias de la zona (<b>130.000-169.000 €</b>) y 6 testigos del MTVV (<b>139.000-199.000 €</b>)— pide vivienda reformada de 2 dormitorios, lista para entrar. El barrio mueve entre 60 y 90 compraventas al año, y el comprador real —parejas jóvenes, primeros compradores, estudiantes y personal universitario, verificado en campo— compite hoy por un parque de vivienda mayoritariamente sin reformar. El problema, por tanto, no es de demanda ni de localización: es la falta de producto adecuado en el punto exacto donde el mercado lo pide.</p>
+  <p><b>La aportación de valor:</b> La operación transforma dos locales comerciales en dos viviendas de 2 dormitorios mediante cambio de uso, agrupación/segregación registral y reforma integral, con los dos accesos independientes y la fachada propia de cada unidad ya confirmados en visita técnica (27/08/2026). La reforma resuelve, sin tocar la estructura, la única limitación técnica real —la altura libre actual de ≈2,50 m, recuperable a ≈2,55-2,56 m acabados retirando el relleno y la solera existente— y aprovecha que cada vivienda cuenta ya con contador individual de agua y electricidad, sin necesidad de nueva acometida. El resultado es el producto que hoy falta en Altabix: vivienda reformada y lista para entrar, con la <b>Vivienda 1</b> (2 dormitorios, 1 baño) y la <b>Vivienda 2</b> (2 dormitorios, 2 baños), planificadas con un Gantt de obra de 11 capítulos y 16 semanas. El valor no se crea comprando barato, sino cerrando la distancia entre lo que hay hoy (local comercial) y lo que el comprador de la zona busca y no encuentra (vivienda habitual reformada).</p>
+  <h3>Dónde está — y por qué importa</h3>
+  <table>
+    <tr><th>Punto de interés</th><th>Distancia</th></tr>
+    <tr><td>Supermercado (Consum)</td><td>58 m</td></tr>
+<tr><td>Colegio CEIP Víctor Pradera</td><td>189 m</td></tr>
+<tr><td>Centro de Salud de Altabix (urgencias)</td><td>385 m</td></tr>
+    <tr><td>Universidad Miguel Hernández (UMH)</td><td>300 m al campus · 2 min en coche</td></tr>
+    <tr><td>Hospital General Universitario de Elche</td><td>1,1 km · 3 min en coche</td></tr>
+  </table>
+  <h3>Estado original</h3>
+  <div class="gal">
+    <img src="assets/fotos/original-1.jpg" alt="Estado original 1" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+    <img src="assets/fotos/original-2.jpg" alt="Estado original 2" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+    <img src="assets/fotos/original-3.jpg" alt="Estado original 3" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+    <img src="assets/fotos/original-4.jpg" alt="Estado original 4" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+    <img src="assets/fotos/original-5.jpg" alt="Estado original 5" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+    <img src="assets/fotos/original-6.jpg" alt="Estado original 6" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+    <img src="assets/fotos/original-7.jpg" alt="Estado original 7" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+    <img src="assets/fotos/original-8.jpg" alt="Estado original 8" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+  </div>
+</section>
+
+<!-- ═════════ S2 · FASE 1 — VIABILIDAD POR PATAS + doc estrella ═════════ -->
+<section class="sec" id="fase1">
+  <span class="phase-badge go"><span class="dot"></span>Fase 1 · GO</span>
+  <div class="kicker">El veredicto</div>
+  <h2>¿Es viable este cambio de uso?</h2>
+  <div class="fase-split">
+    <div class="fs servicio">
+      <div class="fs-tag">Qué hace esta fase en el servicio</div>
+      <h3>El veredicto, sin ruleta</h3>
+      <p>La Fase 1 valida cuatro ejes — y si uno falla, falla todo: <b>jurídico/registral, urbanístico, técnico y económico</b>. Se obtiene un veredicto claro (GO / GO con ajustes / NO GO) antes de comprometer un euro.</p>
+    </div>
+    <div class="fs tdc">
+      <div class="fs-tag">Qué hicimos en Entresuelo Altabix</div>
+      <h3>Tres ejes avanzan, uno pendiente de cierre</h3>
+      <p>A fecha de hoy no se pueden dar por cerrados los cuatro ejes: el encaje técnico está confirmado, pero el CCU sigue sin conceder (la funcionaria responsable del Ayuntamiento de Elche está de baja), la superficie del activo tiene tres lecturas distintas sin reconciliar (120/127,05/144 m²) y el precio de venta asumido en el Excel (325.000 €) supera el escenario optimista de la segunda fuente de mercado consultada (IM·PULSO V2, 310.161 €). Veredicto: GO condicionado al cierre de estos tres puntos.</p>
+    </div>
+  </div>
+
+  <h3>El informe de viabilidad</h3>
+  <p class="lead">Todo el diagnóstico, en un solo documento.</p>
+  <a class="btn-doc doc-hero" href="https://drive.google.com/file/d/1inI73HNIVS2oxarGgk8xugHpcSlNN2Ka/view" target="_blank" rel="noopener"><img src="assets/logo-cdu-casa.png" alt="CdU de 0 a Éxito" style="height:30px;width:auto"> Ver Informe de Diagnóstico · Fase 1</a>
+  <p style="font-size:13px;color:var(--grey);margin-top:14px">Y la documentación con la que verificamos cada eje, como prueba de que está respaldado:</p>
+  <div class="docbtns">
+    <a class="btn-doc" href="https://drive.google.com/file/d/1kWAxpN8BghftxuowdVBCh3X0Q3ymno0p/view" target="_blank" rel="noopener"><span class="ic">📄</span> Nota simple</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1jLLy7OIfEWk5a1FeA02RC0HLdvuzXQGb/view" target="_blank" rel="noopener"><span class="ic">🗂️</span> Datos catastrales</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1lk2eWLPUfwMi8iy1DwSp0hGdTsKWJSb7/view" target="_blank" rel="noopener"><span class="ic">🏷️</span> Valor de referencia catastral</a>
+    <a class="btn-doc" href="#" data-pendiente="URL_DOC_NORMAS_COMUNITARIAS" title="Documento pendiente: URL_DOC_NORMAS_COMUNITARIAS" target="_blank" rel="noopener"><span class="ic">🏠</span> Normas comunitarias</a>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<!-- ═════════  ACTO 2 · FASE 2 · MAP — PLAN EJECUTABLE  ═════════════ -->
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<div class="act-divider">
+  <div class="act-n">Fase 2 · MAP</div>
+  <h2>El plan ejecutable</h2>
+  <p>La viabilidad abre la puerta; la ejecución decide el resultado. Aquí convertimos el "sí" en un plan: el encaje técnico al detalle, los suministros, los números por partidas, los escenarios, los riesgos y el calendario de obra.</p>
+</div>
+
+<!-- ═════════ S3 · ENCAJE TÉCNICO DETALLADO (Fase 2) ═════════ -->
+<section class="sec" id="proyecto">
+  <span class="phase-badge map"><span class="dot"></span>Fase 2 · MAP</span>
+  <div class="kicker">Plan estratégico y operativo</div>
+  <h2>El mapa del cambio de uso: del «sí, es viable» al plan que ejecuta la obra</h2>
+  <p class="lead">La viabilidad abre la puerta. La ejecución decide el resultado.</p>
+  <div class="fs-tag">Qué hace esta fase en el servicio</div>
+  <p>La Fase 1 respondió a una pregunta: «¿es viable este cambio de uso?». La Fase 2 no responde otra — <b>dibuja el mapa</b>. Traza el camino completo: qué hacer, en qué orden y qué pedir a quién en cada trámite, para que la obra arranque sin bloqueos ni sorpresas.</p>
+  <div class="patas">
+    <div class="pata">
+      <div class="p-tag">Proyecto técnico</div>
+      <b>Las 2 viviendas encajan</b>
+      <p>Cambio de uso, agrupación y segregación registral contemplados y presupuestados (AJD específico para cada trámite). El informe de encaje técnico está confirmado; queda pendiente la concesión del Certificado de Compatibilidad Urbanística (CCU) por el Ayuntamiento de Elche.</p>
+      <div class="docbtns">
+        <a class="btn-doc" href="https://drive.google.com/file/d/16-Ob23SzguKTFvWp3F8KJv_7xYWexXZv/view" target="_blank" rel="noopener"><span class="ic">📐</span> Encaje técnico</a>
+        <a class="btn-doc" href="#" data-pendiente="URL_DOC_ESTADO_ACTUAL" title="Documento pendiente: URL_DOC_ESTADO_ACTUAL" target="_blank" rel="noopener"><span class="ic">🏚️</span> Estado actual</a>
+      </div>
+    </div>
+    <div class="pata">
+      <div class="p-tag">Vía administrativa</div>
+      <b>CCU en trámite, licencia por presentar</b>
+      <p>El Certificado de Compatibilidad Urbanística (CCU) está en trámite ante el Ayuntamiento de Elche; el expediente está actualmente bloqueado porque la funcionaria responsable se encuentra de baja. La licencia de obras todavía no se ha presentado.</p>
+      <div class="docbtns">
+        <a class="btn-doc" href="#" data-pendiente="URL_DOC_CERTIFICADO_COMPATIBILIDAD" title="Documento pendiente: URL_DOC_CERTIFICADO_COMPATIBILIDAD" target="_blank" rel="noopener"><span class="ic">🏛️</span> Certificado de compatibilidad</a>
+      </div>
+    </div>
+    <div class="pata">
+      <div class="p-tag">Marco jurídico</div>
+      <b>Precio libre y comunidad, pendientes de documentar</b>
+      <p>Los dos locales objeto de la operación nunca han tenido calificación de vivienda de protección oficial: son locales comerciales en planta baja/entresuelo, por lo que el régimen de <b>VPO no aplica</b> a esta operación y el precio de venta es libre por naturaleza del activo, no por certificado. Lo que sí queda pendiente de reunir es la documentación de la comunidad de propietarios: no se han localizado las normas o estatutos que autoricen expresamente la agrupación, segregación y cambio de uso de los locales a vivienda. Existen las actas de la derrama aprobada por la comunidad, pero no está confirmado que ese documento equivalga a la conformidad estatutaria que exige el cambio de uso. Este extremo —normas/estatutos de la comunidad, o la confirmación de que las actas de derrama cubren el mismo alcance— sigue abierto y debe cerrarse antes de dar por completada la vía jurídica de la operación.</p>
+      <div class="docbtns">
+        <a class="btn-doc" href="#" data-pendiente="URL_DOC_CONFORMIDAD_COMUNITARIA" title="Documento pendiente: URL_DOC_CONFORMIDAD_COMUNITARIA" target="_blank" rel="noopener"><span class="ic">✔️</span> Conformidad comunitaria</a>
+      </div>
+    </div>
+  </div>
+  <h3>El mapa antes de la obra</h3>
+  <p>Qué hacer, en qué orden y por qué — cada paso con su documento sobre la mesa. Cuando la obra empieza, no se improvisa: <b>se ejecuta</b>.</p>
+  <div class="cards">
+    <div class="card"><div class="big">≈2,50 m actual → ≈2,55–2,56 m acabados</div><div class="lbl">Altura actual de 2,50 m, recuperable a ≈2,55–2,56 m acabados retirando el granito/relleno y la solera existente, con regularización y tarima final (~6 mm)</div></div>
+    <div class="card"><div class="big"><span title="Pendiente: VENTANAS_PUERTAS" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span></div><div class="lbl"><span title="Pendiente: DESCRIPCION_VENTANAS_PUERTAS" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span></div></div>
+    <div class="card"><div class="big"><span title="Pendiente: GARAJES_EXIGIBLES" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span></div><div class="lbl"><span title="Pendiente: DESCRIPCION_GARAJES" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span></div></div>
+  </div>
+  <h3>El producto final (visualización · piso piloto)</h3>
+  <div class="gal">
+    <img src="assets/fotos/render-1.jpg" alt="Render 1" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+    <img src="assets/fotos/render-2.jpg" alt="Render 2" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+    <img src="assets/fotos/render-3.jpg" alt="Render 3" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+    <img src="assets/fotos/render-4.jpg" alt="Render 4" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+    <img src="assets/fotos/render-5.jpg" alt="Render 5" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+    <img src="assets/fotos/render-6.jpg" alt="Render 6" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+  </div>
+</section>
+
+<!-- ═════════ SUMINISTROS (bloque NUEVO · Fase 2) ═════════ -->
+<section class="sec" id="suministros">
+  <span class="phase-badge map"><span class="dot"></span>Fase 2 · MAP</span>
+  <div class="kicker">Plan ejecutable · Suministros</div>
+  <h2>Agua y luz: previstos y presupuestados</h2>
+  <p class="lead">Los suministros son una de las sorpresas clásicas de un cambio de uso. Por eso van en el plan, no en la obra.</p>
+  <div class="cards">
+    <div class="card"><div class="big">Luz</div><div class="lbl">Contador individual de electricidad ya existente en cada vivienda; no se prevé nueva batería de contadores ni nuevos puntos de suministro</div></div>
+    <div class="card"><div class="big">Agua</div><div class="lbl">Contador individual de agua ya existente en cada vivienda; no se prevé nueva acometida</div></div>
+    <div class="card"><div class="big">2 contadores</div><div class="lbl">Una unidad de suministro por vivienda — independientes</div></div>
+  </div>
+  <p>Cada vivienda dispone ya de contador individual de agua y electricidad; no se prevé nueva batería de contadores ni nuevos puntos de suministro, lo que reduce la incertidumbre técnica y económica de esta partida. Sigue sin existir un presupuesto formal de agua en PDF — solo hay tres fotografías de los contadores existentes, pendientes de solicitar los presupuestos formales a las compañías.</p>
+  <div class="gal">
+    <img src="assets/fotos/014_instalaciones_2.jpeg" alt="CGP en fachada" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+    <img src="assets/fotos/contador-luz.jpg" alt="Contadores de luz" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+    <img src="assets/fotos/contador-agua.jpg" alt="Contadores de agua" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px">
+  </div>
+  <div class="docbtns">
+    <a class="btn-doc" href="#" data-pendiente="URL_DOC_PRESUPUESTO_AGUA" title="Documento pendiente: URL_DOC_PRESUPUESTO_AGUA" target="_blank" rel="noopener"><span class="ic">💧</span> Presupuesto de acometida de agua (Hidrogea)</a>
+  </div>
+</section>
+
+<!-- ═════════ S4 · NÚMEROS DETALLE (cifras núcleo UNA vez · Fase 2) ═════════ -->
+<section class="sec" id="numeros">
+  <span class="phase-badge map"><span class="dot"></span>Fase 2 · MAP</span>
+  <div class="kicker">Plan ejecutable · Análisis económico</div>
+  <h2>Los números, partida a partida</h2>
+  <p class="lead">En el diagnóstico de la Fase 1 confirmamos que los números de la operación cuadraban. Aquí los llevamos al detalle: el desglose fino, partida a partida, con la cifra exacta de cada una.</p>
+  <table>
+    <tr><th>Partida</th><th>Importe <span style="font-weight:400">(cálculo cerrado · 3 presupuestos contrastados)</span></th></tr>
+    <tr><td>Compra del activo</td><td>110.000 €</td></tr>
+    <tr><td>Compra de los 2 locales</td><td>110.000 €</td></tr>
+<tr><td colspan="2">ITP (9%) + notaría + registro + gestoría ~11.700 €</td></tr>
+<tr><td colspan="2">AJD (cambio de uso + agrupación + segregación) ~4.258,58 €</td></tr>
+<tr><td>partida 'In-Bruto' (concepto sin aclarar en el Excel)</td><td>12.100 €</td></tr>
+<tr><td>honorarios técnicos</td><td>5.227,20 €</td></tr>
+<tr><td>ICIO (2,7%)</td><td>744,45 €</td></tr>
+<tr><td>reforma (presupuesto SPM V3, con IVA)</td><td>108.028,80 €</td></tr>
+<tr><td colspan="2">otros gastos de reforma (limpieza, certificados ECUV, salida de humos) ~4.938,06 €</td></tr>
+<tr><td>imprevistos</td><td>1.000 €</td></tr>
+<tr><td>honorario del servicer</td><td>12.000 €</td></tr>
+    <tr><td>ITP (9%) + notaría + registro + gestoría</td><td>~11.700 €</td></tr>
+    <tr><td><b>INVERSIÓN TOTAL DE LA OPERACIÓN</b></td><td><b>259.489,09 €</b></td></tr>
+  </table>
+  <div class="docbtns">
+    <a class="btn-doc gold" href="https://drive.google.com/file/d/1oWJ_2qBN-2VluLjT-ixHSLZkud1Cuod9/view" target="_blank" rel="noopener"><span class="ic">📄</span> Ver presupuesto de obra (SPM)</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1cG5LEvbqVSoxhO4rNC_zImu1rXLmClO5/view" target="_blank" rel="noopener"><span class="ic">📊</span> Excel · análisis económico</a>
+  </div>
+  <p style="font-size:13px;color:var(--grey)">Cálculo prudente sobre 3 presupuestos contrastados. En la estructura de inversión verás el reparto del capital.</p>
+  <!-- TABÚ (FUERA): "Comercializamos EN PARALELO a la obra (método probado en Crevillente)" → se suelta en vivo, no en el HTML. -->
+  <div class="impulso">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <div class="tag">IM·PULSO v2 · Informe completo de valoración</div>
+      <img src="assets/logo-impulso.png" alt="IM·PULSO" style="height:30px;width:auto;opacity:.95">
+    </div>
+    <h3>El precio, confirmado por tres motores</h3>
+    <p>En la Fase 1 mostramos un resumen del análisis IM·PULSO. Aquí está el <b>informe completo</b>: cruza <b>tres motores de valoración independientes</b> — el <b>motor IM·PULSO</b> (datos masivos de mercado), el <b>portal del notariado</b> (precios reales de escritura) y el <b>MTVV</b> · Método Total de Valoración de Vivienda del estudio inicial. Más profundidad y más cruce, mismo resultado: las tres vías convergen en <b>155.000–170.000 € por unidad</b>, en línea con el paso 4.</p>
+    <a class="btn-doc gold" href="https://drive.google.com/file/d/1BI1z8b7m9aLWiCHsE-DsSwUG898jcTOz/view" target="_blank" rel="noopener"><span class="ic">📈</span> Ver informe completo IM·PULSO · 3 motores cruzados</a>
+  </div>
+</section>
+
+<!-- ═════════ S4b · ESCENARIOS (realista + optimista · el inverso FUERA) ═════════ -->
+<section class="sec" id="escenarios">
+  <span class="phase-badge map"><span class="dot"></span>Fase 2 · MAP</span>
+  <div class="kicker">Plan ejecutable · Escenarios</div>
+  <h2>Dos escenarios</h2>
+  <p class="lead">El escenario que contamos es el <b>realista</b>, fijado sobre suelos validados varias veces — situado en la franja alta de ese rango ya validado. El optimista es el techo razonable.</p>
+  <table>
+    <tr><th></th><th>Realista (el que contamos)</th><th>Optimista</th></tr>
+    <tr><td><b>Quién compra</b></td><td>Parejas jóvenes, primeros compradores y personas solas, verificado en la comercialización real (6 contactos telefónicos en 6 días), atraídos por la reforma integral y la ubicación</td><td>Target más amplio del barrio: 86-89% comprador nacional, familias de tamaño medio, estudiantes y empleados públicos/docentes/investigadores; uso mayoritario como vivienda habitual (65-75%), con una franja de alquiler a jóvenes (15-20%) e inversión pequeña (5-10%)</td></tr>
+    <tr><td><b>Venta 2 unidades</b></td><td><b>325.000 €</b> (155.000+170.000)</td><td><b><span title="Pendiente: VENTA_OPTIMISTA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span></b> (<span title="Pendiente: DESGLOSE_VENTA_OPTIMISTA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span>)</td></tr>
+    <tr><td><b>Beneficio</b> (tras servicer 12.000 €)</td><td><b>52.911 €</b></td><td><b><span title="Pendiente: BENEFICIO_OPTIMISTA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span></b></td></tr>
+    <tr><td><b>Rentabilidad del capital</b></td><td><b>20,39%</b></td><td><b><span title="Pendiente: RENTABILIDAD_OPTIMISTA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span> + bonus *</b></td></tr>
+  </table>
+  <p style="font-size:13px;color:var(--grey)">El capital rinde el mismo porcentaje para gestor e inversores por igual. <b>* Vender por encima de 325.000 € activa el bonus</b> — una capa aparte que se suma a tu rentabilidad (ver «La propuesta»).</p>
+  <!-- TABÚ (FUERA): Escenario INVERSO (compradores financian la obra → ROE ~35%) NO se enseña aquí; es la joya, se suelta en vivo. -->
+</section>
+
+<!-- ═════════ S5 · RIESGOS + MATRIZ (etiquetas CERRADO/VALIDADO) ═════════ -->
+<section class="sec" id="riesgos">
+  <span class="phase-badge map"><span class="dot"></span>Fase 2 · MAP</span>
+  <div class="kicker">Plan ejecutable · Riesgos y mitigaciones</div>
+  <h2>Los riesgos: los que cerramos y los que vigilamos</h2>
+  <div class="quote">"Toda operación tiene riesgos. La diferencia es si te los encuentras… o si los cierras antes de que te encuentren ellos."</div>
+  <p>Esta operación tiene varios riesgos abiertos, no cerrados: el CCU pendiente de concesión, el presupuesto de obra caducado sin revalidar, la superficie del activo sin reconciliar entre tres fuentes, y el precio de venta asumido en el Excel que supera el escenario optimista de la segunda fuente de mercado consultada. Lo que sigue abierto, acotado y con responsable:</p>
+  <table>
+    <tr><th>Riesgo</th><th>Estado</th><th>P×I</th><th>Mitigación</th></tr>
+    <tr><td colspan="2">Entresuelo Altabix identifica varios riesgos abiertos: CCU pendiente de concesión (8·Medio) — Ayto. de Elche, funcionaria de baja</td></tr>
+<tr><td>presupuesto de obra caducado</td><td>~3 meses, venció jun-2026, resubido sin revalidar</td></tr>
+<tr><td>superficies sin reconciliar entre tres fuentes</td><td>120/127,05/144 m²</td></tr>
+<tr><td>precio de venta y rentabilidad no respaldados por la segunda fuente de mercado — IM·PULSO V2 optimista (310.161 €) es inferior a los</td><td>325.000 € del Excel</td></tr>
+<tr><td>fórmulas rotas en la hoja 'Inversores'</td><td>impiden repartir capital/beneficio por inversor</td></tr>
+<tr><td>riesgo residual recalculado en la matriz</td><td>filas 10-13 = 6·Bajo, filas 14-15 = 9·Medio</td></tr>
+<tr><td>desfase de 2 días entre el plazo de arras y el calendario del equipo</td><td>ya corregido por decisión de Xavi</td></tr>
+    <tr><td>Régimen fiscal — ITP vs IVA</td><td><b style="color:var(--ok)">✅ CERRADO</b></td><td>—</td><td>Confirmado: la operación tributa por ITP (9%), no por IVA — verificado en el contrato de arras y el análisis económico</td></tr>
+    <tr><td>CCU — Certificado de Compatibilidad Urbanística</td><td><b style="color:#9a6712">🟡 VALIDADO</b></td><td>8 · Medio</td><td>Pendiente de concesión por el Ayuntamiento de Elche; expediente bloqueado por baja de la funcionaria responsable — seguimiento activo</td></tr>
+    <tr><td>Precio de venta no respaldado por la segunda fuente de mercado</td><td><b style="color:var(--warn)">🔴 ABIERTO</b></td><td>9 · Medio</td><td>El precio asumido (325.000 €) supera el escenario optimista de IM·PULSO V2 (310.161 €); pendiente de contrastar antes de comprometer el precio de salida definitivo</td></tr>
+  </table>
+  <div class="docbtns">
+    <a class="btn-doc" href="https://drive.google.com/file/d/1DQuylMCeJIIq23qKjgVS5ERoll-0VZKp/view" target="_blank" rel="noopener"><span class="ic">📋</span> Ver matriz de riesgos</a>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<!-- ════════  ACTO 3 · FASE 3 · ÉXITO + BLOQUE INVERSIÓN  ═══════════ -->
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<div class="act-divider">
+  <div class="act-n">Fase 3 · ÉXITO + Inversión</div>
+  <h2>Del plan al resultado — y cómo entras tú</h2>
+  <p>La Fase 3 lleva el plan al resultado real: obra y cierre de la operación. Y a continuación, la parte que te toca: la estructura de la inversión, cómo entras, cómo cobras y con qué garantías.</p>
+</div>
+
+<!-- ═════════ S7 · EJECUCIÓN Y VENTA (Fase 3) ═════════ -->
+<section class="sec" id="ejecucion">
+  <span class="phase-badge exito"><span class="dot"></span>Fase 3 · ÉXITO</span>
+  <div class="kicker">Ejecución integral · Sistema propio</div>
+  <h2>Orquestamos y ejecutamos hasta la venta</h2>
+  <div class="fase-split">
+    <div class="fs servicio">
+      <div class="fs-tag">Qué hace esta fase en el servicio</div>
+      <h3>La realidad se juega en la obra</h3>
+      <p>La Fase 3 ejecuta: dirección de obra por hitos, proveedores con ofertas comparadas, control económico y cierre documental auditable. Es donde el plan se convierte en beneficio.</p>
+    </div>
+    <div class="fs tdc">
+      <div class="fs-tag">Qué hicimos en Entresuelo Altabix</div>
+      <h3>Preparada para arrancar</h3>
+      <p>La operación llega con un doble estudio de mercado ya realizado —<b>MTVV</b> (Fase 3), con 6 testigos directos, e informe <b>IM·PULSO V2</b>, con 60 testigos— y con el Proyecto Técnico y el Encaje Técnico confirmados, que validan sin tocar la estructura la transformación de los dos locales en dos viviendas. La obra está planificada al detalle: un Gantt de 11 capítulos con 16 semanas de duración, sobre un presupuesto de obra ya cerrado con la constructora (SPM, 620 €/m²). Los trámites de la compra están resueltos —régimen de ITP confirmado, AJD de cambio de uso, agrupación y segregación ya calculados— y el activo cuenta con nota simple, datos catastrales y valor de referencia catastral verificados. Queda pendiente la vía administrativa: el <b>Certificado de Compatibilidad Urbanística</b> sigue en trámite ante el Ayuntamiento de Elche, y la licencia de obras todavía no se ha presentado.</p>
+    </div>
+  </div>
+  <h3>Estrategia de salida</h3>
+  <div class="cards">
+    <div class="card"><div class="big">325.000 €</div><div class="lbl">Venta de las 2 viviendas — escenario realista</div></div>
+    <div class="card"><div class="big">155.000–170.000 € por unidad</div><div class="lbl">Precio por unidad según tipo — sobre suelo validado</div></div>
+    <div class="card"><div class="big">2-3 meses por unidad · 3-5 meses el conjunto</div><div class="lbl">Horizonte de venta por unidad</div></div>
+  </div>
+  <p><b>Posicionamiento:</b> El producto se posiciona como vivienda de 2 dormitorios, reformada y lista para entrar, en un barrio consolidado y en expansión: 21.532 habitantes, el de mayor crecimiento de Elche, a 300 m del campus de la <b>UMH</b>, con supermercado a 58 m, colegio a 189 m y centro de salud a 385 m. El perfil de comprador verificado en campo —parejas jóvenes, primeros compradores y personas solas— coincide con el target más amplio del barrio: 86-89% comprador nacional, con un 65-75% de uso como vivienda habitual y una franja del 15-20% de alquiler a estudiantes y jóvenes profesionales ligada a la proximidad universitaria. Esa doble demanda encaja también con el inversor patrimonialista: con 326 anuncios de alquiler activos y entre 60 y 90 compraventas al año en la zona, Altabix ofrece salida tanto en venta como en alquiler. La verificación real de la comercialización —6 contactos telefónicos en 6 días, todos dispuestos a pagar entre 150.000 y 160.000 €— confirma que ese comprador existe y está activo hoy, no es una hipótesis de gabinete.</p>
+  <p><b>El precio de salida está validado, no estimado</b> — El precio se ha contrastado con cuatro métodos independientes. Primero, 5 inmobiliarias de la zona tasaron el producto de referencia entre <b>130.000 y 169.000 €</b>. Segundo, el MTVV documentó 6 testigos de mercado directos en Altabix, con precios entre <b>139.000 y 199.000 €</b>. Tercero, el informe IM·PULSO V2 amplió la muestra a 60 testigos (23 para la Vivienda 1, 37 para la Vivienda 2), con un rango bruto de <b>115.000 a 192.000 €</b>. Cuarto, la comercialización real del MTVV recibió 6 contactos telefónicos en los primeros 6 días de publicación, todos dispuestos a pagar entre 150.000 y 160.000 €, validando en campo el precio de cierre de 150.000 € para la vivienda de referencia de 60 m². El precio de salida asumido en el análisis económico de esta operación (155.000 € + 170.000 € = 325.000 € por las dos viviendas reales) queda por encima de los tres escenarios del informe IM·PULSO V2 (conservador 251.071 €, medio 278.573 €, optimista 310.161 €), una discrepancia que sigue pendiente de resolver antes de confirmar el precio de salida definitivo.</p>
+  <div class="docbtns">
+    <a class="btn-doc" href="#" data-pendiente="URL_DOC_MTVV_ORIGEN" title="Documento pendiente: URL_DOC_MTVV_ORIGEN" target="_blank" rel="noopener"><span class="ic">📈</span> MTVV · inbruto (origen)</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1hw9txLZE8JTgxsfRWTyuw5_uXFlvMbi7/view" target="_blank" rel="noopener"><span class="ic">📈</span> MTVV actualizado · paso 4 (CdU)</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1BI1z8b7m9aLWiCHsE-DsSwUG898jcTOz/view" target="_blank" rel="noopener"><span class="ic">📊</span> Revisar IM·PULSO v2</a>
+  </div>
+  <!-- TABÚ (FUERA): "comercialización EN PARALELO a la obra (método probado en Crevillente)" → se suelta en vivo, no en el HTML. -->
+  </section>
+
+<!-- ═════════ S6 · GANTT (planificación · Fase 3) ═════════ -->
+<section class="sec" id="gantt">
+  <span class="phase-badge exito"><span class="dot"></span>Fase 3 · ÉXITO</span>
+  <div class="kicker">Ejecución · Dirección por hitos</div>
+  <h2>Obra: 16 semanas, planificadas capítulo a capítulo</h2>
+  <div class="cards">
+    <div class="card"><div class="big"><span title="Pendiente: DURACION_LICENCIA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span></div><div class="lbl">Licencia (en trámite, pre-validada)</div></div>
+    <div class="card"><div class="big">16 semanas (4 meses)</div><div class="lbl">Obra — Gantt de 11 capítulos con solapes</div></div>
+    <div class="card"><div class="big">≈8-10 meses</div><div class="lbl">Operación completa</div></div>
+  </div>
+  11 capítulos (+ gestión de residuos y seguridad y salud, ambos paralelos a toda la obra, 16 semanas): I. Demoliciones y levantado de solado (S1-S3) · II. Albañilería: tabiquería, trasdosados, techos (S3-S7) · III. Fontanería (S5-S12) · IV. Electricidad (S7-S16) · V. Carpintería de madera (S7-S16) · VI. Andamio + carpintería metálica y ventanas (3 semanas) · VII. Revestimientos interiores, sin fachada (S10-S14) · VIII. Climatización/preinstalación (2 semanas) · IX. Griferías y sanitarios (3 semanas) · X. Pintura (S15-S16) · XI. Gestión de residuos (16 semanas, paralela).
+  <div class="gantt">
+    <div class="g-mes"><span style="grid-column:1"></span><span>MES 1</span><span>MES 2</span><span>MES 3</span><span>MES 4</span></div>
+    <div class="g-head"><span style="text-align:left">Capítulo</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span></div>
+    <div class="g-row"><span class="g-lbl">Demoliciones</span><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="g-row"><span class="g-lbl">Albañilería</span><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="g-row"><span class="g-lbl">Fontanería + clima</span><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="g-row"><span class="g-lbl">Electricidad</span><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="g-row"><span class="g-lbl">Carpintería metálica</span><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="g-row"><span class="g-lbl">Revestimientos</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="g-row"><span class="g-lbl">Carpintería madera</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="g-row"><span class="g-lbl">Sanitarios + grifería</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+    <div class="g-row"><span class="g-lbl">Hormigón pulido</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+    <div class="g-row"><span class="g-lbl">Pintura</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+    <div class="g-row"><span class="g-lbl">Exterior (h. impreso)</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+    <div class="g-row cont"><span class="g-lbl">Residuos + Seg. y salud</span><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+    <div class="g-row"><span class="g-lbl"><b>ENTREGA</b></span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="background:var(--ok)"></i></div>
+  </div>
+  <p style="font-size:12.5px;color:var(--grey)">Solapes según el diagrama: Demoliciones (S1-S3) → Albañilería (S3-S7) → Fontanería + Climatización (S5-S12) → Electricidad + Sanitarios (S7-S16) → Carpintería (S7-S16) → Revestimientos (S10-S14) → Pintura (S15-S16) → entrega final (S16). El Cap. I se amplía a 3 semanas por el levantado de solado completo (131 m²); el Cap. VI incluye montaje y desmontaje de andamio para la sustitución de carpintería exterior. No hay capítulo de fachada exterior. Suministros: cada vivienda ya tiene contador individual de agua y electricidad, no se prevé nueva batería.</p>
+  <p>Calendario estimado: Fase 1 (GO — Diagnóstico): completada, septiembre 2026. Fase 2 (MAP — Ejecución): pendiente — recepción del CCU, expediente técnico definitivo y ejecución de obra (16 semanas / 4 meses); no consta un plazo global de esta fase porque la duración de la tramitación del CCU/licencia no consta. Fase 3 (ÉXITO — Comercialización): venta estimada en 2-3 meses por unidad, 3-5 meses el conjunto. Fecha límite contractual fijada: escriturar antes del 13-oct-2026 (plazo de arras).</p>
+  <div class="docbtns">
+    <a class="btn-doc" href="https://drive.google.com/file/d/1mXtiBNmBspPLCRMGQwyiXPMgrwC0N59H/view" target="_blank" rel="noopener"><span class="ic">📅</span> Gantt de obra</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1V-w5Pd44S1mIi5ezFaKTBIT59SrxayEL/view" target="_blank" rel="noopener"><span class="ic">📐</span> Proyecto técnico visado</a>
+    <a class="btn-doc" href="#" data-pendiente="URL_DOC_ACUSE_LICENCIA" title="Documento pendiente: URL_DOC_ACUSE_LICENCIA" target="_blank" rel="noopener"><span class="ic">🧾</span> Acuse de licencia presentada</a>
+  </div>
+  <div class="docbtns">
+    <a class="btn-doc" href="https://drive.google.com/file/d/1Bbd1_Zl7LQ6YSlrEIySuBWu9-oFhq5lF/view" target="_blank" rel="noopener"><span class="ic">🏠</span> Plano de venta · vivienda 1</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1v5L4lGlJsU-PZucLZJvlOP9zIHxqWyui/view" target="_blank" rel="noopener"><span class="ic">🏠</span> Plano de venta · vivienda 2</a>
+    </div>
+</section>
+
+<!-- ═════════ EL PLAN — quién compra y cómo (bloque inversión) ═════════ -->
+<section class="sec" id="plan">
+  <span class="phase-badge invers"><span class="dot"></span>Bloque inversión</span>
+  <div class="kicker">Estructura de inversión · El plan</div>
+  <h2>Quién compra el activo — y cómo entras tú</h2>
+  <div class="cards">
+    <div class="card"><div class="big">La empresa CdU</div><div class="lbl">Quién compra el activo: <b>CdU de 0 a ÉXITO SL</b> adquiere el local y ejecuta la operación como gestor único frente a terceros</div></div>
+    <div class="card"><div class="big">Vía CCP</div><div class="lbl">Cómo entras tú: a través de un <b>Contrato de Cuentas en Participación</b> (arts. 239-243 CCom) — inviertes, no gestionas</div></div>
+    <div class="card"><div class="big">Venta por unidades</div><div class="lbl">Cada vivienda se vende individualmente · liquidación conforme se vende</div></div>
+  </div>
+  <p><b>Quién compra el activo:</b> <b>CdU de 0 a ÉXITO SL</b> compra el local y figura como titular y gestor único frente a terceros. <b>Cómo entras tú:</b> mediante un Contrato de Cuentas en Participación — aportas capital a la operación, sin gestionar y sin aparecer frente a terceros, con tu riesgo limitado estrictamente a tu aportación.</p>
+</section>
+
+<!-- ═════════ LA PROPUESTA — JV SERVICER del Programa (ask del gestor) ═════════ -->
+<section class="sec" id="propuesta">
+  <span class="phase-badge invers"><span class="dot"></span>Bloque inversión</span>
+  <div class="kicker">Estructura de inversión · La propuesta</div>
+  <h2>La propuesta: una Joint Venture servicer</h2>
+  <p class="lead">En el formato del <b>Programa IN</b> hay dos tipos de Joint Venture: <b>waterfall</b> y <b>servicer</b>. Esta operación es <b>servicer</b>: honorario fijo de gestión + nuestro propio capital al mismo riesgo y misma rentabilidad que el tuyo.</p>
+  <div class="ask">
+    <div class="col give"><h3>Lo que pedimos</h3>
+      <p><b>Honorario servicer fijo de 12.000 €</b> por la gestión integral de la operación: propuesta, dirección de la aportación de valor y conducción del proyecto hasta su cierre. Una cifra <b>cerrada y conocida de antemano</b>, descontada del resultado y reflejada en el Excel.</p>
+      <p style="font-size:13px;color:var(--grey)">Más un <b>bonus</b> ligado a superar el objetivo — lo detallamos justo aquí debajo.</p></div>
+    <div class="col get"><h3>Lo que ponemos</h3>
+      <p><b>5.000 € de capital propio</b> dentro de la operación, al <b>mismo riesgo y misma rentabilidad</b> que tú — 20,39% en el realista. Capital simétrico: sin clases de capital, sin rentabilidad asimétrica para el gestor.</p>
+      <p style="font-size:13px;color:var(--grey)">Gestión llave en mano + el <b>Cuadro de Mandos oficial de CdU de 0 a ÉXITO</b>: sigues tu inversión en vivo desde el día uno (te lo enseñamos más abajo).</p></div>
+  </div>
+  <div class="bonus-box">
+    <div class="bx-tag">🎁 El bonus — alineados al 100%</div>
+    <h3>Solo ganamos más si la operación va mejor de lo previsto</h3>
+    <p>El precio que contamos es <b>325.000 €</b>. Todo lo que vendamos <b>por encima</b> de esa cifra es un <b>bonus</b> que se reparte entre el gestor y el conjunto de inversores:</p>
+    <div class="bx-grid">
+      <div class="bx-c"><div class="bx-h">Dentro de los 12 meses</div><div class="bx-v">70% gestor · <b>30% inversores</b></div><div class="bx-n">Ej.: vender en <span title="Pendiente: VENTA_OPTIMISTA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span> → +<span title="Pendiente: DIFERENCIA_BONUS" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span> → <b><span title="Pendiente: EJEMPLO_BONUS_INVERSOR" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span> al lado inversor</b>, repartidos entre los partícipes según su aportación</div></div>
+      <div class="bx-c alt"><div class="bx-h">Si se alarga más de 12 meses</div><div class="bx-v"><b>70% inversores</b> · 30% gestor</div><div class="bx-n">El reparto se invierte a favor de los inversores: si tardamos más, ganáis vosotros</div></div>
+    </div>
+    <p class="bx-foot">El bonus se considera ganado en cuanto hay <b>contrato de arras</b> de la venta. Es una <b>capa aparte</b> de la rentabilidad: nunca resta, solo suma — y la parte de cada inversor es proporcional a su aportación.</p>
+  </div>
+  <div class="quote">No es un porcentaje abierto del resultado: es un <b>servicer fijo + capital al mismo riesgo que el tuyo</b>. Ponemos nuestro dinero junto al tuyo y rendimos exactamente igual.</div>
+</section>
+
+<!-- ═════════ S8 · CCP — cómo entras, cómo cobras, cómo te blinda ═════════ -->
+<section class="sec" id="ccp">
+  <span class="phase-badge invers"><span class="dot"></span>Bloque inversión</span>
+  <div class="kicker">Estructura de inversión · El contrato (CCP)</div>
+  <h2>Cómo entras, cómo cobras — y cómo te blinda</h2>
+  <div class="cards">
+    <div class="card"><div class="big">259.489,09 €</div><div class="lbl">Capital total de la operación</div></div>
+    <div class="card"><div class="big">5.000 €</div><div class="lbl">Lo pone el GESTOR (3,11%) — nuestro dinero, junto al tuyo</div></div>
+    <div class="card"><div class="big"><span title="Pendiente: CAPITAL_INVERSORES" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span></div><div class="lbl">Capital de inversores (<span title="Pendiente: CAPITAL_INVERSORES_PCT" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span>)</div></div>
+  </div>
+  <table>
+    <tr><th>Aportación</th><th>Capital</th><th>% del capital</th><th>Rentabilidad (realista)</th></tr>
+    <tr><td><b>Inversores</b> (partícipes)</td><td><span title="Pendiente: CAPITAL_INVERSORES" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span></td><td><span title="Pendiente: CAPITAL_INVERSORES_PCT" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span></td><td>20,39%</td></tr>
+    <tr><td><b>Gestor</b> (CdU de 0 a ÉXITO)</td><td>5.000 €</td><td>3,11%</td><td>20,39%</td></tr>
+    <tr><td><b>Operación</b></td><td><b>259.489,09 €</b></td><td>100%</td><td><b>20,39%</b></td></tr>
+  </table>
+  <p><b>Modelo servicer sobre Cuentas en Participación</b> (arts. 239-243 CCom): <b>todo el capital rinde igual</b> — el del gestor y el de los inversores, al mismo porcentaje (<b>20,39%</b> en el escenario realista). Sin clases de capital, sin letra pequeña. Si la venta supera los 325.000 €, ese extra se reparte aparte como <b>bonus</b> (ver «La propuesta»).</p>
+  <p><b>El partícipe:</b> invierte, no gestiona, no aparece frente a terceros, y su riesgo queda limitado estrictamente a su aportación.</p>
+  <p><b>El gestor:</b> responde frente a terceros, fondos en cuenta exclusiva del proyecto, contabilidad separada, información periódica, derecho de auditoría externa, seguro RC.</p>
+  <p style="font-size:13px;color:var(--grey)">Fiscalidad del partícipe: rendimiento del capital mobiliario (19-23%), retención 19% practicada por el gestor.</p>
+  <h3>Cómo te blinda el contrato</h3>
+  <p class="lead">El CCP no es un papel de confianza: <strong>es un blindaje recíproco que sigue el código de buenas prácticas del Programa IN — protege al partícipe y a la gestora por igual.</strong></p>
+  <div class="cards">
+    <div class="card"><div class="big">Riesgo acotado</div><div class="lbl">Tu riesgo se limita <b>estrictamente a tu aportación</b> (arts. 239-243 CCom). Ni un euro más, pase lo que pase.</div></div>
+    <div class="card"><div class="big">Tu dinero, separado</div><div class="lbl">Fondos en <b>cuenta exclusiva</b> del proyecto y <b>contabilidad separada</b>. Nada se mezcla con la gestora.</div></div>
+    <div class="card"><div class="big">Luz y control</div><div class="lbl"><b>Información periódica</b>, <b>derecho de auditoría externa</b> y <b>seguro de RC</b> del gestor. Todo trazable.</div></div>
+    <div class="card"><div class="big">Intereses alineados</div><div class="lbl">El capital del gestor rinde <b>al mismo % que el tuyo</b>. Sin clases de capital ni letra pequeña.</div></div>
+  </div>
+  <div class="docbtns">
+    <a class="btn-doc gold" href="#" data-pendiente="URL_DOC_CONTRATO_CCP" title="Documento pendiente: URL_DOC_CONTRATO_CCP" target="_blank" rel="noopener"><span class="ic">📑</span> Modelo de contrato CCP</a>
+    <a class="btn-doc" href="#" data-pendiente="URL_DOC_ANEXO_CCP" title="Documento pendiente: URL_DOC_ANEXO_CCP" target="_blank" rel="noopener"><span class="ic">📎</span> Anexo del CCP</a>
+  </div>
+</section>
+
+
+<!-- ═════════ COMPROMISOS + SOLVENCIA (operativos · distintos del blindaje CCP) ═════════ -->
+<section class="sec" id="compromisos">
+  <span class="phase-badge invers"><span class="dot"></span>Bloque inversión</span>
+  <div class="kicker">Solvencia y transparencia · Código de Buenas Prácticas</div>
+  <h2>Nuestros compromisos contigo</h2>
+  <p class="lead">No te pedimos confianza ciega. Esta operación opera según el <b>Código de Buenas Prácticas</b> del <span class="prog-in"><span class="pg">PROGRAMA</span><span class="in">IN</span></span> — y lo cumplimos punto por punto. Esto es lo que firmamos contigo:</p>
+
+  <h3>Tu dinero, protegido</h3>
+  <div class="commit">
+    <div class="c"><b><span style="color:var(--ok)">✓</span> Cuenta única</b>Cuenta bancaria exclusiva de la operación.</div>
+    <div class="c"><b><span style="color:var(--ok)">✓</span> Liquidaciones parciales</b>Cobras conforme se vende cada vivienda — en 5-7 días.</div>
+    <div class="c"><b><span style="color:var(--ok)">✓</span> Liquidación final en resultados</b>Reparto del beneficio a los 15 días del cierre.</div>
+    <div class="c"><b><span style="color:var(--ok)">✓</span> Sin cargas sobre el activo</b>Ninguna hipoteca o deuda sin tu consentimiento escrito.</div>
+  </div>
+
+  <h3>Transparencia y control</h3>
+  <div class="commit">
+    <div class="c"><b><span style="color:var(--ok)">✓</span> Un único contrato</b>El CCP: un solo documento, visible y transparente.</div>
+    <div class="c"><b><span style="color:var(--ok)">✓</span> Comunicaciones periódicas</b>Reporting regulado en cada hito de la operación.</div>
+    <div class="c"><b><span style="color:var(--ok)">✓</span> Auditoría externa</b>A disposición del partícipe en todo momento.</div>
+    <div class="c"><b><span style="color:var(--ok)">✓</span> Plazos definidos</b>Calendario del proyecto cerrado y comprometido.</div>
+  </div>
+
+  <h3>Garantías</h3>
+  <div class="commit">
+    <div class="c"><b><span style="color:var(--ok)">✓</span> Seguro de Responsabilidad Civil</b>Cobertura del gestor durante toda la operación.</div>
+    <div class="c"><b><span style="color:var(--ok)">✓</span> Penalizaciones por retraso</b>Cláusula por retrasos injustificados.</div>
+    <div class="c"><b><span style="color:var(--ok)">✓</span> Firma por plataforma digital</b>Contrato firmado de forma segura y trazable.</div>
+  </div>
+
+  <h3>Y te lo documentamos</h3>
+  <p>La sociedad gestora está al corriente de sus obligaciones y sin deudas pendientes. La cuenta exclusiva de la operación ya está abierta a nombre de la sociedad gestora.</p>
+  <div class="docbtns">
+    <a class="btn-doc" href="https://drive.google.com/file/d/1bXR_-mlImSqwhxiVmrQdsgIQ28YsAR1o/view" target="_blank" rel="noopener"><span class="ic">🟢</span> Al corriente · Hacienda</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1F5aIrcsnYLkUq-31PaytvW7hKKBqUHri/view" target="_blank" rel="noopener"><span class="ic">🟢</span> Al corriente · Seguridad Social</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1Sl6zHrSdUuyZLt7fgSbauypcePrrzcag/view" target="_blank" rel="noopener"><span class="ic">📋</span> CIRBE · sin deudas (1)</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1UqfeUIl4IZJL0duk3Hhf87MFKc3og4hD/view" target="_blank" rel="noopener"><span class="ic">📋</span> CIRBE · sin deudas (2)</a>
+    <a class="btn-doc" href="#" data-pendiente="URL_DOC_TITULARIDAD_CUENTA" title="Documento pendiente: URL_DOC_TITULARIDAD_CUENTA" target="_blank" rel="noopener"><span class="ic">🏦</span> Certificado de titularidad · cuenta de la operación</a>
+  </div>
+  <p class="lead" style="margin-top:14px">Y por encima de todo, un compromiso que nadie más en la plataforma te da: <b>verlo tú mismo, casi en tiempo real</b>. 👇</p>
+</section>
+
+<!-- ═════════ S9 · CUADRO DE MANDOS (cierre boom) ═════════ -->
+<section class="sec" id="visor">
+  <span class="phase-badge invers"><span class="dot"></span>Bloque inversión</span>
+  <div class="kicker">Solvencia y transparencia · Tu cuadro de mandos</div>
+  <h2>Tu cuadro de mandos — desde el día uno</h2>
+  <div class="quote">"Vamos todos en el mismo vehículo. El equipo CdU de 0 a ÉXITO es quien conduce la inversión — y tú, como invitado, solo disfrutas del viaje: viendo en tiempo real cómo trabaja tu dinero, en qué fase está la operación, qué hito viene, las fotos de la obra y qué ha pasado con cada euro."</div>
+  <div class="dash visor-dash">
+    <div class="visor-flag">⭐ Exclusivo · solo para inversores</div>
+    <h3>📊 Visor del Inversor <span style="font-size:11px;color:var(--ochre);letter-spacing:1px">· HERRAMIENTA OFICIAL CdU DE 0 A ÉXITO</span></h3>
+    <p>El cuadro de mandos de tu inversión. Todas nuestras operaciones se siguen así: no es un PDF que envejece, es la operación en vivo, casi en tiempo real.</p>
+    <div class="row">
+      <div class="pill"><b>Estado y avance</b> · GO ✅ · MAP ✅ · ÉXITO 🟡 + % de la operación</div>
+      <div class="pill"><b>Hitos de la operación</b> · conseguidos y próximos</div>
+      <div class="pill"><b>Obra</b> · cronograma real, semana a semana</div>
+      <div class="pill"><b>Cuenta dedicada</b> · tramos y cada movimiento</div>
+      <div class="pill"><b>Obra en directo</b> · cámaras en la obra desde el primer día</div>
+      <div class="pill"><b>Documentación</b> · todos los papeles a mano</div>
+    </div>
+    <a class="visor-cta" href="#" data-pendiente="URL_VISOR_INVERSOR" title="Documento pendiente: URL_VISOR_INVERSOR" target="_blank" rel="noopener"><img src="assets/logo-cdu-blanco.png" alt="CdU de 0 a ÉXITO" class="vc-logo"> Abrir el Visor del Inversor <span class="vc-arrow">→</span></a>
+  </div>
+</section>
+
+<!-- ═════════ S10 · ÍNDICE DOCUMENTAL LIGERO (cierre) ═════════ -->
+<section class="sec" id="docs">
+  <div class="kicker">Cierre · Índice documental</div>
+  <h2>Toda la documentación, a un clic</h2>
+  <p>Cada documento ya se ha mostrado en la fase a la que pertenece. Este es el índice maestro por si quieres revisarlos todos juntos — se abren aquí mismo, sin salir de la presentación.</p>
+  <div class="serv">
+    <div class="s-card">
+      <div class="s-tag">FASE 1 · GO</div>
+      <div class="s-t">Diagnóstico de viabilidad</div>
+      <div class="docbtns">
+        <a class="btn-doc gold" href="https://drive.google.com/file/d/1inI73HNIVS2oxarGgk8xugHpcSlNN2Ka/view" target="_blank" rel="noopener"><span class="ic">📄</span> Informe Diagnóstico GO</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/1kWAxpN8BghftxuowdVBCh3X0Q3ymno0p/view" target="_blank" rel="noopener"><span class="ic">📜</span> Nota simple</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/1jLLy7OIfEWk5a1FeA02RC0HLdvuzXQGb/view" target="_blank" rel="noopener"><span class="ic">🏷️</span> Datos catastrales</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/1lk2eWLPUfwMi8iy1DwSp0hGdTsKWJSb7/view" target="_blank" rel="noopener"><span class="ic">💶</span> Valor de referencia catastral</a>
+        <a class="btn-doc" href="#" data-pendiente="URL_DOC_NORMAS_COMUNITARIAS" title="Documento pendiente: URL_DOC_NORMAS_COMUNITARIAS" target="_blank" rel="noopener"><span class="ic">📋</span> Normas comunitarias</a>
+      </div>
+    </div>
+    <div class="s-card">
+      <div class="s-tag">FASE 2 · MAP</div>
+      <div class="s-t">Plan ejecutable</div>
+      <div class="docbtns">
+        <a class="btn-doc" href="#" data-pendiente="URL_DOC_CERTIFICADO_COMPATIBILIDAD" title="Documento pendiente: URL_DOC_CERTIFICADO_COMPATIBILIDAD" target="_blank" rel="noopener"><span class="ic">🏛️</span> Compatibilidad urbanística</a>
+        <a class="btn-doc" href="#" data-pendiente="URL_DOC_CONFORMIDAD_COMUNITARIA" title="Documento pendiente: URL_DOC_CONFORMIDAD_COMUNITARIA" target="_blank" rel="noopener"><span class="ic">✔️</span> Conformidad comunitaria</a>
+        <a class="btn-doc" href="#" data-pendiente="URL_DOC_ESTADO_ACTUAL" title="Documento pendiente: URL_DOC_ESTADO_ACTUAL" target="_blank" rel="noopener"><span class="ic">🏚️</span> Estado actual</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/16-Ob23SzguKTFvWp3F8KJv_7xYWexXZv/view" target="_blank" rel="noopener"><span class="ic">📐</span> Encaje técnico</a>
+        <a class="btn-doc" href="#" data-pendiente="URL_DOC_PRESUPUESTO_AGUA" title="Documento pendiente: URL_DOC_PRESUPUESTO_AGUA" target="_blank" rel="noopener"><span class="ic">💧</span> Hidrogea (agua)</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/1oWJ_2qBN-2VluLjT-ixHSLZkud1Cuod9/view" target="_blank" rel="noopener"><span class="ic">📄</span> Presupuesto de obra</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/1cG5LEvbqVSoxhO4rNC_zImu1rXLmClO5/view" target="_blank" rel="noopener"><span class="ic">📊</span> Análisis económico (Excel)</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/1DQuylMCeJIIq23qKjgVS5ERoll-0VZKp/view" target="_blank" rel="noopener"><span class="ic">📋</span> Matriz de riesgos</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/1BI1z8b7m9aLWiCHsE-DsSwUG898jcTOz/view" target="_blank" rel="noopener"><span class="ic">📈</span> Informe IM·PULSO v2</a>
+      </div>
+    </div>
+    <div class="s-card">
+      <div class="s-tag">FASE 3 · ÉXITO + Inversión</div>
+      <div class="s-t">Ejecución, contrato y solvencia</div>
+      <div class="docbtns">
+        <a class="btn-doc" href="https://drive.google.com/file/d/1V-w5Pd44S1mIi5ezFaKTBIT59SrxayEL/view" target="_blank" rel="noopener"><span class="ic">📐</span> Proyecto técnico visado</a>
+        <a class="btn-doc" href="#" data-pendiente="URL_DOC_ACUSE_LICENCIA" title="Documento pendiente: URL_DOC_ACUSE_LICENCIA" target="_blank" rel="noopener"><span class="ic">🧾</span> Acuse de licencia</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/1mXtiBNmBspPLCRMGQwyiXPMgrwC0N59H/view" target="_blank" rel="noopener"><span class="ic">📅</span> Gantt de obra</a>
+        <a class="btn-doc" href="#" data-pendiente="URL_DOC_MTVV_ORIGEN" title="Documento pendiente: URL_DOC_MTVV_ORIGEN" target="_blank" rel="noopener"><span class="ic">📈</span> MTVV · inbruto (Antonio)</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/1hw9txLZE8JTgxsfRWTyuw5_uXFlvMbi7/view" target="_blank" rel="noopener"><span class="ic">📈</span> MTVV actualizado · paso 4</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/1Bbd1_Zl7LQ6YSlrEIySuBWu9-oFhq5lF/view" target="_blank" rel="noopener"><span class="ic">🏠</span> Plano de venta 1</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/1v5L4lGlJsU-PZucLZJvlOP9zIHxqWyui/view" target="_blank" rel="noopener"><span class="ic">🏠</span> Plano de venta 2</a>
+        <a class="btn-doc gold" href="#" data-pendiente="URL_DOC_CONTRATO_CCP" title="Documento pendiente: URL_DOC_CONTRATO_CCP" target="_blank" rel="noopener"><span class="ic">📑</span> Modelo de contrato CCP</a>
+        <a class="btn-doc" href="#" data-pendiente="URL_DOC_ANEXO_CCP" title="Documento pendiente: URL_DOC_ANEXO_CCP" target="_blank" rel="noopener"><span class="ic">📎</span> Anexo del CCP</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/1bXR_-mlImSqwhxiVmrQdsgIQ28YsAR1o/view" target="_blank" rel="noopener"><span class="ic">🟢</span> Al corriente · Hacienda</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/1F5aIrcsnYLkUq-31PaytvW7hKKBqUHri/view" target="_blank" rel="noopener"><span class="ic">🟢</span> Al corriente · Seg. Social</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/1Sl6zHrSdUuyZLt7fgSbauypcePrrzcag/view" target="_blank" rel="noopener"><span class="ic">📋</span> CIRBE (1)</a>
+        <a class="btn-doc" href="https://drive.google.com/file/d/1UqfeUIl4IZJL0duk3Hhf87MFKc3og4hD/view" target="_blank" rel="noopener"><span class="ic">📋</span> CIRBE (2)</a>
+        <a class="btn-doc" href="#" data-pendiente="URL_DOC_TITULARIDAD_CUENTA" title="Documento pendiente: URL_DOC_TITULARIDAD_CUENTA" target="_blank" rel="noopener"><span class="ic">🏦</span> Certificado de titularidad · cuenta</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="text-align:center;background:linear-gradient(140deg,var(--navy),var(--navy2));color:var(--cream)">
+  <div class="kicker" style="color:var(--ochre)">El siguiente paso es tuyo</div>
+  <h2 style="color:#fff;max-width:820px;margin:0 auto 12px">De la viabilidad al beneficio real — contigo dentro</h2>
+  <p class="lead" style="color:rgba(253,251,247,.9);max-width:720px;margin:0 auto 22px">Si quieres entrar, hablamos 1 a 1 esta semana — los CCP se firman por orden de compromiso.</p>
+  <a href="#" data-pendiente="URL_PLATAFORMA_IN" title="Documento pendiente: URL_PLATAFORMA_IN" target="_blank" rel="noopener" class="in-access" style="margin:0 auto;justify-content:center"><span>Accede a esta oportunidad en la plataforma del <span class="prog-in light" style="font-size:14px"><span class="pg">PROGRAMA</span><span class="in">IN</span></span></span><span class="go">Abrir en la plataforma →</span></a>
+</section>
+
+<div class="foot">
+  <div class="foot-logos">
+    <a href="https://tucambiodeuso.com" target="_blank" rel="noopener" class="fl"><img src="assets/logo-cdu-blanco.png" alt="CdU de 0 a ÉXITO"><span class="acc">Acceder ↗</span></a>
+    <a href="https://im-pulso.app" target="_blank" rel="noopener" class="fl"><img src="assets/logo-impulso-chapa.png" alt="IM·PULSO"><span class="acc">Acceder ↗</span></a>
+    <a href="https://programa.in/" target="_blank" rel="noopener" class="fl"><span class="prog-in light" style="font-size:22px"><span class="pg">PROGRAMA</span><span class="in">IN</span></span><span class="acc">Acceder ↗</span></a>
+  </div>
+  <div class="foot-tag">Oportunidad del Programa IN · Entresuelo Altabix · Alicante · 2026<br><span class="foot-claim">Primero claridad. Luego control. Y al final, resultado.</span></div>
+</div>
+
+</main>
+
+
+<script id="op-data" type="application/json">
+{
+  "_comment": "DATOS DE LA OPERACIÓN — PLANTILLA. Rellenar cada marcador de doble llave al clonar para una operación nueva. NÚMEROS = hoja 'Resumen' del Excel oficial (la que se enseña). El 'Escenario Alternativo/Inverso' NO se enseña (sorpresa). Al cerrar con Paco: actualizar aquí y en las celdas .prov; para ocultar chips PROVISIONAL añadir class='final' al <body>.",
+  "operacion": "Entresuelo Altabix", "provincia": "Alicante", "modalidad": "C/A/V · CCP",
+  "compra": "110.000 €", "inversion_total": "259.489,09 €",
+  "estructura": {"gestor": "5.000 €", "gestor_pct": "3,11%", "inversores": "<span title="Pendiente: CAPITAL_INVERSORES" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span>", "inversores_pct": "<span title="Pendiente: CAPITAL_INVERSORES_PCT" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span>", "servicer": "12.000 €"},
+  "venta": {"realista": "325.000 €", "realista_desglose": "155.000+170.000", "optimista": "<span title="Pendiente: VENTA_OPTIMISTA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span>", "optimista_desglose": "<span title="Pendiente: DESGLOSE_VENTA_OPTIMISTA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span>"},
+  "beneficio_tras_servicer": {"realista": "52.911 €", "optimista": "<span title="Pendiente: BENEFICIO_OPTIMISTA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span>"},
+  "rentabilidad_capital": {"realista": "20,39%", "optimista": "<span title="Pendiente: RENTABILIDAD_OPTIMISTA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span>"},
+  "reforma_eur_m2": "620", "obra_semanas": "16", "plazo_meses": "8-10",
+  "unidades": [{"tipo": "2 dormitorios, 1 baño"}, {"tipo": "2 dormitorios, 2 baños"}],
+  "precio_salida": "<span title="Pendiente: PRECIO_SALIDA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span>", "rango_cierre": "155.000-170.000",
+  "estado": "PROVISIONAL"
+}
+</script>
+
+<!-- ═════════ VISOR MODAL EMBEBIDO (docs + lightbox fotos) ═════════ -->
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Visor de documento">
+  <div class="viewer-bar">
+    <span class="vt" id="viewerTitle">Documento</span>
+    <span class="va">
+      <a class="vlink" id="viewerOpen" href="#" target="_blank" rel="noopener">Abrir / descargar ↗</a>
+      <button class="vclose" onclick="vClose()" aria-label="Cerrar">✕</button>
+    </span>
+  </div>
+  <div class="viewer-stage" id="viewerStage"></div>
+</div>
+<script>
+(function(){
+  var v=document.getElementById('viewer'),stage=document.getElementById('viewerStage'),
+      vt=document.getElementById('viewerTitle'),vo=document.getElementById('viewerOpen');
+  window.vOpen=function(src,title,type){
+    vt.textContent=title||'Documento';vo.href=src;
+    stage.innerHTML=(type==='img')
+      ? '<img src="'+src+'" alt="'+(title||'')+'">'
+      : '<iframe src="'+src+'#view=FitH" title="'+(title||'')+'"></iframe>';
+    v.classList.add('open');document.body.style.overflow='hidden';
+  };
+  window.vClose=function(){v.classList.remove('open');stage.innerHTML='';document.body.style.overflow='';};
+  v.addEventListener('click',function(e){if(e.target===v)vClose();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')vClose();});
+  document.querySelectorAll('.gal img').forEach(function(img){
+    img.style.cursor='zoom-in';
+    img.addEventListener('click',function(){vOpen(img.src,img.alt||'Imagen','img');});
+  });
+})();
+</script>
+</body>
+</html>
