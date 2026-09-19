@@ -31,6 +31,8 @@
   --line:rgba(22,61,96,.13); --ochre-soft:#f7e9cd; --ok:#1d7a4f; --warn:#b3401f; --grey:#667;
   --impulso-navy:#141B36; --impulso-orange:#FF4D2E;
   --in-coral:#E9554F; --in-coral-soft:#fdeceb;
+  /* variante oscura del coral del IN: la clara da 3,6:1 sobre blanco y no pasa WCAG AA */
+  --in-coral-dark:#C0392B;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -178,7 +180,7 @@ body.final .todo{display:none}
 /* acceso a la oportunidad en la plataforma IN (pastilla portada, marcada) */
 .in-access{display:inline-flex;align-items:center;flex-wrap:wrap;gap:10px 14px;font-size:14px;font-weight:600;color:#fff;margin-bottom:16px;background:rgba(233,85,79,.15);border:1px solid rgba(233,85,79,.55);padding:10px 10px 10px 18px;border-radius:13px;text-decoration:none;transition:.15s}
 .in-access:hover{background:rgba(233,85,79,.27);border-color:var(--in-coral)}
-.in-access .go{font-weight:800;color:#fff;background:var(--in-coral);padding:7px 14px;border-radius:30px;font-size:12.5px;white-space:nowrap;box-shadow:0 2px 10px rgba(233,85,79,.4)}
+.in-access .go{font-weight:800;color:#fff;background:var(--in-coral-dark);padding:7px 14px;border-radius:30px;font-size:12.5px;white-space:nowrap;box-shadow:0 2px 10px rgba(233,85,79,.4)}
 /* accesos sutiles en el pie */
 .partners a.ft-link{color:rgba(253,251,247,.92);text-decoration:none;font-weight:600;border-bottom:1px dotted rgba(253,251,247,.45);transition:.15s}
 .partners a.ft-link:hover{color:#fff;border-bottom-color:#fff}
@@ -321,6 +323,26 @@ body.final .todo{display:none}
 .pata b{color:var(--navy)}
 .pata p{font-size:13px;margin:4px 0 8px}
 .pata .docbtns{margin:8px 0 0}
+/* tabla del Programa IN — formato que los inversores ya conocen, con branding CdU */
+.in-wrap{margin:8px 0 34px}
+.in-tabla{width:100%;border-collapse:separate;border-spacing:6px 5px;font-size:15px}
+.in-tabla thead th{background:var(--navy);color:#fff;font-weight:800;letter-spacing:.06em;
+  font-size:12.5px;text-transform:uppercase;padding:13px 14px;border-radius:9px;text-align:center}
+.in-tabla thead th.in-conj{background:var(--in-coral-dark)}
+.in-tabla td.in-esq{background:none;border:0}
+.in-tabla tbody th{background:#eceef1;color:var(--navy);text-align:left;font-weight:700;
+  font-size:14px;padding:12px 15px;border-radius:9px;white-space:nowrap}
+.in-tabla tbody td{background:#fff;border:1.5px solid var(--in-coral-soft);border-radius:9px;
+  padding:12px 15px;font-weight:700;color:var(--ink);text-align:left}
+.in-tabla tbody td.in-conj{color:var(--in-coral-dark);border-color:var(--in-coral-dark)}
+.in-tabla tbody tr:nth-child(odd) th{background:#e3e6ea}
+.in-nota{font-size:13.5px;line-height:1.55;margin:14px 2px 0}
+@media(max-width:720px){
+  .in-tabla{font-size:13px;border-spacing:4px 4px}
+  .in-tabla thead th{font-size:10.5px;padding:9px 7px}
+  .in-tabla tbody th,.in-tabla tbody td{padding:9px 9px;font-size:12.5px;white-space:normal}
+}
+
 /* bonus destacado (#propuesta) */
 .bonus-box{background:linear-gradient(140deg,#fff,#fff8ec);border:1.5px solid var(--ochre);border-radius:16px;padding:22px 26px;margin:18px 0}
 .bonus-box .bx-tag{font-weight:900;letter-spacing:1.5px;font-size:12px;color:#8a5a14;text-transform:uppercase}
@@ -706,6 +728,27 @@ body.final .todo{display:none}
 <section class="sec" id="numeros">
   <span class="phase-badge map"><span class="dot"></span>Fase 2 · MAP</span>
   <div class="kicker">Plan ejecutable · Análisis económico</div>
+  <h2>La inversión, de un vistazo</h2>
+  <p class="lead">El cuadro de siempre, con las cifras de esta operación. Debajo, el desglose partida a partida.</p>
+
+  <div class="in-wrap">
+    <table class="in-tabla">
+      <thead>
+        <tr><td class="in-esq"></td><th>GESTOR</th><th>INVERSOR</th><th class="in-conj">LA INVERSIÓN EN CONJUNTO</th></tr>
+      </thead>
+      <tbody>
+        <tr><th>Aportación €</th><td>34.489 €</td><td>225.000 €</td><td class="in-conj">259.489 €</td></tr>
+        <tr><th>Aportación %</th><td>13,29 %</td><td>86,71 %</td><td class="in-conj">100 %</td></tr>
+        <tr><th>Beneficio €</th><td>7.032 €</td><td>45.879 €</td><td class="in-conj">52.911 €</td></tr>
+        <tr><th>Beneficio %</th><td>13,29 %</td><td>86,71 %</td><td class="in-conj">100 %</td></tr>
+        <tr><th>Rentabilidad Neta</th><td>20,39 %</td><td>20,39 %</td><td class="in-conj">20,39 %</td></tr>
+        <tr><th>Rentabilidad ANUALIZADA</th><td>24,47 %</td><td>24,47 %</td><td class="in-conj">24,47 %</td></tr>
+      </tbody>
+    </table>
+    <p class="in-nota"><b>El capital rinde lo mismo para todos.</b> El gestor entra con su propio dinero y cobra por él exactamente el mismo porcentaje que cualquier inversor: no hay clases de capital ni comisión sobre vuestro beneficio. La única asimetría está en el <b>bonus</b>, que solo aparece si vendemos por encima de 325.000 € — y nunca resta, solo suma.</p>
+    <p class="in-nota" style="color:var(--grey)">Escenario realista. Anualizada calculada sobre 10 meses, el extremo largo del plazo previsto (8-10 meses).</p>
+  </div>
+
   <h2>Los números, partida a partida</h2>
   <p class="lead">En el diagnóstico de la Fase 1 confirmamos que los números de la operación cuadraban. Aquí los llevamos al detalle: el desglose fino, partida a partida, con la cifra exacta de cada una.</p>
   <table>
@@ -972,14 +1015,20 @@ body.final .todo{display:none}
   </div>
 
   <h3>Y te lo documentamos</h3>
-  <p>La sociedad gestora está al corriente de sus obligaciones y sin deudas pendientes. La cuenta exclusiva de la operación ya está abierta a nombre de la sociedad gestora.</p>
+  <p>La sociedad gestora está al corriente de sus obligaciones y sin deudas pendientes. Aquí tienes su documentación societaria y de solvencia, para que puedas comprobarlo por ti mismo en lugar de creernos.</p>
   <div class="docbtns">
+    <a class="btn-doc" href="https://drive.google.com/file/d/1zbeRwtLxeVxwQ4-ZzkQq-k9MeQsd9WYr/view" target="_blank" rel="noopener"><span class="ic">📜</span> Escritura de constitución · CDU DE 0 A ÉXITO SL</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1cYSWRiSGi8mdxlfmcwySDCnayUgg6MVV/view" target="_blank" rel="noopener"><span class="ic">🏢</span> CIF de la sociedad</a>
     <a class="btn-doc" href="https://drive.google.com/file/d/1bXR_-mlImSqwhxiVmrQdsgIQ28YsAR1o/view" target="_blank" rel="noopener"><span class="ic">🟢</span> Al corriente · Hacienda</a>
     <a class="btn-doc" href="https://drive.google.com/file/d/1F5aIrcsnYLkUq-31PaytvW7hKKBqUHri/view" target="_blank" rel="noopener"><span class="ic">🟢</span> Al corriente · Seguridad Social</a>
     <a class="btn-doc" href="https://drive.google.com/file/d/1Sl6zHrSdUuyZLt7fgSbauypcePrrzcag/view" target="_blank" rel="noopener"><span class="ic">📋</span> CIRBE · sin deudas (1)</a>
     <a class="btn-doc" href="https://drive.google.com/file/d/1UqfeUIl4IZJL0duk3Hhf87MFKc3og4hD/view" target="_blank" rel="noopener"><span class="ic">📋</span> CIRBE · sin deudas (2)</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1NJ9TdmNtWnUdlq9KAH94WutBY9V9JDLk/view" target="_blank" rel="noopener"><span class="ic">🛡️</span> Póliza de Responsabilidad Civil</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1o55EDuZBBGuNwIaR8jFqooZokk2iCuhO/view" target="_blank" rel="noopener"><span class="ic">🧾</span> Recibo del seguro de RC · al corriente</a>
+    <a class="btn-doc" href="https://drive.google.com/file/d/1XwUXa9Np-xMdvFyvxYszm2MgZgVjYeA0/view" target="_blank" rel="noopener"><span class="ic">⛑️</span> Certificado del Servicio de Prevención</a>
     <a class="btn-doc" href="#" data-pendiente="URL_DOC_TITULARIDAD_CUENTA" title="Documento pendiente: URL_DOC_TITULARIDAD_CUENTA" target="_blank" rel="noopener"><span class="ic">🏦</span> Certificado de titularidad · cuenta de la operación</a>
   </div>
+  <p style="font-size:13.5px;color:var(--grey);margin-top:12px">La operación opera con <b>cuenta exclusiva a nombre de la sociedad gestora</b>, separada de cualquier otra actividad. Su certificado de titularidad se incorpora a este mismo apartado en cuanto la cuenta queda operativa.</p>
   <p class="lead" style="margin-top:14px">Y por encima de todo, un compromiso que nadie más en la plataforma te da: <b>verlo tú mismo, casi en tiempo real</b>. 👇</p>
 </section>
 
