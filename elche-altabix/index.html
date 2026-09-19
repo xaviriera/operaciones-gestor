@@ -742,11 +742,11 @@ body.final .todo{display:none}
         <tr><th>Beneficio €</th><td>7.032 €</td><td>45.879 €</td><td class="in-conj">52.911 €</td></tr>
         <tr><th>Beneficio %</th><td>13,29 %</td><td>86,71 %</td><td class="in-conj">100 %</td></tr>
         <tr><th>Rentabilidad Neta</th><td>20,39 %</td><td>20,39 %</td><td class="in-conj">20,39 %</td></tr>
-        <tr><th>Rentabilidad ANUALIZADA</th><td>24,47 %</td><td>24,47 %</td><td class="in-conj">24,47 %</td></tr>
+        <tr><th>Rentabilidad ANUALIZADA</th><td>20,39 %</td><td>20,39 %</td><td class="in-conj">20,39 %</td></tr>
       </tbody>
     </table>
     <p class="in-nota"><b>El capital rinde lo mismo para todos.</b> El gestor entra con su propio dinero y cobra por él exactamente el mismo porcentaje que cualquier inversor: no hay clases de capital ni comisión sobre vuestro beneficio. La única asimetría está en el <b>bonus</b>, que solo aparece si vendemos por encima de 325.000 € — y nunca resta, solo suma.</p>
-    <p class="in-nota" style="color:var(--grey)">Escenario realista. Anualizada calculada sobre 10 meses, el extremo largo del plazo previsto (8-10 meses).</p>
+    <p class="in-nota" style="color:var(--grey)">Escenario realista. La rentabilidad anualizada se calcula sobre los <b>12 meses</b> que fija el contrato de cuentas en participación, con fecha objetivo de finalización el 15 de octubre de 2027.</p>
   </div>
 
   <h2>Los números, partida a partida</h2>
@@ -807,19 +807,14 @@ body.final .todo{display:none}
   <div class="kicker">Plan ejecutable · Riesgos y mitigaciones</div>
   <h2>Los riesgos: los que cerramos y los que vigilamos</h2>
   <div class="quote">"Toda operación tiene riesgos. La diferencia es si te los encuentras… o si los cierras antes de que te encuentren ellos."</div>
-  <p>Esta operación tiene varios riesgos abiertos, no cerrados: el CCU pendiente de concesión, el presupuesto de obra caducado sin revalidar, la superficie del activo sin reconciliar entre tres fuentes, y el precio de venta asumido en el Excel que supera el escenario optimista de la segunda fuente de mercado consultada. Lo que sigue abierto, acotado y con responsable:</p>
+  <p>No te vamos a decir que esta operación no tiene riesgos. Tiene cinco, y aquí están los cinco: qué son, cuánto pesan y qué hacemos con cada uno. El más relevante es el certificado urbanístico, que sigue en trámite por un retraso del Ayuntamiento — y su mitigación es la más importante que puedes leer en este documento: <b>si no se obtuviera, la aportación se devuelve íntegra</b>.</p>
   <table>
     <tr><th>Riesgo</th><th>Estado</th><th>P×I</th><th>Mitigación</th></tr>
-    <tr><td colspan="2">Entresuelo Altabix identifica varios riesgos abiertos: CCU pendiente de concesión (8·Medio) — Ayto. de Elche, funcionaria de baja</td></tr>
-<tr><td>presupuesto de obra caducado</td><td>~3 meses, venció jun-2026, resubido sin revalidar</td></tr>
-<tr><td>superficies sin reconciliar entre tres fuentes</td><td>120/127,05/144 m²</td></tr>
-<tr><td>precio de venta y rentabilidad no respaldados por la segunda fuente de mercado — IM·PULSO V2 optimista (310.161 €) es inferior a los</td><td>325.000 € del Excel</td></tr>
-<tr><td>fórmulas rotas en la hoja 'Inversores'</td><td>impiden repartir capital/beneficio por inversor</td></tr>
-<tr><td>riesgo residual recalculado en la matriz</td><td>filas 10-13 = 6·Bajo, filas 14-15 = 9·Medio</td></tr>
-<tr><td>desfase de 2 días entre el plazo de arras y el calendario del equipo</td><td>ya corregido por decisión de Xavi</td></tr>
+    <tr><td>Presupuesto de obra con validez vencida</td><td><b style="color:#9a6712">🟡 VIGILADO</b></td><td>6 · Bajo</td><td>El presupuesto de SPM conserva impresa la validez de mayo de 2026, aunque su contenido ya está actualizado a los metros reales. Se pide su reemisión con fecha nueva antes de contratar la obra, de modo que el importe quede confirmado por escrito por el constructor.</td></tr>
+    <tr><td>Superficie del activo entre fuentes distintas</td><td><b style="color:#9a6712">🟡 VIGILADO</b></td><td>6 · Bajo</td><td>Las tres fuentes miden cosas distintas: 127,05 m² útiles y 131 m² construidos son la superficie del activo; los 144 m² del presupuesto son superficie de intervención de obra. Prevalece siempre el proyecto técnico.</td></tr>
     <tr><td>Régimen fiscal — ITP vs IVA</td><td><b style="color:var(--ok)">✅ CERRADO</b></td><td>—</td><td>Confirmado: la operación tributa por ITP (9%), no por IVA — verificado en el contrato de arras y el análisis económico</td></tr>
-    <tr><td>CCU — Certificado de Compatibilidad Urbanística</td><td><b style="color:#9a6712">🟡 VALIDADO</b></td><td>8 · Medio</td><td>Pendiente de concesión por el Ayuntamiento de Elche; expediente bloqueado por baja de la funcionaria responsable — seguimiento activo</td></tr>
-    <tr><td>Precio de venta no respaldado por la segunda fuente de mercado</td><td><b style="color:var(--warn)">🔴 ABIERTO</b></td><td>9 · Medio</td><td>El precio asumido (325.000 €) supera el escenario optimista de IM·PULSO V2 (310.161 €); pendiente de contrastar antes de comprometer el precio de salida definitivo</td></tr>
+    <tr><td>CCU — Certificado de Compatibilidad Urbanística</td><td><b style="color:#9a6712">🟡 EN TRÁMITE</b></td><td>8 · Medio</td><td><b>Qué pasa:</b> el certificado está solicitado al Ayuntamiento de Elche y lleva meses sin emitirse, porque la funcionaria que instruye estos expedientes está de baja. No hay ningún reparo técnico ni urbanístico sobre la operación: es un retraso administrativo.<br><br><b>Por qué avanzamos igualmente:</b> el encaje urbanístico está verificado por el proyecto técnico y por el informe de diagnóstico de Fase 1, y la operación tiene una fecha de escritura comprometida en las arras. Esperar sin fecha bloquearía la operación entera.<br><br><b>Qué pasa si finalmente no se obtuviera:</b> <b style="color:var(--navy)">se devuelve íntegramente su aportación a cada partícipe.</b> El riesgo del trámite no lo soporta el inversor.</td></tr>
+    <tr><td>Precio de venta por encima del rango del informe de mercado</td><td><b style="color:#9a6712">🟡 VIGILADO</b></td><td>9 · Medio</td><td>El precio previsto (325.000 €) supera el escenario optimista del informe IM·PULSO (310.161 €). La razón es que ese informe valora los 60 testigos del barrio, y <b>ninguno es vivienda a estrenar</b>: en Altabix no hay obra nueva. El propio informe sitúa la vivienda usada como suelo del mercado (1.647 €/m²) y la obra nueva de Elche como techo (2.632 €/m²), y el producto a estrenar por cambio de uso entre ambos. Estas dos viviendas salen a 2.481 €/m², dentro de esa banda. <b>Vigilancia:</b> se contrasta con las inmobiliarias de la zona antes de fijar el precio de salida definitivo, y el plan de venta contempla ajustarlo si el mercado no responde en los primeros 60 días.</td></tr>
   </table>
   <div class="docbtns">
     <a class="btn-doc" href="https://drive.google.com/file/d/1DQuylMCeJIIq23qKjgVS5ERoll-0VZKp/view" target="_blank" rel="noopener"><span class="ic">📋</span> Ver matriz de riesgos</a>
@@ -876,7 +871,7 @@ body.final .todo{display:none}
   <div class="cards">
     <div class="card"><div class="big"><span title="Pendiente: DURACION_LICENCIA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span></div><div class="lbl">Licencia (en trámite, pre-validada)</div></div>
     <div class="card"><div class="big">16 semanas (4 meses)</div><div class="lbl">Obra — Gantt de 11 capítulos con solapes</div></div>
-    <div class="card"><div class="big">≈8-10 meses</div><div class="lbl">Operación completa</div></div>
+    <div class="card"><div class="big">12 meses</div><div class="lbl">Operación completa — plazo del contrato, con fecha objetivo de finalización el 15 de octubre de 2027</div></div>
   </div>
   11 capítulos (+ gestión de residuos y seguridad y salud, ambos paralelos a toda la obra, 16 semanas): I. Demoliciones y levantado de solado (S1-S3) · II. Albañilería: tabiquería, trasdosados, techos (S3-S7) · III. Fontanería (S5-S12) · IV. Electricidad (S7-S16) · V. Carpintería de madera (S7-S16) · VI. Andamio + carpintería metálica y ventanas (3 semanas) · VII. Revestimientos interiores, sin fachada (S10-S14) · VIII. Climatización/preinstalación (2 semanas) · IX. Griferías y sanitarios (3 semanas) · X. Pintura (S15-S16) · XI. Gestión de residuos (16 semanas, paralela).
   <div class="gantt">
@@ -1137,7 +1132,7 @@ body.final .todo{display:none}
   "venta": {"realista": "325.000 €", "realista_desglose": "155.000+170.000", "optimista": "<span title="Pendiente: VENTA_OPTIMISTA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span>", "optimista_desglose": "<span title="Pendiente: DESGLOSE_VENTA_OPTIMISTA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span>"},
   "beneficio_tras_servicer": {"realista": "52.911 €", "optimista": "<span title="Pendiente: BENEFICIO_OPTIMISTA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span>"},
   "rentabilidad_capital": {"realista": "20,39%", "optimista": "<span title="Pendiente: RENTABILIDAD_OPTIMISTA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span>"},
-  "reforma_eur_m2": "620", "obra_semanas": "16", "plazo_meses": "8-10",
+  "reforma_eur_m2": "620", "obra_semanas": "16", "plazo_meses": "12",
   "unidades": [{"tipo": "2 dormitorios, 1 baño"}, {"tipo": "2 dormitorios, 2 baños"}],
   "precio_salida": "<span title="Pendiente: PRECIO_SALIDA" style="background:#ffe9a8;color:#8a6d00;padding:0 5px;border-radius:3px;font-size:.85em;white-space:nowrap">pendiente</span>", "rango_cierre": "155.000-170.000",
   "estado": "PROVISIONAL"
