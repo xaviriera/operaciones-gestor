@@ -1316,7 +1316,8 @@ function calcularPorcentajeAvance(estado){
     if(hito.estado==="actual") return total+(peso/2);
     return total;
   },0);
-  return Math.round(avance);
+  // Se normaliza por la suma real de pesos: el avance nunca pasa de 100 aunque los pesos no sumen 100.
+  return Math.min(100, Math.round((avance/pesoTotal)*100));
 }
 function renderOperacion(){
   const operacion=datosOperacion.operacion || {};
