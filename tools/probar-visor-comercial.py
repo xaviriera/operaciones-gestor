@@ -63,6 +63,7 @@ class ComercialTest(unittest.TestCase):
         filtro = json.loads((g.RAIZ / "tools/filtro-visor-comercial.json").read_text(encoding="utf-8"))
         filtro["renombrar_hitos"] = {"Grupo inversor": "Preparación"}
         filtro["detalle_hitos"] = {"Grupo inversor": "Documentos preparados", "Entrega": ""}
+        filtro["excluir_bitacora_titulos"] = ["Título exacto"]
         ruta = self.root / "filtro.json"
         ruta.write_text(json.dumps(filtro), encoding="utf-8")
         self.datos.update({

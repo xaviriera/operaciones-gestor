@@ -76,6 +76,19 @@ def filtrar_textos(datos: dict, ruta: Path) -> tuple[int, int, int]:
             hito["detalle"] = ""
         vaciados += bool(detalle_original) and hito.get("detalle") == ""
     datos.setdefault("contacto", {})["mensaje_predeterminado"] = filtro["contacto_mensaje"]
+    reemplazos = filtro.get("reemplazos_texto", {})
+    if not isinstance(reemplazos, dict) or not all(isinstance(k, str) and isinstance(v, str) for k, v in reemplazos.items()):
+        raise ValueError("Filtro inválido: reemplazos_texto debe ser un objeto de strings.")
+
+    def reemplazar(valor):
+        if isinstance(valor, dict):
+            return {k: reemplazar(v) for k, v in valor.items()}
+        if isinstance(valor, list):
+            return [reemplazar(v) for v in valor]
+        return reemplazos.get(valor, valor) if isinstance(valor, str) else valor
+
+    for clave in list(datos):
+        datos[clave] = reemplazar(datos[clave])
     restos = []
 
     def revisar(valor, ruta_json="", esquema=""):
@@ -125,8 +138,12 @@ def referencias_locales(datos, es_referencia=False):
         yield ruta
 
 
-def preparar_publicacion(destino: Path, datos: dict, assets: Path):
+def preparar_publicacion(destino: Path, datos: dict, assets: Path, reemplazos_html: dict | None = None):
     html = (RAIZ / "torres-cotillas/visor/index.html").read_text(encoding="utf-8")
+    for original, nuevo in (reemplazos_html or {}).items():
+        if original not in html:
+            raise ValueError(f"reemplazos_html: no se encuentra en la plantilla: {original[:80]!r}")
+        html = html.replace(original, nuevo)
     for nombre, valor in (("ORIGEN_LLAVERO", URL_LLAVERO), ("ORIGEN_DATOS", "")):
         html, cantidad = re.subn(rf"const {nombre} = '[^']*';", f"const {nombre} = '{valor}';", html)
         if cantidad != 1:
@@ -174,7 +191,10 @@ def main(argv=None) -> int:
     datos["modo_comercial"] = {"etiqueta": args.etiqueta, "pie_legal": args.pie_legal}
     eliminadas, renombrados, vaciados = filtrar_textos(datos, args.filtro)
     plano = (json.dumps(datos, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
-    publicacion = preparar_publicacion(destino, datos, ASSETS) if destino else None
+    reemplazos_html = json.loads(args.filtro.read_text(encoding="utf-8")).get("reemplazos_html", {})
+    if not isinstance(reemplazos_html, dict) or not all(isinstance(k, str) and isinstance(v, str) for k, v in reemplazos_html.items()):
+        raise ValueError("Filtro inválido: reemplazos_html debe ser un objeto de strings.")
+    publicacion = preparar_publicacion(destino, datos, ASSETS, reemplazos_html) if destino else None
     password = os.environ.get("VISOR_COMERCIAL_PASSWORD")
     ruta_llavero = salida / "llavero.json"
     generada = False

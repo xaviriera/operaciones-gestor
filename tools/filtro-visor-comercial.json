@@ -69,19 +69,14 @@
     "12 meses desde la firma del contrato (2 jul 2026) · objetivo: 2 jul 2027": "Objetivo de finalización: 2 jul 2027"
   },
   "reemplazos_html": {
-    "<title>Visor del Inversor</title>": "<title>Seguimiento de obra</title>",
     "content=\"Panel privado de seguimiento de la operación.\"": "content=\"Seguimiento de obra de la promoción.\"",
-    "Visor del Inversor · CdU de 0 a Éxito": "Seguimiento de obra · CdU de 0 a Éxito",
     "Seguimiento privado de la operación.": "Seguimiento de obra de la promoción.",
     "content=\"https://visor.tucambiodeuso.com/tdc/\">": "content=\"https://visor.tucambiodeuso.com/tdc-comercial/\">",
-    "Visor del Inversor de CdU de 0 a Éxito": "Seguimiento de obra de CdU de 0 a Éxito",
-    "<h1 class=\"access-title\" id=\"accessTitle\">Visor del Inversor</h1>": "<h1 class=\"access-title\" id=\"accessTitle\">Seguimiento de obra</h1>",
     "Acceso privado para partícipes de la operación.": "Acceso reservado para uso comercial.",
-    "Visor del Inversor · Herramienta oficial": "Seguimiento de obra · Uso comercial",
+    "Visor del Inversor · Herramienta oficial": "Visor del Inversor · Uso comercial",
     "El cuadro de mandos de tu inversión": "El estado de la obra, al día",
     "captación de la oportunidad, viabilidad, presentación a inversores, formalización y compra, transformación, venta de las unidades, reparto y cierre.": "viabilidad, formalización y compra, transformación, venta de las unidades y cierre documental.",
     "El contrato fija una duración estimada de <b>12 meses desde su firma</b> (2 de julio de 2026), con fecha objetivo el <b>2 de julio de 2027</b>.": "La fecha objetivo de finalización es el <b>2 de julio de 2027</b>.",
-    "\"Fase 2 · MAP\":\"Encaje, presupuesto, estructura legal, grupo inversor y compra\"": "\"Fase 2 · MAP\":\"Encaje, presupuesto, estructura legal, organización y compra\"",
-    "`Visor del Inversor · ${valor(operacion.nombre)}`": "`Seguimiento de obra · ${valor(operacion.nombre)}`"
+    "\"Fase 2 · MAP\":\"Encaje, presupuesto, estructura legal, grupo inversor y compra\"": "\"Fase 2 · MAP\":\"Encaje, presupuesto, estructura legal, organización y compra\""
   }
 }
