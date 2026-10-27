@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import re
 import subprocess
+import sys
 import tempfile
 import threading
 import unittest
@@ -57,6 +58,63 @@ class ComercialTest(unittest.TestCase):
 
     def llavero(self):
         return g.cifrar.leer_llavero(self.salida / "llavero.json")
+
+    def test_filtro(self):
+        filtro = json.loads((g.RAIZ / "tools/filtro-visor-comercial.json").read_text(encoding="utf-8"))
+        filtro["renombrar_hitos"] = {"Grupo inversor": "Preparación"}
+        filtro["detalle_hitos"] = {"Grupo inversor": "Documentos preparados", "Entrega": ""}
+        ruta = self.root / "filtro.json"
+        ruta.write_text(json.dumps(filtro), encoding="utf-8")
+        self.datos.update({
+            "bitacora": [{"titulo": "Coste", "texto": "100 €"},
+                         {"titulo": "Obra", "texto": "Tabiques terminados"},
+                         {"titulo": "Título exacto", "texto": "Nota"},
+                         {"titulo": "INVERSIÓN", "texto": "Nota"}],
+            "hitos": [{"nombre": "Grupo inversor", "detalle": "Partícipes", "peso": 20, "estado": "conseguido", "fase": "Inicio"},
+                      {"nombre": "Obra", "detalle": "COMISION bancaria abonada", "peso": 50, "estado": "actual", "fase": "Obra"},
+                      {"nombre": "Entrega", "detalle": "Texto sustituible", "peso": 30, "estado": "pendiente", "fase": "Final"}],
+            "contacto": {"mensaje_predeterminado": "Soy inversor", "whatsapp_numero": "123.45"},
+            "camaras": [{"url": "https://example.invalid/123.45"}],
+            "fotos_avance": [{"url": "https://example.invalid/123.45"}],
+            "planos": [{"fichero": "123.45.svg"}],
+            "noticias_mercado": [{"enlace": "https://example.invalid/123.45"}],
+        })
+        self.origen.write_text(json.dumps(self.datos), encoding="utf-8")
+        resumen = self.ejecutar("--filtro", str(ruta))
+        salida = json.loads((self.salida / "operacion.json").read_text(encoding="utf-8"))
+        self.assertEqual(salida["bitacora"], [self.datos["bitacora"][1]])
+        self.assertEqual(salida["hitos"][0]["nombre"], "Preparación")
+        self.assertEqual([h["detalle"] for h in salida["hitos"]], ["Documentos preparados", "", ""])
+        self.assertEqual(len(salida["hitos"]), len(self.datos["hitos"]))
+        self.assertEqual(salida["estado"], self.datos["estado"])
+        for antes, despues in zip(self.datos["hitos"], salida["hitos"]):
+            for clave in ("peso", "estado", "fase"):
+                self.assertEqual(antes[clave], despues[clave])
+        self.assertEqual(salida["contacto"]["mensaje_predeterminado"], filtro["contacto_mensaje"])
+        self.assertIn("Bitácoras eliminadas: 3; hitos renombrados: 1; detalles vaciados: 2", resumen)
+
+    def test_rechazo_sin_escritura(self):
+        self.datos["hitos"] = [{"nombre": "INVERSIÓN privada", "detalle": ""}]
+        self.datos["extra"] = {"anidado": ["Saldo bancario", "123.45"]}
+        self.origen.write_text(json.dumps(self.datos), encoding="utf-8")
+        for preexistente in (False, True):
+            if preexistente:
+                self.salida.mkdir()
+                self.destino.mkdir()
+                (self.salida / "operacion.json").write_bytes(b"sintetico anterior")
+                (self.destino / "index.html").write_bytes(b"publicacion anterior")
+            antes = {p: p.read_bytes() for p in self.root.rglob("*") if p.is_file()}
+            resultado = subprocess.run([sys.executable, str(Path(g.__file__)), *self.args,
+                                       "--publicar-en", str(self.destino)], capture_output=True, text=True, encoding="utf-8",
+                                      env={**os.environ, "PYTHONIOENCODING": "utf-8"})
+            self.assertEqual(resultado.returncode, 1)
+            for ruta in ("hitos[0].nombre", "extra.anidado[0]", "extra.anidado[1]"):
+                self.assertIn(ruta, resultado.stderr)
+            self.assertIn("INVERSIÓN privada", resultado.stderr)
+            self.assertEqual(antes, {p: p.read_bytes() for p in self.root.rglob("*") if p.is_file()})
+            if not preexistente:
+                self.assertFalse(self.salida.exists())
+                self.assertFalse(self.destino.exists())
 
     def test_cifrado_y_actualizacion(self):
         self.ejecutar()

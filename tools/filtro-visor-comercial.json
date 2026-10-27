@@ -1,0 +1,8 @@
+{
+  "patrones_privados": ["€", "\\beuros?\\b", "\\d+[.,]\\d{2}\\b", "part[ií]cipe", "inversor", "inversi[oó]n", "aportaci", "saldo", "extracto", "\\bcuenta\\b", "rentabilidad", "reparto", "tramo", "cesi[oó]n", "colaborador", "comisi[oó]n", "\\bIVA\\b", "ahorro", "abonad", "pagad", "liquidaci", "financiaci", "preventa", "beneficio", "capital"],
+  "renombrar_hitos": {"Nombre original exacto": "Nombre comercial"},
+  "detalle_hitos": {"Nombre original exacto": "Detalle comercial"},
+  "excluir_bitacora_titulos": ["Título exacto"],
+  "contacto_mensaje": "Hola, soy de Rosa & Porta y tengo una consulta sobre las viviendas de C/ D'Estoup 17.",
+  "campos_exentos": ["contacto.whatsapp_numero", "camaras[].url", "fotos_avance[].url", "planos[].fichero", "noticias_mercado[].enlace"]
+}

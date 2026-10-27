@@ -11,6 +11,7 @@ import re
 import secrets
 import shutil
 import sys
+import unicodedata
 from urllib.parse import unquote, urlsplit
 
 RAIZ = Path(__file__).resolve().parents[1]
@@ -24,6 +25,74 @@ spec = importlib.util.spec_from_file_location("cifrar_visor", Path(__file__).wit
 cifrar = importlib.util.module_from_spec(spec)
 sys.modules[spec.name] = cifrar
 spec.loader.exec_module(cifrar)
+
+
+def sin_acentos(texto: str) -> str:
+    return "".join(c for c in unicodedata.normalize("NFD", texto)
+                   if unicodedata.category(c) != "Mn")
+
+
+def filtrar_textos(datos: dict, ruta: Path) -> tuple[int, int, int]:
+    filtro = json.loads(ruta.read_text(encoding="utf-8"))
+    tipos = {"patrones_privados": list, "renombrar_hitos": dict,
+             "detalle_hitos": dict, "excluir_bitacora_titulos": list,
+             "contacto_mensaje": str, "campos_exentos": list}
+    for clave, tipo in tipos.items():
+        valor = filtro.get(clave) if isinstance(filtro, dict) else None
+        if not isinstance(valor, tipo):
+            raise ValueError(f"Filtro inválido: {clave} debe ser {tipo.__name__}.")
+        if isinstance(valor, (list, dict)) and not all(isinstance(v, str) for v in valor):
+            raise ValueError(f"Filtro inválido: {clave} debe contener strings.")
+        if isinstance(valor, dict) and not all(isinstance(v, str) for v in valor.values()):
+            raise ValueError(f"Filtro inválido: los valores de {clave} deben ser strings.")
+    try:
+        patrones = [re.compile(sin_acentos(p), re.IGNORECASE) for p in filtro["patrones_privados"]]
+    except re.error as exc:
+        raise ValueError(f"Regex inválida en el filtro: {exc}") from exc
+
+    def privado(texto):
+        return isinstance(texto, str) and any(p.search(sin_acentos(texto)) for p in patrones)
+
+    eliminadas = renombrados = vaciados = 0
+    if "bitacora" in datos:
+        conservadas = []
+        for entrada in datos["bitacora"]:
+            if (entrada.get("titulo") in filtro["excluir_bitacora_titulos"]
+                    or privado(entrada.get("titulo")) or privado(entrada.get("texto"))):
+                eliminadas += 1
+            else:
+                conservadas.append(entrada)
+        datos["bitacora"] = conservadas
+    for hito in datos.get("hitos", []):
+        original = hito.get("nombre")
+        if original in filtro["renombrar_hitos"]:
+            nuevo = filtro["renombrar_hitos"][original]
+            renombrados += nuevo != original
+            hito["nombre"] = nuevo
+        detalle_original = hito.get("detalle")
+        if original in filtro["detalle_hitos"]:
+            hito["detalle"] = filtro["detalle_hitos"][original]
+        if privado(hito.get("detalle")):
+            hito["detalle"] = ""
+        vaciados += bool(detalle_original) and hito.get("detalle") == ""
+    datos.setdefault("contacto", {})["mensaje_predeterminado"] = filtro["contacto_mensaje"]
+    restos = []
+
+    def revisar(valor, ruta_json="", esquema=""):
+        if isinstance(valor, dict):
+            for clave, contenido in valor.items():
+                revisar(contenido, f"{ruta_json}.{clave}" if ruta_json else clave,
+                        f"{esquema}.{clave}" if esquema else clave)
+        elif isinstance(valor, list):
+            for indice, contenido in enumerate(valor):
+                revisar(contenido, f"{ruta_json}[{indice}]", f"{esquema}[]")
+        elif isinstance(valor, str) and esquema not in filtro["campos_exentos"] and privado(valor):
+            restos.append(f"{ruta_json}: {json.dumps(valor, ensure_ascii=False)}")
+
+    revisar(datos)
+    if restos:
+        raise ValueError("Quedan textos privados; no se ha escrito ni publicado nada:\n" + "\n".join(restos))
+    return eliminadas, renombrados, vaciados
 
 
 def comprobar_publicacion(destino: Path, html: str) -> None:
@@ -87,6 +156,7 @@ def main(argv=None) -> int:
     parser.add_argument("--origen", type=Path, default=RAIZ / "data/tdc/operacion.json")
     parser.add_argument("--salida-dir", type=Path, default=RAIZ / "data/tdc-comercial")
     parser.add_argument("--publicar-en", type=Path)
+    parser.add_argument("--filtro", type=Path, default=RAIZ / "tools/filtro-visor-comercial.json")
     parser.add_argument("--etiqueta", default=ETIQUETA)
     parser.add_argument("--pie-legal", default=PIE_LEGAL)
     args = parser.parse_args(argv)
@@ -102,6 +172,7 @@ def main(argv=None) -> int:
     for clave in PRIVADAS:
         datos.pop(clave, None)
     datos["modo_comercial"] = {"etiqueta": args.etiqueta, "pie_legal": args.pie_legal}
+    eliminadas, renombrados, vaciados = filtrar_textos(datos, args.filtro)
     plano = (json.dumps(datos, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     publicacion = preparar_publicacion(destino, datos, ASSETS) if destino else None
     password = os.environ.get("VISOR_COMERCIAL_PASSWORD")
@@ -140,6 +211,7 @@ def main(argv=None) -> int:
         shutil.copy2(ruta_llavero, destino / "llavero.json")
         comprobar_publicacion(destino, (destino / "index.html").read_text(encoding="utf-8"))
     print("Visor comercial generado correctamente.")
+    print(f"Bitácoras eliminadas: {eliminadas}; hitos renombrados: {renombrados}; detalles vaciados: {vaciados}.")
     return 0
 
 
