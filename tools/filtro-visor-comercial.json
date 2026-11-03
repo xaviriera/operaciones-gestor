@@ -50,9 +50,12 @@
     "Canal de seguimiento para partícipes en marcha": "Reuniones de avance periódicas y visor con el estado de la obra al día.",
     "Seguimiento en obra: cámaras y reporte fotográfico": "Cámaras en el local y seguimiento fotográfico del avance.",
     "Venta de las 3 viviendas": "Venta de las tres viviendas al finalizar la obra.",
-    "Reparto a partícipes y cierre documental": "Carpeta final de la operación. Fecha objetivo: 2 de julio de 2027."
+    "Reparto a partícipes y cierre documental": "Carpeta final de la operación. Fecha objetivo: 2 de julio de 2027.",
+    "Estrategia de comercialización definida y en marcha": "Estrategia de comercialización firmada. Evento presencial el 21 nov y portales desde el 22 nov."
   },
-  "excluir_bitacora_titulos": [],
+  "excluir_bitacora_titulos": [
+    "Exclusiva de venta firmada: precio protegido y estrategia de marketing en marcha"
+  ],
   "contacto_mensaje": "Hola, soy de Rosa & Porta y tengo una consulta sobre las viviendas de C/ D'Estoup 17.",
   "campos_exentos": [
     "contacto.whatsapp_numero",
@@ -78,5 +81,12 @@
     "captación de la oportunidad, viabilidad, presentación a inversores, formalización y compra, transformación, venta de las unidades, reparto y cierre.": "viabilidad, formalización y compra, transformación, venta de las unidades y cierre documental.",
     "El contrato fija una duración estimada de <b>12 meses desde su firma</b> (2 de julio de 2026), con fecha objetivo el <b>2 de julio de 2027</b>.": "La fecha objetivo de finalización es el <b>2 de julio de 2027</b>.",
     "\"Fase 2 · MAP\":\"Encaje, presupuesto, estructura legal, grupo inversor y compra\"": "\"Fase 2 · MAP\":\"Encaje, presupuesto, estructura legal, organización y compra\""
-  }
+  },
+  "bitacora_extra": [
+    {
+      "fecha": "30 oct 2026",
+      "titulo": "Estrategia comercial firmada",
+      "texto": "Esta semana se ha firmado la estrategia de comercialización de las tres viviendas: material de venta (fotografía, vídeo, renders), experiencia de realidad virtual, evento presencial de presentación el 21 de noviembre y publicación en portales desde el 22 de noviembre."
+    }
+  ]
 }

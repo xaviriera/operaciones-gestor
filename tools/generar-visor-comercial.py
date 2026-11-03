@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from datetime import date
 import importlib.util
 import json
 import os
@@ -63,6 +64,34 @@ def filtrar_textos(datos: dict, ruta: Path) -> tuple[int, int, int]:
             else:
                 conservadas.append(entrada)
         datos["bitacora"] = conservadas
+        extras = filtro.get("bitacora_extra", [])
+        if not isinstance(extras, list):
+            raise ValueError("Filtro invalido: bitacora_extra debe ser una lista.")
+        meses = "ene feb mar abr may jun jul ago sep oct nov dic".split()
+
+        def fecha_bitacora(valor):
+            dia, mes, anio = valor.split()
+            return date(int(anio), meses.index(mes.lower()) + 1, int(dia))
+
+        fechas_extra = []
+        for entrada in extras:
+            if not isinstance(entrada, dict) or not all(
+                    isinstance(entrada.get(clave), str) for clave in ("fecha", "titulo", "texto")):
+                raise ValueError("Filtro invalido: bitacora_extra requiere fecha, titulo y texto de tipo str.")
+            try:
+                fechas_extra.append(fecha_bitacora(entrada["fecha"]))
+            except ValueError as exc:
+                raise ValueError("Filtro invalido: bitacora_extra contiene una fecha inválida.") from exc
+        for entrada, fecha in zip(extras, fechas_extra):
+            if any(actual.get("titulo") == entrada["titulo"] for actual in datos["bitacora"]):
+                continue
+            if not datos["bitacora"]:
+                datos["bitacora"].append(entrada.copy())
+                continue
+            for indice, actual in enumerate(datos["bitacora"]):
+                if fecha_bitacora(actual["fecha"]) <= fecha:
+                    datos["bitacora"].insert(indice, entrada.copy())
+                    break
     for hito in datos.get("hitos", []):
         original = hito.get("nombre")
         if original in filtro["renombrar_hitos"]:
