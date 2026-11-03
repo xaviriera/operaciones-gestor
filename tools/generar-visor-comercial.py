@@ -18,7 +18,7 @@ from urllib.parse import unquote, urlsplit
 RAIZ = Path(__file__).resolve().parents[1]
 ASSETS = RAIZ.parent / "cdu-visor" / "tdc"
 URL_LLAVERO = "https://visor.tucambiodeuso.com/tdc-comercial/llavero.json"
-PRIVADAS = ("escenario_economico", "cuentas", "documentacion", "proximo_reporte")
+PRIVADAS = ("escenario_economico", "cuentas", "documentacion", "proximo_reporte", "estrategia_comercial")
 ETIQUETA = "Solo para uso comercial · Seeds4Leads"
 PIE_LEGAL = "Información orientativa sobre el estado de la obra y de la promoción, facilitada exclusivamente para su comercialización. No constituye oferta vinculante ni sustituye a la documentación contractual. © CdU DE 0 A ÉXITO, S.L."
 

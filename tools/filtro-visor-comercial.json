@@ -54,7 +54,7 @@
     "Estrategia de comercialización definida y en marcha": "Estrategia de comercialización firmada. Evento presencial el 21 nov y portales desde el 22 nov."
   },
   "excluir_bitacora_titulos": [
-    "Exclusiva de venta firmada: precio protegido y estrategia de marketing en marcha"
+    "Exclusiva de venta firmada y estrategia en marcha"
   ],
   "contacto_mensaje": "Hola, soy de Rosa & Porta y tengo una consulta sobre las viviendas de C/ D'Estoup 17.",
   "campos_exentos": [
@@ -88,5 +88,8 @@
       "titulo": "Estrategia comercial firmada",
       "texto": "Esta semana se ha firmado la estrategia de comercialización de las tres viviendas: material de venta (fotografía, vídeo, renders), experiencia de realidad virtual, evento presencial de presentación el 21 de noviembre y publicación en portales desde el 22 de noviembre."
     }
+  ],
+  "excluir_claves": [
+    "estrategia_comercial"
   ]
 }

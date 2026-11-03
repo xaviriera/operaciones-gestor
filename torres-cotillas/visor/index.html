@@ -782,6 +782,52 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 }
 .folder:hover{border-color:rgba(226,159,52,.75);box-shadow:0 8px 22px rgba(22,61,96,.08)}
 .folder svg{flex:0 0 28px;width:28px;height:28px;fill:var(--ochre)}
+/* Estrategia de comercializacion activa (plegable) */
+.estrategia{padding:0;overflow:hidden}
+.estrategia>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 20px;cursor:pointer;min-height:56px}
+.estrategia>summary::-webkit-details-marker{display:none}
+.estrategia>summary:focus-visible{outline:2px solid var(--ochre);outline-offset:-2px}
+.estrategia-head b{display:block;color:var(--navy);font-size:clamp(17px,2.2vw,21px);line-height:1.2}
+.estrategia-head span{display:block;margin-top:5px;color:var(--muted);font-size:12.5px;font-weight:700}
+.estrategia-caret{flex:0 0 auto;width:11px;height:11px;margin:0 4px;border-right:2px solid var(--navy);border-bottom:2px solid var(--navy);transform:rotate(45deg);transition:transform .2s ease;opacity:.6}
+.estrategia[open]>summary{border-bottom:1px solid var(--line)}
+.estrategia[open] .estrategia-caret{transform:rotate(-135deg)}
+.estrategia-body{display:grid;gap:22px;padding:20px}
+.estrategia h3{margin:0 0 8px;color:var(--navy);font-size:15px;line-height:1.25}
+.estrategia-body p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
+.escalera{display:grid;gap:8px;margin:0}
+.escalon{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:center;gap:6px 16px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:#fff}
+.escalon .e-main{min-width:0}
+.escalon .e-label{display:block;font-size:11px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;line-height:1.3}
+.escalon .e-importe{display:block;margin-top:3px;font-size:clamp(22px,4vw,28px);font-weight:900;line-height:1.1;white-space:nowrap}
+.escalon .e-detalle{display:block;margin-top:3px;font-size:12px;font-weight:600;opacity:.85}
+.escalon .e-lectura{font-size:13px;font-weight:600;line-height:1.4}
+.escalon.salida{background:var(--navy);border-color:var(--navy);color:#fff}
+.escalon.salida .e-label{color:var(--ochre)}
+.escalon.bajada{background:#fff6e4;border-color:rgba(226,159,52,.45);color:var(--navy)}
+.escalon.bajada .e-label{color:#a8690c}
+.escalon.suelo{background:#fff;border:2px solid var(--navy);color:var(--navy)}
+.escalon.suelo .e-label{color:var(--navy)}
+.escalon.n1{margin-left:0}.escalon.n2{margin-left:clamp(14px,5vw,44px)}.escalon.n3{margin-left:clamp(28px,10vw,88px)}.escalon.n4{margin-left:clamp(42px,15vw,132px)}
+.estrategia .margen{padding:12px 14px;border-left:4px solid var(--ochre);background:#fffaf0;border-radius:0 8px 8px 0;color:var(--navy);font-size:13.5px;font-weight:600;line-height:1.5}
+.estrategia-reglas{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.estrategia-reglas li{position:relative;padding-left:20px;color:var(--ink);font-size:14px;line-height:1.5}
+.estrategia-reglas li::before{content:"";position:absolute;left:2px;top:.55em;width:8px;height:8px;border-radius:50%;background:var(--ochre)}
+.plan-venta{margin:0;padding:0 0 0 20px;list-style:none;position:relative;display:grid;gap:14px}
+.plan-venta::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.plan-venta li{position:relative}
+.plan-venta li::before{content:"";position:absolute;left:-20px;top:4px;width:10px;height:10px;border-radius:50%;background:rgba(22,61,96,.28);box-shadow:0 0 0 4px var(--white)}
+.plan-venta li:first-child::before{background:var(--ochre)}
+.plan-venta .p-cuando{display:block;color:var(--ochre);font-size:11px;font-weight:900;letter-spacing:.6px;text-transform:uppercase}
+.plan-venta .p-que{display:block;margin-top:3px;color:var(--muted);font-size:13.5px;line-height:1.5}
+.estrategia .objetivo{padding:14px 16px;border-radius:8px;background:var(--navy);color:#fff;font-size:14px;font-weight:700}
+.entry-enlace{display:inline-flex;align-items:center;min-height:40px;margin-top:6px;color:var(--ochre);font-size:13px;font-weight:800;text-decoration:none;cursor:pointer}
+.entry-enlace:hover{text-decoration:underline}
+@media(max-width:560px){
+  .estrategia>summary{padding:16px}.estrategia-body{padding:16px}
+  .escalon{grid-template-columns:1fr}
+  .escalon.n2{margin-left:12px}.escalon.n3{margin-left:24px}.escalon.n4{margin-left:36px}
+}
 .feed{display:grid;gap:12px}
 .entry{display:grid;grid-template-columns:112px 1fr;gap:14px;padding:16px}
 .entry-date{color:var(--ochre);font-size:11px;font-weight:900;text-transform:uppercase}
@@ -1076,6 +1122,16 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
       <div class="action-row">
         <p class="note">Celebración sobria: sello, evidencia y actualización del punto de avance.</p>
       </div>
+    </section>
+
+    <section class="section" id="estrategia-comercial" hidden>
+      <details class="card estrategia" id="estrategiaDetails">
+        <summary>
+          <div class="estrategia-head"><b id="estrategiaTitulo"></b><span id="estrategiaVigencia"></span></div>
+          <i class="estrategia-caret" aria-hidden="true"></i>
+        </summary>
+        <div class="estrategia-body" id="estrategiaBody"></div>
+      </details>
     </section>
 
     <section class="section" id="cronograma">
@@ -1947,6 +2003,38 @@ function renderFolders(){
     <a class="folder card" href="${escapeAttr(item.url_drive || "#")}" target="_blank" rel="noopener">${folderIcon()}<span>${escapeHtml(valor(item.nombre))}</span></a>
   `).join("");
 }
+function renderEstrategiaComercial(){
+  const visible=mostrarSeccionOpcional("estrategia_comercial","estrategia-comercial");
+  const e=datosOperacion.estrategia_comercial;
+  if(!visible || !e || typeof e!=="object"){
+    document.getElementById("estrategia-comercial").hidden=true;
+    return;
+  }
+  document.getElementById("estrategiaTitulo").textContent=valor(e.titulo);
+  document.getElementById("estrategiaVigencia").textContent=valor(e.vigencia);
+  const escalera=(Array.isArray(e.escalera)?e.escalera:[]).map((f,i)=>{
+    const tipo=["salida","bajada","suelo"].includes(f.tipo) ? f.tipo : "bajada";
+    const detalle=f.detalle ? `<span class="e-detalle">${escapeHtml(f.detalle)}</span>` : "";
+    const lectura=f.lectura ? `<span class="e-lectura">${escapeHtml(f.lectura)}</span>` : "";
+    return `<div class="escalon ${tipo} n${Math.min(i+1,4)}"><div class="e-main"><span class="e-label">${escapeHtml(valor(f.etiqueta))}</span><span class="e-importe">${escapeHtml(valor(f.importe))}</span>${detalle}</div>${lectura}</div>`;
+  }).join("");
+  const reglas=(Array.isArray(e.reglas)?e.reglas:[]).map(r=>`<li>${escapeHtml(valor(r))}</li>`).join("");
+  const plan=(Array.isArray(e.plan)?e.plan:[]).map(x=>`<li><span class="p-cuando">${escapeHtml(valor(x.cuando))}</span><span class="p-que">${escapeHtml(valor(x.que))}</span></li>`).join("");
+  document.getElementById("estrategiaBody").innerHTML=`
+    <div><h3>${escapeHtml(valor(e.porque_titulo))}</h3><p>${escapeHtml(valor(e.porque))}</p></div>
+    <div class="escalera">${escalera}</div>
+    <p class="margen">${escapeHtml(valor(e.margen))}</p>
+    <div><h3>${escapeHtml(valor(e.reglas_titulo))}</h3><ul class="estrategia-reglas">${reglas}</ul></div>
+    <div><h3>${escapeHtml(valor(e.plan_titulo))}</h3><ol class="plan-venta">${plan}</ol></div>
+    <p class="objetivo">${escapeHtml(valor(e.objetivo))}</p>`;
+}
+function abrirEstrategiaComercial(event){
+  event.preventDefault();
+  const seccion=document.getElementById("estrategia-comercial");
+  if(!seccion || seccion.hidden) return;
+  document.getElementById("estrategiaDetails").open=true;
+  seccion.scrollIntoView({behavior:"smooth",block:"start"});
+}
 function renderBitacora(){
   const section=document.getElementById("bitacoraSection");
   const feed=document.getElementById("bitacoraFeed");
@@ -1960,8 +2048,9 @@ function renderBitacora(){
     const esUltima=index===0;
     const etiqueta=esUltima ? `<span class="entry-latest-label">ÚLTIMA ACTUALIZACIÓN</span>` : "";
     return `
-    <article class="card entry bitacora-entry ${esUltima?"latest":""}"><div class="entry-date">${escapeHtml(valor(item.fecha))}</div><div>${etiqueta}<b>${escapeHtml(valor(item.titulo))}</b><p>${escapeHtml(valor(item.texto))}</p></div></article>`;
+    <article class="card entry bitacora-entry ${esUltima?"latest":""}"><div class="entry-date">${escapeHtml(valor(item.fecha))}</div><div>${etiqueta}<b>${escapeHtml(valor(item.titulo))}</b><p>${escapeHtml(valor(item.texto))}</p>${item.enlace && item.enlace.ancla==="estrategia-comercial" && datosOperacion.estrategia_comercial ? `<a class="entry-enlace" href="#estrategia-comercial">${escapeHtml(valor(item.enlace.texto))}</a>` : ""}${typeof item.foto==="string" && /^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+\/=]+$/.test(item.foto) ? `<img src="${escapeAttr(item.foto)}" alt="${escapeAttr(valor(item.titulo))}" loading="lazy" style="width:100%;height:auto;margin-top:12px;border-radius:8px">` : ""}</div></article>`;
   }).join("");
+  feed.querySelectorAll("a.entry-enlace").forEach(a=>a.addEventListener("click",abrirEstrategiaComercial));
 }
 function renderNoticiasMercado(){
   const section=document.getElementById("noticiasMercadoSection");
@@ -2020,6 +2109,7 @@ function renderTodo(){
   renderProximoReporte();
   renderEscenarioEconomico();
   renderHitos();
+  renderEstrategiaComercial();
   renderGantt();
   renderEconomico();
   renderCamaras();
