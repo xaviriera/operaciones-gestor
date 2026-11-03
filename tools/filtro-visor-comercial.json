@@ -54,7 +54,8 @@
     "Estrategia de comercialización definida y en marcha": "Estrategia de comercialización firmada. Evento presencial el 21 nov y portales desde el 22 nov."
   },
   "excluir_bitacora_titulos": [
-    "Exclusiva de venta firmada y estrategia en marcha"
+    "Exclusiva de venta firmada y estrategia en marcha",
+    "Obra principal terminada y camino claro hacia la licencia de primera ocupación"
   ],
   "contacto_mensaje": "Hola, soy de Rosa & Porta y tengo una consulta sobre las viviendas de C/ D'Estoup 17.",
   "campos_exentos": [
@@ -83,6 +84,11 @@
     "\"Fase 2 · MAP\":\"Encaje, presupuesto, estructura legal, grupo inversor y compra\"": "\"Fase 2 · MAP\":\"Encaje, presupuesto, estructura legal, organización y compra\""
   },
   "bitacora_extra": [
+    {
+      "fecha": "03 nov 2026",
+      "titulo": "Obra principal terminada y entrada de los acabados",
+      "texto": "La fase principal de construcción está terminada: tabiquería de las tres viviendas, techos, aislamientos, ventanas con sus remates, fachada revestida, todos los pavimentos porcelánicos y la primera limpieza. Una vivienda ya está encintada y lista para el pintor; siguen las otras dos. A partir de ahora entran los oficios por orden: pintura, carpintería, montajes y limpieza final. En el exterior quedan el hormigón estampado del acceso y el zócalo de fachada."
+    },
     {
       "fecha": "30 oct 2026",
       "titulo": "Estrategia comercial firmada",
