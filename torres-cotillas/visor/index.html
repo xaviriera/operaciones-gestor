@@ -861,27 +861,45 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 .entry-enlace:hover{text-decoration:underline}
 @media(max-width:560px){
   .estrategia>summary{padding:14px;gap:10px;align-items:flex-start}
-  .estrategia-ver{padding:9px 12px;font-size:10.5px;align-self:center}
-  .estrategia-body{padding:14px 12px 16px}
-  .esc-card{padding:12px 4px 10px}
-  .esc-grid{--rowh:50px;grid-template-rows:250px auto}
+  .estrategia-ver{padding:9px 12px;font-size:12px;align-self:center;min-height:44px}
+  .estrategia-badge{font-size:12px}
+  .estrategia-body{padding:14px 10px 16px}
+  .esc-card{padding:12px 2px 10px}
+  /* Movil: cada fila (comision, mas de lo previsto, viviendas) lleva su rotulo en una linea propia
+     encima de las cifras, asi las 4 columnas usan todo el ancho y las cifras llegan a 14 px */
+  .esc-grid{--rowh:0px;grid-template-rows:250px auto}
   .esc-axis{display:none}
-  .esc-total{font-size:12px;letter-spacing:-.3px;margin-bottom:4px}
-  .esc-pc{font-size:11px;padding:1px 5px}
+  .esc-total{font-size:14px;letter-spacing:-.6px;margin-bottom:4px}
+  .esc-pc{font-size:12px;padding:1px 5px}
   .esc-frase{font-size:14px;padding:11px 12px}
-  .esc-lab{font-size:11px;padding:6px 0 5px;letter-spacing:-.2px}
-  .esc-read{font-size:11px;font-weight:700;letter-spacing:-.4px;padding:5px 0;hyphens:none}
-  .esc-rowlab{font-size:11px;padding-right:4px}
+  .esc-lab{font-size:12px;padding:6px 0 5px;letter-spacing:-.2px}
+  .esc-read{font-size:12px;font-weight:700;letter-spacing:-.3px;padding:5px 0;hyphens:none}
+  .esc-rowlab{grid-column:1/-1;font-size:12px;text-align:left;padding:8px 4px 2px;white-space:normal}
   .esc-rowlab .largo{display:none}.esc-rowlab .corto{display:inline}
-  .esc-cell{font-size:11px;letter-spacing:-.4px}
-  .esc-comlab{font-size:10.5px;line-height:1.15;white-space:normal;padding-right:3px}
-  .esc-com{padding:4px 1px}
-  .esc-maslab{font-size:10.5px;padding-right:3px}
-  .esc-mas .mv{font-size:11px;padding:1px 4px;letter-spacing:-.4px}
-  .esc-com .cv{font-size:11.5px;letter-spacing:-.4px}
-  .esc-com .cs{font-size:11px;padding:1px 5px}
+  .esc-rowlab[style*="grid-row:4"]{grid-row:4!important}
+  .esc-cell[style*="grid-row:4"]{grid-row:5!important}
+  .esc-rowlab[style*="grid-row:5"]{grid-row:6!important}
+  .esc-cell[style*="grid-row:5"]{grid-row:7!important}
+  .esc-rowlab[style*="grid-row:6"]{grid-row:8!important}
+  .esc-cell[style*="grid-row:6"]{grid-row:9!important}
+  .esc-rowlab[style*="grid-row:7"]{grid-row:10!important}
+  .esc-cell[style*="grid-row:7"]{grid-row:11!important}
+  .esc-rowlab[style*="grid-row:8"]{grid-row:12!important}
+  .esc-cell[style*="grid-row:8"]{grid-row:13!important}
+  .esc-cell{font-size:14px;letter-spacing:-.5px;padding:7px 0}
+  .esc-comlab{font-size:12px;line-height:1.2;padding:8px 4px 2px}
+  .esc-com{padding:6px 0}
+  .esc-maslab{font-size:12px;padding:8px 4px 2px}
+  .esc-mas .mv{font-size:14px;padding:2px 1px;letter-spacing:-.7px;background:none}
+  .esc-com .cv{font-size:14px;letter-spacing:-.5px}
+  .esc-com .cs{font-size:12px;padding:1px 5px;letter-spacing:-.3px}
+  .esc-com .cs.max{font-size:12px}
   .esc-line .larga{display:none}.esc-line .corta{display:inline}
-  .esc-line span{font-size:10px;padding:1px 6px;left:3px}
+  .esc-line span{font-size:12px;padding:1px 6px;left:3px}
+  .estrategia-body .esc-nota,.estrategia-body .esc-masnota{font-size:12px}
+  .plan-venta .p-cuando{font-size:12px}
+  .photo-date,.kicker{font-size:12px}
+}
 }
 
 .feed{display:grid;gap:12px}
@@ -902,6 +920,7 @@ td.doc a{color:var(--navy);font-weight:800;text-decoration:none}
 .bitacora-entry p{white-space:pre-line}
 .entry.market.nueva{border-left:4px solid var(--ochre);background:#fffaf0}
 .entry-latest-label{display:inline-flex;width:max-content;max-width:100%;margin-bottom:8px;padding:5px 9px;border-radius:999px;background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.4px;line-height:1;text-transform:uppercase}
+@media(max-width:560px){.entry-date{font-size:12px}.entry-latest-label{font-size:12px;letter-spacing:1px;padding:6px 10px}}
 .report{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:24px;color:var(--white);background:linear-gradient(135deg,var(--navy2),var(--navy))}
 .report span{display:block;color:#ffe0aa;font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase}
 .report b{display:block;margin-top:4px;font-size:clamp(20px,3vw,30px)}
