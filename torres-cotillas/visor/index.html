@@ -2064,15 +2064,13 @@ function renderEstrategiaComercial(){
   document.getElementById("estrategiaVigencia").textContent=mv ? `hasta ${mv[1]} ${mv[2].slice(0,3).toLowerCase()} ${mv[3]}` : vigRaw;
   const filas=Array.isArray(e.escalera)?e.escalera:[];
   const num=t=>parseInt(String(t==null?"":t).replace(/[^\d]/g,""),10)||0;
-  const BASE=215000;
+  const BASE=num(e.escala_base)||0;
   const tope=Math.max(...filas.map(f=>num(f.importe)),BASE+1);
   const rango=(tope-BASE)/0.80;
   const alt=f=>Math.max(4,Math.min(100,(num(f.importe)-BASE)/rango*100));
   const suelo=filas.find(f=>f.tipo==="suelo");
   const salidaImp=num(filas[0]&&filas[0].importe)||1;
   const pctDe=f=>Math.round((1-num(f.importe)/salidaImp)*100);
-  const COM_MAX=6000;
-  const eur=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g,".")+" €";
   const cols=filas.map((f,i)=>{
     const tipo=["salida","bajada","suelo"].includes(f.tipo) ? f.tipo : "bajada";
     const extra=tipo==="bajada" ? " b"+Math.min(i,3) : "";
@@ -2084,15 +2082,15 @@ function renderEstrategiaComercial(){
   const labs=filas.map((f,i)=>`<div class="esc-lab" style="grid-column:${i+2}">${escapeHtml(etq(f.etiqueta))}</div>`).join("");
   const viviendas=[0,1,2].map(k=>`<div class="esc-rowlab" style="grid-row:${k+5}"><span class="largo">Vivienda ${k+1}</span><span class="corto">Viv. ${k+1}</span></div>`+filas.map((f,i)=>`<div class="esc-cell" style="grid-column:${i+2};grid-row:${k+5}">${escapeHtml(valor((Array.isArray(f.viviendas)?f.viviendas:[])[k]))}</div>`).join("")).join("");
   const comision=`<div class="esc-rowlab esc-comlab" style="grid-row:4"><span class="largo">Comisión por vivienda</span><span class="corto">Comisión por viv.</span></div>`+filas.map((f,i)=>{
-    const COMS=[[6000,"máximo"],[5000,"−1.000&nbsp;€"],[4500,"−1.500&nbsp;€"],[4000,"mínimo"]];
-    const cm=COMS[Math.min(i,COMS.length-1)];
-    const val=eur(cm[0]);
-    const sub=cm[1];
+    const COMS=Array.isArray(e.comisiones)?e.comisiones:[];
+    const cm=COMS[Math.min(i,COMS.length-1)]||{};
+    const val=escapeHtml(valor(cm.valor)).replace(/ €/g,"&nbsp;€");
+    const sub=escapeHtml(valor(cm.sub)).replace(/ €/g,"&nbsp;€");
     return `<div class="esc-cell esc-com" style="grid-column:${i+2};grid-row:4"><b class="cv">${val}</b><i class="cs">${sub}</i></div>`;
   }).join("");
   const linea=suelo ? `<div class="esc-line" style="height:${alt(suelo).toFixed(1)}%"><span><b class="larga">SUELO · no bajamos de aquí</b><b class="corta">SUELO</b></span></div>` : "";
-  const lectura=`<div class="esc-read arriba" style="grid-column:2">Por encima de la rentabilidad estimada</div><div class="esc-read extra" style="grid-column:3/5">Recortan el extra de todos, también la comisión</div><div class="esc-read abajo" style="grid-column:5">Rentabilidad estimada, protegida</div>`;
-  const escalera=`<div class="esc-card"><div class="esc-grid" role="img" aria-label="${escapeAttr("Escalera de precios descendente: de "+valor(filas[0]&&filas[0].importe)+" hasta el suelo de "+valor(suelo&&suelo.importe))}"><div class="esc-axis">Escala ampliada desde 215.000 €</div>${cols}${linea}${labs}${lectura}${comision}${viviendas}</div><p class="esc-nota">Gráfico ampliado: la base empieza en 215.000 € para que se vean bien las bajadas.</p></div><p class="esc-frase">Si bajamos el precio, la empresa de venta también cobra menos: de 6.000 € por vivienda en el precio de salida a 4.000 € en el suelo.</p>`;
+  const lectura=`<div class="esc-read arriba" style="grid-column:2">${escapeHtml(valor(e.lectura_arriba))}</div><div class="esc-read extra" style="grid-column:3/5">${escapeHtml(valor(e.lectura_extra))}</div><div class="esc-read abajo" style="grid-column:5">${escapeHtml(valor(e.lectura_abajo))}</div>`;
+  const escalera=`<div class="esc-card"><div class="esc-grid" role="img" aria-label="${escapeAttr("Escalera de precios descendente: de "+valor(filas[0]&&filas[0].importe)+" hasta el suelo de "+valor(suelo&&suelo.importe))}"><div class="esc-axis">${escapeHtml(valor(e.escala_axis))}</div>${cols}${linea}${labs}${lectura}${comision}${viviendas}</div><p class="esc-nota">${escapeHtml(valor(e.escala_nota))}</p></div><p class="esc-frase">${escapeHtml(valor(e.nota_comision))}</p>`;
   const reglas=(Array.isArray(e.reglas)?e.reglas:[]).map(r=>`<li>${escapeHtml(valor(r))}</li>`).join("");
   const plan=(Array.isArray(e.plan)?e.plan:[]).map(x=>`<li><span class="p-cuando">${escapeHtml(valor(x.cuando))}</span><span class="p-que">${escapeHtml(valor(x.que))}</span></li>`).join("");
   document.getElementById("estrategiaBody").innerHTML=`
